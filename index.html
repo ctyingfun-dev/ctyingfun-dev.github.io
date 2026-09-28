@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="香港中學數學互動教材與 DSE 操練網站入口。">
+  <title>數學研習室 | 教材總覽</title>
+  <style>
+    :root {
+      --ink: #19312f;
+      --muted: #526664;
+      --line: #d7e2de;
+      --paper: #f6f8f7;
+      --white: #fff;
+      --teal: #08786e;
+      --teal-pale: #e4f4ef;
+      --coral: #c84c66;
+      --coral-pale: #fff0f3;
+      --blue: #286d9e;
+      --blue-pale: #eaf3f9;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", sans-serif;
+      line-height: 1.65;
+    }
+    a { color: inherit; }
+    a:focus-visible { outline: 3px solid var(--teal); outline-offset: 4px; }
+    .wrap { width: min(1100px, calc(100% - 40px)); margin-inline: auto; }
+    .topbar { background: var(--ink); color: var(--white); }
+    .topbar-inner { min-height: 66px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; font-size: 15px; font-weight: 800; white-space: nowrap; }
+    .brand-mark { width: 33px; height: 33px; display: grid; place-items: center; border: 1px solid #89bdb1; color: #a4e0d2; font: 22px Georgia, serif; }
+    .topbar small { color: #b7ceca; font-size: 12px; }
+    main { padding-bottom: 88px; }
+    .intro { padding: 58px 0 45px; }
+    .eyebrow { margin: 0 0 14px; color: var(--teal); font-size: 12px; font-weight: 800; }
+    .eyebrow::before { content: ""; display: inline-block; vertical-align: middle; width: 25px; height: 2px; margin-right: 10px; background: var(--teal); }
+    h1 { max-width: 650px; margin: 0; font-size: clamp(34px, 4vw, 52px); line-height: 1.25; letter-spacing: 0; }
+    .lead { max-width: 680px; margin: 16px 0 0; color: var(--muted); font-size: 16px; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; padding: 0 0 15px; border-bottom: 1px solid var(--line); }
+    h2 { margin: 0; font-size: 24px; line-height: 1.35; letter-spacing: 0; }
+    .count { color: var(--muted); font-size: 13px; white-space: nowrap; }
+    .sites { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 20px; }
+    .site {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .site.live { flex-direction: row; border-color: #a9d1c5; box-shadow: 0 12px 28px rgba(12, 72, 62, .07); }
+    .art { position: relative; width: 38%; min-height: 285px; display: grid; place-items: center; overflow: hidden; border-right: 1px solid var(--line); background-color: var(--teal-pale); }
+    .art::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(to right, rgba(20, 65, 55, .07) 1px, transparent 1px), linear-gradient(to bottom, rgba(20, 65, 55, .07) 1px, transparent 1px); background-size: 27px 27px; }
+    .art svg { position: relative; width: min(82%, 300px); height: auto; overflow: visible; }
+    .site-body { padding: 29px 32px; display: flex; flex: 1; flex-direction: column; }
+    .meta { display: flex; justify-content: space-between; gap: 8px; align-items: center; font-size: 12px; font-weight: 700; }
+    .subject { color: var(--teal); }
+    .status { color: var(--muted); white-space: nowrap; }
+    .status.online { color: var(--teal); }
+    .status.online::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 6px; border-radius: 50%; background: var(--teal); vertical-align: 1px; }
+    h3 { margin: 18px 0 9px; font-size: 22px; line-height: 1.35; letter-spacing: 0; }
+    .description { margin: 0 0 22px; font-size: 14px; color: var(--muted); }
+    .topics { display: flex; flex-wrap: wrap; gap: 7px; margin-top: auto; padding: 0; list-style: none; }
+    .topics li { padding: 3px 8px; border: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+    .action {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 47px;
+      margin-top: 22px;
+      padding: 0 13px;
+      background: var(--ink);
+      color: var(--white);
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      transition: background-color .2s ease, transform .2s ease;
+    }
+    .action:hover { background: var(--teal); transform: translateY(-2px); }
+    .action svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 2; fill: none; }
+    footer { border-top: 1px solid var(--line); padding: 23px 0 34px; color: var(--muted); font-size: 12px; }
+    @media (max-width: 600px) {
+      .wrap { width: min(100% - 32px, 480px); }
+      .topbar-inner { min-height: 60px; }
+      .topbar small { display: none; }
+      .intro { padding: 42px 0 36px; }
+      .lead { font-size: 15px; }
+      .site.live { flex-direction: column; }
+      .art { width: 100%; min-height: 160px; border-right: 0; border-bottom: 1px solid var(--line); }
+      .site-body { padding: 21px; }
+      .section-head { align-items: baseline; }
+      h2 { font-size: 21px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .action { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#main" aria-label="數學研習室，前往教材總覽"><span class="brand-mark" aria-hidden="true">△</span>數學研習室</a>
+      <small>香港中學數學教材</small>
+    </div>
+  </header>
+  <main id="main" class="wrap">
+    <div class="intro">
+      <p class="eyebrow">學習資源</p>
+      <h1>數學教材總覽</h1>
+      <p class="lead">由概念開始，逐步走到 DSE 操練。選一個課題，直接進入教材。</p>
+    </div>
+    <section aria-labelledby="sites-title">
+      <div class="section-head">
+        <h2 id="sites-title">所有網站</h2>
+        <span class="count">3 個已上線</span>
+      </div>
+      <div class="sites">
+        <article class="site live">
+          <div class="art" aria-hidden="true">
+            <svg viewBox="0 0 260 118" role="img">
+              <path d="M18 100 L80 18 L148 100 Z" fill="#fff" stroke="#08786e" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="M128 100 L169 45 L214 100 Z" fill="#d1efe5" stroke="#c84c66" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="M51 56 L115 56 M149 72 L191 72" stroke="#286d9e" stroke-width="2" stroke-dasharray="5 5"/>
+              <circle cx="80" cy="18" r="3.5" fill="#08786e"/>
+              <circle cx="169" cy="45" r="3.5" fill="#c84c66"/>
+            </svg>
+          </div>
+          <div class="site-body">
+            <div class="meta"><span class="subject">幾何 · 互動教材</span><span class="status online">已上線</span></div>
+            <h3>相似三角形</h3>
+            <p class="description">用動畫和圖形理解相似、三個判定條件，以及為甚麼「邊邊角」不能證明相似。</p>
+            <ul class="topics" aria-label="適用範圍"><li>中二基礎</li><li>DSE 溫習</li></ul>
+            <a class="action" href="https://ctyingfun-dev.github.io/similar-triangles-dse/">進入教材 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </article>
+        <article class="site live">
+          <div class="art" aria-hidden="true">
+            <svg viewBox="0 0 260 118" role="img">
+              <path d="M20 86h220M44 86V31M80 86V47M116 86V61M152 86V71M188 86V77M224 86V81" fill="none" stroke="#08786e" stroke-width="3" stroke-linecap="round"/>
+              <path d="M44 31h36v16h36v14h36v10h36v6h36" fill="none" stroke="#c84c66" stroke-width="2.5" stroke-linejoin="round"/>
+              <circle cx="116" cy="61" r="4" fill="#286d9e"/>
+              <circle cx="152" cy="71" r="4" fill="#286d9e"/>
+            </svg>
+          </div>
+          <div class="site-body">
+            <div class="meta"><span class="subject">代數 · 互動教材</span><span class="status online">已上線</span></div>
+            <h3>整數指數定律</h3>
+            <p class="description">從正、零、負指數開始，探索七條運算定律，並完成即時回饋小測。</p>
+            <ul class="topics" aria-label="適用範圍"><li>中三</li><li>英文教材</li></ul>
+            <a class="action" href="integer-index-laws-s3.html">進入教材 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </article>
+        <article class="site live">
+          <div class="art" aria-hidden="true">
+            <svg viewBox="0 0 260 118" role="img">
+              <rect x="45" y="12" width="94" height="94" fill="#dff1e9" stroke="#08786e" stroke-width="2"/>
+              <path d="M110 12v94M45 77h94" stroke="#08786e" stroke-width="2"/>
+              <rect x="110" y="77" width="29" height="29" fill="#fbe4e9" stroke="#c84c66" stroke-width="2"/>
+              <path d="M169 36h51m-25-19v38" stroke="#286d9e" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="195" cy="36" r="5" fill="#286d9e"/>
+            </svg>
+          </div>
+          <div class="site-body">
+            <div class="meta"><span class="subject">代數 · 互動教材</span><span class="status online">已上線</span></div>
+            <h3>恆等式</h3>
+            <p class="description">用面積圖理解和的平方、差的平方與平方差，逐步觀察動畫並完成即時練習。</p>
+            <ul class="topics" aria-label="適用範圍"><li>中二</li><li>繁體中文</li></ul>
+            <a class="action" href="identities-s2.html">進入教材 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer><div class="wrap">數學研習室 · 香港中學數學</div></footer>
+</body>
+</html>
