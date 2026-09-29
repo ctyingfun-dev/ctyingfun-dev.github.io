@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="香港中二數學：多項式的因式分解。以面積圖、公因式、分組法及恆等式理解因式分解，附逐步例題及互動練習。">
+  <title>多項式的因式分解 | 中二數學</title>
+  <style>
+    :root { --ink:#19312f; --muted:#526664; --line:#d7e2de; --teal:#08786e; --blue:#286d9e; --coral:#b53f59; --pale:#e4f4ef; }
+    * { box-sizing:border-box; letter-spacing:0; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:#fff; font:17px/1.85 -apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif; }
+    a { color:var(--teal); text-underline-offset:4px; }
+    button,input,select { font:inherit; }
+    button { cursor:pointer; }
+    :focus-visible { outline:3px solid var(--blue); outline-offset:4px; }
+    .wrap { width:min(800px,calc(100% - 36px)); margin-inline:auto; }
+    .top { background:#f6f8f7; border-bottom:1px solid var(--line); }
+    .top-inner { min-height:66px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { font-size:15px; font-weight:750; text-decoration:none; color:var(--ink); }
+    .brand::before { content:"×"; display:inline-grid; place-items:center; width:30px; height:30px; margin-right:10px; background:var(--teal); color:white; font:23px Georgia,serif; border-radius:4px; }
+    .top nav { display:flex; flex-wrap:wrap; gap:18px; font-size:13px; }
+    .intro { padding:46px 0 32px; border-bottom:1px solid var(--line); }
+    .eyebrow,.kicker { color:var(--teal); font-size:13px; font-weight:700; margin:0 0 10px; }
+    h1 { font-size:36px; line-height:1.35; margin:0 0 16px; }
+    h2 { font-size:27px; line-height:1.5; margin:0; }
+    h3 { font-size:20px; margin:0 0 16px; }
+    h4 { font-size:16px; margin:0 0 10px; }
+    p { margin:0 0 18px; }
+    .lead,.muted { color:var(--muted); }
+    .contents { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:4px 18px; padding:18px 0; border-bottom:1px solid var(--line); }
+    .contents a { padding:10px 12px; border-left:2px solid transparent; text-decoration:none; font-size:14px; color:var(--muted); transition:background-color .2s ease,color .2s ease,border-color .2s ease; }
+    .contents a:hover { background:#f6f8f7; }
+    .contents a[aria-current="location"] { background:var(--pale); border-color:var(--teal); color:var(--teal); font-weight:700; }
+    section { --accent:var(--teal); --tint:#edf6f2; padding:40px 0; border-bottom:1px solid var(--line); scroll-margin-top:20px; }
+    #common,#identities { --accent:var(--blue); --tint:#edf4fa; }
+    #grouping,#cross { --accent:var(--coral); --tint:#fceff2; }
+    .section-heading { padding:20px 24px; margin-bottom:28px; background:var(--tint); border-left:5px solid var(--accent); border-bottom:1px solid var(--line); }
+    .section-heading .kicker { color:var(--accent); margin-bottom:8px; }
+    var { font-family:Georgia,"Times New Roman",serif; font-style:italic; }
+    .math { font:22px/1.9 Georgia,"Times New Roman",serif; overflow-wrap:anywhere; }
+    sup { font-size:.68em; line-height:0; }
+    .formula { margin:20px 0; padding:18px 22px; background:var(--tint); border-left:3px solid var(--accent); }
+    .formula-label { display:block; font:600 13px/1.5 -apple-system,BlinkMacSystemFont,sans-serif; color:var(--muted); margin-bottom:8px; }
+    .note { margin:24px 0; padding:8px 0 8px 18px; border-left:3px solid var(--coral); font-size:15px; }
+    .example { border-left:3px solid var(--blue); padding:20px 0 12px 22px; margin:28px 0; }
+    .example h3 { color:var(--blue); font-size:18px; padding-bottom:12px; border-bottom:1px solid var(--line); }
+    .steps { margin:16px 0; padding-left:24px; }
+    .steps li { padding:7px 0 7px 6px; }
+    details { margin-top:24px; border-top:1px solid var(--line); }
+    summary { cursor:pointer; color:var(--teal); font-size:16px; font-weight:600; padding:14px 0; }
+    details > div { padding:10px 0; }
+    .tool { margin:28px 0; border:1px solid var(--line); border-radius:6px; overflow:hidden; background:white; }
+    .tool-heading { margin:0; padding:16px 20px; background:var(--tint); border-top:3px solid var(--accent); border-bottom:1px solid var(--line); font-size:17px; }
+    .tool-body { padding:22px; }
+    .controls { display:flex; gap:20px; align-items:end; flex-wrap:wrap; padding:18px 22px; border-bottom:1px solid var(--line); background:#fafbfa; }
+    label { display:block; font-weight:600; font-size:14px; }
+    select { max-width:100%; padding:8px; border:1px solid #8ea8a1; border-radius:4px; color:var(--ink); background:white; }
+    input[type=range] { max-width:100%; width:180px; accent-color:var(--teal); }
+    .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:18px; }
+    .primary,.secondary { min-height:44px; padding:9px 16px; border-radius:4px; }
+    .primary { border:1px solid var(--teal); color:white; background:var(--teal); }
+    .secondary { border:1px solid var(--line); color:var(--teal); background:white; }
+    .primary,.secondary { transition:background-color .2s ease,border-color .2s ease,transform .2s ease,box-shadow .2s ease; }
+    .primary:hover:not(:disabled),.secondary:hover:not(:disabled) { transform:translateY(-2px); box-shadow:0 4px 10px #19312f18; }
+    .primary:hover:not(:disabled) { background:#09665e; }
+    .secondary:hover:not(:disabled) { background:var(--pale); border-color:#8ea8a1; }
+    .primary:active:not(:disabled),.secondary:active:not(:disabled) { transform:translateY(0); box-shadow:none; }
+    button:disabled { cursor:default; }
+    .primary:disabled,.secondary:disabled { opacity:.45; }
+    .feedback { min-height:80px; margin:16px 0 0; font-size:16px; }
+    .diagram { margin:24px 0; }
+    figcaption { font-size:13px; color:var(--muted); margin-top:14px; }
+    .reverse-flow { display:grid; grid-template-columns:1fr 90px 1fr; gap:12px; align-items:center; text-align:center; padding:20px 0; }
+    .reverse-flow .math { padding:18px 8px; border-bottom:3px solid var(--blue); background:#edf4fa; }
+    .reverse-flow .math:last-child { background:#edf6f2; border-color:var(--teal); }
+    .flow-arrows { font-size:12px; color:var(--muted); }
+    .flow-arrows strong { display:block; font-size:24px; line-height:1.1; color:var(--coral); }
+    .factor-token { color:var(--coral); font-weight:700; }
+    .factor-tile-stage { width:min(100%,470px); margin:auto; }
+    .tile-widths { display:grid; grid-template-columns:3fr 2fr; text-align:center; padding-left:38px; font-size:18px; margin-bottom:8px; }
+    .tile-layout { display:grid; grid-template-columns:30px minmax(0,1fr); gap:8px; align-items:center; }
+    .tile-height { text-align:center; }
+    .tile-board,.tile-tray { display:grid; grid-template-columns:3fr 2fr; height:132px; }
+    .tile-board { border:1px solid #638f87; }
+    .tile-region { display:flex; align-items:center; justify-content:center; font:24px Georgia,serif; }
+    #area-left { background:#dbeff7; border-right:1px solid #638f87; }
+    #area-slot { display:grid; place-items:center; min-width:0; background:#f7faf8; border:2px dashed #9ab9aa; color:var(--muted); font-size:14px; }
+    #area-slot.filled { border:0; background:#e5f3ed; }
+    .tile-tray { width:calc(100% - 38px); margin:12px 0 0 38px; }
+    #area-right { grid-column:2; width:100%; height:100%; border:1px solid #638f87; border-radius:0; background:#e5f3ed; color:var(--ink); touch-action:none; user-select:none; cursor:grab; }
+    #area-right:active { cursor:grabbing; }
+    #area-slot #area-right { grid-column:1; border:0; cursor:default; }
+    .tile-region { transition:background-color .28s ease; }
+    .tile-prompt { margin:0 0 12px; color:var(--muted); font-size:15px; }
+    .tile-actions { margin:12px 0 0; }
+    .group-stage { min-height:100px; padding:12px 0; }
+    .group-terms { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; }
+    .group-term { min-height:64px; min-width:0; padding:8px 3px; border:1px solid #a9bcb5; border-radius:4px; background:#fff; color:var(--ink); font:21px Georgia,serif; white-space:nowrap; }
+    .group-term:hover { background:#edf4fa; }
+    .group-term[aria-pressed=true] { border:2px solid var(--blue); background:#edf4fa; }
+    .group-pair { color:var(--blue); }
+    .group-pair.second { color:var(--coral); }
+    .identity-tabs { display:flex; flex-wrap:wrap; gap:0; border-bottom:1px solid var(--line); }
+    .identity-tabs button { flex:1; min-width:120px; padding:12px 8px; border:0; border-bottom:3px solid transparent; background:white; color:var(--muted); font-size:14px; transition:background-color .2s ease,color .2s ease,border-color .2s ease; }
+    .identity-tabs button:hover:not([aria-pressed=true]) { background:#f6f8f7; }
+    .identity-tabs button[aria-pressed=true] { color:var(--blue); background:#edf4fa; border-bottom-color:var(--blue); }
+    .square-stage { width:min(100%,290px); aspect-ratio:1; display:grid; grid-template-columns:3fr 1fr; grid-template-rows:3fr 1fr; margin:20px auto; border:1px solid #719d93; }
+    .square-stage > div { display:grid; place-items:center; border:1px solid white; font:22px Georgia,serif; background:#dceef7; }
+    .square-stage > div:nth-child(2),.square-stage > div:nth-child(3) { background:#e0f0e9; }
+    .square-stage > div:last-child { background:#f9e1e7; }
+    .cross-grid { display:grid; grid-template-columns:80px 100px 80px; grid-template-rows:58px 58px; justify-content:center; align-items:center; text-align:center; margin:20px 0; }
+    .cross-grid .math { background:#edf4fa; border-bottom:2px solid var(--blue); }
+    .cross-grid svg { grid-column:2; grid-row:1 / 3; width:100px; height:116px; }
+    .cross-grid .math:nth-of-type(2),.cross-grid .math:nth-of-type(4) { background:#fceff2; border-color:var(--coral); }
+    .quiz-head { display:flex; gap:16px; justify-content:space-between; padding:14px 20px; background:var(--ink); color:white; font-size:13px; }
+    .choices { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin:20px 0; }
+    .choice { min-height:56px; border:1px solid #8ea8a1; border-radius:4px; background:white; color:var(--ink); padding:12px; text-align:left; font:21px Georgia,serif; overflow-wrap:anywhere; transition:background-color .24s ease,border-color .24s ease,box-shadow .24s ease; }
+    .choice:hover:not(:disabled) { background:var(--pale); }
+    .choice.correct { border:2px solid var(--teal); background:var(--pale); }
+    .choice.wrong { border:2px solid var(--coral); background:#fff0f3; }
+    .choice.try-again { border-color:var(--coral); background:#fff7f8; }
+    .choice.correct { box-shadow:inset 0 0 0 2px #fff; }
+    .quiz-progress { width:100%; height:5px; border:0; display:block; accent-color:var(--teal); }
+    .method-list { padding:0; list-style:none; }
+    .method-list li { padding:12px 0; border-bottom:1px solid var(--line); }
+    .method-list strong { color:var(--teal); }
+    .scroll-enter { animation:arrive .55s cubic-bezier(.2,.7,.2,1) both; }
+    @keyframes arrive { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+    [hidden] { display:none!important; }
+    footer { padding:28px 0 40px; color:var(--muted); font-size:13px; }
+    @media(min-width:1100px) {
+      .top .wrap,footer.wrap { width:min(1080px,calc(100% - 64px)); }
+      main.wrap { width:min(1080px,calc(100% - 64px)); display:grid; grid-template-columns:210px minmax(0,1fr); column-gap:64px; }
+      .intro { grid-column:1 / -1; }
+      .contents { grid-column:1; grid-row:2 / span 6; position:sticky; top:24px; align-self:start; grid-template-columns:1fr; border:0; padding-top:40px; }
+      main > section { grid-column:2; }
+    }
+    @media(max-width:640px) {
+      h1 { font-size:29px; } h2 { font-size:23px; }
+      .top-inner { flex-wrap:wrap; padding-block:12px; }
+      .section-heading { padding:16px; }
+      .tool-body,.controls { padding:16px; }
+      .math { font-size:20px; }
+      .reverse-flow { grid-template-columns:minmax(0,1fr); gap:8px; }
+      .flow-arrows { display:flex; justify-content:center; align-items:center; gap:12px; }
+      .flow-arrows strong { transform:rotate(90deg); }
+      .choices { grid-template-columns:1fr; }
+      .group-terms { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .cross-grid { grid-template-columns:60px 80px 60px; }
+      .cross-grid svg { width:80px; }
+    }
+    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; } .scroll-enter { animation:none; } }
+    @media print { .top,.contents,.controls,.actions,.quiz { display:none; } main.wrap { display:block; width:100%; } .scroll-enter { animation:none; } section { padding:18px 0; } }
+  </style>
+</head>
+<body>
+  <header class="top"><div class="wrap top-inner"><a class="brand" href="index.html">數學研習室</a><nav aria-label="主要導覽"><a href="#common">公因式</a><a href="#practice">練習</a><a href="index.html">教材總覽</a></nav></div></header>
+  <main class="wrap">
+    <div class="intro"><p class="eyebrow">香港 · 中二 · 代數</p><h1>多項式的因式分解</h1><p class="lead">把「幾項相加」變成「幾個因式相乘」，再用展開驗算。</p></div>
+    <nav class="contents" aria-label="課程章節"><a href="#meaning">01 甚麼是因式分解？</a><a href="#common">02 提取公因式</a><a href="#grouping">03 分組法</a><a href="#identities">04 運用恆等式</a><a href="#practice">05 練習與方法選擇</a></nav>
+    <section id="meaning" aria-labelledby="meaning-title">
+      <header class="section-heading"><p class="kicker">01 · 由展開倒過來</p><h2 id="meaning-title">甚麼是因式分解？</h2></header>
+      <p>展開時，把乘積寫成各項的和；因式分解則反過來，把多項式寫成<strong>因式的乘積</strong>。</p>
+      <figure class="diagram">
+        <div class="reverse-flow"><div class="math">3(<var>x</var> + 2)</div><div class="flow-arrows">展開<strong aria-hidden="true">→</strong><strong aria-hidden="true">←</strong>因式分解</div><div class="math">3<var>x</var> + 6</div></div>
+        <figcaption>3 與 (<var>x</var> + 2) 是兩個因式；3<var>x</var> 與 6 是兩項，並不是整個多項式的兩個因式。</figcaption>
+      </figure>
+      <div class="formula math"><span class="formula-label">分配律：兩個方向都成立</span><var>a</var>(<var>b</var> + <var>c</var>) = <var>ab</var> + <var>ac</var></div>
+      <p class="note">因式分解不是解方程。題目只有多項式，沒有等號時，不需要求 <var>x</var> 的值。</p>
+      <div class="tool" id="meaning-tool" hidden>
+        <h3 class="tool-heading">哪一個才是因式分解？</h3><div class="tool-body">
+          <p>把 <span class="math">6<var>x</var> + 12</span> 完全因式分解。</p>
+          <div class="choices" id="meaning-choices"><button type="button" class="choice" data-meaning="0">6(<var>x</var> + 2)</button><button type="button" class="choice" data-meaning="1">3(2<var>x</var> + 4)</button><button type="button" class="choice" data-meaning="2">6(<var>x</var> + 12)</button></div>
+          <p class="feedback" id="meaning-feedback" aria-live="polite">留意「相等」和「已完全分解」是兩件不同的事。</p>
+        </div>
+      </div>
+    </section>
+    <section id="common" aria-labelledby="common-title">
+      <header class="section-heading"><p class="kicker">02 · 每項都有甚麼？</p><h2 id="common-title">先找最大公因式</h2></header>
+      <ol class="steps"><li>數字：找各項係數的最大公因數。</li><li>字母：只取每一項都有的字母，並取其<strong>最低次數</strong>。</li><li>每一項除以公因式，所得結果放入括號。</li></ol>
+      <article class="example"><h3>例 1 · 數字與字母一起提取</h3>
+        <p class="math">6<var>x</var><sup>2</sup><var>y</var> + 9<var>xy</var><sup>2</sup></p>
+        <p>6 和 9 的最大公因數是 3；兩項都有 <var>x</var> 和 <var>y</var>，最低次數都是 1。</p>
+        <div class="formula math"><span class="formula-label">最大公因式：3<var>xy</var></span>6<var>x</var><sup>2</sup><var>y</var> + 9<var>xy</var><sup>2</sup><br>= <span class="factor-token">3<var>xy</var></span>(2<var>x</var> + 3<var>y</var>)</div>
+        <details><summary>展開驗算</summary><div><p class="math">3<var>xy</var> × 2<var>x</var> + 3<var>xy</var> × 3<var>y</var><br>= 6<var>x</var><sup>2</sup><var>y</var> + 9<var>xy</var><sup>2</sup></p></div></details>
+      </article>
+      <div class="tool" id="area-tool" hidden>
+        <h3 class="tool-heading">面積圖：共同的高度，就是公因式</h3>
+        <div class="controls"><div><label for="factor-a">共同高度：<output id="factor-a-label">3</output></label><input id="factor-a" type="range" min="1" max="6" step="1" value="3"></div><div><label for="factor-b">右邊闊度：<output id="factor-b-label">2</output></label><input id="factor-b" type="range" min="1" max="6" step="1" value="2"></div></div>
+        <div class="tool-body">
+          <figure class="diagram"><p class="tile-prompt" id="area-prompt" aria-live="polite">把綠色長方形拖到虛線位置，或點按它。</p><div class="factor-tile-stage"><div class="tile-widths"><span><var>x</var></span><span id="width-b">2</span></div><div class="tile-layout"><div class="tile-height math" id="height-a">3</div><div class="tile-board"><div class="tile-region" id="area-left">3<var>x</var></div><div id="area-slot" aria-label="拼合位置"><span>放在這裏</span></div></div></div><div class="tile-tray" id="tile-tray"><button type="button" class="tile-region" id="area-right" aria-label="把右邊長方形拼到面積圖">6</button></div></div><div class="tile-actions"><button type="button" class="secondary" id="area-reset" hidden>分開重試</button></div><figcaption>兩個長方形高度相同，合併後的闊度為 <var>x</var> 加上右邊闊度。這是代數示意圖，並非按比例繪製；面積解釋假設 <var>x</var> &gt; 0。</figcaption></figure>
+          <div class="formula math" id="area-equation" aria-live="polite" hidden></div>
+          <p>分開計面積：把兩項相加。合起來計面積：共同高度 × 總闊度。</p>
+        </div>
+      </div>
+      <p class="note">提取後不能漏掉 1：<span class="math">5<var>x</var> + 5 = 5(<var>x</var> + 1)</span>，不是 <span class="math">5<var>x</var></span>。</p>
+      <details><summary>遇到負數：提取 −1 有甚麼作用？</summary><div><p class="math">3 − <var>x</var> = −(<var>x</var> − 3)</p><p>提出負號時，括號內每一項都要變號。例如：</p><p class="math">−4<var>x</var><sup>2</sup> + 8<var>x</var> = −4<var>x</var>(<var>x</var> − 2)</p></div></details>
+    </section>
+    <section id="grouping" aria-labelledby="grouping-title">
+      <header class="section-heading"><p class="kicker">03 · 把共同括號找出來</p><h2 id="grouping-title">四項多項式：分組法</h2></header>
+      <p>若沒有所有項都共有的因式，可先把各項分組。每組提取公因式後，看看能否出現<strong>相同的括號</strong>。</p>
+      <div class="formula math"><var>ax</var> + <var>ay</var> + <var>bx</var> + <var>by</var><br>= <var>a</var>(<var>x</var> + <var>y</var>) + <var>b</var>(<var>x</var> + <var>y</var>)<br>= (<var>a</var> + <var>b</var>)(<var>x</var> + <var>y</var>)</div>
+      <div class="tool" id="group-tool" hidden>
+        <h3 class="tool-heading">逐步拆解：先分組，再提取</h3>
+        <div class="controls"><label for="group-case">例題 <select id="group-case"><option value="0">正數分組</option><option value="1">留意負號</option></select></label></div>
+        <div class="tool-body"><p class="muted" id="group-progress"></p><div class="group-stage math"><div class="group-terms" id="group-terms" role="group" aria-label="選兩項為第一組"></div><div id="group-expression" hidden></div></div><p class="feedback" id="group-explanation" aria-live="polite"></p><div class="actions"><button type="button" class="primary" id="group-next" disabled>下一步</button><button type="button" class="secondary" id="group-reset">重新開始</button></div></div>
+      </div>
+      <article class="example"><h3>例 2 · 括號的次序相反</h3><p class="math"><var>a</var>(<var>x</var> − <var>y</var>) + <var>b</var>(<var>y</var> − <var>x</var>)<br>= <var>a</var>(<var>x</var> − <var>y</var>) − <var>b</var>(<var>x</var> − <var>y</var>)<br>= (<var>a</var> − <var>b</var>)(<var>x</var> − <var>y</var>)</p><p class="note"><span class="math">(<var>y</var> − <var>x</var>) = −(<var>x</var> − <var>y</var>)</span>，不能直接當作相同括號。</p></article>
+    </section>
+    <section id="identities" aria-labelledby="identities-title">
+      <header class="section-heading"><p class="kicker">04 · 認出熟悉的形狀</p><h2 id="identities-title">把恆等式倒過來用</h2></header>
+      <div class="formula math"><span class="formula-label">平方差：兩項、相減、各自是平方</span><var>a</var><sup>2</sup> − <var>b</var><sup>2</sup> = (<var>a</var> + <var>b</var>)(<var>a</var> − <var>b</var>)</div>
+      <div class="formula math"><span class="formula-label">完全平方：中間項必須是 ±2<var>ab</var></span><var>a</var><sup>2</sup> + 2<var>ab</var> + <var>b</var><sup>2</sup> = (<var>a</var> + <var>b</var>)<sup>2</sup><br><var>a</var><sup>2</sup> − 2<var>ab</var> + <var>b</var><sup>2</sup> = (<var>a</var> − <var>b</var>)<sup>2</sup></div>
+      <figure class="diagram"><h3>為甚麼中間是 2<var>ab</var>？</h3>
+        <div class="square-stage" aria-label="邊長 a 加 b 的正方形分成 a 平方、兩個 ab 及 b 平方四部分"><div><span><var>a</var><sup>2</sup></span></div><div><span><var>ab</var></span></div><div><span><var>ab</var></span></div><div><span><var>b</var><sup>2</sup></span></div></div>
+        <figcaption>大正方形邊長為 <var>a</var> + <var>b</var>。兩個綠色長方形的面積各為 <var>ab</var>，合計 2<var>ab</var>。圖示假設 <var>a</var>、<var>b</var> 均為正數；恆等式本身不限於正數。</figcaption>
+      </figure>
+      <div class="tool" id="identity-tool" hidden>
+        <h3 class="tool-heading">辨認模式，再揭曉因式</h3><div class="identity-tabs" role="group" aria-label="恆等式模式"><button type="button" data-identity="0" aria-pressed="true">平方差</button><button type="button" data-identity="1" aria-pressed="false">完全平方：加</button><button type="button" data-identity="2" aria-pressed="false">完全平方：減</button></div>
+        <div class="tool-body"><div class="math" id="identity-expression"></div><p class="feedback" id="identity-clue"></p><button type="button" class="primary" id="identity-reveal">揭曉並驗算</button><div class="formula math" id="identity-answer" aria-live="polite" hidden></div></div>
+      </div>
+      <article class="example"><h3>例 3 · 提取後，還可以再分解</h3><p class="math">2<var>x</var><sup>2</sup> − 18<br>= 2(<var>x</var><sup>2</sup> − 9)<br>= <strong>2(<var>x</var> + 3)(<var>x</var> − 3)</strong></p><p>先提出 2，再把括號內的平方差分解，才是完全因式分解。</p></article>
+      <p class="note"><span class="math"><var>x</var><sup>2</sup> + 9</span> 是平方<strong>和</strong>，不能寫成 <span class="math">(<var>x</var> + 3)(<var>x</var> − 3)</span>。後者展開是 <span class="math"><var>x</var><sup>2</sup> − 9</span>。</p>
+      <p><a href="identities-s2.html">重溫恆等式的面積圖解</a></p>
+    </section>
+    <section id="practice" aria-labelledby="practice-title">
+      <header class="section-heading"><p class="kicker">05 · 先選方法，再動筆</p><h2 id="practice-title">完全分解，展開驗算</h2></header>
+      <ol class="method-list"><li><strong>先看公因式。</strong> 每題都先檢查能否提取。</li><li><strong>兩項：</strong>看看是否平方差。</li><li><strong>三項：</strong>看看是否完全平方。</li><li><strong>四項：</strong>嘗試分組，找出共同括號。</li><li><strong>最後檢查：</strong>還能再分解嗎？展開後是否回到原式？</li></ol>
+      <div class="tool quiz" id="quiz" hidden><div class="quiz-head"><span id="progress"></span><span id="score"></span></div><progress class="quiz-progress" id="quiz-progress" value="0" max="9" aria-label="已完成題數"></progress><div class="tool-body"><h3 id="question" tabindex="-1"></h3><div class="choices" id="choices"></div><p id="feedback" class="feedback" aria-live="polite"></p><div class="actions"><button class="primary" id="next" type="button" hidden>下一題</button></div></div></div>
+      <noscript><p>互動練習需要啟用 JavaScript；所有講解、例題及以下綜合題仍可閱讀。</p></noscript>
+      <article class="example"><h3>綜合題 · 不要提早停下來</h3><p>把 <span class="math">3<var>x</var><sup>3</sup> − 12<var>x</var></span> 完全因式分解。</p><details><summary>完整解答</summary><div><p class="math">3<var>x</var><sup>3</sup> − 12<var>x</var><br>= 3<var>x</var>(<var>x</var><sup>2</sup> − 4)<br>= <strong>3<var>x</var>(<var>x</var> + 2)(<var>x</var> − 2)</strong></p><p>先提出公因式 3<var>x</var>，再分解括號內的平方差。</p></div></details></article>
+    </section>
+  </main>
+  <footer class="wrap">數學研習室 · 中二數學 · <a href="index.html">教材總覽</a></footer>
+  <script>
+    const el = id => document.getElementById(id);
+    const motion=matchMedia("(prefers-reduced-motion: reduce)");
+    function animateChange(node, keyframes, duration=280) {
+      if(motion.matches || !node.animate)return;
+      node.getAnimations().forEach(animation=>animation.cancel());
+      node.animate(keyframes,{duration,easing:"cubic-bezier(.2,.7,.2,1)"});
+    }
+    const settleIn=[{opacity:.35,transform:"translateY(6px)"},{opacity:1,transform:"translateY(0)"}];
+    const x = "<var>x</var>";
+    const term = (coefficient, variable = x) => `${coefficient === 1 ? "" : coefficient}${variable}`;
+    document.querySelectorAll("[data-meaning]").forEach(button => button.addEventListener("click", () => {
+      const reasons = [
+        "正確。6(x + 2) 展開得 6x + 12；括號內已沒有可再提出的整數公因式。",
+        "這個式子相等，但還未完全分解。括號內的 2x + 4 仍有公因式 2，應再分解為 6(x + 2)。",
+        "不相等。6(x + 12) 展開得 6x + 72。原式的每一項都要除以 6，才放入括號。"
+      ];
+      document.querySelectorAll("[data-meaning]").forEach(item => item.classList.remove("correct","wrong"));
+      button.classList.add(button.dataset.meaning === "0" ? "correct" : "wrong");
+      el("meaning-feedback").innerHTML = reasons[Number(button.dataset.meaning)].replaceAll("x",x);
+    }));
+    el("meaning-tool").hidden = false;
+    function renderArea(animate=false) {
+      const a = el("factor-a").valueAsNumber, b = el("factor-b").valueAsNumber;
+      el("factor-a-label").value = a; el("factor-b-label").value = b;
+      el("height-a").textContent = a; el("width-b").textContent = b;
+      el("area-left").innerHTML = term(a); el("area-right").textContent = a * b;
+      el("area-equation").innerHTML = `${term(a)} + ${a * b} = ${a}(${x} + ${b})`;
+      if(animate) {
+        const changed=el("area-left");
+        animateChange(changed,[{backgroundColor:"#b9e4f2",transform:"scale(.985)"},{backgroundColor:"#dbeff7",transform:"scale(1)"}],340);
+        animateChange(el("area-right"),[{backgroundColor:"#c6ead8",transform:"scale(.985)"},{backgroundColor:"#e5f3ed",transform:"scale(1)"}],340);
+        if(!el("area-equation").hidden)animateChange(el("area-equation"),settleIn);
+      }
+    }
+    ["factor-a","factor-b"].forEach(id => el(id).addEventListener("input",()=>renderArea(true)));
+    el("area-tool").hidden = false; renderArea();
+    const tile=el("area-right"),slot=el("area-slot");
+    let dragStart=null,suppressTileClick=false;
+    function assembleArea() {
+      if(tile.parentElement===slot)return;
+      const from=tile.getBoundingClientRect();
+      tile.style.transform="";tile.style.position="";tile.style.zIndex="";
+      slot.replaceChildren(tile);
+      slot.classList.add("filled");
+      el("tile-tray").hidden=true;
+      tile.disabled=true;
+      el("area-reset").hidden=false;
+      el("area-equation").hidden=false;
+      el("area-prompt").textContent="拼合成功：共同高度是公因式，總闊度放在括號內。";
+      const to=tile.getBoundingClientRect();
+      animateChange(tile,[{transform:`translate(${from.left-to.left}px, ${from.top-to.top}px)`},{transform:"translate(0, 0)"}],420);
+      animateChange(el("area-equation"),settleIn,380);
+    }
+    tile.addEventListener("pointerdown",event=>{
+      if(tile.disabled)return;
+      dragStart={x:event.clientX,y:event.clientY,moved:false};
+      tile.setPointerCapture(event.pointerId);
+    });
+    tile.addEventListener("pointermove",event=>{
+      if(!dragStart)return;
+      const dx=event.clientX-dragStart.x,dy=event.clientY-dragStart.y;
+      if(Math.hypot(dx,dy)<5&&!dragStart.moved)return;
+      dragStart.moved=true;
+      tile.style.position="relative";tile.style.zIndex="2";
+      tile.style.transform=`translate(${dx}px, ${dy}px)`;
+    });
+    tile.addEventListener("pointerup",event=>{
+      if(!dragStart)return;
+      if(dragStart.moved) {
+        suppressTileClick=true;
+        const rect=slot.getBoundingClientRect();
+        if(event.clientX>=rect.left&&event.clientX<=rect.right&&event.clientY>=rect.top&&event.clientY<=rect.bottom)assembleArea();
+        else {
+          tile.style.transform="";tile.style.position="";tile.style.zIndex="";
+          el("area-prompt").textContent="還差一點：把綠色長方形放進虛線位置。";
+        }
+        requestAnimationFrame(()=>{suppressTileClick=false;});
+      }
+      dragStart=null;
+    });
+    tile.addEventListener("pointercancel",()=>{
+      dragStart=null;tile.style.transform="";tile.style.position="";tile.style.zIndex="";
+    });
+    tile.addEventListener("click",()=>{if(!suppressTileClick)assembleArea();});
+    el("area-reset").addEventListener("click",()=>{
+      el("tile-tray").append(tile);
+      el("tile-tray").hidden=false;
+      slot.replaceChildren(Object.assign(document.createElement("span"),{textContent:"放在這裏"}));
+      slot.classList.remove("filled");
+      tile.disabled=false;
+      el("area-reset").hidden=true;
+      el("area-equation").hidden=true;
+      el("area-prompt").textContent="把綠色長方形拖到虛線位置，或點按它。";
+    });
+    const groupCases = [
+      [
+        [`${x}<sup>2</sup> + 3${x} + 2${x} + 6`, "先看看四項中，哪些項可以放在同一組。"],
+        [`<span class="group-pair">(${x}<sup>2</sup> + 3${x})</span> + <span class="group-pair second">(2${x} + 6)</span>`, "前兩項為一組，後兩項為另一組。"],
+        [`${x}<span class="factor-token">(${x} + 3)</span> + 2<span class="factor-token">(${x} + 3)</span>`, `第一組提出 ${x}，第二組提出 2，出現相同括號。`],
+        [`(${x} + 2)(${x} + 3)`, `把 (${x} + 3) 當作一個整體，提出共同因式。展開可得 ${x}<sup>2</sup> + 5${x} + 6。`]
+      ],
+      [
+        [`${x}<sup>2</sup> − 3${x} − 2${x} + 6`, "留意第二組有負號。"],
+        [`<span class="group-pair">(${x}<sup>2</sup> − 3${x})</span> + <span class="group-pair second">(−2${x} + 6)</span>`, "先分成兩組，保留每一項原有的正負號。"],
+        [`${x}<span class="factor-token">(${x} − 3)</span> − 2<span class="factor-token">(${x} − 3)</span>`, `第二組提出 −2：−2(${x} − 3) = −2${x} + 6。`],
+        [`(${x} − 2)(${x} − 3)`, `共同括號是 (${x} − 3)，餘下 ${x} − 2。展開可得 ${x}<sup>2</sup> − 5${x} + 6。`]
+      ]
+    ];
+    const alternateGroups = [
+      [
+        [`<span class="group-pair">(${x}<sup>2</sup> + 2${x})</span> + <span class="group-pair second">(3${x} + 6)</span>`, "兩組各有一個含 x 的項及一個常數或平方項。"],
+        [`${x}<span class="factor-token">(${x} + 2)</span> + 3<span class="factor-token">(${x} + 2)</span>`, `第一組提出 ${x}，第二組提出 3，出現相同括號。`],
+        [`(${x} + 3)(${x} + 2)`, `提出 (${x} + 2)。展開可得 ${x}<sup>2</sup> + 5${x} + 6。`]
+      ],
+      [
+        [`<span class="group-pair">(${x}<sup>2</sup> − 2${x})</span> + <span class="group-pair second">(−3${x} + 6)</span>`, "兩組要保留原來的負號。"],
+        [`${x}<span class="factor-token">(${x} − 2)</span> − 3<span class="factor-token">(${x} − 2)</span>`, `第二組提出 −3，才會得到相同的 (${x} − 2)。`],
+        [`(${x} − 3)(${x} − 2)`, `提出 (${x} − 2)。展開可得 ${x}<sup>2</sup> − 5${x} + 6。`]
+      ]
+    ];
+    const reverseGroups = [
+      [
+        [
+          [`<span class="group-pair">(2${x} + 6)</span> + <span class="group-pair second">(${x}<sup>2</sup> + 3${x})</span>`, "先處理你選的後兩項，餘下兩項是另一組。"],
+          [`2<span class="factor-token">(${x} + 3)</span> + ${x}<span class="factor-token">(${x} + 3)</span>`, `兩組各自提取後，都有 (${x} + 3)。`],
+          [`(${x} + 2)(${x} + 3)`, `提出共同括號。展開可得 ${x}<sup>2</sup> + 5${x} + 6。`]
+        ],
+        [
+          [`<span class="group-pair">(3${x} + 6)</span> + <span class="group-pair second">(${x}<sup>2</sup> + 2${x})</span>`, "先處理你選的兩項，再看餘下兩項。"],
+          [`3<span class="factor-token">(${x} + 2)</span> + ${x}<span class="factor-token">(${x} + 2)</span>`, `兩組各自提取後，都有 (${x} + 2)。`],
+          [`(${x} + 3)(${x} + 2)`, `提出共同括號。展開可得 ${x}<sup>2</sup> + 5${x} + 6。`]
+        ]
+      ],
+      [
+        [
+          [`<span class="group-pair">(−2${x} + 6)</span> + <span class="group-pair second">(${x}<sup>2</sup> − 3${x})</span>`, "先處理你選的後兩項，記得保留負號。"],
+          [`−2<span class="factor-token">(${x} − 3)</span> + ${x}<span class="factor-token">(${x} − 3)</span>`, `第一組提出 −2，兩組才有相同括號。`],
+          [`(${x} − 2)(${x} − 3)`, `提出共同括號。展開可得 ${x}<sup>2</sup> − 5${x} + 6。`]
+        ],
+        [
+          [`<span class="group-pair">(−3${x} + 6)</span> + <span class="group-pair second">(${x}<sup>2</sup> − 2${x})</span>`, "先處理你選的兩項，記得保留負號。"],
+          [`−3<span class="factor-token">(${x} − 2)</span> + ${x}<span class="factor-token">(${x} − 2)</span>`, `第一組提出 −3，兩組才有相同括號。`],
+          [`(${x} − 3)(${x} − 2)`, `提出共同括號。展開可得 ${x}<sup>2</sup> − 5${x} + 6。`]
+        ]
+      ]
+    ];
+    const groupTerms=[
+      [`${x}<sup>2</sup>`,`+ 3${x}`,`+ 2${x}`,"+ 6"],
+      [`${x}<sup>2</sup>`,`− 3${x}`,`− 2${x}`,"+ 6"]
+    ];
+    let groupStep=0,groupPair=null;
+    const selectedTerms=new Set();
+    function renderGroup(animate=false) {
+      const caseIndex=Number(el("group-case").value);
+      const paths={
+        "0,1":groupCases[caseIndex],
+        "0,2":[groupCases[caseIndex][0],...alternateGroups[caseIndex]],
+        "2,3":[groupCases[caseIndex][0],...reverseGroups[caseIndex][0]],
+        "1,3":[groupCases[caseIndex][0],...reverseGroups[caseIndex][1]]
+      };
+      const steps=paths[groupPair]||groupCases[caseIndex];
+      el("group-progress").textContent = `第 ${groupStep + 1} 步，共 4 步`;
+      el("group-terms").hidden=groupStep!==0;
+      el("group-expression").hidden=groupStep===0;
+      if(groupStep===0) {
+        el("group-terms").replaceChildren();
+        groupTerms[caseIndex].forEach((term,index)=>{
+          const button=document.createElement("button");
+          button.type="button";button.className="group-term";button.dataset.term=String(index);
+          button.setAttribute("aria-pressed",String(selectedTerms.has(index)));
+          button.innerHTML=term;
+          button.addEventListener("click",()=>selectGroupTerm(index));
+          el("group-terms").append(button);
+        });
+      } else el("group-expression").innerHTML=steps[groupStep][0];
+      el("group-explanation").innerHTML = steps[groupStep][1];
+      el("group-next").disabled = groupStep===0||groupStep===3;
+      if(animate) {
+        animateChange(groupStep===0?el("group-terms"):el("group-expression"),settleIn,340);
+        animateChange(el("group-explanation"),settleIn,380);
+      }
+    }
+    function selectGroupTerm(index) {
+      if(selectedTerms.has(index))selectedTerms.delete(index);
+      else selectedTerms.add(index);
+      document.querySelectorAll("[data-term]").forEach(button=>button.setAttribute("aria-pressed",String(selectedTerms.has(Number(button.dataset.term)))));
+      if(selectedTerms.size<2) {
+        el("group-explanation").textContent="再選一項，看看餘下兩項能否提出相同括號。";
+        return;
+      }
+      const pair=[...selectedTerms].sort().join(",");
+      selectedTerms.clear();
+      if(["0,1","2,3","0,2","1,3"].includes(pair)) {
+        groupPair=pair;
+        groupStep=1;renderGroup(true);
+      } else {
+        document.querySelectorAll("[data-term]").forEach(button=>button.setAttribute("aria-pressed","false"));
+        el("group-explanation").textContent="這兩項雖可相加，但餘下兩項不能提出相同括號。試把平方項與其中一個一次項配對。";
+        animateChange(el("group-explanation"),settleIn);
+      }
+    }
+    el("group-next").addEventListener("click",()=>{groupStep=Math.min(3,groupStep+1);renderGroup(true);});
+    el("group-reset").addEventListener("click",()=>{groupStep=0;groupPair=null;selectedTerms.clear();renderGroup(true);});
+    el("group-case").addEventListener("change",()=>{groupStep=0;groupPair=null;selectedTerms.clear();renderGroup(true);});
+    el("group-tool").hidden = false; renderGroup();
+    const identities = [
+      [`9${x}<sup>2</sup> − 16`, `兩項都是平方：9${x}<sup>2</sup> = (3${x})<sup>2</sup>，16 = 4<sup>2</sup>，中間是減號。`, `(3${x} + 4)(3${x} − 4)<br>= 9${x}<sup>2</sup> − 12${x} + 12${x} − 16<br>= 9${x}<sup>2</sup> − 16`],
+      [`${x}<sup>2</sup> + 6${x} + 9`, `首尾分別是 ${x} 和 3 的平方；中間 6${x} = 2 × ${x} × 3，符合完全平方。`, `(${x} + 3)<sup>2</sup> = ${x}<sup>2</sup> + 6${x} + 9`],
+      [`4${x}<sup>2</sup> − 12${x} + 9`, `首尾分別是 2${x} 和 3 的平方；中間 −12${x} = −2 × 2${x} × 3。`, `(2${x} − 3)<sup>2</sup> = 4${x}<sup>2</sup> − 12${x} + 9`]
+    ];
+    let identityIndex = 0;
+    function renderIdentity(animate=false) {
+      el("identity-expression").innerHTML = identities[identityIndex][0];
+      el("identity-clue").innerHTML = identities[identityIndex][1];
+      el("identity-answer").hidden = true; el("identity-reveal").hidden = false;
+      document.querySelectorAll("[data-identity]").forEach(button => button.setAttribute("aria-pressed",String(Number(button.dataset.identity) === identityIndex)));
+      if(animate) {
+        animateChange(el("identity-expression"),settleIn);
+        animateChange(el("identity-clue"),settleIn,340);
+      }
+    }
+    document.querySelectorAll("[data-identity]").forEach(button => button.addEventListener("click",()=>{identityIndex=Number(button.dataset.identity);renderIdentity(true);}));
+    el("identity-reveal").addEventListener("click",()=>{el("identity-answer").innerHTML=identities[identityIndex][2];el("identity-answer").hidden=false;el("identity-reveal").hidden=true;animateChange(el("identity-answer"),settleIn,380);});
+    el("identity-tool").hidden = false; renderIdentity();
+    const questions = [
+      {p:`把 8${x} + 12 完全因式分解。`,c:[`4(2${x} + 3)`,`2(4${x} + 6)`,`4(2${x} + 12)`,`8(${x} + 4)`],a:0,h:"先找 8 和 12 的最大公因數，再檢查括號內能否繼續分解。",r:"最大公因數是 4。第二個選項雖相等，但括號內還有公因數 2，未完全分解。"},
+      {p:`把 6${x}<sup>2</sup> + 9${x} 完全因式分解。`,c:[`3(2${x}<sup>2</sup> + 3${x})`,`3${x}(2${x} + 3)`,`3${x}(2${x} + 9)`,`${x}(6${x} + 9)`],a:1,h:`兩項都有數字公因數，也都有 ${x}；一起提出後再檢查括號。`,r:`最大公因式是 3${x}，每項除以它後，括號內得到 2${x} + 3。`},
+      {p:`把 5${x} − 5 因式分解。`,c:[`5${x}`,`5(${x} − 5)`,`5(${x} − 1)`,`5(${x} + 1)`],a:2,h:"每項都除以 5；特別留意 −5 除以 5 的結果。",r:"每項除以 5；常數項 −5 除以 5 得 −1，不能漏掉。"},
+      {p:`把 ${x}<sup>2</sup> − 25 因式分解。`,c:[`(${x} − 5)<sup>2</sup>`,`(${x} + 5)<sup>2</sup>`,`(${x} − 25)(${x} + 1)`,`(${x} + 5)(${x} − 5)`],a:3,h:"這是兩個平方相減；兩個括號要一正一負。",r:"這是平方差：25 = 5²。兩個因式的常數項一正一負。"},
+      {p:`把 ${x}<sup>2</sup> + 8${x} + 16 因式分解。`,c:[`(${x} + 4)<sup>2</sup>`,`(${x} + 8)<sup>2</sup>`,`(${x} + 2)(${x} + 8)`,`(${x} − 4)<sup>2</sup>`],a:0,h:`16 是 4 的平方；中間的 8${x} 是否等於 2 × ${x} × 4？`,r:`中間項 8${x} = 2 × ${x} × 4，符合完全平方公式。`},
+      {p:`把 4${x}<sup>2</sup> − 12${x} + 9 因式分解。`,c:[`(2${x} + 3)<sup>2</sup>`,`(2${x} − 3)<sup>2</sup>`,`(4${x} − 3)<sup>2</sup>`,`(2${x} − 9)(${x} − 1)`],a:1,h:`首尾分別是 2${x} 和 3 的平方；中間是負數。`,r:`首尾是 (2${x})² 與 3²，中間項是 −2 × 2${x} × 3。`},
+      {p:`把 ${x}<sup>2</sup> + 2${x} + 3${x} + 6 因式分解。`,c:[`(${x} + 2)(${x} + 3)`,`(${x} + 1)(${x} + 6)`,`(${x} + 5)(${x} + 6)`,`(${x} − 2)(${x} − 3)`],a:0,h:"先把四項分成兩組，找兩組提出後是否有相同括號。",r:`分組後得到 ${x}(${x} + 2) + 3(${x} + 2)，再提出共同括號。`},
+      {p:`把 2${x}<sup>2</sup> − 18 完全因式分解。`,c:[`2(${x}<sup>2</sup> − 9)`,`2(${x} + 3)(${x} − 3)`,`(2${x} + 3)(${x} − 6)`,`2(${x} − 3)<sup>2</sup>`],a:1,h:"先提取公因數 2；括號裏還有平方差。",r:"先提出 2，再把括號內的平方差分解；不能在第一步便停下來。"},
+      {p:`哪一個式子等於 <var>y</var> − ${x}？`,c:[`${x} − <var>y</var>`,`−(${x} + <var>y</var>)`,`−(${x} − <var>y</var>)`,`<var>y</var> + ${x}`],a:2,h:"把括號前的 −1 分配到兩項，兩項都要變號。",r:"負號分配到括號內每一項：−(x − y) = −x + y。".replaceAll("x",x).replaceAll("y","<var>y</var>")},
+    ];
+    let questionIndex=0,score=0,answered=false,attempts=0;
+    function renderQuestion(focus=false) {
+      answered=false;attempts=0;
+      el("progress").textContent=`第 ${questionIndex+1} 題，共 ${questions.length} 題`;
+      el("score").textContent=`得分：${score} / ${questions.length}`;
+      el("quiz-progress").value=questionIndex;
+      el("question").innerHTML=questions[questionIndex].p;
+      el("feedback").textContent="";el("next").hidden=true;el("choices").replaceChildren();
+      questions[questionIndex].c.forEach((choice,index)=>{
+        const button=document.createElement("button");button.type="button";button.className="choice";button.innerHTML=choice;
+        button.addEventListener("click",()=>{
+          if(answered)return;
+          const q=questions[questionIndex],correct=index===q.a;
+          if(!correct&&attempts===0) {
+            attempts++;
+            button.classList.add("try-again");button.disabled=true;
+            el("feedback").innerHTML=`<strong>再試一次。</strong> ${q.h}`;
+            animateChange(el("feedback"),settleIn,340);
+            return;
+          }
+          answered=true;
+          if(correct)score++;
+          [...el("choices").children].forEach((item,i)=>{item.disabled=true;if(i===q.a)item.classList.add("correct");else if(i===index)item.classList.add("wrong");});
+          el("feedback").innerHTML=`<strong>${correct?"答對了。":"這題先看到解法。"}</strong> ${q.r}`;
+          animateChange(el("feedback"),settleIn,340);
+          el("score").textContent=`得分：${score} / ${questions.length}`;el("quiz-progress").value=questionIndex+1;
+          const last=questionIndex===questions.length-1;
+          if(last)el("feedback").innerHTML+=` 本輪完成，答對 ${score} 題。`;
+          el("next").textContent=last?"重新挑戰":"下一題";el("next").hidden=false;
+        });el("choices").append(button);
+      });
+      if(focus) {
+        animateChange(el("question"),settleIn,340);
+        animateChange(el("choices"),settleIn,380);
+      }
+      if(focus)el("question").focus();
+    }
+    el("next").addEventListener("click",()=>{if(!answered)return;if(questionIndex===questions.length-1){questionIndex=0;score=0;}else questionIndex++;renderQuestion(true);});
+    el("quiz").hidden=false;renderQuestion();
+    const navLinks=[...document.querySelectorAll(".contents a")];
+    function updateSection(){
+      let current=navLinks[0];
+      navLinks.forEach(link=>{if(document.querySelector(link.getAttribute("href")).getBoundingClientRect().top<=160)current=link;});
+      navLinks.forEach(link=>{if(link===current)link.setAttribute("aria-current","location");else link.removeAttribute("aria-current");});
+    }
+    window.addEventListener("scroll",updateSection,{passive:true});updateSection();
+    const seen=new WeakSet();let observer;
+    function setupMotion(){
+      if(observer)observer.disconnect();
+      document.querySelectorAll(".scroll-enter").forEach(node=>node.classList.remove("scroll-enter"));
+      if(motion.matches||!("IntersectionObserver" in window))return;
+      observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
+        if(!entry.isIntersecting||entry.target.hidden)return;
+        seen.add(entry.target);entry.target.classList.add("scroll-enter");observer.unobserve(entry.target);
+        entry.target.addEventListener("animationend",()=>entry.target.classList.remove("scroll-enter"),{once:true});
+      }),{rootMargin:"0px 0px -24px 0px"});
+      document.querySelectorAll("main > section > .section-heading, main > section > .diagram, main > section > .example").forEach(node=>{if(!seen.has(node))observer.observe(node);});
+    }
+    motion.addEventListener("change",setupMotion);setupMotion();
+  </script>
+</body>
+</html>
