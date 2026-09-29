@@ -45,11 +45,12 @@
     .contents a { padding:11px 12px; text-decoration:none; border-left:2px solid transparent; margin:2px 0; color:var(--muted); font-size:14px; }
     .contents a:hover { color:var(--teal); background:#f6f8f7; }
     .contents a[aria-current="location"] { color:var(--teal); background:var(--pale); border-color:var(--teal); font-weight:650; }
-    section { --accent:var(--teal); --tint:#f2f7f5; padding:52px 0; border-bottom:1px solid var(--line); scroll-margin-top:24px; }
-    #reverse,#interest { --accent:var(--blue); --tint:#f0f6fa; }
-    #successive,#depreciation { --accent:var(--coral); --tint:#fff3f5; }
-    section > .kicker { color:var(--accent); display:flex; align-items:center; gap:12px; }
-    section > .kicker::before { content:""; width:28px; height:4px; background:var(--accent); }
+    section { --accent:var(--teal); --tint:#edf6f2; padding:40px 0; border-bottom:1px solid var(--line); scroll-margin-top:24px; }
+    #reverse,#interest { --accent:var(--blue); --tint:#edf4fa; }
+    #successive,#depreciation { --accent:var(--coral); --tint:#fceff2; }
+    .section-heading { padding:20px 24px; margin-bottom:28px; background:var(--tint); border-left:5px solid var(--accent); border-bottom:1px solid var(--line); }
+    .section-heading .kicker { margin-bottom:8px; color:var(--accent); font-size:13px; }
+    .section-heading h2 { margin:0; font-size:28px; }
     .columns { display:grid; grid-template-columns:minmax(0,1fr); gap:32px; }
     .columns > * { min-width:0; }
     .math { font-family:Georgia,"Times New Roman",serif; font-size:1.12em; line-height:2.1; }
@@ -118,6 +119,8 @@
     .coin-caption { font-size:13px; color:var(--muted); }
     .coin-story { padding:16px 0; min-height:110px; font-size:16px; }
     .activity { margin:28px 0; padding:24px 0; border-block:1px solid var(--line); }
+    .activity > h3,.coin-lab > h3 { display:flex; align-items:center; gap:10px; color:var(--teal); }
+    .activity > h3::before,.coin-lab > h3::before { content:""; width:10px; height:10px; flex:none; background:var(--teal); border-radius:50%; }
     .activity-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:18px; }
     .secondary { padding:10px 16px; border:1px solid var(--line); background:white; color:var(--teal); border-radius:4px; }
     .activity-status { min-height:90px; margin:16px 0 0; font-size:16px; }
@@ -191,6 +194,8 @@
       .intro { padding-top:28px; }
       h1 { font-size:34px; } h2 { font-size:24px; }
       section { padding:36px 0; }
+      .section-heading { padding:16px; margin-bottom:24px; }
+      .section-heading h2 { font-size:24px; }
       .contents { grid-template-columns:1fr; font-size:15px; }
       .columns { grid-template-columns:1fr; gap:28px; }
       .formula { font-size:20px; padding:16px; }
@@ -239,11 +244,11 @@
       <p class="lead">From percentage change to compound growth: always identify the original amount.</p>
     </div>
     <nav class="contents" aria-label="Lesson sections">
-      <a href="#concepts">01 Foundations</a><a href="#reverse">02 Reverse percentages</a><a href="#successive">03 Successive changes</a><a href="#interest">04 Interest</a><a href="#depreciation">05 Growth &amp; depreciation</a><a href="#practice">06 Practice</a>
+      <a href="#concepts">01 Foundations</a><a href="#reverse">02 Reverse percentages</a><a href="#successive">03 Successive changes</a><a href="#depreciation">04 Growth &amp; depreciation</a><a href="#interest">05 Interest</a><a href="#practice">06 Practice</a>
     </nav>
 
     <section id="concepts" aria-labelledby="concepts-title">
-      <p class="kicker">01 &middot; Foundations</p><h2 id="concepts-title">The original amount is 100%</h2>
+      <header class="section-heading"><p class="kicker">01 &middot; Foundations</p><h2 id="concepts-title">The original amount is 100%</h2></header>
       <div class="columns">
         <div>
           <p>A percentage is a fraction out of 100. For example, 35% = 35 &divide; 100 = 0.35, and 0.08 = 8%.</p>
@@ -288,7 +293,7 @@
     </section>
 
     <section id="reverse" aria-labelledby="reverse-title">
-      <p class="kicker">02 &middot; Work backwards</p><h2 id="reverse-title">Reverse percentages</h2>
+      <header class="section-heading"><p class="kicker">02 &middot; Work backwards</p><h2 id="reverse-title">Reverse percentages</h2></header>
       <div class="activity" id="reverse-activity" hidden>
         <h3>Rewind a percentage change</h3>
         <p>After a 15% decrease, an amount is HK$612. What was it before?</p>
@@ -321,7 +326,7 @@
     </section>
 
     <section id="successive" aria-labelledby="successive-title">
-      <p class="kicker">03 &middot; More than one change</p><h2 id="successive-title">Multiply the multipliers</h2>
+      <header class="section-heading"><p class="kicker">03 &middot; More than one change</p><h2 id="successive-title">Multiply the multipliers</h2></header>
       <div class="activity" id="guess-activity" hidden>
         <h3>Predict before you calculate</h3>
         <p>An amount starts at 100, rises by 20%, then falls by 20%. Where does it finish?</p>
@@ -376,8 +381,50 @@
       </div>
     </section>
 
+    <section id="depreciation" aria-labelledby="depreciation-title">
+      <header class="section-heading"><p class="kicker">04 &middot; Repeated percentage change</p><h2 id="depreciation-title">Growth and depreciation</h2></header>
+      <div class="activity" id="depreciation-activity" hidden>
+        <h3>A laptop through time</h3>
+        <p>Purchase price: HK$12,000. Depreciation: 15% of the remaining value each year.</p>
+        <div class="depreciation-control"><label for="depreciation-year">Year <output id="depreciation-year-label">0</output> of 5</label><input id="depreciation-year" type="range" min="0" max="5" step="1" value="0"></div>
+        <div class="laptop-scene">
+          <div class="laptop-symbol" aria-hidden="true"><div class="laptop-screen" id="laptop-year">Year 0</div><div class="laptop-base"></div></div>
+          <div><p class="result" id="depreciation-value">HK$12,000.00</p><p class="coin-caption" id="depreciation-percent">100% of the purchase price remains.</p><div class="value-track" aria-hidden="true"><div id="depreciation-bar" class="value-fill fall" style="--value:100%"></div></div></div>
+        </div>
+        <p class="activity-status" id="depreciation-status" aria-live="polite">At purchase, no depreciation has occurred.</p>
+      </div>
+      <div class="columns">
+        <div>
+          <p>Let <var>V</var><sub>0</sub> be the initial value and <var>V</var> the value after <var>n</var> periods, each with a constant percentage rate <var>r</var>%.</p>
+          <div class="formula"><span class="formula-label">Growth</span><var>V</var> = <var>V</var><sub>0</sub>(1 + <var>r</var>%)<sup><var>n</var></sup></div>
+          <div class="formula"><span class="formula-label">Depreciation</span><var>V</var> = <var>V</var><sub>0</sub>(1 &minus; <var>r</var>%)<sup><var>n</var></sup></div>
+          <p>For depreciation in value, 0 &le; <var>r</var> &le; 100. The same multiplier is applied each period, but the amount lost changes.</p>
+          <p class="note">A 10% annual depreciation does not mean a 30% loss after 3 years. The remaining fraction is 0.9<sup>3</sup> = 0.729, so the loss is 27.1%.</p>
+        </div>
+        <article class="example">
+          <h3>Example 3 &middot; A laptop's value</h3>
+          <p>A laptop costs HK$12,000 and depreciates by 15% each year. Find its value after 3 years.</p>
+          <figure class="value-diagram">
+            <h4>85% remains after each year</h4>
+            <div class="value-row"><div class="value-label"><span>Purchase &middot; 100%</span><strong>HK$12,000</strong></div><div class="value-track" aria-hidden="true"><div class="value-fill" style="--value:100%"></div></div></div>
+            <div class="value-row"><div class="value-label"><span>Year 1 &middot; 85%</span><strong>HK$10,200</strong></div><div class="value-track" aria-hidden="true"><div class="value-fill fall" style="--value:85%"></div></div><small>&times; 0.85 &middot; This year's decrease: HK$1,800</small></div>
+            <div class="value-row"><div class="value-label"><span>Year 2 &middot; 72.25%</span><strong>HK$8,670</strong></div><div class="value-track" aria-hidden="true"><div class="value-fill fall" style="--value:72.25%"></div></div><small>&times; 0.85 again &middot; This year's decrease: HK$1,530</small></div>
+            <div class="value-row"><div class="value-label"><span>Year 3 &middot; 61.4125%</span><strong>HK$7,369.50</strong></div><div class="value-track" aria-hidden="true"><div class="value-fill fall" style="--value:61.4125%"></div></div><small>&times; 0.85 again &middot; This year's decrease: HK$1,300.50</small></div>
+            <figcaption>Bar lengths and percentages refer to the original HK$12,000. Each year's 15% decrease uses the previous year's value, so the dollar decrease becomes smaller.</figcaption>
+          </figure>
+          <p class="math"><var>V</var> = 12,000(1 &minus; 0.15)<sup>3</sup><br>= 12,000(0.85)<sup>3</sup><br>= <strong>HK$7,369.50</strong></p>
+          <p>Total depreciation = 12,000 &minus; 7,369.50 = HK$4,630.50.</p>
+          <details><summary>Find an unknown annual growth rate</summary><div>
+            <p>A population grows from 20,000 to 24,200 in 2 years at a constant annual rate of <var>r</var>%.</p>
+            <p class="math">(1 + <var>r</var>%)<sup>2</sup> = 24,200 &divide; 20,000 = 1.21<br>1 + <var>r</var>% = &radic;1.21 = 1.1<br><var>r</var>% = 10%<br><var>r</var> = 10</p>
+            <p>The annual growth rate is <strong>10%</strong>.</p>
+          </div></details>
+        </article>
+      </div>
+    </section>
+
     <section id="interest" aria-labelledby="interest-title">
-      <p class="kicker">04 &middot; Money over time</p><h2 id="interest-title">Simple and compound interest</h2>
+      <header class="section-heading"><p class="kicker">05 &middot; Money over time</p><h2 id="interest-title">Simple and compound interest</h2></header>
       <p>Let <var>P</var> be the principal, <var>r</var>% the annual interest rate, <var>t</var> the time in years, <var>I</var> the interest and <var>A</var> the final amount. These examples assume a fixed rate, no fees and no deposits or withdrawals.</p>
       <div class="coin-lab" id="coin-lab" hidden>
         <h3>Watch the interest grow</h3>
@@ -460,50 +507,8 @@
       </div>
     </section>
 
-    <section id="depreciation" aria-labelledby="depreciation-title">
-      <p class="kicker">05 &middot; Repeated percentage change</p><h2 id="depreciation-title">Growth and depreciation</h2>
-      <div class="activity" id="depreciation-activity" hidden>
-        <h3>A laptop through time</h3>
-        <p>Purchase price: HK$12,000. Depreciation: 15% of the remaining value each year.</p>
-        <div class="depreciation-control"><label for="depreciation-year">Year <output id="depreciation-year-label">0</output> of 5</label><input id="depreciation-year" type="range" min="0" max="5" step="1" value="0"></div>
-        <div class="laptop-scene">
-          <div class="laptop-symbol" aria-hidden="true"><div class="laptop-screen" id="laptop-year">Year 0</div><div class="laptop-base"></div></div>
-          <div><p class="result" id="depreciation-value">HK$12,000.00</p><p class="coin-caption" id="depreciation-percent">100% of the purchase price remains.</p><div class="value-track" aria-hidden="true"><div id="depreciation-bar" class="value-fill fall" style="--value:100%"></div></div></div>
-        </div>
-        <p class="activity-status" id="depreciation-status" aria-live="polite">At purchase, no depreciation has occurred.</p>
-      </div>
-      <div class="columns">
-        <div>
-          <p>Let <var>V</var><sub>0</sub> be the initial value and <var>V</var> the value after <var>n</var> periods, each with a constant percentage rate <var>r</var>%.</p>
-          <div class="formula"><span class="formula-label">Growth</span><var>V</var> = <var>V</var><sub>0</sub>(1 + <var>r</var>%)<sup><var>n</var></sup></div>
-          <div class="formula"><span class="formula-label">Depreciation</span><var>V</var> = <var>V</var><sub>0</sub>(1 &minus; <var>r</var>%)<sup><var>n</var></sup></div>
-          <p>For depreciation in value, 0 &le; <var>r</var> &le; 100. The same multiplier is applied each period, but the amount lost changes.</p>
-          <p class="note">A 10% annual depreciation does not mean a 30% loss after 3 years. The remaining fraction is 0.9<sup>3</sup> = 0.729, so the loss is 27.1%.</p>
-        </div>
-        <article class="example">
-          <h3>Example 3 &middot; A laptop's value</h3>
-          <p>A laptop costs HK$12,000 and depreciates by 15% each year. Find its value after 3 years.</p>
-          <figure class="value-diagram">
-            <h4>85% remains after each year</h4>
-            <div class="value-row"><div class="value-label"><span>Purchase &middot; 100%</span><strong>HK$12,000</strong></div><div class="value-track" aria-hidden="true"><div class="value-fill" style="--value:100%"></div></div></div>
-            <div class="value-row"><div class="value-label"><span>Year 1 &middot; 85%</span><strong>HK$10,200</strong></div><div class="value-track" aria-hidden="true"><div class="value-fill fall" style="--value:85%"></div></div><small>&times; 0.85 &middot; This year's decrease: HK$1,800</small></div>
-            <div class="value-row"><div class="value-label"><span>Year 2 &middot; 72.25%</span><strong>HK$8,670</strong></div><div class="value-track" aria-hidden="true"><div class="value-fill fall" style="--value:72.25%"></div></div><small>&times; 0.85 again &middot; This year's decrease: HK$1,530</small></div>
-            <div class="value-row"><div class="value-label"><span>Year 3 &middot; 61.4125%</span><strong>HK$7,369.50</strong></div><div class="value-track" aria-hidden="true"><div class="value-fill fall" style="--value:61.4125%"></div></div><small>&times; 0.85 again &middot; This year's decrease: HK$1,300.50</small></div>
-            <figcaption>Bar lengths and percentages refer to the original HK$12,000. Each year's 15% decrease uses the previous year's value, so the dollar decrease becomes smaller.</figcaption>
-          </figure>
-          <p class="math"><var>V</var> = 12,000(1 &minus; 0.15)<sup>3</sup><br>= 12,000(0.85)<sup>3</sup><br>= <strong>HK$7,369.50</strong></p>
-          <p>Total depreciation = 12,000 &minus; 7,369.50 = HK$4,630.50.</p>
-          <details><summary>Find an unknown annual growth rate</summary><div>
-            <p>A population grows from 20,000 to 24,200 in 2 years at a constant annual rate of <var>r</var>%.</p>
-            <p class="math">(1 + <var>r</var>%)<sup>2</sup> = 24,200 &divide; 20,000 = 1.21<br>1 + <var>r</var>% = &radic;1.21 = 1.1<br><var>r</var>% = 10%<br><var>r</var> = 10</p>
-            <p>The annual growth rate is <strong>10%</strong>.</p>
-          </div></details>
-        </article>
-      </div>
-    </section>
-
     <section id="practice" aria-labelledby="practice-title">
-      <p class="kicker">06 &middot; Apply your knowledge</p><h2 id="practice-title">Practice</h2>
+      <header class="section-heading"><p class="kicker">06 &middot; Apply your knowledge</p><h2 id="practice-title">Practice</h2></header>
       <p>Give monetary answers to the nearest cent where necessary.</p>
       <noscript><p>The interactive quiz requires JavaScript. The worked examples and revision task below remain available.</p></noscript>
       <div class="tool quiz" id="quiz" hidden>

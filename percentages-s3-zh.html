@@ -45,11 +45,12 @@
     .contents a { padding:11px 12px; text-decoration:none; border-left:2px solid transparent; margin:2px 0; color:var(--muted); font-size:14px; }
     .contents a:hover { color:var(--teal); background:#f6f8f7; }
     .contents a[aria-current="location"] { color:var(--teal); background:var(--pale); border-color:var(--teal); font-weight:650; }
-    section { --accent:var(--teal); --tint:#f2f7f5; padding:52px 0; border-bottom:1px solid var(--line); scroll-margin-top:24px; }
-    #reverse,#interest { --accent:var(--blue); --tint:#f0f6fa; }
-    #successive,#depreciation { --accent:var(--coral); --tint:#fff3f5; }
-    section > .kicker { color:var(--accent); display:flex; align-items:center; gap:12px; }
-    section > .kicker::before { content:""; width:28px; height:4px; background:var(--accent); }
+    section { --accent:var(--teal); --tint:#edf6f2; padding:40px 0; border-bottom:1px solid var(--line); scroll-margin-top:24px; }
+    #reverse,#interest { --accent:var(--blue); --tint:#edf4fa; }
+    #successive,#depreciation { --accent:var(--coral); --tint:#fceff2; }
+    .section-heading { padding:20px 24px; margin-bottom:28px; background:var(--tint); border-left:5px solid var(--accent); border-bottom:1px solid var(--line); }
+    .section-heading .kicker { margin-bottom:8px; color:var(--accent); font-size:13px; }
+    .section-heading h2 { margin:0; font-size:28px; }
     .columns { display:grid; grid-template-columns:minmax(0,1fr); gap:32px; }
     .columns > * { min-width:0; }
     .math { font-family:Georgia,"Times New Roman",serif; font-size:1.12em; line-height:2.1; }
@@ -118,6 +119,8 @@
     .coin-caption { font-size:13px; color:var(--muted); }
     .coin-story { padding:16px 0; min-height:110px; font-size:16px; }
     .activity { margin:28px 0; padding:24px 0; border-block:1px solid var(--line); }
+    .activity > h3,.coin-lab > h3 { display:flex; align-items:center; gap:10px; color:var(--teal); }
+    .activity > h3::before,.coin-lab > h3::before { content:""; width:10px; height:10px; flex:none; background:var(--teal); border-radius:50%; }
     .activity-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:18px; }
     .secondary { padding:10px 16px; border:1px solid var(--line); background:white; color:var(--teal); border-radius:4px; }
     .activity-status { min-height:90px; margin:16px 0 0; font-size:16px; }
@@ -191,6 +194,8 @@
       .intro { padding-top:28px; }
       h1 { font-size:34px; } h2 { font-size:24px; }
       section { padding:36px 0; }
+      .section-heading { padding:16px; margin-bottom:24px; }
+      .section-heading h2 { font-size:24px; }
       .contents { grid-template-columns:1fr; font-size:15px; }
       .columns { grid-template-columns:1fr; gap:28px; }
       .formula { font-size:20px; padding:16px; }
@@ -239,11 +244,11 @@
       <p class="lead">由百分變化到複利增長：先認清原值，再決定計算方法。</p>
     </div>
     <nav class="contents" aria-label="課程章節">
-      <a href="#concepts">01 基本概念</a><a href="#reverse">02 逆向百分數</a><a href="#successive">03 連續變化</a><a href="#interest">04 利息</a><a href="#depreciation">05 增長與折舊</a><a href="#practice">06 練習</a>
+      <a href="#concepts">01 基本概念</a><a href="#reverse">02 逆向百分數</a><a href="#successive">03 連續變化</a><a href="#depreciation">04 增長與折舊</a><a href="#interest">05 利息</a><a href="#practice">06 練習</a>
     </nav>
 
     <section id="concepts" aria-labelledby="concepts-title">
-      <p class="kicker">01 &middot; 基本概念</p><h2 id="concepts-title">原值就是 100%</h2>
+      <header class="section-heading"><p class="kicker">01 &middot; 基本概念</p><h2 id="concepts-title">原值就是 100%</h2></header>
       <div class="columns">
         <div>
           <p>百分數表示以 100 為分母的分數。例如，35% = 35 &divide; 100 = 0.35，而 0.08 = 8%。</p>
@@ -288,7 +293,7 @@
     </section>
 
     <section id="reverse" aria-labelledby="reverse-title">
-      <p class="kicker">02 &middot; 逆向思考</p><h2 id="reverse-title">逆向百分數</h2>
+      <header class="section-heading"><p class="kicker">02 &middot; 逆向思考</p><h2 id="reverse-title">逆向百分數</h2></header>
       <div class="activity" id="reverse-activity" hidden>
         <h3>百分變化倒帶</h3>
         <p>某金額減少 15% 後為 HK$612，原來是多少？</p>
@@ -321,7 +326,7 @@
     </section>
 
     <section id="successive" aria-labelledby="successive-title">
-      <p class="kicker">03 &middot; 連續變化</p><h2 id="successive-title">把倍率相乘</h2>
+      <header class="section-heading"><p class="kicker">03 &middot; 連續變化</p><h2 id="successive-title">把倍率相乘</h2></header>
       <div class="activity" id="guess-activity" hidden>
         <h3>先預測，再計算</h3>
         <p>一個數量原為 100，先增加 20%，再減少 20%。最後會是多少？</p>
@@ -376,8 +381,50 @@
       </div>
     </section>
 
+    <section id="depreciation" aria-labelledby="depreciation-title">
+      <header class="section-heading"><p class="kicker">04 &middot; 重複百分變化</p><h2 id="depreciation-title">增長與折舊</h2></header>
+      <div class="activity" id="depreciation-activity" hidden>
+        <h3>電腦價值時間軸</h3>
+        <p>購入價為 HK$12,000，每年按當時餘值折舊 15%。</p>
+        <div class="depreciation-control"><label for="depreciation-year">第 <output id="depreciation-year-label">0</output> 年，共 5 年</label><input id="depreciation-year" type="range" min="0" max="5" step="1" value="0"></div>
+        <div class="laptop-scene">
+          <div class="laptop-symbol" aria-hidden="true"><div class="laptop-screen" id="laptop-year">第 0 年</div><div class="laptop-base"></div></div>
+          <div><p class="result" id="depreciation-value">HK$12,000.00</p><p class="coin-caption" id="depreciation-percent">100% 的購入價。</p><div class="value-track" aria-hidden="true"><div id="depreciation-bar" class="value-fill fall" style="--value:100%"></div></div></div>
+        </div>
+        <p class="activity-status" id="depreciation-status" aria-live="polite">購入時尚未折舊。</p>
+      </div>
+      <div class="columns">
+        <div>
+          <p>設 <var>V</var><sub>0</sub> 為初始值，<var>V</var> 為經過 <var>n</var> 期後的值，每期百分率固定為 <var>r</var>%。</p>
+          <div class="formula"><span class="formula-label">增長</span><var>V</var> = <var>V</var><sub>0</sub>(1 + <var>r</var>%)<sup><var>n</var></sup></div>
+          <div class="formula"><span class="formula-label">折舊</span><var>V</var> = <var>V</var><sub>0</sub>(1 &minus; <var>r</var>%)<sup><var>n</var></sup></div>
+          <p>折舊時，0 &le; <var>r</var> &le; 100。每期使用相同倍率，但減少的金額會改變。</p>
+          <p class="note">每年折舊 10%，不代表 3 年後減值 30%。剩餘比例為 0.9<sup>3</sup> = 0.729，因此減值 27.1%。</p>
+        </div>
+        <article class="example">
+          <h3>例 3 &middot; 手提電腦的價值</h3>
+          <p>一部手提電腦購入價為 HK$12,000，每年折舊 15%。求 3 年後的價值。</p>
+          <figure class="value-diagram">
+            <h4>每年剩下上一年價值的 85%</h4>
+            <div class="value-row"><div class="value-label"><span>購入時 &middot; 100%</span><strong>HK$12,000</strong></div><div class="value-track" aria-hidden="true"><div class="value-fill" style="--value:100%"></div></div></div>
+            <div class="value-row"><div class="value-label"><span>第 1 年 &middot; 85%</span><strong>HK$10,200</strong></div><div class="value-track" aria-hidden="true"><div class="value-fill fall" style="--value:85%"></div></div><small>&times; 0.85 &middot; 本年折舊額：HK$1,800</small></div>
+            <div class="value-row"><div class="value-label"><span>第 2 年 &middot; 72.25%</span><strong>HK$8,670</strong></div><div class="value-track" aria-hidden="true"><div class="value-fill fall" style="--value:72.25%"></div></div><small>&times; 再次乘 0.85 &middot; 本年折舊額：HK$1,530</small></div>
+            <div class="value-row"><div class="value-label"><span>第 3 年 &middot; 61.4125%</span><strong>HK$7,369.50</strong></div><div class="value-track" aria-hidden="true"><div class="value-fill fall" style="--value:61.4125%"></div></div><small>&times; 再次乘 0.85 &middot; 本年折舊額：HK$1,300.50</small></div>
+            <figcaption>長條長度及百分數均以原價 HK$12,000 為基準。每年減少的 15% 是按上一年的價值計算，因此每年減少的金額愈來愈小。</figcaption>
+          </figure>
+          <p class="math"><var>V</var> = 12,000(1 &minus; 0.15)<sup>3</sup><br>= 12,000(0.85)<sup>3</sup><br>= <strong>HK$7,369.50</strong></p>
+          <p>總折舊額 = 12,000 &minus; 7,369.50 = HK$4,630.50.</p>
+          <details><summary>求未知的年增長率</summary><div>
+            <p>某地人口在 2 年內由 20,000 增至 24,200，固定年增長率為 <var>r</var>%。</p>
+            <p class="math">(1 + <var>r</var>%)<sup>2</sup> = 24,200 &divide; 20,000 = 1.21<br>1 + <var>r</var>% = &radic;1.21 = 1.1<br><var>r</var>% = 10%<br><var>r</var> = 10</p>
+            <p>年增長率為 <strong>10%</strong>.</p>
+          </div></details>
+        </article>
+      </div>
+    </section>
+
     <section id="interest" aria-labelledby="interest-title">
-      <p class="kicker">04 &middot; 金錢與時間</p><h2 id="interest-title">單利與複利</h2>
+      <header class="section-heading"><p class="kicker">05 &middot; 金錢與時間</p><h2 id="interest-title">單利與複利</h2></header>
       <p>設 <var>P</var> 為本金，<var>r</var>% 為年利率，<var>t</var> 為年期，<var>I</var> 為利息，<var>A</var> 為本利和。以下例子假設利率固定、不收費，且期間沒有存款或提款。</p>
       <div class="coin-lab" id="coin-lab" hidden>
         <h3>觀察利息增長</h3>
@@ -460,50 +507,8 @@
       </div>
     </section>
 
-    <section id="depreciation" aria-labelledby="depreciation-title">
-      <p class="kicker">05 &middot; 重複百分變化</p><h2 id="depreciation-title">增長與折舊</h2>
-      <div class="activity" id="depreciation-activity" hidden>
-        <h3>電腦價值時間軸</h3>
-        <p>購入價為 HK$12,000，每年按當時餘值折舊 15%。</p>
-        <div class="depreciation-control"><label for="depreciation-year">第 <output id="depreciation-year-label">0</output> 年，共 5 年</label><input id="depreciation-year" type="range" min="0" max="5" step="1" value="0"></div>
-        <div class="laptop-scene">
-          <div class="laptop-symbol" aria-hidden="true"><div class="laptop-screen" id="laptop-year">第 0 年</div><div class="laptop-base"></div></div>
-          <div><p class="result" id="depreciation-value">HK$12,000.00</p><p class="coin-caption" id="depreciation-percent">100% 的購入價。</p><div class="value-track" aria-hidden="true"><div id="depreciation-bar" class="value-fill fall" style="--value:100%"></div></div></div>
-        </div>
-        <p class="activity-status" id="depreciation-status" aria-live="polite">購入時尚未折舊。</p>
-      </div>
-      <div class="columns">
-        <div>
-          <p>設 <var>V</var><sub>0</sub> 為初始值，<var>V</var> 為經過 <var>n</var> 期後的值，每期百分率固定為 <var>r</var>%。</p>
-          <div class="formula"><span class="formula-label">增長</span><var>V</var> = <var>V</var><sub>0</sub>(1 + <var>r</var>%)<sup><var>n</var></sup></div>
-          <div class="formula"><span class="formula-label">折舊</span><var>V</var> = <var>V</var><sub>0</sub>(1 &minus; <var>r</var>%)<sup><var>n</var></sup></div>
-          <p>折舊時，0 &le; <var>r</var> &le; 100。每期使用相同倍率，但減少的金額會改變。</p>
-          <p class="note">每年折舊 10%，不代表 3 年後減值 30%。剩餘比例為 0.9<sup>3</sup> = 0.729，因此減值 27.1%。</p>
-        </div>
-        <article class="example">
-          <h3>例 3 &middot; 手提電腦的價值</h3>
-          <p>一部手提電腦購入價為 HK$12,000，每年折舊 15%。求 3 年後的價值。</p>
-          <figure class="value-diagram">
-            <h4>每年剩下上一年價值的 85%</h4>
-            <div class="value-row"><div class="value-label"><span>購入時 &middot; 100%</span><strong>HK$12,000</strong></div><div class="value-track" aria-hidden="true"><div class="value-fill" style="--value:100%"></div></div></div>
-            <div class="value-row"><div class="value-label"><span>第 1 年 &middot; 85%</span><strong>HK$10,200</strong></div><div class="value-track" aria-hidden="true"><div class="value-fill fall" style="--value:85%"></div></div><small>&times; 0.85 &middot; 本年折舊額：HK$1,800</small></div>
-            <div class="value-row"><div class="value-label"><span>第 2 年 &middot; 72.25%</span><strong>HK$8,670</strong></div><div class="value-track" aria-hidden="true"><div class="value-fill fall" style="--value:72.25%"></div></div><small>&times; 再次乘 0.85 &middot; 本年折舊額：HK$1,530</small></div>
-            <div class="value-row"><div class="value-label"><span>第 3 年 &middot; 61.4125%</span><strong>HK$7,369.50</strong></div><div class="value-track" aria-hidden="true"><div class="value-fill fall" style="--value:61.4125%"></div></div><small>&times; 再次乘 0.85 &middot; 本年折舊額：HK$1,300.50</small></div>
-            <figcaption>長條長度及百分數均以原價 HK$12,000 為基準。每年減少的 15% 是按上一年的價值計算，因此每年減少的金額愈來愈小。</figcaption>
-          </figure>
-          <p class="math"><var>V</var> = 12,000(1 &minus; 0.15)<sup>3</sup><br>= 12,000(0.85)<sup>3</sup><br>= <strong>HK$7,369.50</strong></p>
-          <p>總折舊額 = 12,000 &minus; 7,369.50 = HK$4,630.50.</p>
-          <details><summary>求未知的年增長率</summary><div>
-            <p>某地人口在 2 年內由 20,000 增至 24,200，固定年增長率為 <var>r</var>%。</p>
-            <p class="math">(1 + <var>r</var>%)<sup>2</sup> = 24,200 &divide; 20,000 = 1.21<br>1 + <var>r</var>% = &radic;1.21 = 1.1<br><var>r</var>% = 10%<br><var>r</var> = 10</p>
-            <p>年增長率為 <strong>10%</strong>.</p>
-          </div></details>
-        </article>
-      </div>
-    </section>
-
     <section id="practice" aria-labelledby="practice-title">
-      <p class="kicker">06 &middot; 學以致用</p><h2 id="practice-title">練習</h2>
+      <header class="section-heading"><p class="kicker">06 &middot; 學以致用</p><h2 id="practice-title">練習</h2></header>
       <p>有需要時，把金額答案四捨五入至最接近的一仙。</p>
       <noscript><p>互動練習需要啟用 JavaScript；例題及下方的綜合題仍可閱讀。</p></noscript>
       <div class="tool quiz" id="quiz" hidden>
