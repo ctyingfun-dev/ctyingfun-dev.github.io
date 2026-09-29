@@ -132,6 +132,8 @@
     .laptop-base { height:10px; width:150px; margin-left:-5px; background:#8ca7a0; border-radius:0 0 8px 8px; }
     .depreciation-control { display:flex; gap:20px; align-items:center; flex-wrap:wrap; }
     @keyframes coin-arrive { from { transform:translateY(-12px); opacity:0; } to { transform:translateY(0); opacity:1; } }
+    .scroll-enter { animation:section-arrive .55s cubic-bezier(.2,.65,.3,1) both; }
+    @keyframes section-arrive { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
     .tool { margin-top:36px; border:1px solid var(--line); border-radius:6px; background:white; overflow:hidden; }
     .tool-heading { margin:0; padding:18px 24px; font-size:16px; border-bottom:1px solid var(--line); border-top:3px solid var(--accent); background:var(--tint); color:var(--ink); }
     .controls { display:flex; flex-wrap:wrap; align-items:end; gap:24px; padding:24px; border-bottom:1px solid var(--line); background:#fafbfa; }
@@ -213,8 +215,9 @@
       .laptop-scene { grid-template-columns:1fr; gap:18px; }
       .guess-options { grid-template-columns:1fr; }
     }
-    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .coin { animation:none; } .value-fill { transition:none; } }
+    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .coin,.scroll-enter { animation:none; } .value-fill { transition:none; } }
     @media print {
+      .scroll-enter { animation:none; }
       body { background:white; font-size:11pt; }
       .top,.contents,.controls,.quiz,canvas,.legend { display:none; }
       .wrap { width:100%; }
@@ -522,6 +525,29 @@
   </main>
   <footer class="wrap">Mathematics Studio &middot; Secondary 3 &middot; <a href="index.html">All lessons</a></footer>
   <script>
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const entranceTargets = [...document.querySelectorAll("main > section > :not(.columns), main > section > .columns > *")];
+    const entranceSeen = new WeakSet();
+    let entranceObserver;
+    function setupEntrances() {
+      if (entranceObserver) entranceObserver.disconnect();
+      document.querySelectorAll(".scroll-enter").forEach(node => node.classList.remove("scroll-enter"));
+      if (reducedMotion.matches || !("IntersectionObserver" in window)) return;
+      entranceObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting || entry.target.hidden) return;
+          entranceSeen.add(entry.target);
+          entry.target.classList.add("scroll-enter");
+          entry.target.addEventListener("animationend", event => {
+            if (event.target === entry.target && event.animationName === "section-arrive") entry.target.classList.remove("scroll-enter");
+          });
+          entranceObserver.unobserve(entry.target);
+        });
+      }, { threshold:0, rootMargin:"0px 0px -24px 0px" });
+      entranceTargets.forEach(node => { if (!entranceSeen.has(node)) entranceObserver.observe(node); });
+    }
+    reducedMotion.addEventListener("change", setupEntrances);
+    setupEntrances();
     const sectionLinks = [...document.querySelectorAll(".contents a")];
     const lessonSections = sectionLinks.map(link => document.querySelector(link.getAttribute("href")));
     function updateCurrentSection() {
