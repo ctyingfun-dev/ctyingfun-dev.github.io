@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Hong Kong Secondary 3 mathematics: percentages, reverse percentages, successive changes, simple and compound interest, and depreciation.">
+  <title>Percentages | S3 Mathematics</title>
+  <style>
+    :root { --ink:#19312f; --muted:#526664; --line:#d7e2de; --paper:#f6f8f7; --teal:#08786e; --pale:#e4f4ef; --coral:#b53f59; --blue:#286d9e; }
+    * { box-sizing:border-box; letter-spacing:0; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:white; color:#253330; font:18px/1.85 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; }
+    a { color:var(--teal); text-underline-offset:4px; }
+    button,input { font:inherit; }
+    button { cursor:pointer; }
+    :focus-visible { outline:3px solid var(--blue); outline-offset:4px; }
+    .wrap { width:min(800px,calc(100% - 48px)); margin-inline:auto; }
+    .top { background:#f6f8f7; color:var(--ink); border-bottom:1px solid var(--line); }
+    .top-inner { min-height:66px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .brand { font-weight:750; color:var(--ink); text-decoration:none; font-size:15px; }
+    .brand::before { content:"%"; display:inline-grid; place-items:center; width:30px; height:30px; margin-right:10px; background:var(--teal); color:white; font:20px Georgia,serif; border-radius:4px; }
+    .top nav { display:flex; flex-wrap:wrap; gap:18px; }
+    .top nav a { color:var(--muted); font-size:13px; text-decoration:none; }
+    .top nav a:hover { color:var(--teal); text-decoration:underline; }
+    .intro { padding:48px 0 32px; border-bottom:1px solid var(--line); }
+    .eyebrow,.kicker { color:var(--teal); font-size:13px; font-weight:700; text-transform:uppercase; margin:0 0 12px; }
+    h1 { font:normal 52px/1.15 Georgia,"Times New Roman",serif; margin:0 0 16px; }
+    h2 { font:normal 32px/1.3 Georgia,"Times New Roman",serif; margin:0 0 28px; }
+    h3 { font-size:21px; line-height:1.5; margin:0 0 18px; }
+    p { margin:0 0 20px; }
+    .lead,.muted { color:var(--muted); }
+    .value-diagram { margin:24px 0 28px; padding:20px 0; border-block:1px solid var(--line); }
+    .value-diagram h4 { margin:0 0 18px; font-size:16px; }
+    .value-row { margin:18px 0; }
+    .value-label { display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px 12px; font-size:14px; margin-bottom:6px; }
+    .value-label strong { font-variant-numeric:tabular-nums; }
+    .value-track { height:24px; background:#f0f3f2; border-radius:3px; overflow:hidden; }
+    .value-fill { width:var(--value); height:100%; background:var(--blue); border-radius:0 3px 3px 0; }
+    .value-fill.rise { background:var(--teal); }
+    .value-fill.fall { background:var(--coral); }
+    .value-row small { display:block; color:var(--muted); font-size:13px; margin-top:4px; }
+    .value-diagram figcaption { color:var(--muted); font-size:14px; margin-top:16px; }
+    .contents { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 28px; padding:18px 0; border-block:1px solid var(--line); font-size:15px; }
+    .contents a { padding:11px 12px; text-decoration:none; border-left:2px solid transparent; margin:2px 0; color:var(--muted); font-size:14px; }
+    .contents a:hover { color:var(--teal); background:#f6f8f7; }
+    .contents a[aria-current="location"] { color:var(--teal); background:var(--pale); border-color:var(--teal); font-weight:650; }
+    section { --accent:var(--teal); --tint:#f2f7f5; padding:52px 0; border-bottom:1px solid var(--line); scroll-margin-top:24px; }
+    #reverse,#interest { --accent:var(--blue); --tint:#f0f6fa; }
+    #successive,#depreciation { --accent:var(--coral); --tint:#fff3f5; }
+    section > .kicker { color:var(--accent); display:flex; align-items:center; gap:12px; }
+    section > .kicker::before { content:""; width:28px; height:4px; background:var(--accent); }
+    .columns { display:grid; grid-template-columns:minmax(0,1fr); gap:32px; }
+    .columns > * { min-width:0; }
+    .math { font-family:Georgia,"Times New Roman",serif; font-size:1.12em; line-height:2.1; }
+    var { font-family:Georgia,"Times New Roman",serif; font-style:italic; }
+    .formula { padding:20px 24px; margin:18px 0; background:var(--tint); border-left:3px solid var(--accent); font-family:Georgia,"Times New Roman",serif; font-size:23px; line-height:1.9; overflow-wrap:anywhere; }
+    .formula-label { display:block; font:600 14px/1.5 "Segoe UI",Arial,sans-serif; color:var(--muted); margin-bottom:8px; }
+    .definitions { display:grid; grid-template-columns:36px minmax(0,1fr); gap:8px 16px; margin:18px 0 28px; }
+    .definitions dt,.definitions dd { margin:0; }
+    .definitions dt { color:var(--teal); }
+    .frac { display:inline-flex; flex-direction:column; text-align:center; vertical-align:middle; line-height:1.3; margin:0 3px; font-size:.92em; }
+    .frac > span:first-child { border-bottom:1px solid currentColor; padding:0 4px 2px; }
+    .frac > span:last-child { padding:2px 4px 0; }
+    .note { border-left:3px solid var(--coral); padding:8px 0 8px 20px; margin:28px 0 0; font-size:16px; line-height:1.85; }
+    .example { padding:28px 0 12px 24px; background:white; border:0; border-left:3px solid var(--blue); border-radius:0; }
+    .example h3 { color:var(--blue); padding:0 0 16px; margin-left:0; background:transparent; border-bottom:1px solid #dce8f0; font-size:18px; }
+    .flow { margin:28px 0 8px; padding:24px 0; border-block:1px solid var(--line); }
+    .flow-track { display:grid; grid-template-columns:1fr 1fr 1fr; align-items:center; gap:12px; text-align:center; }
+    .flow-stage { padding:18px 10px; background:#f0f6fa; border-bottom:2px solid var(--blue); border-radius:4px 4px 0 0; }
+    .flow-stage:last-child { background:var(--pale); border-color:var(--teal); }
+    .flow-stage strong { display:block; font:700 30px/1.5 Georgia,serif; }
+    .flow-stage span { font-size:13px; color:var(--muted); }
+    .flow-change { color:var(--coral); font-size:15px; font-weight:700; }
+    .flow-arrow { display:block; font-size:32px; line-height:1.4; }
+    .flow figcaption { margin-top:16px; color:var(--muted); font-size:14px; text-align:center; }
+    .example p:last-child { margin-bottom:0; }
+    .example + .example { margin-top:16px; }
+    .steps { margin:20px 0; padding-left:28px; }
+    .steps li { padding:8px 0 8px 8px; }
+    .worked-step { padding:20px 0; border-bottom:1px solid var(--line); }
+    .worked-step:last-child { border-bottom:0; }
+    .worked-step h4 { margin:0 0 12px; font-size:17px; color:var(--blue); }
+    .worked-step p:last-child { margin-bottom:0; }
+    .base-label { display:block; color:var(--muted); font-size:14px; margin-bottom:8px; }
+    .interest-visual { margin:28px 0 36px; padding:24px 0; border-block:1px solid var(--line); }
+    .interest-lanes { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px; }
+    .interest-lane { min-width:0; --lane:var(--blue); }
+    .interest-lane.compound { --lane:var(--coral); }
+    .interest-lane h4 { margin:0 0 6px; font-size:19px; color:var(--lane); }
+    .interest-lane > p { font-size:14px; color:var(--muted); }
+    .year-step { min-height:210px; padding:16px 0; border-top:1px solid var(--line); }
+    .year-step small { display:block; color:var(--muted); font-size:12px; font-weight:700; }
+    .year-step .math { font-size:18px; }
+    .year-step p { margin:4px 0; font-size:14px; }
+    .earning-track { height:18px; background:#f0f3f2; display:flex; margin:12px 0; border-radius:3px; overflow:hidden; }
+    .earning-principal { width:83.333333%; background:var(--blue); }
+    .earning-extra { width:var(--extra); background:var(--coral); }
+    .earning-key { display:flex; flex-wrap:wrap; gap:8px 20px; margin:12px 0 20px; font-size:13px; }
+    .earning-key span::before { content:""; display:inline-block; width:12px; height:12px; margin-right:7px; background:var(--blue); vertical-align:middle; border-radius:2px; }
+    .earning-key span:last-child::before { background:var(--coral); }
+    .interest-visual figcaption { margin-top:18px; font-size:15px; }
+    .coin-lab { margin:28px 0; border-block:1px solid var(--line); padding:24px 0; }
+    .coin-controls { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin:20px 0; }
+    .coin-controls button { padding:8px 14px; background:white; color:var(--teal); border:1px solid var(--line); border-radius:4px; min-height:44px; }
+    .coin-controls button:disabled { opacity:.4; cursor:default; }
+    .coin-controls output { font-weight:700; font-variant-numeric:tabular-nums; }
+    .coin-scenes { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+    .coin-scene { min-width:0; }
+    .coin-scene h4 { margin:0; font-size:17px; }
+    .coin-stage { position:relative; height:220px; display:flex; align-items:end; justify-content:center; gap:16px; border-bottom:2px solid var(--line); background:repeating-linear-gradient(to top,transparent 0,transparent 37px,#edf2ef 37px,#edf2ef 38px); }
+    .coin-pile { display:flex; flex-direction:column-reverse; gap:3px; width:60px; padding-bottom:2px; }
+    .coin-slot { height:16px; width:60px; }
+    .coin { width:60px; height:16px; background:#9bd4eb; border:2px solid var(--blue); border-radius:50%; box-shadow:inset 0 -4px 0 #69b2d1; animation:coin-arrive .35s ease-out both; }
+    .coin.extra { background:#f7b5c3; border-color:var(--coral); box-shadow:inset 0 -4px 0 #e5889e; }
+    .coin-total { display:block; margin:14px 0 6px; font:26px/1.4 Georgia,serif; color:var(--teal); }
+    .coin-scene p { font-size:14px; margin:4px 0; }
+    .coin-caption { font-size:13px; color:var(--muted); }
+    .coin-story { padding:16px 0; min-height:110px; font-size:16px; }
+    .activity { margin:28px 0; padding:24px 0; border-block:1px solid var(--line); }
+    .activity-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:18px; }
+    .secondary { padding:10px 16px; border:1px solid var(--line); background:white; color:var(--teal); border-radius:4px; }
+    .activity-status { min-height:90px; margin:16px 0 0; font-size:16px; }
+    .guess-options { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin:20px 0; }
+    .guess-options button { padding:12px 8px; border:1px solid var(--line); border-radius:4px; background:white; color:var(--ink); font-size:15px; }
+    .guess-options button[aria-pressed=true] { background:var(--pale); border-color:var(--teal); }
+    .guess-options button:disabled { opacity:1; cursor:default; }
+    .value-fill { transition:width .55s ease; }
+    .laptop-scene { display:grid; grid-template-columns:150px minmax(0,1fr); gap:24px; align-items:center; margin:24px 0; }
+    .laptop-symbol { width:140px; margin-inline:auto; }
+    .laptop-screen { height:90px; border:6px solid #344d49; border-radius:5px 5px 0 0; background:#edf5fa; display:grid; place-items:center; font:26px Georgia,serif; color:var(--blue); }
+    .laptop-base { height:10px; width:150px; margin-left:-5px; background:#8ca7a0; border-radius:0 0 8px 8px; }
+    .depreciation-control { display:flex; gap:20px; align-items:center; flex-wrap:wrap; }
+    @keyframes coin-arrive { from { transform:translateY(-12px); opacity:0; } to { transform:translateY(0); opacity:1; } }
+    .tool { margin-top:36px; border:1px solid var(--line); border-radius:6px; background:white; overflow:hidden; }
+    .tool-heading { margin:0; padding:18px 24px; font-size:16px; border-bottom:1px solid var(--line); border-top:3px solid var(--accent); background:var(--tint); color:var(--ink); }
+    .controls { display:flex; flex-wrap:wrap; align-items:end; gap:24px; padding:24px; border-bottom:1px solid var(--line); background:#fafbfa; }
+    label,.control-title { display:block; font-size:13px; font-weight:700; margin-bottom:5px; }
+    input[type=number] { width:140px; max-width:100%; padding:7px 10px; border:1px solid #8ea8a1; border-radius:4px; background:white; color:var(--ink); }
+    input[type=range] { width:210px; max-width:100%; accent-color:var(--teal); vertical-align:middle; }
+    .segments { display:flex; border:1px solid #8ea8a1; border-radius:4px; overflow:hidden; }
+    .segments button { padding:8px 14px; border:0; background:white; color:var(--ink); }
+    .segments button + button { border-left:1px solid #8ea8a1; }
+    .segments button[aria-pressed=true] { background:var(--teal); color:white; }
+    .tool-body { padding:24px; }
+    #interest-results > .columns { grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+    .result { font:normal 32px/1.3 Georgia,serif; color:var(--teal); margin:8px 0; overflow-wrap:anywhere; font-variant-numeric:tabular-nums; }
+    .bar-row { display:grid; grid-template-columns:75px minmax(0,1fr); align-items:center; gap:10px; margin:10px 0; font-size:13px; }
+    .track { height:20px; background:#f0f3f2; border-radius:3px; overflow:hidden; }
+    .bar { height:100%; background:var(--blue); min-width:0; border-radius:0 3px 3px 0; }
+    .bar.new { background:var(--teal); }
+    .legend { display:flex; flex-wrap:wrap; gap:20px; margin:12px 0; font-size:13px; }
+    .legend span::before { content:""; display:inline-block; width:20px; height:3px; vertical-align:middle; margin-right:8px; background:var(--blue); }
+    .legend span:last-child::before { background:var(--coral); }
+    canvas { display:block; width:100%; height:260px; }
+    .table-wrap { overflow-x:auto; }
+    table { border-collapse:collapse; width:100%; font-size:14px; }
+    th,td { text-align:left; padding:9px 12px; border-bottom:1px solid var(--line); }
+    th { background:#edf3f0; }
+    caption { text-align:left; font-weight:700; padding:10px 0; }
+    details { margin-top:24px; border-top:1px solid var(--line); }
+    summary { cursor:pointer; color:var(--teal); font-weight:600; padding:16px 0; font-size:16px; }
+    details > div { padding-top:12px; }
+    .error { color:var(--coral); font-size:14px; }
+    .error:empty { display:none; }
+    .quiz-head { display:flex; justify-content:space-between; gap:15px; padding:14px 20px; border-bottom:1px solid var(--line); font-size:13px; background:var(--ink); color:white; }
+    .choices { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin:20px 0; }
+    .choice { min-height:48px; padding:10px 14px; border:1px solid #8ea8a1; border-radius:4px; background:white; color:var(--ink); text-align:left; overflow-wrap:anywhere; }
+    .choice:hover:not(:disabled) { background:var(--pale); }
+    .choice:disabled { cursor:default; opacity:1; }
+    .choice.correct { background:var(--pale); border:2px solid var(--teal); }
+    .choice.wrong { background:#fff0f3; border:2px solid var(--coral); }
+    .feedback { min-height:80px; }
+    .primary { background:var(--teal); color:white; border:0; border-radius:4px; padding:10px 18px; }
+    [hidden] { display:none!important; }
+    footer { padding:25px 0 40px; font-size:13px; color:var(--muted); }
+    @media(min-width:1100px) {
+      .top .wrap,footer.wrap { width:min(1080px,calc(100% - 64px)); }
+      main.wrap { width:min(1080px,calc(100% - 64px)); display:grid; grid-template-columns:210px minmax(0,1fr); column-gap:64px; }
+      .intro { grid-column:1 / -1; padding-block:52px 36px; }
+      .lead { max-width:740px; }
+      .contents { grid-column:1; grid-row:2 / span 6; position:sticky; top:24px; align-self:start; grid-template-columns:1fr; border:0; padding-top:40px; }
+      main > section { grid-column:2; }
+    }
+    @media(max-width:640px) {
+      body { font-size:17px; }
+      .wrap { width:calc(100% - 36px); }
+      .top-inner { align-items:flex-start; flex-direction:column; gap:6px; padding-block:12px; }
+      .intro { padding-top:28px; }
+      h1 { font-size:34px; } h2 { font-size:24px; }
+      section { padding:36px 0; }
+      .contents { grid-template-columns:1fr; font-size:15px; }
+      .columns { grid-template-columns:1fr; gap:28px; }
+      .formula { font-size:20px; padding:16px; }
+      .choices { grid-template-columns:1fr; }
+      .controls,.tool-body { padding:16px; }
+      .example { padding:18px 0 8px 16px; }
+      .example h3 { margin-left:0; }
+      .flow-track { gap:6px; grid-template-columns:1fr 0.8fr 1fr; }
+      .flow-stage { padding:14px 4px; }
+      .flow-stage strong { font-size:24px; }
+      .flow-change { font-size:13px; }
+      #interest-results > .columns { grid-template-columns:1fr; gap:16px; }
+      .math { overflow-wrap:anywhere; }
+      .result { font-size:27px; }
+      .interest-lanes { grid-template-columns:1fr; gap:28px; }
+      .year-step { min-height:0; }
+      .coin-scenes { gap:12px; }
+      .coin-stage { gap:5px; }
+      .coin-pile,.coin-slot,.coin { width:46px; }
+      .coin-total { font-size:21px; }
+      .coin-controls button { padding:8px; font-size:14px; }
+      .laptop-scene { grid-template-columns:1fr; gap:18px; }
+      .guess-options { grid-template-columns:1fr; }
+    }
+    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .coin { animation:none; } .value-fill { transition:none; } }
+    @media print {
+      body { background:white; font-size:11pt; }
+      .top,.contents,.controls,.quiz,canvas,.legend { display:none; }
+      .wrap { width:100%; }
+      section { break-inside:avoid; padding:16px 0; }
+      details > div { display:block!important; }
+      h1 { font-size:28pt; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top"><div class="wrap top-inner">
+    <a class="brand" href="index.html">Mathematics Studio</a>
+    <nav aria-label="Main navigation"><a href="#concepts">Concepts</a><a href="#interest">Interest</a><a href="#practice">Practice</a><a href="index.html">All lessons</a><a href="percentages-s3-zh.html" lang="zh-Hant">繁體中文</a></nav>
+  </div></header>
+  <main class="wrap">
+    <div class="intro">
+      <p class="eyebrow">Hong Kong &middot; Secondary 3</p>
+      <h1>Percentages</h1>
+      <p class="lead">From percentage change to compound growth: always identify the original amount.</p>
+    </div>
+    <nav class="contents" aria-label="Lesson sections">
+      <a href="#concepts">01 Foundations</a><a href="#reverse">02 Reverse percentages</a><a href="#successive">03 Successive changes</a><a href="#interest">04 Interest</a><a href="#depreciation">05 Growth &amp; depreciation</a><a href="#practice">06 Practice</a>
+    </nav>
+
+    <section id="concepts" aria-labelledby="concepts-title">
+      <p class="kicker">01 &middot; Foundations</p><h2 id="concepts-title">The original amount is 100%</h2>
+      <div class="columns">
+        <div>
+          <p>A percentage is a fraction out of 100. For example, 35% = 35 &divide; 100 = 0.35, and 0.08 = 8%.</p>
+          <p>To express one amount as a percentage of another, divide by the reference amount, then multiply by 100%.</p>
+          <p class="math">18 out of 24 = (18 &divide; 24) &times; 100% = 75%</p>
+          <div class="formula"><span class="formula-label">Percentage change</span><span class="frac"><span>new &minus; original</span><span>original</span></span> &times; 100%</div>
+          <p>A positive result means an increase; a negative result means a decrease. The original amount must be non-zero.</p>
+        </div>
+        <div>
+          <h3>Use a multiplier</h3>
+          <dl class="definitions"><dt><var>O</var></dt><dd>Original amount</dd><dt><var>N</var></dt><dd>New amount</dd><dt><var>r</var></dt><dd>Percentage rate: for 15%, use <var>r</var> = 15.</dd></dl>
+          <div class="formula"><span class="formula-label">Percentage increase</span><var>N</var> = <var>O</var>(1 + <var>r</var>%)</div>
+          <div class="formula"><span class="formula-label">Percentage decrease</span><var>N</var> = <var>O</var>(1 &minus; <var>r</var>%)</div>
+          <p>The expression in brackets is the <strong>multiplier</strong>. A 15% increase gives 1.15; a 15% decrease gives 0.85.</p>
+          <figure class="flow" aria-label="A 15 percent decrease takes 100 percent of the original amount to 85 percent, using a multiplier of 0.85.">
+            <div class="flow-track">
+              <div class="flow-stage"><span>Original</span><strong>100%</strong></div>
+              <div class="flow-change">&minus;15%<span class="flow-arrow" aria-hidden="true">&rarr;</span>&times; 0.85</div>
+              <div class="flow-stage"><span>Remaining</span><strong>85%</strong></div>
+            </div>
+            <figcaption>100% &minus; 15% = 85% = 0.85 of the original amount</figcaption>
+          </figure>
+          <p class="note">“Increase by 20%” means reach 120% of the original. “Increase to 120%” means the same thing. “Decrease to 20%” means an 80% decrease.</p>
+        </div>
+      </div>
+      <div class="tool" aria-label="Percentage change explorer">
+        <h3 class="tool-heading">Percentage change explorer</h3>
+        <div class="controls">
+          <div><label for="original">Original amount (HK$)</label><input id="original" type="number" min="1" max="1000000" step="1" value="800"></div>
+          <div><span class="control-title" id="direction-label">Change</span><div class="segments" role="group" aria-labelledby="direction-label"><button type="button" data-direction="increase" aria-pressed="false">Increase</button><button type="button" data-direction="decrease" aria-pressed="true">Decrease</button></div></div>
+          <div><label for="rate">Rate: <output id="rate-label" for="rate">25%</output></label><input id="rate" type="range" min="0" max="100" step="1" value="25"></div>
+        </div>
+        <div class="tool-body">
+          <p class="error" id="change-error" role="status"></p>
+          <div id="change-result" aria-live="polite"><p class="muted">New amount</p><p class="result" id="new-amount"></p><p class="math" id="change-working"></p></div>
+          <div aria-label="Original and new amounts on the same scale" role="img" id="bars">
+            <div class="bar-row"><span>Original</span><div class="track"><div id="original-bar" class="bar"></div></div></div>
+            <div class="bar-row"><span>New</span><div class="track"><div id="new-bar" class="bar new"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="reverse" aria-labelledby="reverse-title">
+      <p class="kicker">02 &middot; Work backwards</p><h2 id="reverse-title">Reverse percentages</h2>
+      <div class="activity" id="reverse-activity" hidden>
+        <h3>Rewind a percentage change</h3>
+        <p>After a 15% decrease, an amount is HK$612. What was it before?</p>
+        <div class="flow-track">
+          <div class="flow-stage"><span>Original amount</span><strong id="rewind-original">?</strong></div>
+          <div class="flow-change" id="rewind-arrow">&times; 0.85<span class="flow-arrow" aria-hidden="true">&rarr;</span></div>
+          <div class="flow-stage"><span>Final amount</span><strong>612</strong></div>
+        </div>
+        <p class="activity-status" id="rewind-status" aria-live="polite">The final amount is 85% of the original. Reverse the multiplier to find the missing 100%.</p>
+        <div class="activity-actions"><button class="primary" id="rewind" type="button">Rewind</button><button class="secondary" id="rewind-reset" type="button">Start again</button></div>
+      </div>
+      <div class="columns">
+        <div>
+          <p>When the final amount is given, divide by the multiplier to recover the original amount.</p>
+          <div class="formula"><var>O</var> = <span class="frac"><span><var>N</var></span><span>multiplier</span></span></div>
+          <p>After an increase of <var>r</var>%: divide by (1 + <var>r</var>%).<br>After a decrease of <var>r</var>%: divide by (1 &minus; <var>r</var>%).</p>
+          <p class="note">Do not apply the same percentage to the final amount. It has a different base. After a 100% decrease, the multiplier is zero, so the original cannot be recovered from the final amount alone.</p>
+        </div>
+        <article class="example">
+          <h3>Example 1 &middot; Before the sale</h3>
+          <p>A jacket costs HK$612 after a 15% discount. Find its marked price.</p>
+          <ol class="steps">
+            <li>Remaining percentage = 100% &minus; 15% = 85%.</li>
+            <li>Let the marked price be HK$<var>x</var>. Then 0.85<var>x</var> = 612.</li>
+            <li><span class="math"><var>x</var> = 612 &divide; 0.85 = 720.</span></li>
+          </ol>
+          <p><strong>Marked price = HK$720.</strong> Check: 720 &times; 0.85 = 612.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="successive" aria-labelledby="successive-title">
+      <p class="kicker">03 &middot; More than one change</p><h2 id="successive-title">Multiply the multipliers</h2>
+      <div class="activity" id="guess-activity" hidden>
+        <h3>Predict before you calculate</h3>
+        <p>An amount starts at 100, rises by 20%, then falls by 20%. Where does it finish?</p>
+        <div class="guess-options" role="group" aria-label="Predict the final amount">
+          <button type="button" data-guess="below" aria-pressed="false">Below 100</button><button type="button" data-guess="equal" aria-pressed="false">Exactly 100</button><button type="button" data-guess="above" aria-pressed="false">Above 100</button>
+        </div>
+        <div class="value-label"><span id="guess-stage">Original amount</span><strong id="guess-amount">100</strong></div>
+        <div class="value-track" aria-hidden="true"><div id="guess-bar" class="value-fill" style="--value:83.333333%"></div></div>
+        <p id="guess-status" class="activity-status" aria-live="polite">Make a prediction to reveal the first change.</p>
+        <div class="activity-actions"><button type="button" class="primary" id="guess-next" hidden>Apply the 20% fall</button><button type="button" class="secondary" id="guess-reset">Try again</button></div>
+      </div>
+      <div class="columns">
+        <div>
+          <p>When an amount changes twice, <strong>the second percentage uses the amount after the first change</strong>. Find that intermediate amount before continuing.</p>
+        </div>
+        <article class="example">
+          <h3>Example 2 &middot; Two price changes</h3>
+          <p>A bicycle costs HK$2,000. Its price rises by 10%, then falls by 15%.</p>
+          <figure class="value-diagram">
+            <h4>Follow the changing price</h4>
+            <div class="value-row"><div class="value-label"><span>Original price</span><strong>HK$2,000</strong></div><div class="value-track" aria-hidden="true"><div class="value-fill" style="--value:90.909091%"></div></div></div>
+            <div class="value-row"><div class="value-label"><span>After a 10% rise</span><strong>HK$2,200</strong></div><div class="value-track" aria-hidden="true"><div class="value-fill rise" style="--value:100%"></div></div><small>Add HK$200: 10% of the original HK$2,000.</small></div>
+            <div class="value-row"><div class="value-label"><span>Then a 15% fall</span><strong>HK$1,870</strong></div><div class="value-track" aria-hidden="true"><div class="value-fill fall" style="--value:85%"></div></div><small>Subtract HK$330: 15% of the new HK$2,200.</small></div>
+            <figcaption>All bars start at zero and use the same scale. The final bar is shorter than the original: the net decrease is HK$130.</figcaption>
+          </figure>
+          <div class="worked-step">
+            <h4>Step 1 &middot; Increase the original price by 10%</h4>
+            <span class="base-label">Base for this change: HK$2,000</span>
+            <p class="math">2,000 &times; (1 + 10%) = <strong>HK$2,200</strong></p>
+            <p>The increase is 10% of HK$2,000, which is HK$200.</p>
+          </div>
+          <div class="worked-step">
+            <h4>Step 2 &middot; Decrease the new price by 15%</h4>
+            <span class="base-label">Base for this change: HK$2,200, not HK$2,000</span>
+            <p class="math">2,200 &times; (1 &minus; 15%) = <strong>HK$1,870</strong></p>
+            <p>The decrease is 15% of HK$2,200, which is HK$330.</p>
+          </div>
+          <div class="worked-step">
+            <h4>Step 3 &middot; Compare the final price with the original</h4>
+            <span class="base-label">Base for the overall change: HK$2,000</span>
+            <p class="math"><span class="frac"><span>1,870 &minus; 2,000</span><span>2,000</span></span> &times; 100% = &minus;6.5%</p>
+            <p><strong>Overall: a 6.5% decrease.</strong> The HK$200 rise and HK$330 fall give a net decrease of HK$130.</p>
+          </div>
+          <div class="formula"><span class="formula-label">Shortcut: multiply the two multipliers</span>2,000 &times; 1.10 &times; 0.85 = 1,870</div>
+          <p class="note">Do not subtract the rates to get 10% &minus; 15% = &minus;5%. The two percentages use different bases.</p>
+          <details><summary>Why do a 20% rise and a 20% fall not cancel?</summary><div>
+            <p class="math">100 &times; 1.20 = 120<br>120 &times; 0.80 = 96</p>
+            <p>The rise adds 20, but the fall subtracts 24. The final amount is 4% below the original.</p>
+          </div></details>
+          <details><summary>What rise reverses a 20% fall?</summary><div><p>A 20% fall leaves 0.8 of the original. The recovery multiplier is 1 &divide; 0.8 = 1.25, so a <strong>25% rise</strong> is needed.</p></div></details>
+        </article>
+      </div>
+    </section>
+
+    <section id="interest" aria-labelledby="interest-title">
+      <p class="kicker">04 &middot; Money over time</p><h2 id="interest-title">Simple and compound interest</h2>
+      <p>Let <var>P</var> be the principal, <var>r</var>% the annual interest rate, <var>t</var> the time in years, <var>I</var> the interest and <var>A</var> the final amount. These examples assume a fixed rate, no fees and no deposits or withdrawals.</p>
+      <div class="coin-lab" id="coin-lab" hidden>
+        <h3>Watch the interest grow</h3>
+        <p>HK$5,000 &middot; 4% per year &middot; annual compounding</p>
+        <div class="earning-key"><span>Interest on the original principal</span><span>Extra interest from compounding</span></div>
+        <div class="coin-controls">
+          <button type="button" id="coin-back">Previous year</button>
+          <output id="coin-year">Year 0 of 5</output>
+          <button type="button" id="coin-next">Next year</button>
+        </div>
+        <div class="coin-scenes">
+          <div class="coin-scene"><h4>Simple interest</h4><div class="coin-stage" aria-hidden="true"><div class="coin-pile" id="simple-coins"></div></div><strong class="coin-total" id="simple-earned">HK$0.00</strong><p>Interest earned</p><p id="simple-balance">Balance: HK$5,000.00</p></div>
+          <div class="coin-scene"><h4>Compound interest</h4><div class="coin-stage" aria-hidden="true"><div class="coin-pile" id="compound-base-coins"></div><div class="coin-pile" id="compound-extra-coins"></div></div><strong class="coin-total" id="compound-earned">HK$0.00</strong><p>Interest earned</p><p id="coin-compound-balance">Balance: HK$5,000.00</p></div>
+        </div>
+        <p class="coin-caption">Each full coin represents HK$100 of interest; part-coins represent smaller amounts. The original HK$5,000 is not shown as coins.</p>
+        <p class="coin-story" id="coin-story" aria-live="polite"></p>
+      </div>
+      <figure class="interest-visual">
+        <h3>Where does the extra interest come from?</h3>
+        <p>Start with <strong>HK$5,000 at 4% per year</strong>. The bars show the interest earned in each year, not the total balance. Every full track represents HK$240.</p>
+        <div class="earning-key"><span>Interest on the original HK$5,000</span><span>Interest on earlier interest</span></div>
+        <div class="interest-lanes">
+          <div class="interest-lane">
+            <h4>Simple interest</h4><p>The interest-bearing base stays at HK$5,000.</p>
+            <div class="year-step"><small>YEAR 1</small><div class="math">5,000 &times; 4% = <strong>200</strong></div><div class="earning-track" aria-hidden="true"><span class="earning-principal"></span></div><p>Year-end balance: HK$5,200</p></div>
+            <div class="year-step"><small>YEAR 2</small><div class="math">5,000 &times; 4% = <strong>200</strong></div><div class="earning-track" aria-hidden="true"><span class="earning-principal"></span></div><p>Year-end balance: HK$5,400</p></div>
+            <div class="year-step"><small>YEAR 3</small><div class="math">5,000 &times; 4% = <strong>200</strong></div><div class="earning-track" aria-hidden="true"><span class="earning-principal"></span></div><p>Year-end balance: <strong>HK$5,600</strong></p></div>
+          </div>
+          <div class="interest-lane compound">
+            <h4>Compound interest</h4><p>Each year's opening balance becomes the new base.</p>
+            <div class="year-step"><small>YEAR 1</small><div class="math">5,000 &times; 4% = <strong>200</strong></div><div class="earning-track" aria-hidden="true"><span class="earning-principal"></span></div><p>Year-end balance: HK$5,200</p></div>
+            <div class="year-step"><small>YEAR 2</small><div class="math">5,200 &times; 4% = <strong>208</strong></div><div class="earning-track" aria-hidden="true"><span class="earning-principal"></span><span class="earning-extra" style="--extra:3.333333%"></span></div><p>HK$200 + <strong>HK$8 on earlier interest</strong></p><p>Year-end balance: HK$5,408</p></div>
+            <div class="year-step"><small>YEAR 3</small><div class="math">5,408 &times; 4% = <strong>216.32</strong></div><div class="earning-track" aria-hidden="true"><span class="earning-principal"></span><span class="earning-extra" style="--extra:6.8%"></span></div><p>HK$200 + <strong>HK$16.32 on earlier interest</strong></p><p>Year-end balance: <strong>HK$5,624.32</strong></p></div>
+          </div>
+        </div>
+        <figcaption><strong>Same principal. Same rate. Different base.</strong> Simple interest adds HK$200 each year. Compound interest adds HK$200, then HK$208, then HK$216.32. The extra HK$24.32 comes from interest earning more interest.</figcaption>
+      </figure>
+      <div class="columns">
+        <div>
+          <h3>Simple interest</h3>
+          <p>Interest is calculated on the original principal only.</p>
+          <div class="formula"><var>I</var> = <var>P</var> &times; <var>r</var>% &times; <var>t</var></div>
+          <div class="formula"><var>A</var> = <var>P</var>(1 + <var>r</var>% &times; <var>t</var>)</div>
+          <p>HK$5,000 at 4% p.a. for 3 years:</p>
+          <p class="math"><var>I</var> = 5,000 &times; 0.04 &times; 3 = HK$600<br><var>A</var> = 5,000 + 600 = <strong>HK$5,600</strong></p>
+          <p class="note">“p.a.” means per annum (per year). For simple interest over 9 months, use <var>t</var> = 9/12.</p>
+        </div>
+        <div>
+          <h3>Compound interest</h3>
+          <p>Interest is added to the balance and earns interest in later periods.</p>
+          <div class="formula"><var>A</var> = <var>P</var>(1 + <var>r</var>%)<sup><var>t</var></sup></div>
+          <div class="formula"><var>I</var> = <var>A</var> &minus; <var>P</var></div>
+          <p>HK$5,000 at 4% p.a., compounded annually for 3 years:</p>
+          <p class="math"><var>A</var> = 5,000(1.04)<sup>3</sup> = <strong>HK$5,624.32</strong><br><var>I</var> = 5,624.32 &minus; 5,000 = HK$624.32</p>
+          <p class="note">The annual formula assumes a whole number of annual compounding periods. Keep full precision during working and round money to the nearest cent at the end.</p>
+        </div>
+      </div>
+      <details><summary>Extension: compounding more than once a year</summary><div>
+        <p>For a nominal annual rate of <var>r</var>%, compounded <var>m</var> times per year, the rate per period is <span class="math">(<span class="frac"><span><var>r</var></span><span><var>m</var></span></span>)%</span> and the number of periods is <var>mt</var>.</p>
+        <div class="formula"><var>A</var> = <var>P</var>(1 + (<span class="frac"><span><var>r</var></span><span><var>m</var></span></span>)%)<sup><var>mt</var></sup></div>
+        <p>HK$8,000 at 6% p.a., compounded half-yearly for 2 years: <var>m</var> = 2, so <var>A</var> = 8,000(1.03)<sup>4</sup> &asymp; HK$9,004.07.</p>
+      </div></details>
+      <div class="tool" aria-label="Interest comparison">
+        <h3 class="tool-heading">Compare simple and compound interest</h3>
+        <div class="controls">
+          <div><label for="principal">Principal (HK$)</label><input id="principal" type="number" min="1" max="1000000" step="1" value="5000"></div>
+          <div><label for="interest-rate">Annual rate (%)</label><input id="interest-rate" type="number" min="0" max="30" step="0.1" value="4"></div>
+          <div><label for="years">Years: <output id="years-label" for="years">3</output></label><input id="years" type="range" min="1" max="20" step="1" value="3"></div>
+        </div>
+        <div class="tool-body">
+          <p class="error" id="interest-error" role="status"></p>
+          <div id="interest-results">
+            <div class="columns" aria-live="polite"><div><p class="muted">Simple interest: final amount</p><p class="result" id="simple-total"></p></div><div><p class="muted">Annual compounding: final amount</p><p class="result" id="compound-total"></p></div></div>
+            <p id="interest-difference"></p>
+            <div class="legend"><span>Simple interest</span><span>Compound interest</span></div>
+            <canvas id="interest-chart" role="img" aria-label="Balance by year. Exact amounts are in the table below."></canvas>
+            <details><summary>Year-by-year balances</summary><div class="table-wrap"><table><caption>Balance at the end of each year (HK$)</caption><thead><tr><th scope="col">Year</th><th scope="col">Simple</th><th scope="col">Compound</th></tr></thead><tbody id="interest-table"></tbody></table></div></details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="depreciation" aria-labelledby="depreciation-title">
+      <p class="kicker">05 &middot; Repeated percentage change</p><h2 id="depreciation-title">Growth and depreciation</h2>
+      <div class="activity" id="depreciation-activity" hidden>
+        <h3>A laptop through time</h3>
+        <p>Purchase price: HK$12,000. Depreciation: 15% of the remaining value each year.</p>
+        <div class="depreciation-control"><label for="depreciation-year">Year <output id="depreciation-year-label">0</output> of 5</label><input id="depreciation-year" type="range" min="0" max="5" step="1" value="0"></div>
+        <div class="laptop-scene">
+          <div class="laptop-symbol" aria-hidden="true"><div class="laptop-screen" id="laptop-year">Year 0</div><div class="laptop-base"></div></div>
+          <div><p class="result" id="depreciation-value">HK$12,000.00</p><p class="coin-caption" id="depreciation-percent">100% of the purchase price remains.</p><div class="value-track" aria-hidden="true"><div id="depreciation-bar" class="value-fill fall" style="--value:100%"></div></div></div>
+        </div>
+        <p class="activity-status" id="depreciation-status" aria-live="polite">At purchase, no depreciation has occurred.</p>
+      </div>
+      <div class="columns">
+        <div>
+          <p>Let <var>V</var><sub>0</sub> be the initial value and <var>V</var> the value after <var>n</var> periods, each with a constant percentage rate <var>r</var>%.</p>
+          <div class="formula"><span class="formula-label">Growth</span><var>V</var> = <var>V</var><sub>0</sub>(1 + <var>r</var>%)<sup><var>n</var></sup></div>
+          <div class="formula"><span class="formula-label">Depreciation</span><var>V</var> = <var>V</var><sub>0</sub>(1 &minus; <var>r</var>%)<sup><var>n</var></sup></div>
+          <p>For depreciation in value, 0 &le; <var>r</var> &le; 100. The same multiplier is applied each period, but the amount lost changes.</p>
+          <p class="note">A 10% annual depreciation does not mean a 30% loss after 3 years. The remaining fraction is 0.9<sup>3</sup> = 0.729, so the loss is 27.1%.</p>
+        </div>
+        <article class="example">
+          <h3>Example 3 &middot; A laptop's value</h3>
+          <p>A laptop costs HK$12,000 and depreciates by 15% each year. Find its value after 3 years.</p>
+          <figure class="value-diagram">
+            <h4>85% remains after each year</h4>
+            <div class="value-row"><div class="value-label"><span>Purchase &middot; 100%</span><strong>HK$12,000</strong></div><div class="value-track" aria-hidden="true"><div class="value-fill" style="--value:100%"></div></div></div>
+            <div class="value-row"><div class="value-label"><span>Year 1 &middot; 85%</span><strong>HK$10,200</strong></div><div class="value-track" aria-hidden="true"><div class="value-fill fall" style="--value:85%"></div></div><small>&times; 0.85 &middot; This year's decrease: HK$1,800</small></div>
+            <div class="value-row"><div class="value-label"><span>Year 2 &middot; 72.25%</span><strong>HK$8,670</strong></div><div class="value-track" aria-hidden="true"><div class="value-fill fall" style="--value:72.25%"></div></div><small>&times; 0.85 again &middot; This year's decrease: HK$1,530</small></div>
+            <div class="value-row"><div class="value-label"><span>Year 3 &middot; 61.4125%</span><strong>HK$7,369.50</strong></div><div class="value-track" aria-hidden="true"><div class="value-fill fall" style="--value:61.4125%"></div></div><small>&times; 0.85 again &middot; This year's decrease: HK$1,300.50</small></div>
+            <figcaption>Bar lengths and percentages refer to the original HK$12,000. Each year's 15% decrease uses the previous year's value, so the dollar decrease becomes smaller.</figcaption>
+          </figure>
+          <p class="math"><var>V</var> = 12,000(1 &minus; 0.15)<sup>3</sup><br>= 12,000(0.85)<sup>3</sup><br>= <strong>HK$7,369.50</strong></p>
+          <p>Total depreciation = 12,000 &minus; 7,369.50 = HK$4,630.50.</p>
+          <details><summary>Find an unknown annual growth rate</summary><div>
+            <p>A population grows from 20,000 to 24,200 in 2 years at a constant annual rate of <var>r</var>%.</p>
+            <p class="math">(1 + <var>r</var>%)<sup>2</sup> = 24,200 &divide; 20,000 = 1.21<br>1 + <var>r</var>% = &radic;1.21 = 1.1<br><var>r</var>% = 10%<br><var>r</var> = 10</p>
+            <p>The annual growth rate is <strong>10%</strong>.</p>
+          </div></details>
+        </article>
+      </div>
+    </section>
+
+    <section id="practice" aria-labelledby="practice-title">
+      <p class="kicker">06 &middot; Apply your knowledge</p><h2 id="practice-title">Practice</h2>
+      <p>Give monetary answers to the nearest cent where necessary.</p>
+      <noscript><p>The interactive quiz requires JavaScript. The worked examples and revision task below remain available.</p></noscript>
+      <div class="tool quiz" id="quiz" hidden>
+        <div class="quiz-head"><span id="progress"></span><span id="score"></span></div>
+        <div class="tool-body"><h3 id="question" tabindex="-1"></h3><div class="choices" id="choices"></div><p class="feedback" id="feedback" aria-live="polite"></p><button id="next" class="primary" type="button" hidden>Next question</button></div>
+      </div>
+      <article class="example" style="margin-top:24px">
+        <h3>Revision task</h3>
+        <p>A student deposits HK$4,000 at 5% p.a., compounded annually for 2 years. Find the final balance. The student uses the entire balance to buy a camera, which then depreciates by 10% per year for 2 years. Find the camera's value and its overall percentage change from the original HK$4,000.</p>
+        <details><summary>Full solution</summary><div>
+          <p>Final balance = 4,000 &times; (1 + 5%)<sup>2</sup> = <strong>HK$4,410.</strong></p>
+          <p>Camera's value = 4,410 &times; (1 &minus; 10%)<sup>2</sup> = <strong>HK$3,572.10.</strong></p>
+          <p>Overall percentage change = (3,572.10 &minus; 4,000) &divide; 4,000 &times; 100% = &minus;10.6975%.</p>
+          <p>This is a <strong>10.7% decrease</strong>, correct to 1 decimal place. The depreciation starts from HK$4,410, while the overall change uses HK$4,000 as the base.</p>
+        </div></details>
+      </article>
+      <p class="note">Final check: identify the base, choose the multiplier, write the equation, and check whether the answer is reasonable. A change from 40% to 50% is 10 percentage points, but the relative increase is (10 &divide; 40) &times; 100% = 25%.</p>
+    </section>
+  </main>
+  <footer class="wrap">Mathematics Studio &middot; Secondary 3 &middot; <a href="index.html">All lessons</a></footer>
+  <script>
+    const sectionLinks = [...document.querySelectorAll(".contents a")];
+    const lessonSections = sectionLinks.map(link => document.querySelector(link.getAttribute("href")));
+    function updateCurrentSection() {
+      let current = lessonSections[0];
+      for (const section of lessonSections) {
+        if (section.getBoundingClientRect().top <= 160) current = section;
+      }
+      sectionLinks.forEach(link => {
+        if (link.getAttribute("href") === "#" + current.id) link.setAttribute("aria-current", "location");
+        else link.removeAttribute("aria-current");
+      });
+    }
+    window.addEventListener("scroll", updateCurrentSection, { passive:true });
+    updateCurrentSection();
+    const el = id => document.getElementById(id);
+    const money = value => "HK$" + value.toLocaleString("en-HK", { minimumFractionDigits:2, maximumFractionDigits:2 });
+    let rewindStage = 0;
+    function renderRewind() {
+      el("rewind-original").textContent = rewindStage ? "720" : "?";
+      el("rewind-arrow").innerHTML = rewindStage === 1 ? '&divide; 0.85<span class="flow-arrow" aria-hidden="true">&larr;</span>' : '&times; 0.85<span class="flow-arrow" aria-hidden="true">&rarr;</span>';
+      el("rewind-status").textContent = [
+        "The final amount is 85% of the original. Reverse the multiplier to find the missing 100%.",
+        "Rewind: HK$612 \u00f7 0.85 = HK$720. Adding 15% to HK$612 would give HK$703.80, not the original amount.",
+        "Forward check: HK$720 \u00d7 0.85 = HK$612. Dividing by the multiplier correctly undoes the decrease."
+      ][rewindStage];
+      el("rewind").textContent = rewindStage === 1 ? "Check forwards" : "Rewind";
+      el("rewind").hidden = rewindStage === 2;
+    }
+    el("rewind").addEventListener("click", () => { rewindStage = Math.min(2,rewindStage + 1); renderRewind(); });
+    el("rewind-reset").addEventListener("click", () => { rewindStage = 0; renderRewind(); });
+    el("reverse-activity").hidden = false;
+    let prediction = null;
+    document.querySelectorAll("[data-guess]").forEach(button => button.addEventListener("click", () => {
+      if (prediction !== null) return;
+      prediction = button.dataset.guess;
+      document.querySelectorAll("[data-guess]").forEach(item => {
+        item.disabled = true;
+        item.setAttribute("aria-pressed", String(item === button));
+      });
+      el("guess-stage").textContent = "After the 20% rise";
+      el("guess-amount").textContent = "120";
+      el("guess-bar").style.setProperty("--value","100%");
+      el("guess-status").textContent = "First change: 20% of 100 is 20. Add 20 to get 120. The next change now uses 120 as its base.";
+      el("guess-next").hidden = false;
+    }));
+    el("guess-next").addEventListener("click", () => {
+      el("guess-stage").textContent = "After the 20% fall";
+      el("guess-amount").textContent = "96";
+      el("guess-bar").style.setProperty("--value","80%");
+      el("guess-status").textContent = `${prediction === "below" ? "Your prediction was correct." : "The final amount is below 100."} Now 20% of 120 is 24, so 120 \u2212 24 = 96. A gain of 20 and a loss of 24 leave an overall 4% decrease.`;
+      el("guess-next").hidden = true;
+    });
+    el("guess-reset").addEventListener("click", () => {
+      prediction = null;
+      document.querySelectorAll("[data-guess]").forEach(button => { button.disabled = false; button.setAttribute("aria-pressed","false"); });
+      el("guess-stage").textContent = "Original amount";
+      el("guess-amount").textContent = "100";
+      el("guess-bar").style.setProperty("--value","83.333333%");
+      el("guess-status").textContent = "Make a prediction to reveal the first change.";
+      el("guess-next").hidden = true;
+    });
+    el("guess-activity").hidden = false;
+    function renderDepreciation() {
+      const year = el("depreciation-year").valueAsNumber;
+      const value = 12000 * 0.85 ** year;
+      el("depreciation-year-label").value = year;
+      el("laptop-year").textContent = `Year ${year}`;
+      el("depreciation-value").textContent = money(value);
+      el("depreciation-percent").textContent = `${(100 * 0.85 ** year).toFixed(2)}% of the purchase price remains.`;
+      el("depreciation-bar").style.setProperty("--value",`${100 * 0.85 ** year}%`);
+      el("depreciation-status").textContent = year === 0 ? "At purchase, no depreciation has occurred." : `Year ${year}: 15% of the previous value, ${money(12000 * 0.85 ** (year - 1))}, is ${money(12000 * 0.85 ** (year - 1) * 0.15)}. This is the decrease this year. Total decrease since purchase: ${money(12000 - value)}.`;
+    }
+    el("depreciation-year").addEventListener("input",renderDepreciation);
+    el("depreciation-activity").hidden = false;
+    renderDepreciation();
+    let coinYear = 0;
+    function drawCoins(id, amount, extra = false) {
+      const pile = el(id);
+      pile.replaceChildren();
+      for (let remaining = amount; remaining > 0.000001; remaining -= 100) {
+        const slot = document.createElement("div");
+        slot.className = "coin-slot";
+        const coin = document.createElement("div");
+        coin.className = extra ? "coin extra" : "coin";
+        const fraction = Math.min(1, remaining / 100);
+        coin.style.clipPath = `inset(0 ${100 * (1 - fraction)}% 0 0)`;
+        slot.append(coin);
+        pile.append(slot);
+      }
+    }
+    function renderCoinLab() {
+      const simpleInterest = 200 * coinYear;
+      const compoundBalance = 5000 * 1.04 ** coinYear;
+      const compoundInterest = compoundBalance - 5000;
+      const extra = Math.max(0, compoundInterest - simpleInterest);
+      drawCoins("simple-coins", simpleInterest);
+      drawCoins("compound-base-coins", simpleInterest);
+      drawCoins("compound-extra-coins", extra, true);
+      el("coin-year").value = `Year ${coinYear} of 5`;
+      el("coin-back").disabled = coinYear === 0;
+      el("coin-next").disabled = coinYear === 5;
+      el("simple-earned").textContent = money(simpleInterest);
+      el("compound-earned").textContent = money(compoundInterest);
+      el("simple-balance").textContent = `Balance: ${money(5000 + simpleInterest)}`;
+      el("coin-compound-balance").textContent = `Balance: ${money(compoundBalance)}`;
+      if (coinYear === 0) {
+        el("coin-story").textContent = "Both accounts start with HK$5,000. No interest has been earned yet.";
+      } else if (coinYear === 1) {
+        el("coin-story").textContent = "Year 1: both accounts earn HK$200, because both use HK$5,000 as the base. The two piles are equal.";
+      } else {
+        const opening = 5000 * 1.04 ** (coinYear - 1);
+        el("coin-story").textContent = `Year ${coinYear}: simple interest adds HK$200. Compound interest adds ${money(opening * 0.04)}, calculated on the previous balance of ${money(opening)}. The pink pile now represents ${money(extra)} of extra interest accumulated since the start.`;
+      }
+    }
+    el("coin-back").addEventListener("click", () => { if (coinYear > 0) coinYear--; renderCoinLab(); });
+    el("coin-next").addEventListener("click", () => { if (coinYear < 5) coinYear++; renderCoinLab(); });
+    el("coin-lab").hidden = false;
+    renderCoinLab();
+    let direction = "decrease";
+    function renderChange() {
+      const original = el("original").valueAsNumber;
+      const rate = el("rate").valueAsNumber;
+      el("rate-label").value = rate + "%";
+      const valid = el("original").validity.valid && Number.isFinite(original);
+      el("change-error").textContent = valid ? "" : "Enter a whole-dollar amount from 1 to 1,000,000.";
+      el("change-result").hidden = !valid;
+      el("bars").hidden = !valid;
+      if (!valid) return;
+      const multiplier = 1 + (direction === "increase" ? rate : -rate) / 100;
+      const amount = original * multiplier;
+      el("new-amount").textContent = money(amount);
+      el("change-working").textContent = `${money(original)} \u00d7 (1 ${direction === "increase" ? "+" : "\u2212"} ${rate}%) = ${money(original)} \u00d7 ${multiplier.toFixed(2)} = ${money(amount)}`;
+      const max = Math.max(original, amount);
+      el("original-bar").style.width = (original / max * 100) + "%";
+      el("new-bar").style.width = (amount / max * 100) + "%";
+      el("bars").setAttribute("aria-label", `Original ${money(original)}; new ${money(amount)}, a ${rate}% ${direction}.`);
+    }
+    document.querySelectorAll("[data-direction]").forEach(button => button.addEventListener("click", () => {
+      direction = button.dataset.direction;
+      document.querySelectorAll("[data-direction]").forEach(item => item.setAttribute("aria-pressed", String(item === button)));
+      renderChange();
+    }));
+    ["original","rate"].forEach(id => el(id).addEventListener("input", renderChange));
+    renderChange();
+
+    function renderInterest() {
+      const principal = el("principal").valueAsNumber;
+      const rate = el("interest-rate").valueAsNumber;
+      const years = el("years").valueAsNumber;
+      el("years-label").value = years;
+      const valid = ["principal","interest-rate"].every(id => el(id).validity.valid && Number.isFinite(el(id).valueAsNumber));
+      el("interest-error").textContent = valid ? "" : "Enter a whole-dollar principal from 1 to 1,000,000 and a rate from 0 to 30 (up to one decimal place).";
+      el("interest-results").hidden = !valid;
+      if (!valid) return;
+      const simple = Array.from({length:years + 1}, (_, year) => principal * (1 + rate / 100 * year));
+      const compound = Array.from({length:years + 1}, (_, year) => principal * (1 + rate / 100) ** year);
+      el("simple-total").textContent = money(simple[years]);
+      el("compound-total").textContent = money(compound[years]);
+      el("interest-difference").textContent = `Extra interest from compounding: ${money(compound[years] - simple[years])}.`;
+      el("interest-table").innerHTML = simple.map((amount, year) => `<tr><th scope="row">${year}</th><td>${money(amount)}</td><td>${money(compound[year])}</td></tr>`).join("");
+      drawChart(simple, compound, years);
+    }
+    function drawChart(simple, compound, years) {
+      const canvas = el("interest-chart");
+      const width = canvas.clientWidth;
+      if (!width) return;
+      const height = 260;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      const ctx = canvas.getContext("2d");
+      ctx.scale(dpr, dpr);
+      const left = 58, right = width - 16, top = 18, bottom = 222;
+      const max = Math.max(...compound, ...simple) * 1.1;
+      const x = year => left + year / years * (right - left);
+      const y = amount => bottom - amount / max * (bottom - top);
+      ctx.font = "11px Arial";
+      ctx.textAlign = "right";
+      for (let tick = 0; tick <= 4; tick++) {
+        const value = max * tick / 4;
+        ctx.strokeStyle = "#d7e2de";
+        ctx.beginPath(); ctx.moveTo(left,y(value)); ctx.lineTo(right,y(value)); ctx.stroke();
+        ctx.fillStyle = "#526664";
+        const label = value >= 1000000 ? (value / 1000000).toFixed(1) + "m" : value >= 1000 ? (value / 1000).toFixed(1) + "k" : value.toFixed(0);
+        ctx.fillText(label,left - 8,y(value) + 4);
+      }
+      ctx.textAlign = "left"; ctx.fillText("HK$",0,12);
+      ctx.textAlign = "center";
+      const gap = Math.max(1, Math.ceil(years / (width < 400 ? 4 : 8)));
+      for (let year = 0; year <= years; year++) {
+        if (year % gap === 0 || year === years) ctx.fillText(String(year), x(year), bottom + 17);
+      }
+      ctx.fillText("Year", (left + right) / 2, 257);
+      [[simple,"#286d9e"],[compound,"#b53f59"]].forEach(([values,color]) => {
+        ctx.strokeStyle = color; ctx.lineWidth = 2.5; ctx.beginPath();
+        values.forEach((value,year) => year === 0 ? ctx.moveTo(x(year),y(value)) : ctx.lineTo(x(year),y(value)));
+        ctx.stroke();
+      });
+    }
+    ["principal","interest-rate","years"].forEach(id => el(id).addEventListener("input",renderInterest));
+    new ResizeObserver(renderInterest).observe(el("interest-chart"));
+    renderInterest();
+
+    const questions = [
+      {prompt:"A price rises from HK$240 to HK$300. What is the percentage increase?", choices:["20%","25%","60%","80%"], answer:1, reason:"Use the original price: (300 \u2212 240) \u00f7 240 \u00d7 100% = 25%."},
+      {prompt:"A shirt costs HK$504 after a 20% discount. What was its marked price?", choices:["HK$604.80","HK$630","HK$403.20","HK$2,520"], answer:1, reason:"The sale price is 80% of the marked price. Divide by 0.8: 504 \u00f7 0.8 = HK$630."},
+      {prompt:"An amount increases by 20%, then decreases by 20%. What is the overall change?", choices:["No change","4% increase","4% decrease","40% decrease"], answer:2, reason:"The multiplier is 1.2 \u00d7 0.8 = 0.96. The final amount is 96% of the original, a 4% decrease."},
+      {prompt:"Find the simple interest on HK$8,000 at 3% p.a. for 9 months.", choices:["HK$180","HK$240","HK$2,160","HK$8,180"], answer:0, reason:"Time = 9/12 year. Interest = 8,000 \u00d7 0.03 \u00d7 9/12 = HK$180. The question asks for interest, not the final amount."},
+      {prompt:"HK$10,000 earns 5% p.a., compounded annually for 2 years. Find the final amount.", choices:["HK$11,000","HK$10,500","HK$11,025","HK$1,025"], answer:2, reason:"Final amount = 10,000 \u00d7 1.05\u00b2 = HK$11,025. The second year's interest includes interest on the first year's interest."},
+      {prompt:"A machine worth HK$20,000 depreciates by 10% per year. What is its value after 2 years?", choices:["HK$16,000","HK$18,000","HK$19,800","HK$16,200"], answer:3, reason:"Value = 20,000 \u00d7 0.9\u00b2 = HK$16,200. Apply the second 10% decrease to HK$18,000."},
+      {prompt:"A value grows from 5,000 to 6,050 in 2 years at a constant annual percentage rate. Find the rate.", choices:["10%","10.5%","21%","5%"], answer:0, reason:"The two-year multiplier is 6,050 \u00f7 5,000 = 1.21. The annual multiplier is \u221a1.21 = 1.1, giving 10%."},
+      {prompt:"After a 25% decrease, what percentage increase restores the original amount?", choices:["25%","20%","33\u2153%","75%"], answer:2, reason:"The remaining fraction is 0.75. To recover, multiply by 1 \u00f7 0.75 = 4/3, an increase of 33\u2153%."},
+      {prompt:"A pass rate rises from 60% to 75%. What is the relative percentage increase?", choices:["15%","25%","15 percentage points only","125%"], answer:1, reason:"The rise is 15 percentage points. The relative increase is (75 \u2212 60) \u00f7 60 \u00d7 100% = 25%."},
+      {prompt:"Which formula gives the original price O after a decrease of r%, when the final price is N?", mathPrompt:"Which formula gives the original price <var>O</var> after a decrease of <var>r</var>%, when the final price is <var>N</var>?", choices:["<var>O</var> = <var>N</var>(1 + <var>r</var>%)","<var>O</var> = <var>N</var>(1 &minus; <var>r</var>%)","<var>O</var> = <var>N</var> &divide; (1 + <var>r</var>%)","<var>O</var> = <var>N</var> &divide; (1 &minus; <var>r</var>%)"], answer:3, reason:"Divide the final price by the decrease multiplier. This reverses the original multiplication, provided the decrease is less than 100%."}
+    ];
+    let questionIndex = 0, score = 0, answered = false;
+    function renderQuestion(focus = false) {
+      answered = false;
+      const question = questions[questionIndex];
+      el("progress").textContent = `Question ${questionIndex + 1} of ${questions.length}`;
+      el("score").textContent = `Score: ${score} / ${questions.length}`;
+      el("question").innerHTML = question.mathPrompt || question.prompt;
+      el("feedback").textContent = "";
+      el("next").hidden = true;
+      el("choices").replaceChildren();
+      question.choices.forEach((choice,index) => {
+        const button = document.createElement("button");
+        button.type = "button"; button.className = "choice"; button.innerHTML = choice;
+        button.addEventListener("click", () => {
+          if (answered) return;
+          answered = true;
+          const correct = index === question.answer;
+          if (correct) score++;
+          [...el("choices").children].forEach((item,i) => {
+            item.disabled = true;
+            if (i === question.answer) item.classList.add("correct");
+            else if (i === index) item.classList.add("wrong");
+          });
+          el("feedback").textContent = `${correct ? "Correct." : "Not quite."} ${question.reason}`;
+          el("score").textContent = `Score: ${score} / ${questions.length}`;
+          const last = questionIndex === questions.length - 1;
+          if (last) el("feedback").textContent += ` Complete: ${score} out of ${questions.length}.`;
+          el("next").textContent = last ? "Try again" : "Next question";
+          el("next").hidden = false;
+        });
+        el("choices").append(button);
+      });
+      if (focus) el("question").focus();
+    }
+    el("next").addEventListener("click", () => {
+      if (!answered) return;
+      if (questionIndex === questions.length - 1) { questionIndex = 0; score = 0; }
+      else questionIndex++;
+      renderQuestion(true);
+    });
+    el("quiz").hidden = false;
+    renderQuestion();
+  </script>
+</body>
+</html>
