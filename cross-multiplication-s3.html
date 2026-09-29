@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="香港中三數學：十字相乘的不同情況。以互動十字圖比較正負配對、首項係數及公因式，附分類練習與驗算。">
+  <title>十字相乘的不同情況 | 中三數學</title>
+  <style>
+    :root { --ink:#192f34; --muted:#52666b; --line:#d8e2e2; --teal:#08776d; --blue:#276996; --coral:#ad3e58; --pale:#e4f4ef; }
+    * { box-sizing:border-box; letter-spacing:0; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:#fff; font:17px/1.85 -apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif; }
+    a { color:var(--teal); text-underline-offset:4px; }
+    button,input,select { font:inherit; }
+    button { cursor:pointer; }
+    :focus-visible { outline:3px solid var(--blue); outline-offset:4px; }
+    .wrap { width:min(820px,calc(100% - 40px)); margin-inline:auto; }
+    .top { background:#f7faf9; border-bottom:1px solid var(--line); }
+    .top-inner { min-height:68px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { display:inline-flex; align-items:center; font-size:15px; font-weight:750; text-decoration:none; color:var(--ink); white-space:nowrap; }
+    .brand::before { content:"×"; display:inline-grid; place-items:center; width:31px; height:31px; margin-right:10px; background:var(--teal); color:white; font:23px Georgia,serif; border-radius:4px; }
+    .top nav { display:flex; flex-wrap:wrap; gap:6px 20px; font-size:13px; font-weight:600; }
+    .top nav a { color:var(--muted); text-decoration:none; }
+    .top nav a:hover { color:var(--teal); text-decoration:underline; }
+    .intro { padding:56px 0 40px; border-bottom:1px solid var(--line); }
+    .eyebrow,.kicker { color:var(--teal); font-size:13px; font-weight:750; margin:0 0 10px; }
+    .eyebrow { display:inline-block; padding-bottom:5px; border-bottom:2px solid var(--teal); }
+    h1 { font-size:clamp(36px,4vw,48px); line-height:1.3; margin:12px 0 13px; }
+    h2 { font-size:clamp(23px,2.4vw,29px); line-height:1.48; margin:0; }
+    h3 { font-size:20px; margin:0 0 16px; }
+    h4 { font-size:16px; margin:0 0 10px; }
+    p { margin:0 0 18px; }
+    .lead,.muted { color:var(--muted); }
+    .lead { max-width:45em; margin-bottom:0; font-size:18px; }
+    .contents { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:4px 18px; padding:19px 0; border-bottom:1px solid var(--line); }
+    .contents a { padding:9px 12px; border-left:3px solid transparent; text-decoration:none; font-size:14px; color:var(--muted); transition:background .2s,color .2s; }
+    .contents a:hover { background:#f2f7f6; color:var(--ink); }
+    .contents a[aria-current="location"] { background:var(--pale); border-color:var(--teal); color:var(--teal); font-weight:700; }
+    section { --accent:var(--teal); --tint:#edf7f3; padding:48px 0 52px; border-bottom:1px solid var(--line); scroll-margin-top:24px; }
+    #signs,#first { --accent:var(--blue); --tint:#eef5f9; }
+    #coefficient,#special { --accent:var(--coral); --tint:#fcf0f2; }
+    .section-heading { padding:20px 24px 21px; margin-bottom:30px; background:var(--tint); border-left:5px solid var(--accent); }
+    .section-heading .kicker { color:var(--accent); margin-bottom:8px; }
+    section > p:not(.note) { max-width:66ch; }
+    var { font-family:Georgia,"Times New Roman",serif; font-style:italic; }
+    .math { font:22px/1.85 Georgia,"Times New Roman",serif; overflow-wrap:anywhere; }
+    sup { font-size:.68em; line-height:0; }
+    .formula { margin:24px 0; padding:20px 24px; background:var(--tint); border-left:3px solid var(--accent); }
+    .formula-label { display:block; font:600 13px/1.5 -apple-system,BlinkMacSystemFont,sans-serif; color:var(--muted); margin-bottom:8px; }
+    .note { margin:30px 0 0; padding:11px 18px; background:#fff8f9; border-left:3px solid var(--coral); font-size:15px; }
+    .example { border-left:3px solid var(--accent); padding:4px 0 6px 22px; margin:32px 0; }
+    .example h3 { color:var(--accent); font-size:18px; line-height:1.5; padding-bottom:9px; border-bottom:1px solid var(--line); }
+    .example p:last-child { margin-bottom:0; }
+    .example .math { padding:6px 0; }
+    .steps { margin:16px 0; padding-left:24px; }
+    .steps li { padding:7px 0 7px 6px; }
+    details { margin-top:24px; border-top:1px solid var(--line); }
+    summary { cursor:pointer; color:var(--teal); font-size:16px; font-weight:600; padding:14px 0; }
+    details > div { padding:10px 0; }
+    .tool { margin:30px 0; border:1px solid #cbdad8; border-radius:6px; overflow:hidden; background:white; box-shadow:0 5px 18px rgb(25 47 52 / 5%); }
+    .tool-heading { margin:0; padding:15px 22px; background:var(--tint); border-top:3px solid var(--accent); border-bottom:1px solid var(--line); font-size:17px; }
+    .tool-body { padding:22px 24px 26px; }
+    .controls { display:flex; gap:20px; align-items:center; flex-wrap:wrap; padding:16px 24px; border-bottom:1px solid var(--line); background:#fafcfc; }
+    label { display:flex; gap:12px; align-items:center; flex-wrap:wrap; font-weight:650; font-size:14px; }
+    select { max-width:100%; min-height:42px; padding:8px 12px; border:1px solid #91aaa8; border-radius:4px; color:var(--ink); background:white; }
+    input[type=range] { max-width:100%; width:180px; accent-color:var(--teal); }
+    .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:18px; }
+    .primary,.secondary { min-height:44px; padding:9px 18px; border-radius:4px; font-size:15px; font-weight:700; transition:background .2s,border-color .2s,transform .2s; }
+    .primary { border:1px solid var(--teal); color:white; background:var(--teal); }
+    .primary:hover { background:#075d57; border-color:#075d57; }
+    .secondary { border:1px solid var(--teal); color:var(--teal); background:white; }
+    .secondary:hover { background:var(--pale); }
+    .primary:active,.secondary:active { transform:translateY(1px); }
+    button:disabled { cursor:default; }
+    .primary:disabled,.secondary:disabled { opacity:.45; }
+    .feedback { min-height:0; margin:18px 0; padding:11px 14px; background:#fff4f5; border-left:3px solid var(--coral); font-size:15px; }
+    .feedback[data-correct="true"] { background:#eaf6f1; border-color:var(--teal); }
+    .diagram { margin:18px 0 24px; padding:22px 12px 16px; background:#f8fbfb; border:1px solid #e6eeee; border-radius:4px; }
+    figcaption { font-size:13px; color:var(--muted); margin:12px 0 0; text-align:center; }
+    .legend-blue,.legend-coral { display:inline-block; width:14px; height:3px; vertical-align:middle; margin-right:5px; }
+    .legend-blue { background:var(--blue); }
+    .legend-coral { background:var(--coral); margin-left:13px; }
+    .target-label,.result-label { display:block; color:var(--muted); font:700 12px/1.5 -apple-system,BlinkMacSystemFont,"PingFang TC",sans-serif; }
+    .target-expression { margin:0; font-size:27px; }
+    .diagonal-result { padding:10px 0 13px; border-bottom:1px solid var(--line); margin-bottom:16px; }
+    .diagonal-result .math { margin:2px 0 0; }
+    .swap-expression { padding:15px 18px; background:var(--tint); border-left:3px solid var(--accent); margin:0; }
+    .swap-expression .math { display:block; }
+    .swap-expression small { display:block; color:var(--muted); font:600 13px/1.5 -apple-system,BlinkMacSystemFont,"PingFang TC",sans-serif; }
+    .exercise-meta { margin-left:auto; font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums; }
+    .exercise-question { margin:0 0 10px; font-size:27px; }
+    .exercise-hint { color:var(--muted); font-size:15px; }
+    .reverse-flow { display:grid; grid-template-columns:1fr 90px 1fr; gap:12px; align-items:center; text-align:center; padding:20px 0; }
+    .reverse-flow .math { padding:18px 8px; border-bottom:3px solid var(--blue); background:#edf4fa; }
+    .reverse-flow .math:last-child { background:#edf6f2; border-color:var(--teal); }
+    .flow-arrows { font-size:12px; color:var(--muted); }
+    .flow-arrows strong { display:block; font-size:24px; line-height:1.1; color:var(--coral); }
+    .factor-token { color:var(--coral); font-weight:700; }
+    .factor-tile-stage { width:min(100%,470px); margin:auto; }
+    .tile-widths { display:grid; grid-template-columns:3fr 2fr; text-align:center; padding-left:38px; font-size:18px; margin-bottom:8px; }
+    .tile-layout { display:grid; grid-template-columns:30px minmax(0,1fr); gap:8px; align-items:center; }
+    .tile-height { text-align:center; }
+    .tile-board { display:grid; grid-template-columns:3fr 2fr; grid-template-rows:repeat(4,38px); border:1px solid #638f87; height:152px; }
+    .tile-region { grid-row:1 / -1; display:flex; align-items:center; justify-content:center; font:24px Georgia,serif; }
+    .tile-region:first-child { background:#dbeff7; border-right:1px solid #638f87; }
+    .tile-region:last-child { background:#e5f3ed; }
+    .group-stage { min-height:165px; padding:18px 0; }
+    .group-pair { color:var(--blue); }
+    .group-pair.second { color:var(--coral); }
+    .identity-tabs { display:flex; flex-wrap:wrap; gap:0; border-bottom:1px solid var(--line); }
+    .identity-tabs button { flex:1; min-width:120px; padding:12px 8px; border:0; border-bottom:3px solid transparent; background:white; color:var(--muted); font-size:14px; }
+    .identity-tabs button[aria-pressed=true] { color:var(--blue); background:#edf4fa; border-bottom-color:var(--blue); }
+    .square-stage { width:min(100%,290px); aspect-ratio:1; display:grid; grid-template-columns:3fr 1fr; grid-template-rows:3fr 1fr; margin:20px auto; border:1px solid #719d93; }
+    .square-stage > div { display:grid; place-items:center; border:1px solid white; font:22px Georgia,serif; background:#dceef7; }
+    .square-stage > div:nth-child(2),.square-stage > div:nth-child(3) { background:#e0f0e9; }
+    .square-stage > div:last-child { background:#f9e1e7; }
+    .cross-grid { display:grid; grid-template-columns:82px 100px 82px; grid-template-rows:60px 60px; justify-content:center; align-items:center; text-align:center; margin:0; }
+    .cross-grid .math { background:#eaf3fa; border-bottom:2px solid var(--blue); }
+    .cross-grid svg { grid-column:2; grid-row:1 / 3; width:100px; height:116px; }
+    .cross-grid .math:nth-of-type(2),.cross-grid .math:nth-of-type(4) { background:#faedf1; border-color:var(--coral); }
+    .worked-cross { max-width:390px; margin:18px 0 22px; padding:15px 16px 12px; background:#f8fbfb; border:1px solid #e0e9e8; border-radius:4px; }
+    .worked-cross .cross-grid { grid-template-columns:64px 80px 64px; grid-template-rows:48px 48px; }
+    .worked-cross .cross-grid .math { font-size:20px; padding:0; }
+    .worked-cross .cross-grid svg { width:80px; height:96px; }
+    .worked-cross figcaption { margin:0 0 8px; text-align:left; }
+    .worked-cross .cross-calculation { margin:12px 0 0; padding-top:9px; border-top:1px solid var(--line); font-size:19px; text-align:center; }
+    .worked-cross .cross-calculation strong { color:var(--teal); font-weight:700; }
+    .worked-cross[data-valid="false"] .cross-calculation strong { color:var(--coral); }
+    .cross-pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .cross-pair .worked-cross { width:100%; }
+    .exercise-cross { margin-top:18px; }
+    .quiz-head { display:flex; gap:16px; justify-content:space-between; padding:14px 20px; background:var(--ink); color:white; font-size:13px; }
+    .choices { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin:20px 0; }
+    .choice { min-height:56px; border:1px solid #8ea8a1; border-radius:4px; background:white; color:var(--ink); padding:12px; text-align:left; font:21px Georgia,serif; overflow-wrap:anywhere; }
+    .choice:hover:not(:disabled) { background:var(--pale); }
+    .choice.correct { border:2px solid var(--teal); background:var(--pale); }
+    .choice.wrong { border:2px solid var(--coral); background:#fff0f3; }
+    .quiz-progress { width:100%; height:5px; border:0; display:block; accent-color:var(--teal); }
+    .method-list { padding:0; list-style:none; }
+    .method-list li { padding:12px 0; border-bottom:1px solid var(--line); }
+    .method-list strong { color:var(--teal); }
+    .scroll-enter { animation:arrive .5s ease-out both; }
+    @keyframes arrive { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+    [hidden] { display:none!important; }
+    footer { padding:28px 0 40px; color:var(--muted); font-size:13px; }
+    @media(min-width:1100px) {
+      .top .wrap,footer.wrap { width:min(1080px,calc(100% - 64px)); }
+      main.wrap { width:min(1080px,calc(100% - 64px)); display:grid; grid-template-columns:206px minmax(0,1fr); column-gap:60px; }
+      .intro { grid-column:1 / -1; }
+      .contents { grid-column:1; grid-row:2 / span 6; position:sticky; top:24px; align-self:start; grid-template-columns:1fr; border:0; padding-top:44px; }
+      main > section { grid-column:2; }
+    }
+    @media(max-width:640px) {
+      h2 { font-size:23px; }
+      .top-inner { flex-wrap:wrap; padding-block:12px; }
+      .section-heading { padding:16px; }
+      .tool-body,.controls { padding:16px; }
+      .math { font-size:20px; }
+      .target-expression,.exercise-question { font-size:24px; }
+      .exercise-meta { margin-left:0; }
+      .reverse-flow { grid-template-columns:minmax(0,1fr); gap:8px; }
+      .flow-arrows { display:flex; justify-content:center; align-items:center; gap:12px; }
+      .flow-arrows strong { transform:rotate(90deg); }
+      .choices { grid-template-columns:1fr; }
+      .cross-grid { grid-template-columns:64px 80px 64px; }
+      .cross-grid svg { width:80px; }
+      .cross-pair { grid-template-columns:1fr; gap:0; }
+    }
+    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .scroll-enter { animation:none; } .primary,.secondary,.contents a { transition:none; } }
+    @media print { .top,.contents,.controls,.actions,.quiz { display:none; } main.wrap { display:block; width:100%; } .scroll-enter { animation:none; } section { padding:18px 0; } }
+  </style>
+</head>
+<body>
+<header class="top"><div class="wrap top-inner"><a class="brand" href="index.html">數學研習室</a><nav aria-label="主要導覽"><a href="factorisation-s2.html">中二基礎</a><a href="#practice">練習</a><a href="index.html">教材總覽</a><a href="cross-multiplication-s3-en.html" lang="en">English</a></nav></div></header>
+<main class="wrap">
+<div class="intro"><p class="eyebrow">香港 · 中三 · 代數</p><h1>十字相乘</h1><p class="lead">首尾配對，交叉相乘。中間項正確，才是合適的因式。</p></div>
+<nav class="contents" aria-label="課程章節"><a href="#why">01 十字圖的原理</a><a href="#signs">02 首項係數為 1</a><a href="#coefficient">03 首項係數不為 1</a><a href="#first">04 先整理，再分解</a><a href="#special">05 特殊情況</a><a href="#practice">06 分類練習</a></nav>
+<section id="why"><header class="section-heading"><p class="kicker">01 · 從展開看交叉乘積</p><h2>十字相乘在檢查甚麼？</h2></header>
+<div class="formula math">(<var>px</var> + <var>q</var>)(<var>rx</var> + <var>s</var>)<br>= <var>prx</var><sup>2</sup> + (<var>ps</var> + <var>qr</var>)<var>x</var> + <var>qs</var></div>
+<p>左邊相乘得到首項，右邊相乘得到常數項；兩條對角線的乘積相加，必須得到<strong>中間項</strong>。最後沿每一橫行寫出一個因式。</p>
+<div class="tool"><h3 class="tool-heading">十字圖實驗室</h3><div class="controls"><label for="case">例題情況 <select id="case"><option value="0">兩數均為正</option><option value="1">兩數均為負</option><option value="2">異號：中間項為正</option><option value="3">異號：中間項為負</option><option value="4">首項係數不為 1</option><option value="5">首項係數不為 1，且異號</option><option value="6">中間項為零</option><option value="7">兩個因式相同</option></select></label></div>
+<div class="tool-body"><span class="target-label">待分解</span><p class="math target-expression" id="target"></p><figure class="diagram"><div class="cross-grid"><div class="math" id="tl" style="grid-column:1;grid-row:1"></div><div class="math" id="tr" style="grid-column:3;grid-row:1"></div><div class="math" id="bl" style="grid-column:1;grid-row:2"></div><div class="math" id="br" style="grid-column:3;grid-row:2"></div><svg viewBox="0 0 100 116" aria-hidden="true"><path d="M8 29 92 87" stroke="#276996" stroke-width="3"/><path d="M8 87 92 29" stroke="#ad3e58" stroke-width="3"/></svg></div><figcaption><span class="legend-blue"></span>左上 × 右下 <span class="legend-coral"></span>左下 × 右上</figcaption></figure>
+<div class="diagonal-result"><span class="result-label">兩條對角線的和</span><p class="math" id="diagonals"></p></div><p id="clue"></p><button class="primary" id="reveal" type="button">揭曉因式與驗算</button><div class="formula math" id="answer" aria-live="polite" hidden></div></div></div>
+</section>
+<section id="signs"><header class="section-heading"><p class="kicker">02 · 先判斷正負號</p><h2>首項係數為 1：找乘積與和</h2></header>
+<div class="formula math"><var>x</var><sup>2</sup> + <var>bx</var> + <var>c</var> = (<var>x</var> + <var>m</var>)(<var>x</var> + <var>n</var>)<br><var>mn</var> = <var>c</var>，<var>m</var> + <var>n</var> = <var>b</var></div>
+<article class="example"><h3>情況 A · 常數為正，中間項為正</h3><p>兩數同號，而和為正，所以兩數均為正。</p><p class="math"><var>x</var><sup>2</sup> + 5<var>x</var> + 6 = (<var>x</var> + 2)(<var>x</var> + 3)</p><figure class="worked-cross" data-pairs="1,2,1,3"></figure><p>2 × 3 = 6；2 + 3 = 5。</p></article>
+<article class="example"><h3>情況 B · 常數為正，中間項為負</h3><p>兩數同號，而和為負，所以兩數均為負。</p><p class="math"><var>x</var><sup>2</sup> − 5<var>x</var> + 6 = (<var>x</var> − 2)(<var>x</var> − 3)</p><figure class="worked-cross" data-pairs="1,-2,1,-3"></figure><p>(−2) × (−3) = 6；−2 + (−3) = −5。</p></article>
+<article class="example"><h3>情況 C · 常數為負</h3><p>兩數必定異號。絕對值較大的數，決定兩數之和的正負號。</p><div class="cross-pair"><div><p class="math"><var>x</var><sup>2</sup> + <var>x</var> − 6<br>= (<var>x</var> + 3)(<var>x</var> − 2)</p><figure class="worked-cross" data-pairs="1,3,1,-2"></figure></div><div><p class="math"><var>x</var><sup>2</sup> − <var>x</var> − 6<br>= (<var>x</var> − 3)(<var>x</var> + 2)</p><figure class="worked-cross" data-pairs="1,-3,1,2"></figure></div></div></article>
+<p class="note">這個「兩數之和」規則用於首項係數為 1。首項係數不為 1 時，要計算完整的交叉乘積。</p>
+</section>
+<section id="coefficient"><header class="section-heading"><p class="kicker">03 · 配對的位置也重要</p><h2>首項係數不為 1</h2></header>
+<p>以 <span class="math">2<var>x</var><sup>2</sup> + 7<var>x</var> + 3</span> 為例，左邊可放 2<var>x</var> 和 <var>x</var>，右邊放 1 和 3。但右邊的位置不能隨便決定。</p>
+<div class="tool"><h3 class="tool-heading">交換右邊兩數，看看中間項</h3><div class="tool-body"><div class="swap-expression"><small>目前配對</small><p class="math" id="swap-formula"></p></div><figure class="worked-cross" id="swap-cross" aria-live="polite"></figure><p class="feedback" id="swap-feedback" aria-live="polite"></p><button class="secondary" type="button" id="swap">交換 1 與 3</button></div></div>
+<article class="example"><h3>首項係數有多組因數</h3><p class="math">6<var>x</var><sup>2</sup> + 11<var>x</var> + 3</p><p>6 可拆成 1 × 6 或 2 × 3。逐組嘗試，不能只試第一組便放棄。</p><figure class="worked-cross" data-pairs="2,3,3,1"></figure><p class="math">(2<var>x</var> + 3)(3<var>x</var> + 1)<br>= 6<var>x</var><sup>2</sup> + 2<var>x</var> + 9<var>x</var> + 3<br>= 6<var>x</var><sup>2</sup> + 11<var>x</var> + 3</p></article>
+<article class="example"><h3>異號也要看交叉乘積</h3><p class="math">6<var>x</var><sup>2</sup> + <var>x</var> − 2<br>= (3<var>x</var> + 2)(2<var>x</var> − 1)</p><figure class="worked-cross" data-pairs="3,2,2,-1"></figure><p>交叉項為 −3<var>x</var> 和 4<var>x</var>，相加得到 <var>x</var>。不要只把 2 和 −1 相加作判斷。</p></article>
+</section>
+<section id="first"><header class="section-heading"><p class="kicker">04 · 完全分解，不要漏掉外面的因式</p><h2>先提公因式，再用十字相乘</h2></header>
+<article class="example"><h3>有數字公因數</h3><p class="math">2<var>x</var><sup>2</sup> + 10<var>x</var> + 12<br>= 2(<var>x</var><sup>2</sup> + 5<var>x</var> + 6)<br>= 2(<var>x</var> + 2)(<var>x</var> + 3)</p><figure class="worked-cross" data-pairs="1,2,1,3" data-step="先提出 2，再分解括號內的二次式。"></figure></article>
+<article class="example"><h3>首項為負</h3><p class="math">−<var>x</var><sup>2</sup> + 5<var>x</var> − 6<br>= −(<var>x</var><sup>2</sup> − 5<var>x</var> + 6)<br>= −(<var>x</var> − 2)(<var>x</var> − 3)</p><figure class="worked-cross" data-pairs="1,-2,1,-3" data-step="先提出 −1，再分解括號內的二次式。"></figure><p>提出 −1 時，括號內每一項都要變號。</p></article>
+<article class="example"><h3>還有字母公因式</h3><p class="math">3<var>x</var><sup>3</sup> + 15<var>x</var><sup>2</sup> + 18<var>x</var><br>= 3<var>x</var>(<var>x</var><sup>2</sup> + 5<var>x</var> + 6)<br>= 3<var>x</var>(<var>x</var> + 2)(<var>x</var> + 3)</p><figure class="worked-cross" data-pairs="1,2,1,3" data-step="先提出 3x，再分解括號內的二次式。"></figure></article>
+</section>
+<section id="special"><header class="section-heading"><p class="kicker">05 · 不一定要硬湊十字圖</p><h2>零項、重複因式與沒有整數配對</h2></header>
+<article class="example"><h3>中間項為零：平方差</h3><p class="math"><var>x</var><sup>2</sup> − 9 = (<var>x</var> + 3)(<var>x</var> − 3)</p><figure class="worked-cross" data-pairs="1,3,1,-3"></figure><p>交叉項 −3<var>x</var> 和 3<var>x</var> 抵消。能認出平方差時，可直接用恆等式。</p></article>
+<article class="example"><h3>兩個因式相同：完全平方</h3><p class="math"><var>x</var><sup>2</sup> + 6<var>x</var> + 9 = (<var>x</var> + 3)<sup>2</sup></p><figure class="worked-cross" data-pairs="1,3,1,3"></figure></article>
+<article class="example"><h3>常數項為零：先提出字母</h3><p class="math">2<var>x</var><sup>2</sup> + 7<var>x</var> = <var>x</var>(2<var>x</var> + 7)</p><figure class="worked-cross" data-pairs="1,0,2,7" data-step="右上角放 0，可見其中一個因式是字母；通常直接提出公因式更快。"></figure></article>
+<article class="example"><h3>找不到整數因式</h3><p class="math"><var>x</var><sup>2</sup> + <var>x</var> + 1</p><p>整數乘積為 1 的配對只有 1、1 或 −1、−1；和分別為 2 或 −2，都不是 1。因此不能分解成整數係數的一次因式乘積。</p><figure class="worked-cross" data-pairs="1,1,1,1" data-target="1" data-step="試配 1 和 1：首尾項對了，中間項卻不符。"></figure></article>
+<p class="note">因式分解不是解方程。沒有等號時，答案是因式的乘積，不是 <var>x</var> 的值。</p>
+</section>
+<section id="practice"><header class="section-heading"><p class="kicker">06 · 先辨情況，再計交叉項</p><h2>分類練習</h2></header>
+<div class="tool"><h3 class="tool-heading">逐題揭曉與驗算</h3><div class="controls"><label for="exercise">題目 <select id="exercise"></select></label><span class="exercise-meta" id="exercise-count" aria-live="polite"></span></div><div class="tool-body"><span class="target-label">試分解</span><p class="math exercise-question" id="exercise-question"></p><p class="exercise-hint" id="exercise-hint"></p><button type="button" class="primary" id="exercise-reveal">查看解答</button><figure class="worked-cross exercise-cross" id="exercise-cross" hidden></figure><div class="formula math" id="exercise-answer" aria-live="polite" hidden></div></div></div>
+<p><a href="factorisation-s2.html">重溫中二：公因式、分組法與恆等式</a></p>
+</section>
+</main><footer class="wrap">數學研習室 · 中三數學 · <a href="index.html">教材總覽</a></footer>
+<script>
+const el=id=>document.getElementById(id);
+const x="<var>x</var>";
+const number=n=>String(n).replace("-","−");
+const signed=n=>`${n<0?"−":"+"} ${Math.abs(n)}`;
+const term=n=>n===0?"0":`${n===1?"":n===-1?"−":number(n)}${x}`;
+const poly=(a,b,c)=>`${term(a)}<sup>2</sup>${b?` ${b<0?"−":"+"} ${term(Math.abs(b))}`:""}${c?` ${signed(c)}`:""}`;
+const factor=(p,q)=>`(${term(p)} ${signed(q)})`;
+const cases=[[1,2,1,3],[1,-2,1,-3],[1,3,1,-2],[1,-3,1,2],[2,1,1,3],[3,2,2,-1],[1,3,1,-3],[1,3,1,3]];
+function renderCross(node,[p,q,r,s],target=p*s+q*r,step=""){
+ const middle=p*s+q*r,valid=middle===target;
+ node.dataset.valid=String(valid);
+ node.innerHTML=`<figcaption>${step||"十字配對"}</figcaption>
+ <div class="cross-grid" aria-hidden="true">
+ <div class="math" style="grid-column:1;grid-row:1">${term(p)}</div>
+ <div class="math" style="grid-column:3;grid-row:1">${signed(q)}</div>
+ <div class="math" style="grid-column:1;grid-row:2">${term(r)}</div>
+ <div class="math" style="grid-column:3;grid-row:2">${signed(s)}</div>
+ <svg viewBox="0 0 100 116"><path d="M8 29 92 87" stroke="#276996" stroke-width="3"/><path d="M8 87 92 29" stroke="#ad3e58" stroke-width="3"/></svg>
+ </div><p class="math cross-calculation"><span style="color:var(--blue)">${term(p*s)}</span> + (<span style="color:var(--coral)">${term(q*r)}</span>) = <strong>${term(middle)}</strong>${valid?"":` ≠ ${term(target)}`}</p>`;
+ node.setAttribute("aria-label",`${step||"十字配對"}：交叉項之和為 ${number(middle)}x${valid?"":`，不等於目標 ${number(target)}x`}`);
+}
+document.querySelectorAll(".worked-cross[data-pairs]").forEach(node=>{
+ const pairs=node.dataset.pairs.split(",").map(Number);
+ renderCross(node,pairs,node.dataset.target===undefined?undefined:Number(node.dataset.target),node.dataset.step);
+});
+function renderCase(){
+ const [p,q,r,s]=cases[+el("case").value],b=p*s+q*r;
+ el("target").innerHTML=poly(p*r,b,q*s);
+ el("tl").innerHTML=term(p);el("tr").textContent=signed(q);
+ el("bl").innerHTML=term(r);el("br").textContent=signed(s);
+ el("diagonals").innerHTML=`<span style="color:var(--blue)">${term(p*s)}</span> + (<span style="color:var(--coral)">${term(q*r)}</span>) = ${term(b)}`;
+ el("clue").innerHTML=`首項：${term(p)} × ${term(r)} = ${term(p*r)}<sup>2</sup>；常數項：(${number(q)}) × (${number(s)}) = ${number(q*s)}。`;
+ el("answer").innerHTML=`${factor(p,q)}${factor(r,s)}<br>= ${poly(p*r,b,q*s)}`;
+ el("answer").hidden=true;el("reveal").hidden=false;
+}
+el("case").addEventListener("change",renderCase);
+el("reveal").addEventListener("click",()=>{el("answer").hidden=false;el("reveal").hidden=true;});renderCase();
+let swapped=false;
+function renderSwap(){
+ el("swap-formula").innerHTML=swapped?`(2${x} + 1)(${x} + 3)<br>交叉項：6${x} + ${x} = 7${x}`:`(2${x} + 3)(${x} + 1)<br>交叉項：2${x} + 3${x} = 5${x}`;
+ renderCross(el("swap-cross"),swapped?[2,1,1,3]:[2,3,1,1],7,`目標中間項：7${x}`);
+ el("swap-feedback").innerHTML=swapped?`中間項為 7${x}，配對正確。`:`首尾項雖然正確，但中間項是 5${x}，不是 7${x}。`;
+ el("swap-feedback").dataset.correct=String(swapped);
+ el("swap").textContent=swapped?"換回原來配對":"交換 1 與 3";
+}
+el("swap").addEventListener("click",()=>{swapped=!swapped;renderSwap();});renderSwap();
+const exercises=[
+ [1,3,1,4,1,"兩數均為正"],[1,-3,1,-4,1,"兩數均為負"],[1,4,1,-3,1,"異號，和為正"],[1,-4,1,3,1,"異號，和為負"],
+ [2,1,1,3,1,"首項係數不為 1"],[3,2,2,-1,1,"交叉項異號"],[1,2,1,3,2,"先提出 2"],[1,-2,1,-3,-1,"先提出 −1"],[1,5,1,-5,1,"中間項為零"],[1,-4,1,-4,1,"重複因式"]
+];
+exercises.forEach((e,i)=>{const option=document.createElement("option");option.value=i;option.textContent=`${i+1} · ${e[5]}`;el("exercise").append(option);});
+function renderExercise(){
+ const [p,q,r,s,k,hint]=exercises[+el("exercise").value];
+ el("exercise-count").textContent=`${String(+el("exercise").value+1).padStart(2,"0")} / ${exercises.length}`;
+ el("exercise-question").innerHTML=poly(k*p*r,k*(p*s+q*r),k*q*s);
+ el("exercise-hint").textContent=`提示：${hint}。`;
+ el("exercise-answer").innerHTML=`${k===1?"":k===-1?"−":k}${factor(p,q)}${factor(r,s)}<br>驗算：${poly(k*p*r,k*(p*s+q*r),k*q*s)}`;
+ renderCross(el("exercise-cross"),[p,q,r,s],undefined,k===1?"十字配對":`先提出 ${number(k)}，再畫十字。`);
+ el("exercise-cross").hidden=true;el("exercise-answer").hidden=true;el("exercise-reveal").hidden=false;
+}
+el("exercise").addEventListener("change",renderExercise);el("exercise-reveal").addEventListener("click",()=>{el("exercise-cross").hidden=false;el("exercise-answer").hidden=false;el("exercise-reveal").hidden=true;});renderExercise();
+    const navLinks=[...document.querySelectorAll(".contents a")];
+    function updateSection(){
+      let current=navLinks[0];
+      navLinks.forEach(link=>{if(document.querySelector(link.getAttribute("href")).getBoundingClientRect().top<=160)current=link;});
+      navLinks.forEach(link=>{if(link===current)link.setAttribute("aria-current","location");else link.removeAttribute("aria-current");});
+    }
+    window.addEventListener("scroll",updateSection,{passive:true});updateSection();
+    const motion=matchMedia("(prefers-reduced-motion: reduce)");
+    const seen=new WeakSet();let observer;
+    function setupMotion(){
+      if(observer)observer.disconnect();
+      document.querySelectorAll(".scroll-enter").forEach(node=>node.classList.remove("scroll-enter"));
+      if(motion.matches||!("IntersectionObserver" in window))return;
+      observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
+        if(!entry.isIntersecting||entry.target.hidden)return;
+        seen.add(entry.target);entry.target.classList.add("scroll-enter");observer.unobserve(entry.target);
+        entry.target.addEventListener("animationend",()=>entry.target.classList.remove("scroll-enter"),{once:true});
+      }),{rootMargin:"0px 0px -24px 0px"});
+      document.querySelectorAll("main > section > *").forEach(node=>{if(!seen.has(node))observer.observe(node);});
+    }
+    motion.addEventListener("change",setupMotion);setupMotion();
+  </script>
+</body>
+</html>
