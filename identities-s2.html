@@ -86,6 +86,11 @@
     .drawing svg .piece.focus rect { stroke: var(--teal); stroke-width: 2.8; }
     .drawing svg .piece[data-piece="corner"].focus rect, .drawing svg .piece[data-piece="right"].focus rect, .drawing svg .piece[data-piece="bottom"].focus rect, .drawing svg .piece[data-piece="hole"].focus rect, .drawing svg .piece[data-piece="outline"].focus rect { stroke: var(--coral); }
     .drawing svg .hole.removed { fill: var(--white); }
+    .drawing svg .rearrange-piece { transform-box: view-box; transform-origin: 0 0; transition: transform 1.45s cubic-bezier(.45, 0, .2, 1), opacity .65s ease; }
+    .drawing svg .rearrange-piece rect { stroke-width: 1.8; }
+    .drawing svg .difference-labels { transition: opacity .45s ease; }
+    .drawing svg .cut-line { stroke: var(--blue); stroke-width: 2; stroke-dasharray: 5 4; transition: opacity .4s ease; }
+    .drawing svg .dimension { fill: none; stroke: var(--muted); stroke-width: 1; }
     .stage-note { min-height: 38px; color: var(--muted); font-size: 13px; text-align: center; }
     .side { min-width: 0; padding: 26px 25px; display: flex; flex-direction: column; }
     .side-label { color: var(--teal); font-size: 12px; font-weight: 800; }
@@ -100,6 +105,7 @@
     .primary, .secondary { min-height: 41px; padding: 7px 14px; border-radius: 4px; cursor: pointer; font-weight: 700; }
     .primary { border: 1px solid var(--ink); background: var(--ink); color: var(--white); }
     .primary:hover { border-color: var(--teal); background: var(--teal); }
+    .primary:disabled { opacity: .55; cursor: wait; }
     .secondary { border: 1px solid var(--line); background: var(--white); color: var(--ink); }
     .secondary:hover { background: var(--teal-soft); }
     .values { display: flex; gap: 28px; flex-wrap: wrap; padding: 17px 24px 19px; border-top: 1px solid var(--line); }
@@ -190,7 +196,7 @@
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .drawing svg .piece, .drawing svg rect, .stage-progress span, .section::before, .term-chip { transition: none; }
+      .drawing svg .piece, .drawing svg rect, .drawing svg .rearrange-piece, .drawing svg .difference-labels, .drawing svg .cut-line, .stage-progress span, .section::before, .term-chip { transition: none; }
       .section.is-visible .section-heading, .section.is-visible .section-body { animation: none; }
     }
   </style>
@@ -374,10 +380,12 @@
         "右下角的 b² 被減了兩次，計算時要加回一次；圖形仍只保留左上角的 (a − b)²。"
       ],
       difference: [
-        "大正方形的面積是 a²。",
-        "拿走一個邊長 b 的小正方形，餘下面積 a² − b²。",
-        "把餘下的兩部分重新拼合，得到長為 a + b、闊為 a − b 的長方形。",
-        "兩個圖形面積相同，所以 (a + b)(a − b) = a² − b²。"
+        "從邊長 a 的大正方形開始，面積是 a²。右下角的小正方形邊長是 b。",
+        "拿走右下角的小正方形，減去 b²。留下的圖形像一個 L 字，面積是 a² − b²。",
+        "沿虛線切開，把下方的藍色長條分開。它的長是 a − b，闊是 b；沒有拿走任何面積。",
+        "把同一塊藍色長條轉九十度。現在它的高是 a − b，剛好和綠色部分一樣高。",
+        "把藍色長條移到綠色部分旁邊。兩塊貼合成長方形：長是 a + b，闊是 a − b。",
+        "只切開、轉動和移位，沒有拉長，也沒有加減面積。因此 (a + b)(a − b) = a² − b²。"
       ]
     };
     const formulas = {
@@ -387,6 +395,7 @@
     };
     let mode = "plus";
     let step = 0;
+    let stageUnlockTimer;
 
     function italicizeVariables(root) {
       const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
@@ -442,30 +451,82 @@
           <text class="edge" x="85" y="${y + keep / 2}">${svgMath("a − b")}</text><text class="edge" x="85" y="${y + keep + strip / 2}">${svgMath("b")}</text>`;
         document.getElementById("diagram-note").textContent = `留下的正方形面積：${(a - b) ** 2}`;
       } else {
-        const x = 47, y = 72, size = 105, cut = size * b / a;
-        const width = size * (a + b) / a;
-        const height = size * (a - b) / a;
+        const x = 62, y = 52, size = 150, cut = size * b / a, height = size - cut;
         diagram.innerHTML = `
-          ${svgPiece("base", x, y, size, size, "var(--teal-soft)", "a²", x + size / 2, y + size / 2)}
-          ${svgPiece("hole", x + size - cut, y + size - cut, cut, cut, "var(--teal-soft)", "", 0, 0, "hole")}
-          <text x="176" y="126" class="edge">=</text>
-          <g class="piece" data-piece="result"><rect x="195" y="72" width="${width}" height="${height}" fill="var(--blue-soft)" stroke="#52736c" stroke-width="1.4"/>
-            <text class="edge" x="${195 + width / 2}" y="58">${svgMath("a + b")}</text>
-            <text class="edge" x="395" y="${72 + height / 2}">${svgMath("a − b")}</text></g>`;
-        document.getElementById("diagram-note").textContent = `兩種算法的面積都是 ${a * a - b * b}`;
+          <rect x="${x}" y="${y}" width="${size}" height="${size}" fill="none" stroke="#aebfba" stroke-dasharray="4 5"/>
+          <g class="rearrange-piece" data-difference="base" style="transform:translate(${x}px, ${y}px)">
+            <rect width="${size}" height="${height}" fill="var(--teal-soft)" stroke="var(--teal)"/>
+          </g>
+          <g class="rearrange-piece" data-difference="strip" style="transform:translate(${x}px, ${y + height}px) rotate(0deg)">
+            <rect width="${height}" height="${cut}" fill="var(--blue-soft)" stroke="var(--blue)"/>
+          </g>
+          <g class="rearrange-piece" data-difference="removed" style="transform:translate(${x + height}px, ${y + height}px)">
+            <rect width="${cut}" height="${cut}" fill="var(--coral-soft)" stroke="var(--coral)"/>
+            <text x="${cut / 2}" y="${cut / 2}" style="font-size:${cut < 30 ? 12 : 16}px">${svgMath("b²")}</text>
+          </g>
+          <path class="cut-line" d="M${x} ${y + height} H${x + height}" opacity="0"/>
+          <g class="difference-labels" data-difference-label="original">
+            <text class="edge" x="${x + size / 2}" y="29">${svgMath("a")}</text>
+            <text class="edge" x="36" y="${y + size / 2}">${svgMath("a")}</text>
+          </g>
+          <g class="difference-labels" data-difference-label="separated" opacity="0">
+            <text class="edge" x="${x + height / 2}" y="${y + size + 46}">${svgMath("a − b")}</text>
+            <text class="edge" x="${x + height + 22}" y="${y + height + 18 + cut / 2}">${svgMath("b")}</text>
+          </g>
+          <g class="difference-labels" data-difference-label="turned" opacity="0">
+            <text class="edge" x="${x + size + 15 + cut / 2}" y="${y + 10}">${svgMath("b")}</text>
+            <text class="edge" x="${x + size + 15 + cut + 29}" y="${y + 30 + height / 2}">${svgMath("a − b")}</text>
+          </g>
+          <g class="difference-labels" data-difference-label="joined" opacity="0">
+            <path class="dimension" d="M${x} 40 V34 H${x + size} V40 M${x + size} 34 H${x + size + cut} V40 M${x} ${y + height + 15} V${y + height + 22} H${x + size + cut} V${y + height + 15}"/>
+            <text class="edge" x="${x + size / 2}" y="21">${svgMath("a")}</text>
+            <text class="edge" x="${x + size + cut / 2}" y="21">${svgMath("b")}</text>
+            <text class="edge" x="${x + (size + cut) / 2}" y="${y + height + 43}">${svgMath("a + b")}</text>
+            <text class="edge" x="${x + size + cut + 30}" y="${y + height / 2}">${svgMath("a − b")}</text>
+          </g>`;
       }
     }
 
     function applyStage() {
+      if (mode === "difference") {
+        const a = Number(aSlider.value), b = Number(bSlider.value);
+        const x = 62, y = 52, size = 150, cut = size * b / a, height = size - cut;
+        const strip = diagram.querySelector('[data-difference="strip"]');
+        const removed = diagram.querySelector('[data-difference="removed"]');
+        const positions = [
+          `translate(${x}px, ${y + height}px) rotate(0deg)`,
+          `translate(${x}px, ${y + height}px) rotate(0deg)`,
+          `translate(${x}px, ${y + height + 18}px) rotate(0deg)`,
+          `translate(${x + size + 15}px, ${y + height + 30}px) rotate(-90deg)`,
+          `translate(${x + size}px, ${y + height}px) rotate(-90deg)`,
+          `translate(${x + size}px, ${y + height}px) rotate(-90deg)`
+        ];
+        strip.style.transform = positions[step];
+        removed.style.transform = `translate(${x + height + (step > 0 ? 26 : 0)}px, ${y + height + (step > 0 ? 28 : 0)}px)`;
+        removed.style.opacity = step > 0 ? "0" : "1";
+        diagram.querySelector(".cut-line").style.opacity = step === 2 ? "1" : "0";
+        diagram.querySelectorAll("[data-difference-label]").forEach(label => {
+          const visible = { original: step < 3, separated: step === 2, turned: step === 3, joined: step >= 4 };
+          label.style.transitionDelay = visible[label.dataset.differenceLabel] && step >= 3 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "1.2s" : "0s";
+          label.style.opacity = visible[label.dataset.differenceLabel] ? "1" : "0";
+        });
+        document.getElementById("diagram-note").textContent = [
+          `大正方形面積：${a * a}`,
+          `拿走小正方形後，餘下面積：${a * a - b * b}`,
+          "沿虛線切開：綠色部分和藍色長條",
+          "藍色長條轉九十度，形狀和面積都不變",
+          `綠色 + 藍色 = 長方形，面積仍是 ${a * a - b * b}`,
+          `長 × 闊 = ${a + b} × ${a - b} = ${a * a - b * b}`
+        ][step];
+        return;
+      }
       const active = {
         plus: [["base", "ab1", "ab2", "corner"], ["base"], ["base", "ab1", "ab2"], ["base", "ab1", "ab2", "corner"]],
         minus: [["base", "right", "bottom", "corner"], ["base", "bottom"], ["base"], ["base", "outline"]],
-        difference: [["base", "hole"], ["base", "hole"], ["base", "hole", "result"], ["base", "hole", "result"]]
       }[mode][step];
       const focus = {
         plus: [null, "base", "ab1", "corner"],
         minus: [null, "right", "bottom", "outline"],
-        difference: [null, "hole", "result", "result"]
       }[mode][step];
       diagram.querySelectorAll("[data-piece]").forEach(piece => {
         piece.classList.toggle("soft", !active.includes(piece.dataset.piece));
@@ -491,13 +552,18 @@
       });
       document.getElementById("identity-panel").setAttribute("aria-labelledby", `tab-${mode}`);
       document.getElementById("formula").innerHTML = formulas[mode];
-      document.getElementById("step-number").textContent = `第 ${step + 1} 步，共 4 步`;
+      const stepCount = steps[mode].length;
+      document.getElementById("step-number").textContent = `第 ${step + 1} 步，共 ${stepCount} 步`;
       document.getElementById("step-text").textContent = steps[mode][step];
-      document.getElementById("stage-progress").style.width = `${(step + 1) * 25}%`;
+      document.getElementById("stage-progress").style.width = `${(step + 1) * 100 / stepCount}%`;
       const left = mode === "plus" ? (a + actualB) ** 2 : mode === "minus" ? (a - actualB) ** 2 : (a + actualB) * (a - actualB);
       const right = mode === "plus" ? a * a + 2 * a * actualB + actualB * actualB : mode === "minus" ? a * a - 2 * a * actualB + actualB * actualB : a * a - actualB * actualB;
       document.getElementById("numeric").innerHTML = `代入 <span class="math">a = ${a}</span>、<span class="math">b = ${actualB}</span>：左邊 <strong>${left}</strong>，右邊 <strong>${right}</strong>。`;
-      document.getElementById("next-step").textContent = step === 3 ? "再看一次" : "下一步";
+      document.getElementById("next-step").textContent = step === stepCount - 1 ? "再看一次" : "下一步";
+      clearTimeout(stageUnlockTimer);
+      const nextStepButton = document.getElementById("next-step");
+      nextStepButton.disabled = mode === "difference" && !redraw && step > 0 && step < 5 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (nextStepButton.disabled) stageUnlockTimer = setTimeout(() => { nextStepButton.disabled = false; }, 1550);
       if (redraw) renderDiagram(a, actualB);
       applyStage();
       italicizeVariables(document.getElementById("formula"));
@@ -524,7 +590,7 @@
     });
     aSlider.addEventListener("input", () => render(true));
     bSlider.addEventListener("input", () => render(true));
-    document.getElementById("next-step").addEventListener("click", () => { step = (step + 1) % 4; render(); });
+    document.getElementById("next-step").addEventListener("click", () => { step = (step + 1) % steps[mode].length; render(); });
     document.getElementById("restart").addEventListener("click", () => { step = 0; render(); });
     render(true);
 
