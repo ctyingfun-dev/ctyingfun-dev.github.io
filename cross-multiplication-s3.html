@@ -170,49 +170,60 @@
     @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .scroll-enter { animation:none; } .primary,.secondary,.contents a { transition:none; } }
     @media print { .top,.contents,.controls,.actions,.quiz { display:none; } main.wrap { display:block; width:100%; } .scroll-enter { animation:none; } section { padding:18px 0; } }
   </style>
+  <link rel="stylesheet" href="cross-handout.css">
 </head>
 <body>
-<header class="top"><div class="wrap top-inner"><a class="brand" href="index.html">數學研習室</a><nav aria-label="主要導覽"><a href="factorisation-s2.html">中二基礎</a><a href="#practice">練習</a><a href="index.html">教材總覽</a><a href="cross-multiplication-s3-en.html" lang="en">English</a></nav></div></header>
+<header class="top"><div class="wrap top-inner"><a class="brand" href="https://ctyingfun-dev.github.io/">數學研習室</a><nav aria-label="主要導覽"><a href="https://ctyingfun-dev.github.io/factorisation-s2.html">中二基礎</a><a href="#practice">練習</a><a href="https://ctyingfun-dev.github.io/">教材總覽</a><a href="cross-multiplication-s3-en.html" lang="en">English</a></nav></div></header>
 <main class="wrap">
-<div class="intro"><p class="eyebrow">香港 · 中三 · 代數</p><h1>十字相乘</h1><p class="lead">首尾配對，交叉相乘。中間項正確，才是合適的因式。</p></div>
+<div class="intro"><p class="eyebrow">香港 · 中三 · 代數</p><h1>十字相乘，怎樣配？</h1><p class="lead">首尾先對，再驗算中間項。</p><p class="opening-question"><span class="math">2<var>x</var><sup>2</sup> + 7<var>x</var> + 3</span><a href="#coefficient">你來配這題</a></p></div>
 <nav class="contents" aria-label="課程章節"><a href="#why">01 十字圖的原理</a><a href="#signs">02 首項係數為 1</a><a href="#coefficient">03 首項係數不為 1</a><a href="#first">04 先整理，再分解</a><a href="#special">05 特殊情況</a><a href="#practice">06 分類練習</a></nav>
 <section id="why"><header class="section-heading"><p class="kicker">01 · 從展開看交叉乘積</p><h2>十字相乘在檢查甚麼？</h2></header>
-<div class="formula math">(<var>px</var> + <var>q</var>)(<var>rx</var> + <var>s</var>)<br>= <var>prx</var><sup>2</sup> + (<var>ps</var> + <var>qr</var>)<var>x</var> + <var>qs</var></div>
+<div class="formula math"><span class="formula-label">先展開一次：中間項從這兩個乘積而來</span>(<var>px</var> + <var>q</var>)(<var>rx</var> + <var>s</var>)<br>= <var>prx</var><sup>2</sup> + (<var>ps</var> + <var>qr</var>)<var>x</var> + <var>qs</var></div>
 <p>左邊相乘得到首項，右邊相乘得到常數項；兩條對角線的乘積相加，必須得到<strong>中間項</strong>。最後沿每一橫行寫出一個因式。</p>
-<div class="tool"><h3 class="tool-heading">十字圖實驗室</h3><div class="controls"><label for="case">例題情況 <select id="case"><option value="0">兩數均為正</option><option value="1">兩數均為負</option><option value="2">異號：中間項為正</option><option value="3">異號：中間項為負</option><option value="4">首項係數不為 1</option><option value="5">首項係數不為 1，且異號</option><option value="6">中間項為零</option><option value="7">兩個因式相同</option></select></label></div>
+<div class="tool"><h3 class="tool-heading">這兩條對角線，加起來是多少？</h3><div class="controls"><label for="case">例題情況 <select id="case"><option value="0">兩數均為正</option><option value="1">兩數均為負</option><option value="2">異號：中間項為正</option><option value="3">異號：中間項為負</option><option value="4">首項係數不為 1</option><option value="5">首項係數不為 1，且異號</option><option value="6">中間項為零</option><option value="7">兩個因式相同</option></select></label></div>
 <div class="tool-body"><span class="target-label">待分解</span><p class="math target-expression" id="target"></p><figure class="diagram"><div class="cross-grid"><div class="math" id="tl" style="grid-column:1;grid-row:1"></div><div class="math" id="tr" style="grid-column:3;grid-row:1"></div><div class="math" id="bl" style="grid-column:1;grid-row:2"></div><div class="math" id="br" style="grid-column:3;grid-row:2"></div><svg viewBox="0 0 100 116" aria-hidden="true"><path d="M8 29 92 87" stroke="#276996" stroke-width="3"/><path d="M8 87 92 29" stroke="#ad3e58" stroke-width="3"/></svg></div><figcaption><span class="legend-blue"></span>左上 × 右下 <span class="legend-coral"></span>左下 × 右上</figcaption></figure>
 <div class="diagonal-result"><span class="result-label">兩條對角線的和</span><p class="math" id="diagonals"></p></div><p id="clue"></p><button class="primary" id="reveal" type="button">揭曉因式與驗算</button><div class="formula math" id="answer" aria-live="polite" hidden></div></div></div>
 </section>
-<section id="signs"><header class="section-heading"><p class="kicker">02 · 先判斷正負號</p><h2>首項係數為 1：找乘積與和</h2></header>
+<section id="signs"><header class="section-heading"><p class="kicker">02 · 首項係數為 1</p><h2>乘積對了，兩數之和也對嗎？</h2></header>
 <div class="formula math"><var>x</var><sup>2</sup> + <var>bx</var> + <var>c</var> = (<var>x</var> + <var>m</var>)(<var>x</var> + <var>n</var>)<br><var>mn</var> = <var>c</var>，<var>m</var> + <var>n</var> = <var>b</var></div>
-<article class="example"><h3>情況 A · 常數為正，中間項為正</h3><p>兩數同號，而和為正，所以兩數均為正。</p><p class="math"><var>x</var><sup>2</sup> + 5<var>x</var> + 6 = (<var>x</var> + 2)(<var>x</var> + 3)</p><figure class="worked-cross" data-pairs="1,2,1,3"></figure><p>2 × 3 = 6；2 + 3 = 5。</p></article>
-<article class="example"><h3>情況 B · 常數為正，中間項為負</h3><p>兩數同號，而和為負，所以兩數均為負。</p><p class="math"><var>x</var><sup>2</sup> − 5<var>x</var> + 6 = (<var>x</var> − 2)(<var>x</var> − 3)</p><figure class="worked-cross" data-pairs="1,-2,1,-3"></figure><p>(−2) × (−3) = 6；−2 + (−3) = −5。</p></article>
-<article class="example"><h3>情況 C · 常數為負</h3><p>兩數必定異號。絕對值較大的數，決定兩數之和的正負號。</p><div class="cross-pair"><div><p class="math"><var>x</var><sup>2</sup> + <var>x</var> − 6<br>= (<var>x</var> + 3)(<var>x</var> − 2)</p><figure class="worked-cross" data-pairs="1,3,1,-2"></figure></div><div><p class="math"><var>x</var><sup>2</sup> − <var>x</var> − 6<br>= (<var>x</var> − 3)(<var>x</var> + 2)</p><figure class="worked-cross" data-pairs="1,-3,1,2"></figure></div></div></article>
-<p class="note">這個「兩數之和」規則用於首項係數為 1。首項係數不為 1 時，要計算完整的交叉乘積。</p>
+<article class="example"><h3>乘積是 +6，和是 +5：兩數應用甚麼符號？</h3><p>兩數同號，而和為正，所以兩數均為正。</p><p class="math"><var>x</var><sup>2</sup> + 5<var>x</var> + 6 = (<var>x</var> + 2)(<var>x</var> + 3)</p><figure class="worked-cross" data-pairs="1,2,1,3"></figure><p>2 × 3 = 6；2 + 3 = 5。</p></article>
+<article class="example"><h3>乘積仍是 +6，和變成 −5，符號要改嗎？</h3><p>兩數同號，而和為負，所以兩數均為負。</p><p class="math"><var>x</var><sup>2</sup> − 5<var>x</var> + 6 = (<var>x</var> − 2)(<var>x</var> − 3)</p><figure class="worked-cross" data-pairs="1,-2,1,-3"></figure><p>(−2) × (−3) = 6；−2 + (−3) = −5。</p></article>
+<article class="example"><h3>乘積是 −6，負號放在哪個數？</h3><p>兩數必定異號。絕對值較大的數，決定兩數之和的正負號。</p><div class="cross-pair"><div><p class="math"><var>x</var><sup>2</sup> + <var>x</var> − 6<br>= (<var>x</var> + 3)(<var>x</var> − 2)</p><figure class="worked-cross" data-pairs="1,3,1,-2"></figure></div><div><p class="math"><var>x</var><sup>2</sup> − <var>x</var> − 6<br>= (<var>x</var> − 3)(<var>x</var> + 2)</p><figure class="worked-cross" data-pairs="1,-3,1,2"></figure></div></div></article>
+<aside class="teacher-correction">
+<p class="correction-wrong"><span class="correction-label">錯誤寫法</span><span class="math"><var>x</var><sup>2</sup> − 5<var>x</var> + 6 = (<var>x</var> + 2)(<var>x</var> + 3)</span></p>
+<p class="teacher-comment"><span class="correction-label">老師批註</span>只驗算乘積還不夠。右邊展開的中間項是 <span class="math">+5<var>x</var></span>，題目卻是 <span class="math">−5<var>x</var></span>。常數為正，不代表兩數一定為正。</p>
+<p class="correction-right"><span class="correction-label">正確答案</span><span class="math">(<var>x</var> − 2)(<var>x</var> − 3)</span></p>
+</aside>
+<p class="note sticky-note">這個「兩數之和」規則用於首項係數為 1。首項係數不為 1 時，要計算完整的交叉乘積。</p>
 </section>
-<section id="coefficient"><header class="section-heading"><p class="kicker">03 · 配對的位置也重要</p><h2>首項係數不為 1</h2></header>
+<section id="coefficient"><header class="section-heading"><p class="kicker">03 · 首項係數不為 1</p><h2>交換 1 和 3，中間項會一樣嗎？</h2></header>
 <p>以 <span class="math">2<var>x</var><sup>2</sup> + 7<var>x</var> + 3</span> 為例，左邊可放 2<var>x</var> 和 <var>x</var>，右邊放 1 和 3。但右邊的位置不能隨便決定。</p>
-<div class="tool"><h3 class="tool-heading">交換右邊兩數，看看中間項</h3><div class="tool-body"><div class="swap-expression"><small>目前配對</small><p class="math" id="swap-formula"></p></div><figure class="worked-cross" id="swap-cross" aria-live="polite"></figure><p class="feedback" id="swap-feedback" aria-live="polite"></p><button class="secondary" type="button" id="swap">交換 1 與 3</button></div></div>
-<article class="example"><h3>首項係數有多組因數</h3><p class="math">6<var>x</var><sup>2</sup> + 11<var>x</var> + 3</p><p>6 可拆成 1 × 6 或 2 × 3。逐組嘗試，不能只試第一組便放棄。</p><figure class="worked-cross" data-pairs="2,3,3,1"></figure><p class="math">(2<var>x</var> + 3)(3<var>x</var> + 1)<br>= 6<var>x</var><sup>2</sup> + 2<var>x</var> + 9<var>x</var> + 3<br>= 6<var>x</var><sup>2</sup> + 11<var>x</var> + 3</p></article>
-<article class="example"><h3>異號也要看交叉乘積</h3><p class="math">6<var>x</var><sup>2</sup> + <var>x</var> − 2<br>= (3<var>x</var> + 2)(2<var>x</var> − 1)</p><figure class="worked-cross" data-pairs="3,2,2,-1"></figure><p>交叉項為 −3<var>x</var> 和 4<var>x</var>，相加得到 <var>x</var>。不要只把 2 和 −1 相加作判斷。</p></article>
+<div class="tool"><h3 class="tool-heading">這個配對，真的得到 7<var>x</var> 嗎？</h3><div class="tool-body"><div class="swap-expression"><small id="swap-label">錯誤配對</small><p class="math" id="swap-formula"></p></div><figure class="worked-cross" id="swap-cross" aria-live="polite"></figure><p class="feedback" id="swap-feedback" aria-live="polite"></p><div class="formula math" id="swap-correct" hidden><span class="formula-label">正確答案</span>2<var>x</var><sup>2</sup> + 7<var>x</var> + 3<br>= (2<var>x</var> + 1)(<var>x</var> + 3)</div><button class="secondary" type="button" id="swap">交換 1 與 3</button></div></div>
+<article class="example"><h3>6 只試 1 × 6 就夠嗎？</h3><p class="math">6<var>x</var><sup>2</sup> + 11<var>x</var> + 3</p><p>6 可拆成 1 × 6 或 2 × 3。逐組嘗試，不能只試第一組便放棄。</p><figure class="worked-cross" data-pairs="2,3,3,1"></figure><p class="math">(2<var>x</var> + 3)(3<var>x</var> + 1)<br>= 6<var>x</var><sup>2</sup> + 2<var>x</var> + 9<var>x</var> + 3<br>= 6<var>x</var><sup>2</sup> + 11<var>x</var> + 3</p></article>
+<article class="example"><h3>只算 2 + (−1)，真的能驗算中間項嗎？</h3><p class="math">6<var>x</var><sup>2</sup> + <var>x</var> − 2<br>= (3<var>x</var> + 2)(2<var>x</var> − 1)</p><figure class="worked-cross" data-pairs="3,2,2,-1"></figure><p>交叉項為 −3<var>x</var> 和 4<var>x</var>，相加得到 <var>x</var>。不要只把 2 和 −1 相加作判斷。</p></article>
 </section>
-<section id="first"><header class="section-heading"><p class="kicker">04 · 完全分解，不要漏掉外面的因式</p><h2>先提公因式，再用十字相乘</h2></header>
-<article class="example"><h3>有數字公因數</h3><p class="math">2<var>x</var><sup>2</sup> + 10<var>x</var> + 12<br>= 2(<var>x</var><sup>2</sup> + 5<var>x</var> + 6)<br>= 2(<var>x</var> + 2)(<var>x</var> + 3)</p><figure class="worked-cross" data-pairs="1,2,1,3" data-step="先提出 2，再分解括號內的二次式。"></figure></article>
-<article class="example"><h3>首項為負</h3><p class="math">−<var>x</var><sup>2</sup> + 5<var>x</var> − 6<br>= −(<var>x</var><sup>2</sup> − 5<var>x</var> + 6)<br>= −(<var>x</var> − 2)(<var>x</var> − 3)</p><figure class="worked-cross" data-pairs="1,-2,1,-3" data-step="先提出 −1，再分解括號內的二次式。"></figure><p>提出 −1 時，括號內每一項都要變號。</p></article>
-<article class="example"><h3>還有字母公因式</h3><p class="math">3<var>x</var><sup>3</sup> + 15<var>x</var><sup>2</sup> + 18<var>x</var><br>= 3<var>x</var>(<var>x</var><sup>2</sup> + 5<var>x</var> + 6)<br>= 3<var>x</var>(<var>x</var> + 2)(<var>x</var> + 3)</p><figure class="worked-cross" data-pairs="1,2,1,3" data-step="先提出 3x，再分解括號內的二次式。"></figure></article>
+<section id="first"><header class="section-heading"><p class="kicker">04 · 先整理，再分解</p><h2>畫十字之前，有甚麼要先提出來？</h2></header>
+<article class="example"><h3>每項都有 2，先提出來會怎樣？</h3><p class="math">2<var>x</var><sup>2</sup> + 10<var>x</var> + 12<br>= 2(<var>x</var><sup>2</sup> + 5<var>x</var> + 6)<br>= 2(<var>x</var> + 2)(<var>x</var> + 3)</p><figure class="worked-cross" data-pairs="1,2,1,3" data-step="先提出 2，再分解括號內的二次式。"></figure></article>
+<article class="example"><h3>提出 −1，哪幾項要變號？</h3><p class="math">−<var>x</var><sup>2</sup> + 5<var>x</var> − 6<br>= −(<var>x</var><sup>2</sup> − 5<var>x</var> + 6)<br>= −(<var>x</var> − 2)(<var>x</var> − 3)</p><figure class="worked-cross" data-pairs="1,-2,1,-3" data-step="先提出 −1，再分解括號內的二次式。"></figure><p>提出 −1 時，括號內每一項都要變號。</p></article>
+<article class="example"><h3>提出 3 之外，字母也找齊了嗎？</h3><p class="math">3<var>x</var><sup>3</sup> + 15<var>x</var><sup>2</sup> + 18<var>x</var><br>= 3<var>x</var>(<var>x</var><sup>2</sup> + 5<var>x</var> + 6)<br>= 3<var>x</var>(<var>x</var> + 2)(<var>x</var> + 3)</p><figure class="worked-cross" data-pairs="1,2,1,3" data-step="先提出 3x，再分解括號內的二次式。"></figure></article>
+<aside class="teacher-correction">
+<p class="correction-wrong"><span class="correction-label">錯誤寫法 · 漏了外面的因式</span><span class="math">2<var>x</var><sup>2</sup> + 10<var>x</var> + 12 = (<var>x</var> + 2)(<var>x</var> + 3)</span></p>
+<p class="teacher-comment"><span class="correction-label">老師批註</span>十字圖只分解括號內的二次式。原先提出的 2 仍是整個答案的一部分，不可以丟掉。</p>
+<p class="correction-right"><span class="correction-label">正確答案</span><span class="math">2(<var>x</var> + 2)(<var>x</var> + 3)</span></p>
+</aside>
 </section>
-<section id="special"><header class="section-heading"><p class="kicker">05 · 不一定要硬湊十字圖</p><h2>零項、重複因式與沒有整數配對</h2></header>
-<article class="example"><h3>中間項為零：平方差</h3><p class="math"><var>x</var><sup>2</sup> − 9 = (<var>x</var> + 3)(<var>x</var> − 3)</p><figure class="worked-cross" data-pairs="1,3,1,-3"></figure><p>交叉項 −3<var>x</var> 和 3<var>x</var> 抵消。能認出平方差時，可直接用恆等式。</p></article>
-<article class="example"><h3>兩個因式相同：完全平方</h3><p class="math"><var>x</var><sup>2</sup> + 6<var>x</var> + 9 = (<var>x</var> + 3)<sup>2</sup></p><figure class="worked-cross" data-pairs="1,3,1,3"></figure></article>
-<article class="example"><h3>常數項為零：先提出字母</h3><p class="math">2<var>x</var><sup>2</sup> + 7<var>x</var> = <var>x</var>(2<var>x</var> + 7)</p><figure class="worked-cross" data-pairs="1,0,2,7" data-step="右上角放 0，可見其中一個因式是字母；通常直接提出公因式更快。"></figure></article>
-<article class="example"><h3>找不到整數因式</h3><p class="math"><var>x</var><sup>2</sup> + <var>x</var> + 1</p><p>整數乘積為 1 的配對只有 1、1 或 −1、−1；和分別為 2 或 −2，都不是 1。因此不能分解成整數係數的一次因式乘積。</p><figure class="worked-cross" data-pairs="1,1,1,1" data-target="1" data-step="試配 1 和 1：首尾項對了，中間項卻不符。"></figure></article>
+<section id="special"><header class="section-heading"><p class="kicker">05 · 零項、重複因式與整數配對</p><h2>少了一項，或找不到配對，怎樣辦？</h2></header>
+<article class="example"><h3>中間項不見了，是哪兩項抵消？</h3><p class="math"><var>x</var><sup>2</sup> − 9 = (<var>x</var> + 3)(<var>x</var> − 3)</p><figure class="worked-cross" data-pairs="1,3,1,-3"></figure><p>交叉項 −3<var>x</var> 和 3<var>x</var> 抵消。能認出平方差時，可直接用恆等式。</p></article>
+<article class="example"><h3>兩行完全一樣，可以怎樣寫短一點？</h3><p class="math"><var>x</var><sup>2</sup> + 6<var>x</var> + 9 = (<var>x</var> + 3)<sup>2</sup></p><figure class="worked-cross" data-pairs="1,3,1,3"></figure></article>
+<article class="example"><h3>常數項是零，還需要慢慢配對嗎？</h3><p class="math">2<var>x</var><sup>2</sup> + 7<var>x</var> = <var>x</var>(2<var>x</var> + 7)</p><figure class="worked-cross" data-pairs="1,0,2,7" data-step="右上角放 0，可見其中一個因式是字母；通常直接提出公因式更快。"></figure></article>
+<article class="example"><h3>試完所有整數配對，仍不合適呢？</h3><p class="math"><var>x</var><sup>2</sup> + <var>x</var> + 1</p><p>整數乘積為 1 的配對只有 1、1 或 −1、−1；和分別為 2 或 −2，都不是 1。因此不能分解成整數係數的一次因式乘積。</p><figure class="worked-cross" data-pairs="1,1,1,1" data-target="1" data-step="試配 1 和 1：首尾項對了，中間項卻不符。"></figure></article>
 <p class="note">因式分解不是解方程。沒有等號時，答案是因式的乘積，不是 <var>x</var> 的值。</p>
 </section>
-<section id="practice"><header class="section-heading"><p class="kicker">06 · 先辨情況，再計交叉項</p><h2>分類練習</h2></header>
-<div class="tool"><h3 class="tool-heading">逐題揭曉與驗算</h3><div class="controls"><label for="exercise">題目 <select id="exercise"></select></label><span class="exercise-meta" id="exercise-count" aria-live="polite"></span></div><div class="tool-body"><span class="target-label">試分解</span><p class="math exercise-question" id="exercise-question"></p><p class="exercise-hint" id="exercise-hint"></p><button type="button" class="primary" id="exercise-reveal">查看解答</button><figure class="worked-cross exercise-cross" id="exercise-cross" hidden></figure><div class="formula math" id="exercise-answer" aria-live="polite" hidden></div></div></div>
-<p><a href="factorisation-s2.html">重溫中二：公因式、分組法與恆等式</a></p>
+<section id="practice"><header class="section-heading"><p class="kicker">06 · 分類練習</p><h2>這一題，你會先檢查哪裏？</h2></header>
+<div class="tool"><h3 class="tool-heading">你的因式，展開後回到原式嗎？</h3><div class="controls"><label for="exercise">題目 <select id="exercise"></select></label><span class="exercise-meta" id="exercise-count" aria-live="polite"></span></div><div class="tool-body"><span class="target-label">試分解</span><p class="math exercise-question" id="exercise-question"></p><p class="exercise-hint" id="exercise-hint"></p><button type="button" class="primary" id="exercise-reveal">查看解答</button><figure class="worked-cross exercise-cross" id="exercise-cross" hidden></figure><div class="formula math" id="exercise-answer" aria-live="polite" hidden></div></div></div>
+<p><a href="https://ctyingfun-dev.github.io/factorisation-s2.html">重溫中二：公因式、分組法與恆等式</a></p>
 </section>
-</main><footer class="wrap">數學研習室 · 中三數學 · <a href="index.html">教材總覽</a></footer>
+</main><footer class="wrap">數學研習室 · 中三數學 · <a href="https://ctyingfun-dev.github.io/">教材總覽</a></footer>
 <script>
 const el=id=>document.getElementById(id);
 const x="<var>x</var>";
@@ -225,7 +236,7 @@ const cases=[[1,2,1,3],[1,-2,1,-3],[1,3,1,-2],[1,-3,1,2],[2,1,1,3],[3,2,2,-1],[1
 function renderCross(node,[p,q,r,s],target=p*s+q*r,step=""){
  const middle=p*s+q*r,valid=middle===target;
  node.dataset.valid=String(valid);
- node.innerHTML=`<figcaption>${step||"十字配對"}</figcaption>
+ node.innerHTML=`<figcaption>${valid?"":"<span class='correction-label correction-wrong'>錯誤試配 · 中間項不符</span>"}${step||"十字配對"}</figcaption>
  <div class="cross-grid" aria-hidden="true">
  <div class="math" style="grid-column:1;grid-row:1">${term(p)}</div>
  <div class="math" style="grid-column:3;grid-row:1">${signed(q)}</div>
@@ -233,7 +244,7 @@ function renderCross(node,[p,q,r,s],target=p*s+q*r,step=""){
  <div class="math" style="grid-column:3;grid-row:2">${signed(s)}</div>
  <svg viewBox="0 0 100 116"><path d="M8 29 92 87" stroke="#276996" stroke-width="3"/><path d="M8 87 92 29" stroke="#ad3e58" stroke-width="3"/></svg>
  </div><p class="math cross-calculation"><span style="color:var(--blue)">${term(p*s)}</span> + (<span style="color:var(--coral)">${term(q*r)}</span>) = <strong>${term(middle)}</strong>${valid?"":` ≠ ${term(target)}`}</p>`;
- node.setAttribute("aria-label",`${step||"十字配對"}：交叉項之和為 ${number(middle)}x${valid?"":`，不等於目標 ${number(target)}x`}`);
+ node.setAttribute("aria-label",`${step.replace(/<[^>]*>/g,"")||"十字配對"}：交叉項之和為 ${number(middle)}x${valid?"":`，不等於目標 ${number(target)}x`}`);
 }
 document.querySelectorAll(".worked-cross[data-pairs]").forEach(node=>{
  const pairs=node.dataset.pairs.split(",").map(Number);
@@ -250,12 +261,14 @@ function renderCase(){
  el("answer").hidden=true;el("reveal").hidden=false;
 }
 el("case").addEventListener("change",renderCase);
-el("reveal").addEventListener("click",()=>{el("answer").hidden=false;el("reveal").hidden=true;});renderCase();
+el("reveal").addEventListener("click",()=>{el("answer").hidden=false;el("reveal").hidden=true;el("answer").focus({preventScroll:true});});renderCase();
 let swapped=false;
 function renderSwap(){
- el("swap-formula").innerHTML=swapped?`(2${x} + 1)(${x} + 3)<br>交叉項：6${x} + ${x} = 7${x}`:`(2${x} + 3)(${x} + 1)<br>交叉項：2${x} + 3${x} = 5${x}`;
+ el("swap-formula").innerHTML=swapped?`(2${x} + 1)(${x} + 3)`:`(2${x} + 3)(${x} + 1)`;
+ el("swap-label").textContent=swapped?"正確配對":"錯誤配對";
+ el("swap-correct").hidden=!swapped;
  renderCross(el("swap-cross"),swapped?[2,1,1,3]:[2,3,1,1],7,`目標中間項：7${x}`);
- el("swap-feedback").innerHTML=swapped?`中間項為 7${x}，配對正確。`:`首尾項雖然正確，但中間項是 5${x}，不是 7${x}。`;
+ el("swap-feedback").innerHTML=`<span class="correction-label">老師批註</span>${swapped?`中間項為 7${x}，配對正確。沿每一橫行讀出因式，再展開一次。`:`首尾項雖然正確，但中間項是 5${x}，不是 7${x}。把右邊兩數交換，再計一次。`}`;
  el("swap-feedback").dataset.correct=String(swapped);
  el("swap").textContent=swapped?"換回原來配對":"交換 1 與 3";
 }
@@ -274,7 +287,25 @@ function renderExercise(){
  renderCross(el("exercise-cross"),[p,q,r,s],undefined,k===1?"十字配對":`先提出 ${number(k)}，再畫十字。`);
  el("exercise-cross").hidden=true;el("exercise-answer").hidden=true;el("exercise-reveal").hidden=false;
 }
-el("exercise").addEventListener("change",renderExercise);el("exercise-reveal").addEventListener("click",()=>{el("exercise-cross").hidden=false;el("exercise-answer").hidden=false;el("exercise-reveal").hidden=true;});renderExercise();
+el("exercise").addEventListener("change",renderExercise);el("exercise-reveal").addEventListener("click",()=>{el("exercise-cross").hidden=false;el("exercise-answer").hidden=false;el("exercise-reveal").hidden=true;el("exercise-answer").focus({preventScroll:true});});renderExercise();
+["answer","exercise-answer"].forEach(id=>el(id).setAttribute("tabindex","-1"));
+const exerciseActions=document.createElement("div");
+exerciseActions.className="nav-tools";
+exerciseActions.innerHTML='<button class="secondary" type="button" id="exercise-prev">上一題</button><button class="secondary" type="button" id="exercise-next">下一題</button>';
+el("exercise-answer").after(exerciseActions);
+function updateExerciseButtons(){
+ el("exercise-prev").disabled=+el("exercise").value===0;
+ el("exercise-next").disabled=+el("exercise").value===exercises.length-1;
+}
+function moveExercise(direction){
+ const index=+el("exercise").value+direction;
+ if(index<0||index>=exercises.length)return;
+ el("exercise").value=String(index);renderExercise();updateExerciseButtons();
+ el("exercise-question").setAttribute("tabindex","-1");el("exercise-question").focus({preventScroll:true});
+}
+el("exercise-prev").addEventListener("click",()=>moveExercise(-1));
+el("exercise-next").addEventListener("click",()=>moveExercise(1));
+el("exercise").addEventListener("change",updateExerciseButtons);updateExerciseButtons();
     const navLinks=[...document.querySelectorAll(".contents a")];
     function updateSection(){
       let current=navLinks[0];
@@ -297,5 +328,7 @@ el("exercise").addEventListener("change",renderExercise);el("exercise-reveal").a
     }
     motion.addEventListener("change",setupMotion);setupMotion();
   </script>
+  <script src="cross-interactions.js"></script>
+  <script src="cross-compact.js"></script>
 </body>
 </html>

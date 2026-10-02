@@ -170,49 +170,60 @@
     @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .scroll-enter { animation:none; } .primary,.secondary,.contents a { transition:none; } }
     @media print { .top,.contents,.controls,.actions,.quiz { display:none; } main.wrap { display:block; width:100%; } .scroll-enter { animation:none; } section { padding:18px 0; } }
   </style>
+  <link rel="stylesheet" href="cross-handout.css">
 </head>
 <body>
-<header class="top"><div class="wrap top-inner"><a class="brand" href="index.html">Mathematics Studio</a><nav aria-label="Main navigation"><a href="factorisation-s2.html">S2 foundations</a><a href="#practice">Practice</a><a href="index.html">All lessons</a><a href="cross-multiplication-s3.html" lang="zh-Hant">繁體中文</a></nav></div></header>
+<header class="top"><div class="wrap top-inner"><a class="brand" href="https://ctyingfun-dev.github.io/">Mathematics Studio</a><nav aria-label="Main navigation"><a href="https://ctyingfun-dev.github.io/factorisation-s2.html">S2 foundations</a><a href="#practice">Practice</a><a href="https://ctyingfun-dev.github.io/">All lessons</a><a href="cross-multiplication-s3.html" lang="zh-Hant">繁體中文</a></nav></div></header>
 <main class="wrap">
-<div class="intro"><p class="eyebrow">Hong Kong · Secondary 3 · Algebra</p><h1>Cross Multiplication</h1><p class="lead">Pair the first and last terms, then multiply diagonally. The middle term decides whether the factors work.</p></div>
+<div class="intro"><p class="eyebrow">Hong Kong · Secondary 3 · Algebra</p><h1>Cross multiplication: can you pair it?</h1><p class="lead">Match the ends. Check the middle.</p><p class="opening-question"><span class="math">2<var>x</var><sup>2</sup> + 7<var>x</var> + 3</span><a href="#coefficient">Try this pairing</a></p></div>
 <nav class="contents" aria-label="Lesson sections"><a href="#why">01 How the cross works</a><a href="#signs">02 Leading coefficient 1</a><a href="#coefficient">03 Other leading coefficients</a><a href="#first">04 Factor out first</a><a href="#special">05 Special cases</a><a href="#practice">06 Practice by type</a></nav>
 <section id="why"><header class="section-heading"><p class="kicker">01 · Start with expansion</p><h2>What does the cross check?</h2></header>
-<div class="formula math">(<var>px</var> + <var>q</var>)(<var>rx</var> + <var>s</var>)<br>= <var>prx</var><sup>2</sup> + (<var>ps</var> + <var>qr</var>)<var>x</var> + <var>qs</var></div>
+<div class="formula math"><span class="formula-label">Expand once: these two products give the middle term</span>(<var>px</var> + <var>q</var>)(<var>rx</var> + <var>s</var>)<br>= <var>prx</var><sup>2</sup> + (<var>ps</var> + <var>qr</var>)<var>x</var> + <var>qs</var></div>
 <p>The left column gives the leading term and the right column gives the constant term. The two diagonal products must add up to the <strong>middle term</strong>. Read each row to write one factor.</p>
-<div class="tool"><h3 class="tool-heading">Cross diagram explorer</h3><div class="controls"><label for="case">Choose a case <select id="case"><option value="0">Both constants positive</option><option value="1">Both constants negative</option><option value="2">Opposite signs: positive middle term</option><option value="3">Opposite signs: negative middle term</option><option value="4">Leading coefficient greater than 1</option><option value="5">Leading coefficient greater than 1, opposite signs</option><option value="6">No middle term</option><option value="7">Repeated factor</option></select></label></div>
+<div class="tool"><h3 class="tool-heading">What do the two diagonal products add up to?</h3><div class="controls"><label for="case">Choose a case <select id="case"><option value="0">Both constants positive</option><option value="1">Both constants negative</option><option value="2">Opposite signs: positive middle term</option><option value="3">Opposite signs: negative middle term</option><option value="4">Leading coefficient greater than 1</option><option value="5">Leading coefficient greater than 1, opposite signs</option><option value="6">No middle term</option><option value="7">Repeated factor</option></select></label></div>
 <div class="tool-body"><span class="target-label">Factorise</span><p class="math target-expression" id="target"></p><figure class="diagram"><div class="cross-grid"><div class="math" id="tl" style="grid-column:1;grid-row:1"></div><div class="math" id="tr" style="grid-column:3;grid-row:1"></div><div class="math" id="bl" style="grid-column:1;grid-row:2"></div><div class="math" id="br" style="grid-column:3;grid-row:2"></div><svg viewBox="0 0 100 116" aria-hidden="true"><path d="M8 29 92 87" stroke="#276996" stroke-width="3"/><path d="M8 87 92 29" stroke="#ad3e58" stroke-width="3"/></svg></div><figcaption><span class="legend-blue"></span>Top left × bottom right <span class="legend-coral"></span>Bottom left × top right</figcaption></figure>
 <div class="diagonal-result"><span class="result-label">Sum of the diagonal products</span><p class="math" id="diagonals"></p></div><p id="clue"></p><button class="primary" id="reveal" type="button">Show factors and check</button><div class="formula math" id="answer" aria-live="polite" hidden></div></div></div>
 </section>
-<section id="signs"><header class="section-heading"><p class="kicker">02 · Check the signs first</p><h2>Leading coefficient 1: find a product and a sum</h2></header>
+<section id="signs"><header class="section-heading"><p class="kicker">02 · Leading coefficient 1</p><h2>The product matches. Does the sum?</h2></header>
 <div class="formula math"><var>x</var><sup>2</sup> + <var>bx</var> + <var>c</var> = (<var>x</var> + <var>m</var>)(<var>x</var> + <var>n</var>)<br><var>mn</var> = <var>c</var>; <var>m</var> + <var>n</var> = <var>b</var></div>
-<article class="example"><h3>Case A · Positive constant, positive middle term</h3><p>The two numbers have the same sign. Their sum is positive, so both are positive.</p><p class="math"><var>x</var><sup>2</sup> + 5<var>x</var> + 6 = (<var>x</var> + 2)(<var>x</var> + 3)</p><figure class="worked-cross" data-pairs="1,2,1,3"></figure><p>2 × 3 = 6; 2 + 3 = 5.</p></article>
-<article class="example"><h3>Case B · Positive constant, negative middle term</h3><p>The two numbers have the same sign. Their sum is negative, so both are negative.</p><p class="math"><var>x</var><sup>2</sup> − 5<var>x</var> + 6 = (<var>x</var> − 2)(<var>x</var> − 3)</p><figure class="worked-cross" data-pairs="1,-2,1,-3"></figure><p>(−2) × (−3) = 6; −2 + (−3) = −5.</p></article>
-<article class="example"><h3>Case C · Negative constant</h3><p>The two numbers must have opposite signs. The one with the larger absolute value determines the sign of their sum.</p><div class="cross-pair"><div><p class="math"><var>x</var><sup>2</sup> + <var>x</var> − 6<br>= (<var>x</var> + 3)(<var>x</var> − 2)</p><figure class="worked-cross" data-pairs="1,3,1,-2"></figure></div><div><p class="math"><var>x</var><sup>2</sup> − <var>x</var> − 6<br>= (<var>x</var> − 3)(<var>x</var> + 2)</p><figure class="worked-cross" data-pairs="1,-3,1,2"></figure></div></div></article>
-<p class="note">The “sum of two numbers” shortcut applies when the leading coefficient is 1. Otherwise, calculate the full diagonal products.</p>
+<article class="example"><h3>Product +6, sum +5: which signs do we need?</h3><p>The two numbers have the same sign. Their sum is positive, so both are positive.</p><p class="math"><var>x</var><sup>2</sup> + 5<var>x</var> + 6 = (<var>x</var> + 2)(<var>x</var> + 3)</p><figure class="worked-cross" data-pairs="1,2,1,3"></figure><p>2 × 3 = 6; 2 + 3 = 5.</p></article>
+<article class="example"><h3>Still product +6, but sum −5: what changes?</h3><p>The two numbers have the same sign. Their sum is negative, so both are negative.</p><p class="math"><var>x</var><sup>2</sup> − 5<var>x</var> + 6 = (<var>x</var> − 2)(<var>x</var> − 3)</p><figure class="worked-cross" data-pairs="1,-2,1,-3"></figure><p>(−2) × (−3) = 6; −2 + (−3) = −5.</p></article>
+<article class="example"><h3>Product −6: which number gets the minus sign?</h3><p>The two numbers must have opposite signs. The one with the larger absolute value determines the sign of their sum.</p><div class="cross-pair"><div><p class="math"><var>x</var><sup>2</sup> + <var>x</var> − 6<br>= (<var>x</var> + 3)(<var>x</var> − 2)</p><figure class="worked-cross" data-pairs="1,3,1,-2"></figure></div><div><p class="math"><var>x</var><sup>2</sup> − <var>x</var> − 6<br>= (<var>x</var> − 3)(<var>x</var> + 2)</p><figure class="worked-cross" data-pairs="1,-3,1,2"></figure></div></div></article>
+<aside class="teacher-correction">
+<p class="correction-wrong"><span class="correction-label">Incorrect answer</span><span class="math"><var>x</var><sup>2</sup> − 5<var>x</var> + 6 = (<var>x</var> + 2)(<var>x</var> + 3)</span></p>
+<p class="teacher-comment"><span class="correction-label">Teacher's note</span>The product alone is not enough. These factors give <span class="math">+5<var>x</var></span>, but the question has <span class="math">−5<var>x</var></span>. A positive constant does not mean both numbers are positive.</p>
+<p class="correction-right"><span class="correction-label">Correct answer</span><span class="math">(<var>x</var> − 2)(<var>x</var> − 3)</span></p>
+</aside>
+<p class="note sticky-note">The “sum of two numbers” shortcut applies when the leading coefficient is 1. Otherwise, calculate the full diagonal products.</p>
 </section>
-<section id="coefficient"><header class="section-heading"><p class="kicker">03 · Placement matters</p><h2>When the leading coefficient is not 1</h2></header>
+<section id="coefficient"><header class="section-heading"><p class="kicker">03 · Other leading coefficients</p><h2>Does swapping 1 and 3 change the middle term?</h2></header>
 <p>For <span class="math">2<var>x</var><sup>2</sup> + 7<var>x</var> + 3</span>, place 2<var>x</var> and <var>x</var> on the left, and 1 and 3 on the right. But swapping the numbers on the right changes the middle term.</p>
-<div class="tool"><h3 class="tool-heading">Swap the right column and compare</h3><div class="tool-body"><div class="swap-expression"><small>Current pairing</small><p class="math" id="swap-formula"></p></div><figure class="worked-cross" id="swap-cross" aria-live="polite"></figure><p class="feedback" id="swap-feedback" aria-live="polite"></p><button class="secondary" type="button" id="swap">Swap 1 and 3</button></div></div>
-<article class="example"><h3>Several factor pairs for the leading coefficient</h3><p class="math">6<var>x</var><sup>2</sup> + 11<var>x</var> + 3</p><p>You can split 6 as 1 × 6 or 2 × 3. Try each pair before deciding that the expression cannot be factorised.</p><figure class="worked-cross" data-pairs="2,3,3,1"></figure><p class="math">(2<var>x</var> + 3)(3<var>x</var> + 1)<br>= 6<var>x</var><sup>2</sup> + 2<var>x</var> + 9<var>x</var> + 3<br>= 6<var>x</var><sup>2</sup> + 11<var>x</var> + 3</p></article>
-<article class="example"><h3>Opposite signs still require diagonal products</h3><p class="math">6<var>x</var><sup>2</sup> + <var>x</var> − 2<br>= (3<var>x</var> + 2)(2<var>x</var> − 1)</p><figure class="worked-cross" data-pairs="3,2,2,-1"></figure><p>The diagonal terms are −3<var>x</var> and 4<var>x</var>, which add to <var>x</var>. Adding 2 and −1 alone does not check the middle term.</p></article>
+<div class="tool"><h3 class="tool-heading">Does this pairing really give 7<var>x</var>?</h3><div class="tool-body"><div class="swap-expression"><small id="swap-label">Incorrect pairing</small><p class="math" id="swap-formula"></p></div><figure class="worked-cross" id="swap-cross" aria-live="polite"></figure><p class="feedback" id="swap-feedback" aria-live="polite"></p><div class="formula math" id="swap-correct" hidden><span class="formula-label">Correct answer</span>2<var>x</var><sup>2</sup> + 7<var>x</var> + 3<br>= (2<var>x</var> + 1)(<var>x</var> + 3)</div><button class="secondary" type="button" id="swap">Swap 1 and 3</button></div></div>
+<article class="example"><h3>For 6, is trying 1 × 6 enough?</h3><p class="math">6<var>x</var><sup>2</sup> + 11<var>x</var> + 3</p><p>You can split 6 as 1 × 6 or 2 × 3. Try each pair before deciding that the expression cannot be factorised.</p><figure class="worked-cross" data-pairs="2,3,3,1"></figure><p class="math">(2<var>x</var> + 3)(3<var>x</var> + 1)<br>= 6<var>x</var><sup>2</sup> + 2<var>x</var> + 9<var>x</var> + 3<br>= 6<var>x</var><sup>2</sup> + 11<var>x</var> + 3</p></article>
+<article class="example"><h3>Does 2 + (−1) really check the middle term?</h3><p class="math">6<var>x</var><sup>2</sup> + <var>x</var> − 2<br>= (3<var>x</var> + 2)(2<var>x</var> − 1)</p><figure class="worked-cross" data-pairs="3,2,2,-1"></figure><p>The diagonal terms are −3<var>x</var> and 4<var>x</var>, which add to <var>x</var>. Adding 2 and −1 alone does not check the middle term.</p></article>
 </section>
-<section id="first"><header class="section-heading"><p class="kicker">04 · Keep the factor outside</p><h2>Factor out the common factor first</h2></header>
-<article class="example"><h3>A numerical common factor</h3><p class="math">2<var>x</var><sup>2</sup> + 10<var>x</var> + 12<br>= 2(<var>x</var><sup>2</sup> + 5<var>x</var> + 6)<br>= 2(<var>x</var> + 2)(<var>x</var> + 3)</p><figure class="worked-cross" data-pairs="1,2,1,3" data-step="Factor out 2, then use the cross on the quadratic inside."></figure></article>
-<article class="example"><h3>A negative leading term</h3><p class="math">−<var>x</var><sup>2</sup> + 5<var>x</var> − 6<br>= −(<var>x</var><sup>2</sup> − 5<var>x</var> + 6)<br>= −(<var>x</var> − 2)(<var>x</var> − 3)</p><figure class="worked-cross" data-pairs="1,-2,1,-3" data-step="Factor out −1, then use the cross on the quadratic inside."></figure><p>When you factor out −1, the sign of every term inside the brackets changes.</p></article>
-<article class="example"><h3>A variable common factor as well</h3><p class="math">3<var>x</var><sup>3</sup> + 15<var>x</var><sup>2</sup> + 18<var>x</var><br>= 3<var>x</var>(<var>x</var><sup>2</sup> + 5<var>x</var> + 6)<br>= 3<var>x</var>(<var>x</var> + 2)(<var>x</var> + 3)</p><figure class="worked-cross" data-pairs="1,2,1,3" data-step="Factor out 3x, then use the cross on the quadratic inside."></figure></article>
+<section id="first"><header class="section-heading"><p class="kicker">04 · Factor out first</p><h2>What should you take out before drawing the cross?</h2></header>
+<article class="example"><h3>Every term has a factor of 2. Take it out first?</h3><p class="math">2<var>x</var><sup>2</sup> + 10<var>x</var> + 12<br>= 2(<var>x</var><sup>2</sup> + 5<var>x</var> + 6)<br>= 2(<var>x</var> + 2)(<var>x</var> + 3)</p><figure class="worked-cross" data-pairs="1,2,1,3" data-step="Factor out 2, then use the cross on the quadratic inside."></figure></article>
+<article class="example"><h3>Taking out −1: which signs must change?</h3><p class="math">−<var>x</var><sup>2</sup> + 5<var>x</var> − 6<br>= −(<var>x</var><sup>2</sup> − 5<var>x</var> + 6)<br>= −(<var>x</var> − 2)(<var>x</var> − 3)</p><figure class="worked-cross" data-pairs="1,-2,1,-3" data-step="Factor out −1, then use the cross on the quadratic inside."></figure><p>When you factor out −1, the sign of every term inside the brackets changes.</p></article>
+<article class="example"><h3>Besides 3, is there a shared variable?</h3><p class="math">3<var>x</var><sup>3</sup> + 15<var>x</var><sup>2</sup> + 18<var>x</var><br>= 3<var>x</var>(<var>x</var><sup>2</sup> + 5<var>x</var> + 6)<br>= 3<var>x</var>(<var>x</var> + 2)(<var>x</var> + 3)</p><figure class="worked-cross" data-pairs="1,2,1,3" data-step="Factor out 3x, then use the cross on the quadratic inside."></figure></article>
+<aside class="teacher-correction">
+<p class="correction-wrong"><span class="correction-label">Incorrect answer: the outside factor is missing</span><span class="math">2<var>x</var><sup>2</sup> + 10<var>x</var> + 12 = (<var>x</var> + 2)(<var>x</var> + 3)</span></p>
+<p class="teacher-comment"><span class="correction-label">Teacher's note</span>The cross factorises only the quadratic inside the brackets. The 2 you took out still belongs in the final answer.</p>
+<p class="correction-right"><span class="correction-label">Correct answer</span><span class="math">2(<var>x</var> + 2)(<var>x</var> + 3)</span></p>
+</aside>
 </section>
-<section id="special"><header class="section-heading"><p class="kicker">05 · The cross is not always the quickest route</p><h2>Zero terms, repeated factors and no integer pair</h2></header>
-<article class="example"><h3>No middle term: difference of squares</h3><p class="math"><var>x</var><sup>2</sup> − 9 = (<var>x</var> + 3)(<var>x</var> − 3)</p><figure class="worked-cross" data-pairs="1,3,1,-3"></figure><p>The diagonal terms −3<var>x</var> and 3<var>x</var> cancel. If you recognise a difference of squares, you can use the identity directly.</p></article>
-<article class="example"><h3>Two identical factors: a perfect square</h3><p class="math"><var>x</var><sup>2</sup> + 6<var>x</var> + 9 = (<var>x</var> + 3)<sup>2</sup></p><figure class="worked-cross" data-pairs="1,3,1,3"></figure></article>
-<article class="example"><h3>Zero constant term: factor out the variable</h3><p class="math">2<var>x</var><sup>2</sup> + 7<var>x</var> = <var>x</var>(2<var>x</var> + 7)</p><figure class="worked-cross" data-pairs="1,0,2,7" data-step="Put 0 at the top right. One factor is the variable; factoring it out directly is quicker."></figure></article>
-<article class="example"><h3>No integer factors</h3><p class="math"><var>x</var><sup>2</sup> + <var>x</var> + 1</p><p>The only integer pairs with product 1 are 1 and 1, or −1 and −1. Their sums are 2 and −2, not 1. So this cannot be written as a product of linear factors with integer coefficients.</p><figure class="worked-cross" data-pairs="1,1,1,1" data-target="1" data-step="Try 1 and 1: the first and last terms work, but the middle term does not."></figure></article>
+<section id="special"><header class="section-heading"><p class="kicker">05 · Zero terms, repeated factors and integer pairs</p><h2>What if a term is missing, or no pair works?</h2></header>
+<article class="example"><h3>No middle term: which two terms cancel?</h3><p class="math"><var>x</var><sup>2</sup> − 9 = (<var>x</var> + 3)(<var>x</var> − 3)</p><figure class="worked-cross" data-pairs="1,3,1,-3"></figure><p>The diagonal terms −3<var>x</var> and 3<var>x</var> cancel. If you recognise a difference of squares, you can use the identity directly.</p></article>
+<article class="example"><h3>Identical rows: can we write the answer more briefly?</h3><p class="math"><var>x</var><sup>2</sup> + 6<var>x</var> + 9 = (<var>x</var> + 3)<sup>2</sup></p><figure class="worked-cross" data-pairs="1,3,1,3"></figure></article>
+<article class="example"><h3>Zero constant: do we need to try pairs at all?</h3><p class="math">2<var>x</var><sup>2</sup> + 7<var>x</var> = <var>x</var>(2<var>x</var> + 7)</p><figure class="worked-cross" data-pairs="1,0,2,7" data-step="Put 0 at the top right. One factor is the variable; factoring it out directly is quicker."></figure></article>
+<article class="example"><h3>What if every integer pair fails?</h3><p class="math"><var>x</var><sup>2</sup> + <var>x</var> + 1</p><p>The only integer pairs with product 1 are 1 and 1, or −1 and −1. Their sums are 2 and −2, not 1. So this cannot be written as a product of linear factors with integer coefficients.</p><figure class="worked-cross" data-pairs="1,1,1,1" data-target="1" data-step="Try 1 and 1: the first and last terms work, but the middle term does not."></figure></article>
 <p class="note">Factorising is not solving an equation. Without an equals sign, the answer is a product of factors, not a value of <var>x</var>.</p>
 </section>
-<section id="practice"><header class="section-heading"><p class="kicker">06 · Identify the case, then check the diagonals</p><h2>Practice by type</h2></header>
-<div class="tool"><h3 class="tool-heading">Reveal one solution at a time</h3><div class="controls"><label for="exercise">Question <select id="exercise"></select></label><span class="exercise-meta" id="exercise-count" aria-live="polite"></span></div><div class="tool-body"><span class="target-label">Factorise</span><p class="math exercise-question" id="exercise-question"></p><p class="exercise-hint" id="exercise-hint"></p><button type="button" class="primary" id="exercise-reveal">Show solution</button><figure class="worked-cross exercise-cross" id="exercise-cross" hidden></figure><div class="formula math" id="exercise-answer" aria-live="polite" hidden></div></div></div>
-<p><a href="factorisation-s2.html">Review S2: common factors, grouping and identities</a></p>
+<section id="practice"><header class="section-heading"><p class="kicker">06 · Practice by type</p><h2>Where would you start with this one?</h2></header>
+<div class="tool"><h3 class="tool-heading">Do your factors expand back to the question?</h3><div class="controls"><label for="exercise">Question <select id="exercise"></select></label><span class="exercise-meta" id="exercise-count" aria-live="polite"></span></div><div class="tool-body"><span class="target-label">Factorise</span><p class="math exercise-question" id="exercise-question"></p><p class="exercise-hint" id="exercise-hint"></p><button type="button" class="primary" id="exercise-reveal">Show solution</button><figure class="worked-cross exercise-cross" id="exercise-cross" hidden></figure><div class="formula math" id="exercise-answer" aria-live="polite" hidden></div></div></div>
+<p><a href="https://ctyingfun-dev.github.io/factorisation-s2.html">Review S2: common factors, grouping and identities</a></p>
 </section>
-</main><footer class="wrap">Mathematics Studio · Secondary 3 Mathematics · <a href="index.html">All lessons</a></footer>
+</main><footer class="wrap">Mathematics Studio · Secondary 3 Mathematics · <a href="https://ctyingfun-dev.github.io/">All lessons</a></footer>
 <script>
 const el=id=>document.getElementById(id);
 const x="<var>x</var>";
@@ -225,7 +236,7 @@ const cases=[[1,2,1,3],[1,-2,1,-3],[1,3,1,-2],[1,-3,1,2],[2,1,1,3],[3,2,2,-1],[1
 function renderCross(node,[p,q,r,s],target=p*s+q*r,step=""){
  const middle=p*s+q*r,valid=middle===target;
  node.dataset.valid=String(valid);
- node.innerHTML=`<figcaption>${step||"Cross pairing"}</figcaption>
+ node.innerHTML=`<figcaption>${valid?"":"<span class='correction-label correction-wrong'>Incorrect trial: the middle term does not match</span>"}${step||"Cross pairing"}</figcaption>
  <div class="cross-grid" aria-hidden="true">
  <div class="math" style="grid-column:1;grid-row:1">${term(p)}</div>
  <div class="math" style="grid-column:3;grid-row:1">${signed(q)}</div>
@@ -250,12 +261,14 @@ function renderCase(){
  el("answer").hidden=true;el("reveal").hidden=false;
 }
 el("case").addEventListener("change",renderCase);
-el("reveal").addEventListener("click",()=>{el("answer").hidden=false;el("reveal").hidden=true;});renderCase();
+el("reveal").addEventListener("click",()=>{el("answer").hidden=false;el("reveal").hidden=true;el("answer").focus({preventScroll:true});});renderCase();
 let swapped=false;
 function renderSwap(){
- el("swap-formula").innerHTML=swapped?`(2${x} + 1)(${x} + 3)<br>Diagonal terms: 6${x} + ${x} = 7${x}`:`(2${x} + 3)(${x} + 1)<br>Diagonal terms: 2${x} + 3${x} = 5${x}`;
+ el("swap-formula").innerHTML=swapped?`(2${x} + 1)(${x} + 3)`:`(2${x} + 3)(${x} + 1)`;
+ el("swap-label").textContent=swapped?"Correct pairing":"Incorrect pairing";
+ el("swap-correct").hidden=!swapped;
  renderCross(el("swap-cross"),swapped?[2,1,1,3]:[2,3,1,1],7,`Target middle term: 7${x}`);
- el("swap-feedback").innerHTML=swapped?`The middle term is 7${x}. This pairing works.`:`The first and last terms work, but the middle term is 5${x}, not 7${x}.`;
+ el("swap-feedback").innerHTML=`<span class="correction-label">Teacher's note</span>${swapped?`The middle term is 7${x}. This pairing works. Read each row as a factor, then expand once more.`:`The first and last terms work, but the middle term is 5${x}, not 7${x}. Swap the right-hand numbers and check again.`}`;
  el("swap-feedback").dataset.correct=String(swapped);
  el("swap").textContent=swapped?"Restore original pairing":"Swap 1 and 3";
 }
@@ -274,7 +287,25 @@ function renderExercise(){
  renderCross(el("exercise-cross"),[p,q,r,s],undefined,k===1?"Cross pairing":`Factor out ${number(k)} before using the cross.`);
  el("exercise-cross").hidden=true;el("exercise-answer").hidden=true;el("exercise-reveal").hidden=false;
 }
-el("exercise").addEventListener("change",renderExercise);el("exercise-reveal").addEventListener("click",()=>{el("exercise-cross").hidden=false;el("exercise-answer").hidden=false;el("exercise-reveal").hidden=true;});renderExercise();
+el("exercise").addEventListener("change",renderExercise);el("exercise-reveal").addEventListener("click",()=>{el("exercise-cross").hidden=false;el("exercise-answer").hidden=false;el("exercise-reveal").hidden=true;el("exercise-answer").focus({preventScroll:true});});renderExercise();
+["answer","exercise-answer"].forEach(id=>el(id).setAttribute("tabindex","-1"));
+const exerciseActions=document.createElement("div");
+exerciseActions.className="nav-tools";
+exerciseActions.innerHTML='<button class="secondary" type="button" id="exercise-prev">Previous question</button><button class="secondary" type="button" id="exercise-next">Next question</button>';
+el("exercise-answer").after(exerciseActions);
+function updateExerciseButtons(){
+ el("exercise-prev").disabled=+el("exercise").value===0;
+ el("exercise-next").disabled=+el("exercise").value===exercises.length-1;
+}
+function moveExercise(direction){
+ const index=+el("exercise").value+direction;
+ if(index<0||index>=exercises.length)return;
+ el("exercise").value=String(index);renderExercise();updateExerciseButtons();
+ el("exercise-question").setAttribute("tabindex","-1");el("exercise-question").focus({preventScroll:true});
+}
+el("exercise-prev").addEventListener("click",()=>moveExercise(-1));
+el("exercise-next").addEventListener("click",()=>moveExercise(1));
+el("exercise").addEventListener("change",updateExerciseButtons);updateExerciseButtons();
     const navLinks=[...document.querySelectorAll(".contents a")];
     function updateSection(){
       let current=navLinks[0];
@@ -297,5 +328,7 @@ el("exercise").addEventListener("change",renderExercise);el("exercise-reveal").a
     }
     motion.addEventListener("change",setupMotion);setupMotion();
   </script>
+  <script src="cross-interactions.js"></script>
+  <script src="cross-compact.js"></script>
 </body>
 </html>
