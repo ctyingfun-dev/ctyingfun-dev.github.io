@@ -200,43 +200,49 @@
       .section.is-visible .section-heading, .section.is-visible .section-body { animation: none; }
     }
   </style>
+  <link rel="stylesheet" href="teacher-notes.css">
 </head>
-<body>
+<body class="lesson-algebra">
   <header class="top">
     <div class="wrap top-inner">
       <a class="brand" href="#top" aria-label="數學研習室，返回頁首"><span class="brand-mark" aria-hidden="true">≡</span>數學研習室</a>
-      <nav aria-label="頁面導覽"><a href="#compare">對比</a><a href="#explore">圖解</a><a href="#rules">公式</a><a href="#practice">練習</a></nav>
+      <nav aria-label="頁面導覽"><a href="https://ctyingfun-dev.github.io/index.html" aria-label="返回數學網站主頁">主頁</a><a href="#compare">對比</a><a href="#explore">圖解</a><a href="#rules">公式</a><a href="#practice">練習</a></nav>
     </div>
   </header>
   <main id="top">
     <div class="intro wrap">
-      <p class="eyebrow">中二數學 · 代數</p>
-      <h1>恆等式</h1>
-      <p class="lead">先展開括號、比較左右係數找未知數，再用圖形理解三條常用公式。</p>
+      <p class="eyebrow">中二 · 恆等式</p>
+      <h1>這條等式，代入甚麼數都成立嗎？</h1>
+      <p class="lead">例如 <span class="math">(x + 3)<sup>2</sup> = x<sup>2</sup> + 6x + 9</span>，不是只對某一個 <var>x</var> 成立。先看一道找係數的題目，再用面積圖弄清楚：左右為甚麼總是相等？</p>
     </div>
     <section class="section" id="compare" aria-labelledby="compare-title">
       <div class="wrap">
         <div class="section-heading">
-          <p class="kicker">01 · 左右對比</p>
-          <h2 id="compare-title">比較左右係數，找出未知數</h2>
+          <p class="kicker">先試這一題</p>
+          <h2 id="compare-title">不求 <var>x</var>，能找出 <var>A</var> 和 <var>B</var> 嗎？</h2>
         </div>
         <div class="section-body">
-          <p class="section-lead">題目中的 <var>A</var>、<var>B</var> 是待求的數。先展開右邊，再比較兩邊的 <var>x</var><sup>2</sup> 係數、<var>x</var> 係數及常數項。</p>
+          <p class="section-lead">題目說這是一條恆等式，<var>A</var>、<var>B</var> 是待求的數。先展開右邊。兩邊的 <var>x</var><sup>2</sup> 係數、<var>x</var> 係數和常數項，各自應該有甚麼關係？</p>
           <p class="compare-statement"><span class="term-square">35<var>x</var><sup>2</sup></span> + <span class="term-linear"><var>A</var><var>x</var></span> <span class="term-constant">− 6</span> ≡ (5<var>x</var> + 2)(7<var>x</var> + <var>B</var>) <span class="term-constant">− 2</span></p>
+          <p class="teacher-note"><strong>先辨清題意。</strong>這裏不是要找某一個 <var>x</var>。符號 <span class="math">≡</span> 表示兩邊對所有 <var>x</var> 都相等；同類項的係數才可以逐一對比。</p>
           <button class="primary expand-control" type="button" id="expand-terms" aria-controls="expanded-workspace" aria-expanded="false">展開右邊</button>
           <div class="expanded-workspace" id="expanded-workspace" hidden>
             <div class="equation-line" role="group" aria-label="展開後的恆等式，點選同類項比較係數">
-              <button class="term-chip" data-match="square" type="button" aria-pressed="false">35<var>x</var><sup>2</sup></button>
-              <button class="term-chip" data-match="linear" type="button" aria-pressed="false">+ <var>A</var><var>x</var></button>
-              <button class="term-chip" data-match="constant" type="button" aria-pressed="false">− 6</button>
+              <span class="equation-expression equation-expression--given">
+                <button class="term-chip" data-match="square" type="button" aria-pressed="false">35<var>x</var><sup>2</sup></button>
+                <button class="term-chip" data-match="linear" type="button" aria-pressed="false">+ <var>A</var><var>x</var></button>
+                <button class="term-chip" data-match="constant" type="button" aria-pressed="false">− 6</button>
+              </span>
               <span class="equation-symbol">≡</span>
-              <button class="term-chip" data-match="square" type="button" aria-pressed="false">35<var>x</var><sup>2</sup></button>
-              <button class="term-chip" data-match="linear" type="button" aria-pressed="false">+ 5<var>B</var><var>x</var></button>
-              <button class="term-chip" data-match="linear" type="button" aria-pressed="false">+ 14<var>x</var></button>
-              <button class="term-chip" data-match="constant" type="button" aria-pressed="false">+ 2<var>B</var></button>
-              <button class="term-chip" data-match="constant" type="button" aria-pressed="false">− 2</button>
+              <span class="equation-expression equation-expression--expanded">
+                <button class="term-chip" data-match="square" type="button" aria-pressed="false">35<var>x</var><sup>2</sup></button>
+                <button class="term-chip" data-match="linear" type="button" aria-pressed="false">+ 5<var>B</var><var>x</var></button>
+                <button class="term-chip" data-match="linear" type="button" aria-pressed="false">+ 14<var>x</var></button>
+                <button class="term-chip" data-match="constant" type="button" aria-pressed="false">+ 2<var>B</var></button>
+                <button class="term-chip" data-match="constant" type="button" aria-pressed="false">− 2</button>
+              </span>
             </div>
-            <div class="match-detail" id="match-detail" aria-live="polite" hidden>
+            <div class="match-detail chalkboard" id="match-detail" aria-live="polite" hidden>
               <p class="match-title" id="match-title"></p>
               <div class="match-pair">
                 <strong id="match-left"></strong><span>=</span><strong id="match-right"></strong>
@@ -250,12 +256,12 @@
     <section class="section" id="explore" aria-labelledby="explore-title">
       <div class="wrap">
       <div class="section-heading">
-        <p class="kicker">02 · 圖解公式</p>
-        <h2 id="explore-title">恆等式為甚麼「恆」成立？</h2>
+        <p class="kicker">換個方法看同一個數量</p>
+        <h2 id="explore-title">同一塊面積，為甚麼有兩種寫法？</h2>
       </div>
       <div class="section-body">
       <div class="concept">
-        <p><strong>恆等式</strong>是把同一個數量用兩種方法表示。不論代入甚麼合適的數值，左右兩邊都相等。下面用長度和面積看三條公式；拖動 <span class="math">a</span>、<span class="math">b</span>，圖形和數值會一起改變。</p>
+        <p><strong>恆等式</strong>把同一個數量用兩種方法表示，不論代入甚麼合適的數值，左右都相等。以邊長 <span class="math">a + b</span> 的正方形為例：算整塊面積，和把四小塊相加，應該得到同一個答案。</p>
       </div>
       <div class="studio">
         <div class="modes" role="tablist" aria-label="選擇恆等式">
@@ -270,7 +276,7 @@
               <p class="stage-note" id="diagram-note"></p>
             </div>
             <div class="side">
-              <span class="side-label">面積圖解</span>
+              <span class="side-label">跟着圖形逐步看</span>
               <div class="formula" id="formula"></div>
               <span class="step-number" id="step-number"></span>
               <p class="step-text" id="step-text" aria-live="polite"></p>
@@ -295,25 +301,25 @@
     <section class="section" id="rules" aria-labelledby="rules-title">
       <div class="wrap">
       <div class="section-heading">
-        <p class="kicker">03 · 連繫公式</p>
-        <h2 id="rules-title">三條常用恆等式</h2>
+        <p class="kicker">把剛才的觀察寫下來</p>
+        <h2 id="rules-title">三條公式，哪一項最容易漏掉？</h2>
       </div>
       <div class="section-body">
       <div class="rules">
         <div class="rule">
-          <h3>和的平方</h3>
+          <h3>和的平方<br>中間有幾份 <var>ab</var>？</h3>
           <div class="formula">(a + b)<sup>2</sup> = a<sup>2</sup> + 2ab + b<sup>2</sup></div>
           <p>四塊面積：一塊 <span class="math">a<sup>2</sup></span>、兩塊 <span class="math">ab</span>、一塊 <span class="math">b<sup>2</sup></span>。</p>
         </div>
         <div class="rule">
-          <h3>差的平方</h3>
+          <h3>差的平方<br>重疊處怎麼算？</h3>
           <div class="formula">(a − b)<sup>2</sup> = a<sup>2</sup> − 2ab + b<sup>2</sup></div>
           <p>從 <span class="math">a<sup>2</sup></span> 減兩條 <span class="math">ab</span> 長條；重疊的 <span class="math">b<sup>2</sup></span> 要加回一次。</p>
         </div>
         <div class="rule">
-          <h3>平方差</h3>
+          <h3>平方差<br>拼合後長和闊是多少？</h3>
           <div class="formula">(a + b)(a − b) = a<sup>2</sup> − b<sup>2</sup></div>
-          <p>從大正方形拿走小正方形，剩下的面積可以拼成長方形。</p>
+          <p>從大正方形拿走小正方形，再切開、轉動並拼合。沒有加減面積；長變成 <span class="math">a + b</span>，闊是 <span class="math">a − b</span>。</p>
         </div>
       </div>
       </div>
@@ -322,31 +328,36 @@
     <section class="section" aria-labelledby="mistake-title">
       <div class="wrap">
       <div class="section-heading">
-        <p class="kicker">04 · 小心陷阱</p>
-        <h2 id="mistake-title">不要漏掉中間項</h2>
+        <p class="kicker">停一停，檢查這兩種錯法</p>
+        <h2 id="mistake-title">「各自平方就可以」，真的嗎？</h2>
       </div>
       <div class="section-body">
       <div class="mistake">
         <div>
-          <h3>兩項相加後再平方</h3>
-          <p><span class="math wrong">(a + b)<sup>2</sup> ≠ a<sup>2</sup> + b<sup>2</sup></span>。例如 <span class="math">(3 + 2)<sup>2</sup> = 25</span>，但 <span class="math">3<sup>2</sup> + 2<sup>2</sup> = 13</span>。少了兩塊 <span class="math">ab</span>。</p>
+          <h3>兩項相加後再平方，可以分開算嗎？</h3>
+          <div class="correction-row"><strong class="correction-label">常見錯法（錯誤）</strong><span class="math wrong">(a + b)<sup>2</sup> = a<sup>2</sup> + b<sup>2</sup></span></div>
+          <p class="teacher-note">批註：代入 <span class="math">a = 3</span>、<span class="math">b = 2</span>，左邊是 25，右邊只有 13。不是差一點，是漏了兩塊 <span class="math">ab</span>。</p>
+          <div class="correction-row correction-row--right"><strong class="correction-label">正確寫法</strong><span class="math right">(a + b)<sup>2</sup> = a<sup>2</sup> + 2ab + b<sup>2</sup></span></div>
         </div>
         <div>
-          <h3>留意正負號</h3>
-          <p><span class="math right">(a − b)<sup>2</sup> = a<sup>2</sup> − 2ab + b<sup>2</sup></span>。最後的 <span class="math">b<sup>2</sup></span> 是正數項；但平方差的結果是 <span class="math">a<sup>2</sup> − b<sup>2</sup></span>。</p>
+          <h3>括號裏是減號，最後一項也要減嗎？</h3>
+          <div class="correction-row"><strong class="correction-label">常見錯法（錯誤）</strong><span class="math wrong">(a − b)<sup>2</sup> = a<sup>2</sup> − 2ab − b<sup>2</sup></span></div>
+          <p class="teacher-note">批註：最後一項來自 <span class="math">(−b) × (−b)</span>，負乘負得正。別把「差的平方」和「平方差」混在一起。</p>
+          <div class="correction-row correction-row--right"><strong class="correction-label">正確寫法</strong><span class="math right">(a − b)<sup>2</sup> = a<sup>2</sup> − 2ab + b<sup>2</sup></span></div>
         </div>
       </div>
+      <aside class="sticky-note"><strong>記在這裏：</strong>差的平方有三項；平方差只有兩個平方相減。<span class="math">(a − b)<sup>2</sup></span> 和 <span class="math">a<sup>2</sup> − b<sup>2</sup></span> 不是同一回事。</aside>
       </div>
       </div>
     </section>
     <section class="section" id="practice" aria-labelledby="practice-title">
       <div class="wrap">
       <div class="section-heading">
-        <p class="kicker">05 · 自己試</p>
-        <h2 id="practice-title">即時練習</h2>
+        <p class="kicker">換一題，自己判斷</p>
+        <h2 id="practice-title">這次，你會保留哪一個中間項？</h2>
       </div>
       <div class="section-body">
-      <p class="section-lead">每題選一個答案，再看看原因。</p>
+      <p class="section-lead">先看是和的平方、差的平方，還是平方差。選好答案後，再核對中間項和正負號；最後一題回到比較係數。</p>
       <div class="quiz">
         <div class="quiz-head"><span id="progress">第 1 題，共 7 題</span><span id="score">答對 0 題</span></div>
         <div class="quiz-body">
@@ -462,7 +473,8 @@
           </g>
           <g class="rearrange-piece" data-difference="removed" style="transform:translate(${x + height}px, ${y + height}px)">
             <rect width="${cut}" height="${cut}" fill="var(--coral-soft)" stroke="var(--coral)"/>
-            <text x="${cut / 2}" y="${cut / 2}" style="font-size:${cut < 30 ? 12 : 16}px">${svgMath("b²")}</text>
+            ${cut < 30 ? `<path d="M${cut} ${cut / 2} h10" stroke="var(--coral)"/>` : ""}
+            <text x="${cut < 30 ? cut + 25 : cut / 2}" y="${cut / 2}">${svgMath("b²")}</text>
           </g>
           <path class="cut-line" d="M${x} ${y + height} H${x + height}" opacity="0"/>
           <g class="difference-labels" data-difference-label="original">
@@ -573,8 +585,8 @@
         const animated = redraw ? diagram : document.getElementById("step-text");
         animated.getAnimations().forEach(animation => animation.cancel());
         animated.animate(
-          [{ opacity: .4, transform: "translateY(5px)" }, { opacity: 1, transform: "translateY(0)" }],
-          { duration: redraw ? 320 : 260, easing: "cubic-bezier(.22, 1, .36, 1)" }
+          [{ opacity: .65 }, { opacity: 1 }],
+          { duration: 180, easing: "ease-out" }
         );
       }
     }
@@ -619,16 +631,9 @@
         termChips.forEach(chip => chip.setAttribute("aria-pressed", "false"));
       } else if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         expandedWorkspace.animate(
-          [{ opacity: 0, transform: "translateY(18px)" }, { opacity: 1, transform: "translateY(0)" }],
-          { duration: 500, easing: "cubic-bezier(.22, 1, .36, 1)" }
+          [{ opacity: .6 }, { opacity: 1 }],
+          { duration: 180, easing: "ease-out" }
         );
-        termChips.forEach((chip, index) => chip.animate(
-          [
-            { opacity: 0, transform: "translateY(14px) scale(.94)" },
-            { opacity: 1, transform: "translateY(0) scale(1)" }
-          ],
-          { duration: 440, delay: 80 + index * 55, easing: "cubic-bezier(.22, 1, .36, 1)" }
-        ));
       }
     });
 
@@ -636,21 +641,10 @@
       if (kind === "constant") foundB = true;
       if (kind === "linear") selectedX = true;
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      let selectedIndex = 0;
       termChips.forEach(chip => {
         const selected = chip.dataset.match === kind;
         chip.getAnimations().forEach(animation => animation.cancel());
         chip.setAttribute("aria-pressed", String(selected));
-        if (selected && !reducedMotion) {
-          chip.animate(
-            [
-              { transform: "translateY(0) scale(1)", offset: 0 },
-              { transform: "translateY(-13px) scale(1.12)", offset: .55 },
-              { transform: "translateY(-5px) scale(1.045)", offset: 1 }
-            ],
-            { duration: 520, delay: selectedIndex++ * 85, easing: "cubic-bezier(.22, 1, .36, 1)" }
-          );
-        }
       });
       matchDetail.dataset.match = kind;
       matchDetail.hidden = false;
@@ -677,12 +671,8 @@
       if (!reducedMotion) {
         matchDetail.getAnimations().forEach(animation => animation.cancel());
         matchDetail.animate(
-          [
-            { opacity: 0, transform: "translateY(20px) scale(.96)", filter: "blur(5px)", offset: 0 },
-            { opacity: 1, transform: "translateY(-4px) scale(1.012)", filter: "blur(0)", offset: .7 },
-            { opacity: 1, transform: "translateY(0) scale(1)", filter: "blur(0)", offset: 1 }
-          ],
-          { duration: 610, easing: "cubic-bezier(.22, 1, .36, 1)" }
+          [{ opacity: .6 }, { opacity: 1 }],
+          { duration: 180, easing: "ease-out" }
         );
       }
       matchDetail.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "nearest" });
@@ -734,7 +724,7 @@
         if (i === q.answer) button.classList.add("correct");
         else if (i === index) button.classList.add("incorrect");
       });
-      feedbackEl.innerHTML = `<strong>${correct ? "答對了。" : "再想一想。"}</strong><span>${q.reason}</span>`;
+      feedbackEl.innerHTML = `<strong>${correct ? "正確。" : "這個答案不對；正確答案已標示。"}</strong><span>批註：${q.reason}</span>`;
       italicizeVariables(feedbackEl);
       document.getElementById("score").textContent = `答對 ${score} 題`;
       nextQuestion.textContent = current === questions.length - 1 ? "重新練習" : "下一題";
