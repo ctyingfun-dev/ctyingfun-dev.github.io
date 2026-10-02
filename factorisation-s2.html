@@ -7,7 +7,7 @@
   <meta name="description" content="香港中二數學：多項式的因式分解。以面積圖、公因式、分組法及恆等式理解因式分解，附逐步例題及互動練習。">
   <title>多項式的因式分解 | 中二數學</title>
   <style>
-    :root { --ink:#19312f; --muted:#526664; --line:#d7e2de; --teal:#08786e; --blue:#286d9e; --coral:#b53f59; --pale:#e4f4ef; }
+    :root { --ink:#19312f; --muted:#526664; --line:#d4e1dd; --teal:#08786e; --blue:#286d9e; --coral:#b53f59; --pale:#e4f4ef; --surface:#f6f9f8; --shadow:0 8px 28px #19312f0c; }
     * { box-sizing:border-box; letter-spacing:0; }
     html { scroll-behavior:smooth; }
     body { margin:0; color:var(--ink); background:#fff; font:17px/1.85 -apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif; }
@@ -16,27 +16,32 @@
     button { cursor:pointer; }
     :focus-visible { outline:3px solid var(--blue); outline-offset:4px; }
     .wrap { width:min(800px,calc(100% - 36px)); margin-inline:auto; }
-    .top { background:#f6f8f7; border-bottom:1px solid var(--line); }
+    .reading-progress { position:fixed; inset:0 auto auto 0; width:100%; height:3px; z-index:20; background:var(--teal); transform:scaleX(0); transform-origin:left; pointer-events:none; }
+    .top { background:#fff; border-bottom:1px solid var(--line); }
     .top-inner { min-height:66px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
-    .brand { font-size:15px; font-weight:750; text-decoration:none; color:var(--ink); }
-    .brand::before { content:"×"; display:inline-grid; place-items:center; width:30px; height:30px; margin-right:10px; background:var(--teal); color:white; font:23px Georgia,serif; border-radius:4px; }
+    .brand { display:inline-flex; align-items:center; font-size:15px; font-weight:750; text-decoration:none; color:var(--ink); white-space:nowrap; }
+    .brand::before { content:"×"; display:inline-grid; place-items:center; width:32px; height:32px; margin-right:10px; background:var(--teal); color:white; font:23px Georgia,serif; border-radius:4px; }
     .top nav { display:flex; flex-wrap:wrap; gap:18px; font-size:13px; }
-    .intro { padding:46px 0 32px; border-bottom:1px solid var(--line); }
+    .top nav a { color:var(--muted); text-decoration:none; transition:color .2s ease; }
+    .top nav a:hover { color:var(--teal); }
+    .intro { padding:48px 0 38px; border-bottom:1px solid var(--line); }
     .eyebrow,.kicker { color:var(--teal); font-size:13px; font-weight:700; margin:0 0 10px; }
-    h1 { font-size:36px; line-height:1.35; margin:0 0 16px; }
+    h1 { font-size:38px; line-height:1.28; margin:0 0 16px; }
     h2 { font-size:27px; line-height:1.5; margin:0; }
     h3 { font-size:20px; margin:0 0 16px; }
     h4 { font-size:16px; margin:0 0 10px; }
     p { margin:0 0 18px; }
     .lead,.muted { color:var(--muted); }
-    .contents { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:4px 18px; padding:18px 0; border-bottom:1px solid var(--line); }
-    .contents a { padding:10px 12px; border-left:2px solid transparent; text-decoration:none; font-size:14px; color:var(--muted); transition:background-color .2s ease,color .2s ease,border-color .2s ease; }
-    .contents a:hover { background:#f6f8f7; }
+    .lead { max-width:36em; font-size:18px; }
+    .contents { display:flex; gap:4px; overflow-x:auto; padding:10px 0; border-bottom:1px solid var(--line); background:#fff; scrollbar-width:none; }
+    .contents::-webkit-scrollbar { display:none; }
+    .contents a { flex:none; padding:9px 12px; border-bottom:2px solid transparent; text-decoration:none; font-size:14px; color:var(--muted); white-space:nowrap; transition:background-color .2s ease,color .2s ease,border-color .2s ease; }
+    .contents a:hover { background:var(--surface); }
     .contents a[aria-current="location"] { background:var(--pale); border-color:var(--teal); color:var(--teal); font-weight:700; }
-    section { --accent:var(--teal); --tint:#edf6f2; padding:40px 0; border-bottom:1px solid var(--line); scroll-margin-top:20px; }
+    section { --accent:var(--teal); --tint:#edf6f2; padding:42px 0; border-bottom:1px solid var(--line); scroll-margin-top:78px; }
     #common,#identities { --accent:var(--blue); --tint:#edf4fa; }
-    #grouping,#cross { --accent:var(--coral); --tint:#fceff2; }
-    .section-heading { padding:20px 24px; margin-bottom:28px; background:var(--tint); border-left:5px solid var(--accent); border-bottom:1px solid var(--line); }
+    #grouping { --accent:var(--coral); --tint:#fceff2; }
+    .section-heading { padding:18px 24px 20px; margin-bottom:28px; background:var(--tint); border-left:5px solid var(--accent); border-bottom:1px solid var(--line); transition:border-color .3s ease,background-color .3s ease; }
     .section-heading .kicker { color:var(--accent); margin-bottom:8px; }
     var { font-family:Georgia,"Times New Roman",serif; font-style:italic; }
     .math { font:22px/1.9 Georgia,"Times New Roman",serif; overflow-wrap:anywhere; }
@@ -49,15 +54,18 @@
     .steps { margin:16px 0; padding-left:24px; }
     .steps li { padding:7px 0 7px 6px; }
     details { margin-top:24px; border-top:1px solid var(--line); }
-    summary { cursor:pointer; color:var(--teal); font-size:16px; font-weight:600; padding:14px 0; }
-    details > div { padding:10px 0; }
-    .tool { margin:28px 0; border:1px solid var(--line); border-radius:6px; overflow:hidden; background:white; }
-    .tool-heading { margin:0; padding:16px 20px; background:var(--tint); border-top:3px solid var(--accent); border-bottom:1px solid var(--line); font-size:17px; }
+    summary { cursor:pointer; color:var(--teal); font-size:16px; font-weight:600; padding:14px 24px 14px 0; position:relative; }
+    summary::marker { color:var(--teal); }
+    details[open] summary { border-bottom:1px solid var(--line); }
+    details > div { padding:16px 0 2px; }
+    .tool { margin:30px 0; border:1px solid var(--line); border-radius:6px; overflow:hidden; background:white; box-shadow:var(--shadow); }
+    .tool-heading { margin:0; padding:15px 20px; background:var(--tint); border-top:3px solid var(--accent); border-bottom:1px solid var(--line); font-size:17px; line-height:1.5; }
     .tool-body { padding:22px; }
-    .controls { display:flex; gap:20px; align-items:end; flex-wrap:wrap; padding:18px 22px; border-bottom:1px solid var(--line); background:#fafbfa; }
+    .controls { display:flex; gap:20px; align-items:end; flex-wrap:wrap; padding:18px 22px; border-bottom:1px solid var(--line); background:var(--surface); }
     label { display:block; font-weight:600; font-size:14px; }
-    select { max-width:100%; padding:8px; border:1px solid #8ea8a1; border-radius:4px; color:var(--ink); background:white; }
-    input[type=range] { max-width:100%; width:180px; accent-color:var(--teal); }
+    select { max-width:100%; min-height:44px; padding:8px 12px; border:1px solid #8ea8a1; border-radius:4px; color:var(--ink); background:white; }
+    input[type=range] { max-width:100%; width:180px; min-height:28px; accent-color:var(--teal); cursor:pointer; }
+    output { display:inline-block; min-width:2ch; text-align:center; color:var(--teal); font-weight:750; }
     .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:18px; }
     .primary,.secondary { min-height:44px; padding:9px 16px; border-radius:4px; }
     .primary { border:1px solid var(--teal); color:white; background:var(--teal); }
@@ -69,7 +77,11 @@
     .primary:active:not(:disabled),.secondary:active:not(:disabled) { transform:translateY(0); box-shadow:none; }
     button:disabled { cursor:default; }
     .primary:disabled,.secondary:disabled { opacity:.45; }
-    .feedback { min-height:80px; margin:16px 0 0; font-size:16px; }
+    .feedback { min-height:64px; margin:16px 0 0; font-size:16px; }
+    .feedback[data-state] { min-height:0; padding:10px 14px; border-left:3px solid var(--blue); background:#edf4fa; }
+    .feedback[data-state=hint] { border-color:var(--coral); background:#fff4f5; }
+    .feedback[data-state=success] { border-color:var(--teal); background:var(--pale); }
+    .feedback[data-state=answer] { border-color:var(--blue); background:#edf4fa; }
     .diagram { margin:24px 0; }
     figcaption { font-size:13px; color:var(--muted); margin-top:14px; }
     .reverse-flow { display:grid; grid-template-columns:1fr 90px 1fr; gap:12px; align-items:center; text-align:center; padding:20px 0; }
@@ -86,47 +98,54 @@
     .tile-board { border:1px solid #638f87; }
     .tile-region { display:flex; align-items:center; justify-content:center; font:24px Georgia,serif; }
     #area-left { background:#dbeff7; border-right:1px solid #638f87; }
-    #area-slot { display:grid; place-items:center; min-width:0; background:#f7faf8; border:2px dashed #9ab9aa; color:var(--muted); font-size:14px; }
+    #area-slot { display:grid; place-items:center; min-width:0; background:#f7faf8; border:2px dashed #9ab9aa; color:var(--muted); font-size:14px; transition:background-color .2s ease,border-color .2s ease,box-shadow .2s ease; }
+    #area-slot.is-over { background:#e4f4ef; border-color:var(--teal); box-shadow:inset 0 0 0 3px #08786e20; }
     #area-slot.filled { border:0; background:#e5f3ed; }
     .tile-tray { width:calc(100% - 38px); margin:12px 0 0 38px; }
-    #area-right { grid-column:2; width:100%; height:100%; border:1px solid #638f87; border-radius:0; background:#e5f3ed; color:var(--ink); touch-action:none; user-select:none; cursor:grab; }
+    #area-right { grid-column:2; width:100%; height:100%; border:1px solid #638f87; border-radius:0; background:#e5f3ed; color:var(--ink); touch-action:none; user-select:none; cursor:grab; transition:background-color .2s ease,box-shadow .2s ease; }
+    #tile-tray #area-right:hover { background:#d8ede3; box-shadow:0 5px 18px #19312f16; }
     #area-right:active { cursor:grabbing; }
     #area-slot #area-right { grid-column:1; border:0; cursor:default; }
     .tile-region { transition:background-color .28s ease; }
-    .tile-prompt { margin:0 0 12px; color:var(--muted); font-size:15px; }
+    .tile-prompt { margin:0 0 14px; color:var(--muted); font-size:15px; }
+    .tile-prompt[data-state=success] { color:var(--teal); font-weight:650; }
+    .tile-prompt[data-state=hint] { color:var(--coral); }
     .tile-actions { margin:12px 0 0; }
     .group-stage { min-height:100px; padding:12px 0; }
     .group-terms { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; }
-    .group-term { min-height:64px; min-width:0; padding:8px 3px; border:1px solid #a9bcb5; border-radius:4px; background:#fff; color:var(--ink); font:21px Georgia,serif; white-space:nowrap; }
+    .group-term { min-height:64px; min-width:0; padding:8px 3px; border:1px solid #a9bcb5; border-radius:4px; background:#fff; color:var(--ink); font:21px Georgia,serif; white-space:nowrap; transition:background-color .18s ease,border-color .18s ease,transform .18s ease,box-shadow .18s ease; }
     .group-term:hover { background:#edf4fa; }
-    .group-term[aria-pressed=true] { border:2px solid var(--blue); background:#edf4fa; }
+    .group-term[aria-pressed=true] { border:2px solid var(--blue); background:#edf4fa; transform:translateY(-2px); box-shadow:0 4px 10px #286d9e1c; }
     .group-pair { color:var(--blue); }
     .group-pair.second { color:var(--coral); }
     .identity-tabs { display:flex; flex-wrap:wrap; gap:0; border-bottom:1px solid var(--line); }
     .identity-tabs button { flex:1; min-width:120px; padding:12px 8px; border:0; border-bottom:3px solid transparent; background:white; color:var(--muted); font-size:14px; transition:background-color .2s ease,color .2s ease,border-color .2s ease; }
     .identity-tabs button:hover:not([aria-pressed=true]) { background:#f6f8f7; }
     .identity-tabs button[aria-pressed=true] { color:var(--blue); background:#edf4fa; border-bottom-color:var(--blue); }
+    #identity-answer { border-color:var(--teal); background:var(--pale); }
     .square-stage { width:min(100%,290px); aspect-ratio:1; display:grid; grid-template-columns:3fr 1fr; grid-template-rows:3fr 1fr; margin:20px auto; border:1px solid #719d93; }
     .square-stage > div { display:grid; place-items:center; border:1px solid white; font:22px Georgia,serif; background:#dceef7; }
     .square-stage > div:nth-child(2),.square-stage > div:nth-child(3) { background:#e0f0e9; }
     .square-stage > div:last-child { background:#f9e1e7; }
-    .cross-grid { display:grid; grid-template-columns:80px 100px 80px; grid-template-rows:58px 58px; justify-content:center; align-items:center; text-align:center; margin:20px 0; }
-    .cross-grid .math { background:#edf4fa; border-bottom:2px solid var(--blue); }
-    .cross-grid svg { grid-column:2; grid-row:1 / 3; width:100px; height:116px; }
-    .cross-grid .math:nth-of-type(2),.cross-grid .math:nth-of-type(4) { background:#fceff2; border-color:var(--coral); }
-    .quiz-head { display:flex; gap:16px; justify-content:space-between; padding:14px 20px; background:var(--ink); color:white; font-size:13px; }
+    .quiz-head { display:flex; gap:16px; justify-content:space-between; padding:14px 20px; background:var(--ink); color:white; font-size:13px; font-weight:650; }
     .choices { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin:20px 0; }
-    .choice { min-height:56px; border:1px solid #8ea8a1; border-radius:4px; background:white; color:var(--ink); padding:12px; text-align:left; font:21px Georgia,serif; overflow-wrap:anywhere; transition:background-color .24s ease,border-color .24s ease,box-shadow .24s ease; }
-    .choice:hover:not(:disabled) { background:var(--pale); }
+    .choice { position:relative; min-height:62px; border:1px solid #9ab4ab; border-radius:4px; background:white; color:var(--ink); padding:10px 14px 10px 54px; text-align:left; font:21px/1.5 Georgia,serif; overflow-wrap:anywhere; transition:background-color .24s ease,border-color .24s ease,box-shadow .24s ease,transform .2s ease; }
+    .choice::before { content:attr(data-choice-label); position:absolute; left:14px; top:50%; transform:translateY(-50%); display:grid; place-items:center; width:28px; height:28px; border:1px solid var(--line); border-radius:4px; color:var(--muted); font:700 12px/1 -apple-system,BlinkMacSystemFont,sans-serif; }
+    .choice:hover:not(:disabled) { background:var(--pale); transform:translateY(-2px); box-shadow:0 4px 12px #19312f12; }
     .choice.correct { border:2px solid var(--teal); background:var(--pale); }
     .choice.wrong { border:2px solid var(--coral); background:#fff0f3; }
     .choice.try-again { border-color:var(--coral); background:#fff7f8; }
     .choice.correct { box-shadow:inset 0 0 0 2px #fff; }
-    .quiz-progress { width:100%; height:5px; border:0; display:block; accent-color:var(--teal); }
+    .choice.correct::before { content:"✓"; border-color:var(--teal); background:var(--teal); color:#fff; font-size:17px; }
+    .choice.wrong::before,.choice.try-again::before { border-color:var(--coral); color:var(--coral); }
+    .quiz-progress { width:100%; height:7px; border:0; display:block; appearance:none; background:#d8e7e1; }
+    .quiz-progress::-webkit-progress-bar { background:#d8e7e1; }
+    .quiz-progress::-webkit-progress-value { background:var(--teal); transition:width .35s cubic-bezier(.2,.7,.2,1); }
+    .quiz-progress::-moz-progress-bar { background:var(--teal); }
     .method-list { padding:0; list-style:none; }
     .method-list li { padding:12px 0; border-bottom:1px solid var(--line); }
     .method-list strong { color:var(--teal); }
-    .scroll-enter { animation:arrive .55s cubic-bezier(.2,.7,.2,1) both; }
+    .scroll-enter { animation:arrive .5s cubic-bezier(.2,.7,.2,1) both; }
     @keyframes arrive { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
     [hidden] { display:none!important; }
     footer { padding:28px 0 40px; color:var(--muted); font-size:13px; }
@@ -134,12 +153,19 @@
       .top .wrap,footer.wrap { width:min(1080px,calc(100% - 64px)); }
       main.wrap { width:min(1080px,calc(100% - 64px)); display:grid; grid-template-columns:210px minmax(0,1fr); column-gap:64px; }
       .intro { grid-column:1 / -1; }
-      .contents { grid-column:1; grid-row:2 / span 6; position:sticky; top:24px; align-self:start; grid-template-columns:1fr; border:0; padding-top:40px; }
+      .contents { grid-column:1; grid-row:2 / span 5; position:sticky; top:24px; align-self:start; display:grid; overflow:visible; grid-template-columns:1fr; gap:2px; border:0; padding:38px 0 0; background:transparent; }
+      .contents a { white-space:normal; border-left:3px solid transparent; border-bottom:0; line-height:1.5; padding:12px 12px 12px 14px; }
       main > section { grid-column:2; }
+      main > section { scroll-margin-top:20px; }
+    }
+    @media(max-width:1099px) {
+      .contents { position:sticky; top:0; z-index:10; width:calc(100% + 36px); margin-inline:-18px; padding:10px 18px; box-shadow:0 3px 10px #19312f08; }
     }
     @media(max-width:640px) {
-      h1 { font-size:29px; } h2 { font-size:23px; }
+      h1 { font-size:30px; } h2 { font-size:23px; }
       .top-inner { flex-wrap:wrap; padding-block:12px; }
+      .intro { padding:32px 0 28px; }
+      .lead { font-size:16px; }
       .section-heading { padding:16px; }
       .tool-body,.controls { padding:16px; }
       .math { font-size:20px; }
@@ -148,14 +174,14 @@
       .flow-arrows strong { transform:rotate(90deg); }
       .choices { grid-template-columns:1fr; }
       .group-terms { grid-template-columns:repeat(2,minmax(0,1fr)); }
-      .cross-grid { grid-template-columns:60px 80px 60px; }
-      .cross-grid svg { width:80px; }
+      .choice { min-height:58px; }
     }
     @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; } .scroll-enter { animation:none; } }
     @media print { .top,.contents,.controls,.actions,.quiz { display:none; } main.wrap { display:block; width:100%; } .scroll-enter { animation:none; } section { padding:18px 0; } }
   </style>
 </head>
 <body>
+  <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
   <header class="top"><div class="wrap top-inner"><a class="brand" href="index.html">數學研習室</a><nav aria-label="主要導覽"><a href="#common">公因式</a><a href="#practice">練習</a><a href="index.html">教材總覽</a></nav></div></header>
   <main class="wrap">
     <div class="intro"><p class="eyebrow">香港 · 中二 · 代數</p><h1>多項式的因式分解</h1><p class="lead">把「幾項相加」變成「幾個因式相乘」，再用展開驗算。</p></div>
@@ -172,7 +198,7 @@
       <div class="tool" id="meaning-tool" hidden>
         <h3 class="tool-heading">哪一個才是因式分解？</h3><div class="tool-body">
           <p>把 <span class="math">6<var>x</var> + 12</span> 完全因式分解。</p>
-          <div class="choices" id="meaning-choices"><button type="button" class="choice" data-meaning="0">6(<var>x</var> + 2)</button><button type="button" class="choice" data-meaning="1">3(2<var>x</var> + 4)</button><button type="button" class="choice" data-meaning="2">6(<var>x</var> + 12)</button></div>
+          <div class="choices" id="meaning-choices"><button type="button" class="choice" data-meaning="0" data-choice-label="A">6(<var>x</var> + 2)</button><button type="button" class="choice" data-meaning="1" data-choice-label="B">3(2<var>x</var> + 4)</button><button type="button" class="choice" data-meaning="2" data-choice-label="C">6(<var>x</var> + 12)</button></div>
           <p class="feedback" id="meaning-feedback" aria-live="polite">留意「相等」和「已完全分解」是兩件不同的事。</p>
         </div>
       </div>
@@ -242,7 +268,7 @@
       node.getAnimations().forEach(animation=>animation.cancel());
       node.animate(keyframes,{duration,easing:"cubic-bezier(.2,.7,.2,1)"});
     }
-    const settleIn=[{opacity:.35,transform:"translateY(6px)"},{opacity:1,transform:"translateY(0)"}];
+    const settleIn=[{opacity:.8,transform:"translateY(4px)"},{opacity:1,transform:"translateY(0)"}];
     const x = "<var>x</var>";
     const term = (coefficient, variable = x) => `${coefficient === 1 ? "" : coefficient}${variable}`;
     document.querySelectorAll("[data-meaning]").forEach(button => button.addEventListener("click", () => {
@@ -254,6 +280,8 @@
       document.querySelectorAll("[data-meaning]").forEach(item => item.classList.remove("correct","wrong"));
       button.classList.add(button.dataset.meaning === "0" ? "correct" : "wrong");
       el("meaning-feedback").innerHTML = reasons[Number(button.dataset.meaning)].replaceAll("x",x);
+      el("meaning-feedback").dataset.state=button.dataset.meaning==="0"?"success":"hint";
+      animateChange(el("meaning-feedback"),settleIn,320);
     }));
     el("meaning-tool").hidden = false;
     function renderArea(animate=false) {
@@ -284,6 +312,8 @@
       el("area-reset").hidden=false;
       el("area-equation").hidden=false;
       el("area-prompt").textContent="拼合成功：共同高度是公因式，總闊度放在括號內。";
+      el("area-prompt").dataset.state="success";
+      slot.classList.remove("is-over");
       const to=tile.getBoundingClientRect();
       animateChange(tile,[{transform:`translate(${from.left-to.left}px, ${from.top-to.top}px)`},{transform:"translate(0, 0)"}],420);
       animateChange(el("area-equation"),settleIn,380);
@@ -300,6 +330,8 @@
       dragStart.moved=true;
       tile.style.position="relative";tile.style.zIndex="2";
       tile.style.transform=`translate(${dx}px, ${dy}px)`;
+      const rect=slot.getBoundingClientRect();
+      slot.classList.toggle("is-over",event.clientX>=rect.left&&event.clientX<=rect.right&&event.clientY>=rect.top&&event.clientY<=rect.bottom);
     });
     tile.addEventListener("pointerup",event=>{
       if(!dragStart)return;
@@ -310,13 +342,16 @@
         else {
           tile.style.transform="";tile.style.position="";tile.style.zIndex="";
           el("area-prompt").textContent="還差一點：把綠色長方形放進虛線位置。";
+          el("area-prompt").dataset.state="hint";
         }
+        slot.classList.remove("is-over");
         requestAnimationFrame(()=>{suppressTileClick=false;});
       }
       dragStart=null;
     });
     tile.addEventListener("pointercancel",()=>{
       dragStart=null;tile.style.transform="";tile.style.position="";tile.style.zIndex="";
+      slot.classList.remove("is-over");
     });
     tile.addEventListener("click",()=>{if(!suppressTileClick)assembleArea();});
     el("area-reset").addEventListener("click",()=>{
@@ -324,10 +359,12 @@
       el("tile-tray").hidden=false;
       slot.replaceChildren(Object.assign(document.createElement("span"),{textContent:"放在這裏"}));
       slot.classList.remove("filled");
+      slot.classList.remove("is-over");
       tile.disabled=false;
       el("area-reset").hidden=true;
       el("area-equation").hidden=true;
       el("area-prompt").textContent="把綠色長方形拖到虛線位置，或點按它。";
+      delete el("area-prompt").dataset.state;
     });
     const groupCases = [
       [
@@ -411,6 +448,8 @@
         });
       } else el("group-expression").innerHTML=steps[groupStep][0];
       el("group-explanation").innerHTML = steps[groupStep][1];
+      if(groupStep===0)delete el("group-explanation").dataset.state;
+      else el("group-explanation").dataset.state="success";
       el("group-next").disabled = groupStep===0||groupStep===3;
       if(animate) {
         animateChange(groupStep===0?el("group-terms"):el("group-expression"),settleIn,340);
@@ -423,6 +462,7 @@
       document.querySelectorAll("[data-term]").forEach(button=>button.setAttribute("aria-pressed",String(selectedTerms.has(Number(button.dataset.term)))));
       if(selectedTerms.size<2) {
         el("group-explanation").textContent="再選一項，看看餘下兩項能否提出相同括號。";
+        el("group-explanation").dataset.state="answer";
         return;
       }
       const pair=[...selectedTerms].sort().join(",");
@@ -433,6 +473,7 @@
       } else {
         document.querySelectorAll("[data-term]").forEach(button=>button.setAttribute("aria-pressed","false"));
         el("group-explanation").textContent="這兩項雖可相加，但餘下兩項不能提出相同括號。試把平方項與其中一個一次項配對。";
+        el("group-explanation").dataset.state="hint";
         animateChange(el("group-explanation"),settleIn);
       }
     }
@@ -477,9 +518,9 @@
       el("score").textContent=`得分：${score} / ${questions.length}`;
       el("quiz-progress").value=questionIndex;
       el("question").innerHTML=questions[questionIndex].p;
-      el("feedback").textContent="";el("next").hidden=true;el("choices").replaceChildren();
+      el("feedback").textContent="";delete el("feedback").dataset.state;el("next").hidden=true;el("choices").replaceChildren();
       questions[questionIndex].c.forEach((choice,index)=>{
-        const button=document.createElement("button");button.type="button";button.className="choice";button.innerHTML=choice;
+        const button=document.createElement("button");button.type="button";button.className="choice";button.dataset.choiceLabel="ABCD"[index];button.innerHTML=choice;
         button.addEventListener("click",()=>{
           if(answered)return;
           const q=questions[questionIndex],correct=index===q.a;
@@ -487,6 +528,7 @@
             attempts++;
             button.classList.add("try-again");button.disabled=true;
             el("feedback").innerHTML=`<strong>再試一次。</strong> ${q.h}`;
+            el("feedback").dataset.state="hint";
             animateChange(el("feedback"),settleIn,340);
             return;
           }
@@ -494,6 +536,7 @@
           if(correct)score++;
           [...el("choices").children].forEach((item,i)=>{item.disabled=true;if(i===q.a)item.classList.add("correct");else if(i===index)item.classList.add("wrong");});
           el("feedback").innerHTML=`<strong>${correct?"答對了。":"這題先看到解法。"}</strong> ${q.r}`;
+          el("feedback").dataset.state=correct?"success":"answer";
           animateChange(el("feedback"),settleIn,340);
           el("score").textContent=`得分：${score} / ${questions.length}`;el("quiz-progress").value=questionIndex+1;
           const last=questionIndex===questions.length-1;
@@ -510,12 +553,21 @@
     el("next").addEventListener("click",()=>{if(!answered)return;if(questionIndex===questions.length-1){questionIndex=0;score=0;}else questionIndex++;renderQuestion(true);});
     el("quiz").hidden=false;renderQuestion();
     const navLinks=[...document.querySelectorAll(".contents a")];
+    const chapterNav=document.querySelector(".contents");
+    let activeSection=null;
     function updateSection(){
       let current=navLinks[0];
       navLinks.forEach(link=>{if(document.querySelector(link.getAttribute("href")).getBoundingClientRect().top<=160)current=link;});
       navLinks.forEach(link=>{if(link===current)link.setAttribute("aria-current","location");else link.removeAttribute("aria-current");});
+      if(current!==activeSection) {
+        activeSection=current;
+        if(innerWidth<1100)chapterNav.scrollTo({left:current.offsetLeft-(chapterNav.clientWidth-current.clientWidth)/2,behavior:motion.matches?"instant":"smooth"});
+      }
+      const scrollable=document.documentElement.scrollHeight-innerHeight;
+      el("reading-progress").style.transform=`scaleX(${scrollable>0?Math.min(1,scrollY/scrollable):0})`;
     }
-    window.addEventListener("scroll",updateSection,{passive:true});updateSection();
+    window.addEventListener("scroll",updateSection,{passive:true});
+    window.addEventListener("resize",updateSection);updateSection();
     const seen=new WeakSet();let observer;
     function setupMotion(){
       if(observer)observer.disconnect();
@@ -526,7 +578,11 @@
         seen.add(entry.target);entry.target.classList.add("scroll-enter");observer.unobserve(entry.target);
         entry.target.addEventListener("animationend",()=>entry.target.classList.remove("scroll-enter"),{once:true});
       }),{rootMargin:"0px 0px -24px 0px"});
-      document.querySelectorAll("main > section > .section-heading, main > section > .diagram, main > section > .example").forEach(node=>{if(!seen.has(node))observer.observe(node);});
+      document.querySelectorAll("main > section > .section-heading, main > section > .diagram, main > section > .example").forEach(node=>{
+        if(seen.has(node))return;
+        if(node.getBoundingClientRect().top<innerHeight-24)seen.add(node);
+        else observer.observe(node);
+      });
     }
     motion.addEventListener("change",setupMotion);setupMotion();
   </script>
