@@ -231,6 +231,353 @@
       h1 { font-size:28pt; }
     }
   </style>
+  <style id="handout-style">
+/* Shared handout treatment; mathematical notation stays in Georgia. */
+@font-face {
+  font-family:IansuiPercentages;
+  src:url("fonts/Iansui-Percentages.woff2") format("woff2");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+:root {
+  --ink:#263431; --muted:#586963; --line:#dce4dc;
+  --teal:#12766c; --blue:#306a96; --coral:#a94e58;
+  --hand:IansuiPercentages,"Kaiti TC","Songti TC",serif;
+}
+body { color:var(--ink); font:18px/1.85 Georgia,"Times New Roman",serif; }
+html[lang=zh-Hant] body { font-family:var(--hand); }
+html[lang=zh-Hant] .formula-label,
+html[lang=zh-Hant] .formula .word { font-family:var(--hand); }
+html[lang=en] h1,html[lang=en] h2 { font-family:Georgia,"Times New Roman",serif; }
+html[lang=zh-Hant] h1,html[lang=zh-Hant] h2 { font-family:var(--hand); }
+.top { background:white; }
+.brand::before { display:none; }
+.top nav { gap:10px 18px; }
+.intro { padding:54px 0 38px; }
+.eyebrow,.kicker { text-transform:none; font-size:14px; font-weight:400; color:var(--muted); }
+h1 { font-size:40px; line-height:1.4; max-width:20em; }
+h2 { line-height:1.5; }
+.intro .lead { max-width:37em; font-size:18px; }
+.opening-question { margin:26px 0 0; padding:4px 0 4px 18px; border-left:2px solid #9aaea1; max-width:650px; }
+.opening-question .math { display:block; margin:6px 0; font-size:25px; }
+.opening-question p { margin:0; font-size:16px; }
+.opening-label { color:var(--teal); font-size:14px; }
+.contents { gap:0 12px; border-top:0; }
+.contents a { min-height:44px; border-left:0; border-bottom:1px solid transparent; padding:10px 0; }
+.contents a[aria-current=location] { background:none; color:var(--ink); border-color:var(--coral); font-weight:700; }
+.contents a:hover { background:none; color:var(--teal); }
+section { padding:56px 0 60px; scroll-margin-top:80px; }
+#successive { padding-bottom:76px; }
+#interest { padding-top:68px; }
+.section-heading { padding:0; background:none; border:0; margin-bottom:24px; }
+.section-heading .kicker { color:var(--muted); margin-bottom:6px; }
+.section-heading h2 { font-size:29px; }
+.columns { gap:28px; }
+.formula { background:none; border:0; border-bottom:1px solid var(--line); padding:12px 0 18px; margin:24px 0; font-size:23px; }
+.formula-label { font-family:Georgia,"Times New Roman",serif; font-size:14px; }
+.formula .word { font-size:.85em; }
+.chalkboard { padding:24px; background:#263a32; color:#f4f4e8; border:4px solid #405448; box-shadow:inset 0 0 0 1px #7a9280; }
+.chalkboard .formula-label { color:#d3e0d3; }
+.chalkboard var { color:inherit; }
+.note { font-size:16px; border-left:1px dashed #9aaba2; padding:4px 0 4px 16px; margin:24px 0; }
+.teacher-correction { margin:32px 0; max-width:650px; font-size:16px; }
+.correction-row { margin-bottom:18px; }
+.correction-label { display:block; font-size:14px; font-weight:700; color:#8b3540; margin-bottom:4px; }
+.correction-row .math { display:block; line-height:1.8; color:var(--ink); font-size:22px; }
+.teacher-comment { margin-bottom:20px; padding-left:16px; border-left:1px dashed #9aaba2; color:var(--muted); }
+.teacher-comment strong { color:var(--ink); }
+.correction-row--right .correction-label { color:#075b4f; }
+.sticky-reminder { margin:36px 0; padding:20px 22px 6px; background:#fff1b8; box-shadow:3px 4px 0 #e8dfb8; }
+.example { padding:8px 0 12px 20px; margin:18px 0 24px; border-left:1px solid #b9cac2; }
+.example h3 { color:var(--ink); border:0; padding:0; font-size:21px; line-height:1.55; }
+.steps { margin:18px 0; padding-left:24px; }
+.steps li { padding:5px 0 5px 4px; }
+.flow { padding:16px 0; border:0; }
+.flow-stage { background:none!important; border:0; border-radius:0; padding:12px 4px; }
+.flow-stage strong { font-size:29px; }
+.flow-track { grid-template-columns:minmax(0,1fr) 90px minmax(0,1fr); gap:12px; }
+.value-diagram { border:0; padding:12px 0; }
+.value-track,.track { border-radius:2px; box-shadow:inset 0 0 0 1px #b5c5bb; }
+.value-fill,.bar { border-radius:0; }
+.worked-step { padding:20px 0; }
+.worked-step h4 { color:var(--ink); }
+.base-label { color:#386154; }
+.activity,.coin-lab { border:0; border-bottom:1px solid var(--line); padding:16px 0 28px; margin:32px 0; }
+.activity > h3::before,.coin-lab > h3::before { display:none; }
+.activity > h3,.coin-lab > h3 { color:var(--ink); line-height:1.55; }
+.activity-status { min-height:90px; }
+.coin-stage { background:none; height:220px; border-bottom:1px solid #8da99b; }
+.coin { animation:handout-coin .2s ease-out both; }
+.coin-pile { padding-bottom:4px; }
+.coin-scenes { gap:24px; }
+.interest-visual { padding:16px 0; border:0; }
+.interest-lanes { gap:32px; }
+.year-step { min-height:210px; }
+.earning-track { border-radius:2px; box-shadow:inset 0 0 0 1px #b5c5bb; }
+.tool { border:0; border-bottom:1px solid var(--line); border-radius:0; overflow:visible; margin:38px 0; }
+.tool-heading { padding:14px 0 8px; border:0; background:none; font-size:21px; line-height:1.55; }
+.controls { padding:18px 0; background:white; gap:16px 24px; }
+.controls > div { min-width:0; max-width:100%; }
+.tool-body { padding:22px 0; }
+.quiz-head { background:white; color:var(--ink); border-block:1px solid #9bada3; padding:12px 0; font-size:15px; }
+input[type=number] { min-height:44px; }
+input[type=range] { min-height:44px; margin:0; }
+button { min-height:44px; }
+.segments { min-height:44px; }
+.segments button { min-width:0; }
+.secondary,.primary { min-height:44px; }
+.guess-options button { min-height:48px; }
+.choice { min-height:54px; }
+.choice.wrong::after { content:" (incorrect)"; font-size:14px; color:#8b3540; }
+html[lang=zh-Hant] .choice.wrong::after { content:"（錯誤）"; }
+.choice.correct::after { content:" (correct)"; font-size:14px; color:#075b4f; }
+html[lang=zh-Hant] .choice.correct::after { content:"（正確）"; }
+.student-task { margin:32px 0 44px; padding:16px 0 24px; border-bottom:1px solid var(--line); }
+.student-task h3 { font-size:21px; line-height:1.6; }
+.student-task p { font-size:16px; }
+.base-expression { margin:24px 0; min-height:74px; }
+.task-actions,.answer-entry { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin:14px 0; }
+.task-actions [aria-pressed=true] { border-color:var(--teal); background:var(--pale); color:var(--ink); }
+.task-feedback { min-height:64px; margin:20px 0 0; }
+.task-feedback[data-state=success] { color:#075b4f; }
+.task-feedback[data-state=hint] { color:#8b3540; }
+.task-controls { display:flex; flex-wrap:wrap; gap:24px; margin:24px 0; }
+.task-controls > div { max-width:100%; }
+.task-controls output { display:inline-block; min-width:8ch; color:var(--teal); }
+.chain-bars { margin:24px 0; }
+.chain-bars .value-row { min-height:58px; }
+.task-mode { width:max-content; max-width:100%; margin:20px 0; }
+.money-selection { border:0; padding:0; margin:24px 0; min-width:0; }
+.money-selection legend { font-size:15px; color:var(--muted); padding:0 0 12px; }
+.money-selection label { display:flex; gap:12px; align-items:center; font-size:17px; font-weight:400; padding:12px 0; min-height:56px; border-bottom:1px solid var(--line); margin:0; cursor:pointer; }
+.money-selection input { width:20px; height:20px; flex:none; accent-color:var(--teal); }
+.money-selection span { min-width:0; }
+.money-selection strong { display:inline-block; font:20px/1.6 Georgia,serif; }
+.task-progress { min-height:28px; margin:8px 0 0; color:var(--muted); font-size:14px; }
+.student-task .math { font-size:22px; }
+.student-task input[type=number] { width:160px; }
+.visually-hidden { position:absolute; width:1px; height:1px; padding:0!important; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+.compact-lesson .intro { padding-block:32px 24px; }
+.compact-lesson h1 { margin-bottom:10px; }
+.compact-lesson section { padding-block:32px 36px; }
+.compact-lesson .section-heading { margin-bottom:16px; }
+.compact-lesson .student-task { margin:12px 0 20px; padding:0 0 16px; border:0; }
+.compact-lesson .student-task h3 { font-size:19px; margin-bottom:12px; }
+.compact-lesson .student-task p { margin-bottom:14px; }
+.compact-lesson .task-feedback { min-height:0; margin-top:12px; }
+.compact-lesson .task-feedback[data-state=neutral] { color:var(--muted); font-size:14px; }
+.compact-lesson .base-expression { margin:16px 0; min-height:62px; }
+.compact-lesson .task-actions { margin-block:12px; }
+.compact-lesson .money-selection { margin-block:16px; }
+.compact-lesson .money-selection label { min-height:48px; padding-block:9px; }
+.compact-lesson .student-task .math { font-size:20px; line-height:1.75; }
+.compact-lesson .task-progress:empty { display:none; }
+.compact-lesson .activity { margin:12px 0 20px; padding:0 0 20px; border:0; }
+.compact-lesson .activity > h3 { font-size:19px; margin-bottom:12px; }
+.compact-lesson .activity-status { min-height:0; margin-top:14px; }
+.compact-lesson .guess-options { grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
+.compact-lesson .guess-options button { font:22px/1.4 Georgia,serif; min-height:54px; padding:8px 4px; }
+.compact-lesson .task-feedback:empty { display:none; }
+.compact-notes { margin-top:12px; border-top:1px solid var(--line); }
+.compact-notes > summary { font-size:15px; padding-block:12px; font-weight:400; }
+.compact-notes[open] > summary { border-bottom:1px dashed var(--line); }
+.compact-challenge { margin-top:20px; }
+.compact-challenge > summary { font-size:16px; }
+.compact-challenge .student-task { margin-top:18px; }
+.compact-lesson #interest .compact-notes .coin-lab { margin-top:12px; }
+.compact-lesson #practice > p { font-size:14px; margin-bottom:12px; }
+.compact-lesson .quiz { margin:18px 0; }
+.compact-lesson .quiz .feedback { min-height:0; }
+.compact-lesson .quiz .tool-body { padding-block:18px; }
+.compact-lesson #concepts .section-heading { margin-bottom:8px; }
+.lesson-essential { margin:24px 0 28px; }
+.lesson-essential h3 { font-size:19px; margin-bottom:14px; }
+.lesson-essential p { font-size:16px; margin-bottom:14px; }
+.essential-key { color:var(--ink); font-weight:700; }
+.essential-definitions { font-size:14px!important; color:var(--muted); margin-top:12px; }
+.lesson-essential .math { font-size:22px; line-height:1.85; }
+.essential-label { display:inline-block; min-width:100px; font-size:15px; color:var(--muted); }
+.repeated-rates p { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; }
+#interest-calculation { margin:24px 0 36px; }
+.lesson-subtopic { margin-top:32px; padding-top:24px; border-top:1px solid var(--line); }
+.lesson-subtopic .section-heading h3 { font-size:22px; }
+.settlement-tool .segments { display:flex; flex-wrap:wrap; }
+.settlement-tool button { flex:1 0 100px; }
+.settlement-tool > h3 { font-size:19px; line-height:1.5; }
+#settlement-result { margin-top:20px; }
+#simple-interest > div:not(.section-heading), #interest > .section-heading + div { margin-bottom:28px; }
+#interest-calculation > h3 { font-size:21px; line-height:1.6; }
+.comparison-given { font-size:16px; color:var(--muted); }
+.interest-formula-pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px; padding:18px 0; border-block:1px solid var(--line); }
+.interest-formula-pair > div { min-width:0; }
+.interest-formula-pair h4 { margin:0 0 12px; font-size:17px; color:var(--blue); }
+.interest-formula-pair > div:last-child h4 { color:var(--coral); }
+.interest-formula-pair .math { font-size:22px; overflow-wrap:anywhere; }
+.interest-comparison { table-layout:fixed; margin:22px 0; }
+.interest-comparison th,.interest-comparison td { padding:12px 10px; vertical-align:top; }
+.interest-comparison thead th { background:white; border-bottom:2px solid #97aaa0; }
+.interest-comparison th:first-child { width:21%; font-weight:400; }
+.interest-comparison thead th:nth-child(2) { color:var(--blue); }
+.interest-comparison thead th:nth-child(3) { color:var(--coral); }
+.interest-comparison .math { font-size:20px; line-height:1.7; overflow-wrap:anywhere; }
+.interest-comparison .base-change td:last-child { background:#f9f0f2; }
+.interest-comparison .balance-row td:nth-child(2) { color:var(--blue); }
+.interest-comparison .balance-row td:nth-child(3) { color:var(--coral); }
+.comparison-point { margin:18px 0; padding-left:16px; border-left:2px solid var(--coral); font-size:17px; }
+.visual-notes { margin:20px 0; border-block:1px solid var(--line); }
+.visual-notes summary { padding:12px 0; color:var(--teal); font-size:15px; cursor:pointer; }
+.visual-notes > div { padding:16px 0; }
+.interest-core { margin-bottom:20px; }
+.interest-core .formula { margin:12px 0; padding:10px 0; }
+.simple-addition { margin:20px 0; }
+.simple-addition figcaption { margin-bottom:14px; font-size:16px; }
+.addition-track { display:grid; grid-template-columns:2fr repeat(3,1fr); border:1px solid #b7c6cc; min-height:78px; }
+.addition-track > span { display:flex; flex-direction:column; justify-content:center; align-items:center; padding:6px; min-width:0; }
+.principal-block { background:#edf3f7; color:var(--blue); font:700 24px Georgia,serif; }
+.addition-block { border-left:1px solid #b7c6cc; color:var(--blue); }
+.addition-block small { font-size:13px; }
+.addition-block strong { font:700 21px Georgia,serif; }
+.simple-addition .math { margin:12px 0; font-size:21px; }
+.refined-coins { --coin-width:58px; margin:0; padding:0; border:0; }
+.refined-coins > h3 { font-size:21px; }
+.refined-coins > h3 + p { font-size:15px; color:var(--muted); }
+.refined-coins .earning-key { gap:8px 18px; font-size:13px; }
+.refined-coins .earning-key span:first-child::before { background:#e8c25b; border:1px solid #a37b1a; }
+.refined-coins .earning-key span:last-child::before { background:#ec9ca8; border:1px solid #a74557; }
+.coin-view-mode { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); margin:20px 0 12px; }
+.coin-view-mode button { min-width:0; font-size:15px; min-height:44px; }
+.refined-coins .coin-controls { display:grid; grid-template-columns:44px minmax(0,1fr) 44px; margin:14px 0 4px; }
+.refined-coins .coin-controls button { width:44px; height:44px; padding:0; font:24px Georgia,serif; }
+.refined-coins .coin-controls output { text-align:center; font-size:18px; }
+.coin-year-slider input { width:100%; display:block; margin:12px 0 0; }
+.coin-year-ticks { display:flex; justify-content:space-between; padding:0 5px; font:13px Georgia,serif; color:var(--muted); }
+.refined-coins .coin-scenes { gap:28px; margin-top:24px; }
+.refined-coins .coin-scene { text-align:center; }
+.refined-coins .coin-scene h4 { font-size:17px; line-height:1.45; min-height:50px; display:grid; place-items:center; }
+.refined-coins .coin-stage { height:226px; gap:14px; padding:0 8px; border-bottom:1px solid #acb8b3; background:none; }
+.refined-coins .coin-pile { width:var(--coin-width); gap:3px; padding-bottom:7px; }
+.refined-coins .coin-slot { width:var(--coin-width); height:18px; flex:none; }
+.refined-coins .coin {
+  position:relative; width:var(--coin-width); height:18px; border:1px solid #a37b1a; border-bottom-width:3px;
+  background:#f2d478; border-radius:50%; box-shadow:inset 0 -3px 0 #d3a13a,inset 0 2px 0 #fff0b4;
+  animation:handout-coin .18s ease-out both;
+}
+.refined-coins .coin::before { content:""; position:absolute; inset:2px 4px 3px; border:1px solid #c4993a; border-radius:50%; }
+.refined-coins .coin::after { content:"100"; position:absolute; inset:0; text-align:center; font:700 9px/12px Georgia,serif; color:#806016; }
+.refined-coins .coin.extra { background:#f0aeb9; border-color:#a74557; box-shadow:inset 0 -3px 0 #d17689,inset 0 2px 0 #ffe1e6; }
+.refined-coins .coin.extra::before { border-color:#cd7b8c; }
+.refined-coins .coin.extra::after { color:#8d3c4d; }
+.refined-coins .coin-total { font-size:25px; line-height:1.4; margin:12px 0 2px; color:var(--blue); }
+.refined-coins .coin-scene:last-child .coin-total { color:var(--coral); }
+.refined-coins .coin-scene p { font-size:13px; }
+.refined-coins .coin-caption { margin-top:20px; font-size:13px; line-height:1.6; }
+.refined-coins .coin-story { min-height:60px; padding:14px 0; margin:16px 0 0; border-top:1px solid var(--line); font-size:16px; }
+.refined-coins .coin-story strong,.refined-coins .coin-story span { display:block; }
+.refined-coins .coin-story strong { color:var(--coral); font-size:20px; }
+.rate-pair { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:18px; margin:22px 0; }
+.rate-pair p { margin:0; min-width:0; }
+.rate-pair span:not(.frac):not(.frac span) { display:block; font-size:14px; }
+.rate-pair strong { display:block; margin-top:6px; font-size:24px; }
+.settlement-axis { margin:18px 0 26px; }
+.settlement-axis figcaption { margin-bottom:18px; font-size:15px; }
+.settlement-year { margin-bottom:18px; }
+.settlement-year h4 { margin:0 0 10px; font-size:15px; }
+.settlement-year ol { display:grid; grid-template-columns:repeat(var(--periods),minmax(0,1fr)); list-style:none; margin:0 8px 0 0; padding:0; border-left:1px solid #a1b6ae; }
+.settlement-year li { position:relative; min-height:38px; border-top:3px solid #dbe4e0; padding:8px 0 0; text-align:right; }
+.settlement-year li.settled { border-top-color:var(--teal); }
+.period-tick { position:absolute; top:-6px; right:-3px; height:9px; width:5px; border:1px solid #92aaa1; background:white; }
+.settled .period-tick { background:var(--teal); border-color:var(--teal); }
+.current-settlement .period-tick { outline:2px solid var(--teal); outline-offset:3px; }
+.settlement-year li small { position:relative; right:-7px; font-size:12px; white-space:nowrap; }
+#settlement-timeline > label { font-size:16px; }
+#settlement-step { width:100%; display:block; margin:12px 0 18px; }
+.step-equation { display:grid; grid-template-columns:minmax(0,1fr) 12px minmax(0,1fr) 12px minmax(0,1fr); gap:10px; align-items:center; padding:18px 0; margin:0; border-block:1px solid var(--line); }
+.step-equation > span { min-width:0; }
+.step-equation small,.step-equation strong { display:block; }
+.step-equation small { font-size:13px; }
+.step-equation strong { font:700 21px Georgia,serif; margin-top:6px; }
+.step-equation b { font:400 20px Georgia,serif; align-self:end; padding-bottom:1px; }
+.step-balance strong { color:var(--teal); }
+.step-rate { margin:10px 0; font-size:17px; }
+.settlement-final { margin-top:18px; font-size:15px; }
+.settlement-final strong { display:block; font-size:26px; color:var(--teal); }
+@media(max-width:640px) {
+  .settlement-tool .segments { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .settlement-tool .segments button { min-width:0; }
+  .addition-track { grid-template-columns:1.4fr repeat(3,1fr); }
+  .addition-track strong,.principal-block { font-size:18px; }
+  .addition-block small { font-size:12px; }
+  .simple-addition .math { font-size:19px; }
+  .refined-coins { --coin-width:44px; }
+  .refined-coins .coin-scenes { gap:14px; }
+  .refined-coins .coin-stage { padding-inline:4px; gap:8px; }
+  .refined-coins .coin-total { font-size:19px; }
+  .rate-pair { gap:12px; }
+  .rate-pair strong { font-size:21px; }
+  .step-equation { gap:5px; }
+  .step-equation strong { font-size:16px; }
+  .step-equation small { font-size:12px; min-height:32px; }
+  .interest-formula-pair { grid-template-columns:1fr; gap:20px; }
+  .interest-formula-pair .math { font-size:21px; }
+  .interest-comparison th,.interest-comparison td { padding:10px 5px; font-size:13px; }
+  .interest-comparison .math { font-size:16px; }
+  .interest-comparison th:first-child { width:20%; overflow-wrap:anywhere; }
+  .lesson-essential .math { font-size:20px; }
+  .essential-label { min-width:80px; }
+}
+@media print {
+  .compact-notes > div,.compact-challenge > .student-task { display:block!important; }
+}
+.scroll-enter { animation:handout-enter .25s ease both; }
+@keyframes handout-enter { from { opacity:.65; transform:translateY(5px); } to { opacity:1; transform:none; } }
+@keyframes handout-coin { from { opacity:.5; transform:translateY(-3px); } to { opacity:1; transform:none; } }
+@media(min-width:1100px) {
+  .intro { padding:54px 0 38px; }
+  .contents { padding-top:54px; }
+  .contents a { padding:10px 0; }
+}
+@media(max-width:1099px) {
+  .contents { display:flex; position:static; overflow-x:auto; background:#fff; gap:18px; padding:8px 0; scrollbar-width:thin; }
+  .contents a { flex:none; white-space:nowrap; }
+}
+@media(max-width:640px) {
+  body { font-size:17px; }
+  h1 { font-size:30px; line-height:1.5; }
+  .intro { padding:28px 0 30px; }
+  .intro .lead { font-size:17px; }
+  .top nav { gap:6px 14px; }
+  .opening-question { padding-left:14px; }
+  .opening-question .math { font-size:23px; }
+  .section-heading { padding:0; }
+  .section-heading h2 { font-size:24px; }
+  section { padding:40px 0 44px; }
+  .formula { font-size:20px; padding:12px 0 16px; }
+  .chalkboard { padding:18px 14px; }
+  .example { padding-left:14px; }
+  .tool-body,.controls { padding:18px 0; }
+  .flow-track { grid-template-columns:minmax(0,1fr) 68px minmax(0,1fr); gap:5px; }
+  .flow-stage strong { font-size:25px; }
+  .flow-stage span { font-size:12px; }
+  .flow-change { font-size:13px; }
+  .coin-scenes { gap:12px; }
+  .coin-pile,.coin-slot,.coin { width:40px; }
+  .coin-total { font-size:20px; }
+  .coin-stage { gap:4px; }
+  .year-step { min-height:0; }
+  .sticky-reminder { padding:18px 16px 4px; }
+  .correction-row .math { font-size:20px; overflow-wrap:anywhere; }
+  .frac { max-width:100%; }
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; }
+}
+@media print {
+  .chalkboard { background:white; color:black; border:1px solid #777; box-shadow:none; }
+  .sticky-reminder { background:white; box-shadow:none; border:1px solid #777; }
+}
+
+  </style>
 </head>
 <body>
   <header class="top"><div class="wrap top-inner">
@@ -239,16 +586,20 @@
   </div></header>
   <main class="wrap">
     <div class="intro">
-      <p class="eyebrow">香港 &middot; 中三</p>
-      <h1>百分數</h1>
-      <p class="lead">由百分變化到複利增長：先認清原值，再決定計算方法。</p>
+      <p class="eyebrow">中三數學講義 &middot; 百分數</p>
+      <h1>這一題，誰是 100%？</h1>
+      <p class="lead">百分率相同，不代表改變的金額相同。每次下筆前，先問自己：「這個百分率，是哪一個數量的百分之幾？」</p>
+      <aside class="opening-question" aria-label="課前思考"><span class="opening-label">先想一想</span><span class="math">HK$800 &rarr; HK$600</span><p>少了 HK$200，減少率是 25%，還是 33.3%？先圈出你會用的基數。</p></aside>
     </div>
     <nav class="contents" aria-label="課程章節">
       <a href="#concepts">01 基本概念</a><a href="#reverse">02 逆向百分數</a><a href="#successive">03 連續變化</a><a href="#depreciation">04 增長與折舊</a><a href="#interest">05 利息</a><a href="#practice">06 練習</a>
     </nav>
 
     <section id="concepts" aria-labelledby="concepts-title">
-      <header class="section-heading"><p class="kicker">01 &middot; 基本概念</p><h2 id="concepts-title">原值就是 100%</h2></header>
+      <header class="section-heading"><p class="kicker">01 &middot; 基本概念</p><h2 id="concepts-title">少了 200，應該跟哪個數比較？</h2></header>
+      <p>由 HK$800 變成 HK$600，變化額是 −HK$200。題目問「比原來減少多少」，所以 <strong>HK$800 是 100%</strong>，不是剩下的 HK$600。</p>
+      <p class="math"><span class="frac"><span>600 &minus; 800</span><span>800</span></span> &times; 100% = &minus;25%</p>
+      <p class="note">老師批註：200 除以 600 算的是「減少額相對新值」的比例，不是這題的減少率。分母選錯，後面的計算即使全對，意思仍然不同。</p>
       <div class="columns">
         <div>
           <p>百分數表示以 100 為分母的分數。例如，35% = 35 &divide; 100 = 0.35，而 0.08 = 8%。</p>
@@ -258,7 +609,7 @@
           <p>結果為正數表示增加，負數表示減少。原值不能為零。</p>
         </div>
         <div>
-          <h3>使用倍率</h3>
+          <h3>減少 15%，為甚麼乘 0.85？</h3>
           <dl class="definitions"><dt><var>O</var></dt><dd>原值</dd><dt><var>N</var></dt><dd>新值</dd><dt><var>r</var></dt><dd>百分率：若百分率為 15%，則 <var>r</var> = 15.</dd></dl>
           <div class="formula"><span class="formula-label">百分增加</span><var>N</var> = <var>O</var>(1 + <var>r</var>%)</div>
           <div class="formula"><span class="formula-label">百分減少</span><var>N</var> = <var>O</var>(1 &minus; <var>r</var>%)</div>
@@ -275,7 +626,7 @@
         </div>
       </div>
       <div class="tool" aria-label="百分變化探索">
-        <h3 class="tool-heading">百分變化探索</h3>
+        <h3 class="tool-heading">把基數或百分率換掉，新值會怎樣？</h3>
         <div class="controls">
           <div><label for="original">原值（HK$）</label><input id="original" type="number" min="1" max="1000000" step="1" value="800"></div>
           <div><span class="control-title" id="direction-label">變化</span><div class="segments" role="group" aria-labelledby="direction-label"><button type="button" data-direction="increase" aria-pressed="false">增加</button><button type="button" data-direction="decrease" aria-pressed="true">減少</button></div></div>
@@ -293,9 +644,9 @@
     </section>
 
     <section id="reverse" aria-labelledby="reverse-title">
-      <header class="section-heading"><p class="kicker">02 &middot; 逆向思考</p><h2 id="reverse-title">逆向百分數</h2></header>
+      <header class="section-heading"><p class="kicker">02 &middot; 逆向百分數</p><h2 id="reverse-title">612 是 85%，原來的 100% 是多少？</h2></header>
       <div class="activity" id="reverse-activity" hidden>
-        <h3>百分變化倒帶</h3>
+        <h3>乘了 0.85，怎樣走回去？</h3>
         <p>某金額減少 15% 後為 HK$612，原來是多少？</p>
         <div class="flow-track">
           <div class="flow-stage"><span>原值</span><strong id="rewind-original">?</strong></div>
@@ -308,12 +659,12 @@
       <div class="columns">
         <div>
           <p>已知新值時，除以倍率便可求回原值。</p>
-          <div class="formula"><var>O</var> = <span class="frac"><span><var>N</var></span><span>倍率</span></span></div>
+          <div class="formula chalkboard"><span class="formula-label">把同一個計算倒過來</span><var>N</var> = <var>O</var> &times; <span class="word">倍率</span><br><var>O</var> = <span class="frac"><span><var>N</var></span><span class="word">倍率</span></span></div>
           <p>增加 <var>r</var>% 後：除以 (1 + <var>r</var>%)。<br>減少 <var>r</var>% 後：除以 (1 &minus; <var>r</var>%)。</p>
           <p class="note">不能直接對新值加回相同百分率，因為基數已不同。若減少了 100%，倍率為零，便無法單憑新值求回原值。</p>
         </div>
         <article class="example">
-          <h3>例 1 &middot; 求折減前的原價</h3>
+          <h3>外套現在售 612，標價怎樣求？</h3>
           <p>一件外套減價 15% 後售 HK$612，求其標價。</p>
           <ol class="steps">
             <li>剩餘百分率 = 100% &minus; 15% = 85%.</li>
@@ -323,12 +674,17 @@
           <p><strong>標價 = HK$720。</strong> 驗算： 720 &times; 0.85 = 612.</p>
         </article>
       </div>
+      <aside class="teacher-correction" aria-label="逆向百分數的常見錯法">
+        <div class="correction-row"><strong class="correction-label">錯誤答案 · 直接加回 15%</strong><span class="math">612 &times; 1.15 = 703.80</span></div>
+        <p class="teacher-comment"><strong>老師批註：</strong>這次的 15% 是按 612 計算，不是按原價計算。檢查一下：703.80 × 0.85 = 598.23，並不是題目的 612。</p>
+        <div class="correction-row correction-row--right"><strong class="correction-label">正確答案 · 除以原來的倍率</strong><span class="math"><span class="frac"><span>612</span><span>0.85</span></span> = 720</span></div>
+      </aside>
     </section>
 
     <section id="successive" aria-labelledby="successive-title">
-      <header class="section-heading"><p class="kicker">03 &middot; 連續變化</p><h2 id="successive-title">把倍率相乘</h2></header>
+      <header class="section-heading"><p class="kicker">03 &middot; 連續變化</p><h2 id="successive-title">加 20% 再減 20%，真的回到原來嗎？</h2></header>
       <div class="activity" id="guess-activity" hidden>
-        <h3>先預測，再計算</h3>
+        <h3>先選一個答案：最後比 100 大還是小？</h3>
         <p>一個數量原為 100，先增加 20%，再減少 20%。最後會是多少？</p>
         <div class="guess-options" role="group" aria-label="預測最後數量">
           <button type="button" data-guess="below" aria-pressed="false">小於 100</button><button type="button" data-guess="equal" aria-pressed="false">等於 100</button><button type="button" data-guess="above" aria-pressed="false">大於 100</button>
@@ -343,7 +699,7 @@
           <p>一個數量連續改變兩次時，<strong>第二個百分率的基數是第一次改變後的數量</strong>。先求中間值，再繼續計算。</p>
         </div>
         <article class="example">
-          <h3>例 2 &middot; 兩次價格變化</h3>
+          <h3>單車先加價再減價，第二次的基數是甚麼？</h3>
           <p>一輛單車原價 HK$2,000，先加價 10%，再減價 15%。</p>
           <figure class="value-diagram">
             <h4>逐步觀察價格變化</h4>
@@ -370,8 +726,12 @@
             <p class="math"><span class="frac"><span>1,870 &minus; 2,000</span><span>2,000</span></span> &times; 100% = &minus;6.5%</p>
             <p><strong>整體減少 6.5%。</strong> 增加 HK$200 後減去 HK$330，整體減少 HK$130。</p>
           </div>
-          <div class="formula"><span class="formula-label">捷徑：把兩個倍率相乘</span>2,000 &times; 1.10 &times; 0.85 = 1,870</div>
-          <p class="note">不能直接把百分率相減，得出 10% &minus; 15% = &minus;5%。兩個百分率所用的基數並不相同。</p>
+          <div class="formula chalkboard"><span class="formula-label">把兩步接起來：倍率相乘</span>2,000 &times; 1.10 &times; 0.85 = 1,870<br>1.10 &times; 0.85 = 0.935</div>
+          <aside class="teacher-correction sticky-reminder" aria-label="連續變化的易錯提醒">
+            <div class="correction-row"><strong class="correction-label">錯誤答案 · 直接相減</strong><span class="math">10% &minus; 15% = &minus;5%</span></div>
+            <p class="teacher-comment"><strong>老師批註：</strong>這個減法本身沒算錯，但不能用來求整體變化。10% 按 2,000 計算；15% 按 2,200 計算，基數不同。</p>
+            <div class="correction-row correction-row--right"><strong class="correction-label">正確答案 · 跟原價比較</strong><span class="math">(0.935 &minus; 1) &times; 100%<br>= &minus;6.5%</span></div>
+          </aside>
           <details><summary>為甚麼增加 20% 再減少 20% 不能互相抵銷？</summary><div>
             <p class="math">100 &times; 1.20 = 120<br>120 &times; 0.80 = 96</p>
             <p>增加時加了 20，但減少時減去 24。最後比原值少 4%。</p>
@@ -382,9 +742,9 @@
     </section>
 
     <section id="depreciation" aria-labelledby="depreciation-title">
-      <header class="section-heading"><p class="kicker">04 &middot; 重複百分變化</p><h2 id="depreciation-title">增長與折舊</h2></header>
+      <header class="section-heading"><p class="kicker">04 &middot; 增長與折舊</p><h2 id="depreciation-title">每年減少 15%，減少額也相同嗎？</h2></header>
       <div class="activity" id="depreciation-activity" hidden>
-        <h3>電腦價值時間軸</h3>
+        <h3>第二年的 15%，還是按 12,000 計算嗎？</h3>
         <p>購入價為 HK$12,000，每年按當時餘值折舊 15%。</p>
         <div class="depreciation-control"><label for="depreciation-year">第 <output id="depreciation-year-label">0</output> 年，共 5 年</label><input id="depreciation-year" type="range" min="0" max="5" step="1" value="0"></div>
         <div class="laptop-scene">
@@ -402,7 +762,7 @@
           <p class="note">每年折舊 10%，不代表 3 年後減值 30%。剩餘比例為 0.9<sup>3</sup> = 0.729，因此減值 27.1%。</p>
         </div>
         <article class="example">
-          <h3>例 3 &middot; 手提電腦的價值</h3>
+          <h3>三年後，電腦還值多少？</h3>
           <p>一部手提電腦購入價為 HK$12,000，每年折舊 15%。求 3 年後的價值。</p>
           <figure class="value-diagram">
             <h4>每年剩下上一年價值的 85%</h4>
@@ -424,10 +784,10 @@
     </section>
 
     <section id="interest" aria-labelledby="interest-title">
-      <header class="section-heading"><p class="kicker">05 &middot; 金錢與時間</p><h2 id="interest-title">單利與複利</h2></header>
+      <header class="section-heading"><p class="kicker">05 &middot; 單利與複利</p><h2 id="interest-title">同樣存 5,000，為甚麼利息不同？</h2></header>
       <p>設 <var>P</var> 為本金，<var>r</var>% 為年利率，<var>t</var> 為年期，<var>I</var> 為利息，<var>A</var> 為本利和。以下例子假設利率固定、不收費，且期間沒有存款或提款。</p>
       <div class="coin-lab" id="coin-lab" hidden>
-        <h3>觀察利息增長</h3>
+        <h3>第二年，哪些錢也開始賺利息？</h3>
         <p>HK$5,000 &middot; 年利率 4% &middot; 每年複利一次</p>
         <div class="earning-key"><span>原有本金產生的利息</span><span>複利產生的額外利息</span></div>
         <div class="coin-controls">
@@ -464,16 +824,16 @@
       </figure>
       <div class="columns">
         <div>
-          <h3>單利</h3>
+          <h3>單利：每年都按原本金計算嗎？</h3>
           <p>只按原有本金計算利息。</p>
           <div class="formula"><var>I</var> = <var>P</var> &times; <var>r</var>% &times; <var>t</var></div>
           <div class="formula"><var>A</var> = <var>P</var>(1 + <var>r</var>% &times; <var>t</var>)</div>
           <p>本金 HK$5,000，年利率 4%，存期 3 年：</p>
           <p class="math"><var>I</var> = 5,000 &times; 0.04 &times; 3 = HK$600<br><var>A</var> = 5,000 + 600 = <strong>HK$5,600</strong></p>
-          <p class="note">「p.a.」表示每年。計算 9 個月的單利時，<var>t</var> = 9/12。</p>
+          <p class="note">「p.a.」表示每年。計算 9 個月的單利時，<var>t</var> = <span class="frac"><span>9</span><span>12</span></span>。</p>
         </div>
         <div>
-          <h3>複利</h3>
+          <h3>複利：上一年的利息也計息嗎？</h3>
           <p>利息加入結餘後，在往後的期數也會賺取利息。</p>
           <div class="formula"><var>A</var> = <var>P</var>(1 + <var>r</var>%)<sup><var>t</var></sup></div>
           <div class="formula"><var>I</var> = <var>A</var> &minus; <var>P</var></div>
@@ -488,7 +848,7 @@
         <p>本金 HK$8,000，年利率 6%，每半年複利一次，共存 2 年：<var>m</var> = 2，因此 <var>A</var> = 8,000(1.03)<sup>4</sup> &asymp; HK$9,004.07.</p>
       </div></details>
       <div class="tool" aria-label="利息比較">
-        <h3 class="tool-heading">比較單利與複利</h3>
+        <h3 class="tool-heading">多存幾年，兩種結餘會差多少？</h3>
         <div class="controls">
           <div><label for="principal">本金（HK$）</label><input id="principal" type="number" min="1" max="1000000" step="1" value="5000"></div>
           <div><label for="interest-rate">年利率（%）</label><input id="interest-rate" type="number" min="0" max="30" step="0.1" value="4"></div>
@@ -508,7 +868,7 @@
     </section>
 
     <section id="practice" aria-labelledby="practice-title">
-      <header class="section-heading"><p class="kicker">06 &middot; 學以致用</p><h2 id="practice-title">練習</h2></header>
+      <header class="section-heading"><p class="kicker">06 &middot; 練習</p><h2 id="practice-title">你能先指出基數，再選答案嗎？</h2></header>
       <p>有需要時，把金額答案四捨五入至最接近的一仙。</p>
       <noscript><p>互動練習需要啟用 JavaScript；例題及下方的綜合題仍可閱讀。</p></noscript>
       <div class="tool quiz" id="quiz" hidden>
@@ -516,7 +876,7 @@
         <div class="tool-body"><h3 id="question" tabindex="-1"></h3><div class="choices" id="choices"></div><p class="feedback" id="feedback" aria-live="polite"></p><button id="next" class="primary" type="button" hidden>下一題</button></div>
       </div>
       <article class="example" style="margin-top:24px">
-        <h3>綜合練習</h3>
+        <h3>存款變成相機，整體變化應跟誰比較？</h3>
         <p>一名學生存入 HK$4,000，年利率 5%，每年複利一次，共存 2 年。求本利和。學生把全數款項用來購買相機；相機其後每年折舊 10%，共折舊 2 年。求相機的價值，以及相對原來 HK$4,000 的整體百分變化。</p>
         <details><summary>完整解答</summary><div>
           <p>本利和 = 4,000 &times; (1 + 5%)<sup>2</sup> = <strong>HK$4,410.</strong></p>
@@ -544,7 +904,7 @@
           entranceSeen.add(entry.target);
           entry.target.classList.add("scroll-enter");
           entry.target.addEventListener("animationend", event => {
-            if (event.target === entry.target && event.animationName === "section-arrive") entry.target.classList.remove("scroll-enter");
+            if (event.target === entry.target && ["section-arrive","handout-enter"].includes(event.animationName)) entry.target.classList.remove("scroll-enter");
           });
           entranceObserver.unobserve(entry.target);
         });
@@ -553,9 +913,10 @@
     }
     reducedMotion.addEventListener("change", setupEntrances);
     setupEntrances();
-    const sectionLinks = [...document.querySelectorAll(".contents a")];
-    const lessonSections = sectionLinks.map(link => document.querySelector(link.getAttribute("href")));
+    let visibleChapter = null;
     function updateCurrentSection() {
+      const sectionLinks = [...document.querySelectorAll(".contents a")];
+      const lessonSections = sectionLinks.map(link => document.querySelector(link.getAttribute("href")));
       let current = lessonSections[0];
       for (const section of lessonSections) {
         if (section.getBoundingClientRect().top <= 160) current = section;
@@ -564,6 +925,14 @@
         if (link.getAttribute("href") === "#" + current.id) link.setAttribute("aria-current", "location");
         else link.removeAttribute("aria-current");
       });
+      if (current.id !== visibleChapter && innerWidth < 1100) {
+        const navigation = document.querySelector(".contents");
+        const active = navigation.querySelector('[aria-current="location"]');
+        const bounds = navigation.getBoundingClientRect(), item = active.getBoundingClientRect();
+        if (item.left < bounds.left) navigation.scrollLeft += item.left - bounds.left;
+        else if (item.right > bounds.right) navigation.scrollLeft += item.right - bounds.right;
+      }
+      visibleChapter = current.id;
     }
     window.addEventListener("scroll", updateCurrentSection, { passive:true });
     updateCurrentSection();
@@ -768,9 +1137,22 @@
       {prompt:"合格率由 60% 升至 75%，相對增幅是多少？", choices:["15%","25%","只是 15 個百分點","125%"], answer:1, reason:"增加了 15 個百分點。相對增幅為 (75 \u2212 60) \u00f7 60 \u00d7 100% = 25%。"},
       {prompt:"原價減少 r% 後為 N，哪條公式可求原價 O？", mathPrompt:"原價減少 <var>r</var>% 後為 <var>N</var>，哪條公式可求原價 <var>O</var>？", choices:["<var>O</var> = <var>N</var>(1 + <var>r</var>%)","<var>O</var> = <var>N</var>(1 &minus; <var>r</var>%)","<var>O</var> = <var>N</var> &divide; (1 + <var>r</var>%)","<var>O</var> = <var>N</var> &divide; (1 &minus; <var>r</var>%)"], answer:3, reason:"把新價除以減幅倍率，可倒轉原來的乘法；減幅須小於 100%。"}
     ];
-    let questionIndex = 0, score = 0, answered = false;
+    const questionHints = [
+      "增幅要跟原價 240 比較，不是跟新價 300 比較。",
+      "504 是原價的 80%。先寫原價乘 0.8 等於 504。",
+      "兩次變化的基數不同；試把兩個倍率相乘。",
+      "先把 9 個月換算成年，再留意題目問利息還是本利和。",
+      "第二年以第一年年終結餘計息，不是再加一次固定金額。",
+      "每年都乘剩餘比例；第二年不再以 20,000 為基數。",
+      "先求兩年的總倍率，再找每年的相同倍率。",
+      "剩下原值的 75%。回復時的增加額應跟這個新值比較。",
+      "百分點差是 15，但相對增幅的基數是 60。",
+      "原價乘減幅倍率等於新價；求原價時要倒轉這個乘法。"
+    ];
+    let questionIndex = 0, score = 0, answered = false, attempts = 0;
     function renderQuestion(focus = false) {
       answered = false;
+      attempts = 0;
       const question = questions[questionIndex];
       el("progress").textContent = `第 ${questionIndex + 1} 題，共 ${questions.length} 題`;
       el("score").textContent = `得分：${score} / ${questions.length}`;
@@ -783,15 +1165,22 @@
         button.type = "button"; button.className = "choice"; button.innerHTML = choice;
         button.addEventListener("click", () => {
           if (answered) return;
-          answered = true;
           const correct = index === question.answer;
+          attempts++;
+          if (!correct && attempts === 1) {
+            button.classList.add("wrong");
+            button.disabled = true;
+            el("feedback").textContent = `再試一次。${questionHints[questionIndex]}`;
+            return;
+          }
+          answered = true;
           if (correct) score++;
           [...el("choices").children].forEach((item,i) => {
             item.disabled = true;
             if (i === question.answer) item.classList.add("correct");
             else if (i === index) item.classList.add("wrong");
           });
-          el("feedback").textContent = `${correct ? "答對了。" : "未答對。"} ${question.reason}`;
+          el("feedback").textContent = `${correct ? "答對了。" : "兩次都未答對，現在對照解法。"} ${question.reason}`;
           el("score").textContent = `得分：${score} / ${questions.length}`;
           const last = questionIndex === questions.length - 1;
           if (last) el("feedback").textContent += ` 已完成：答對 ${score} 題，共 ${questions.length} 題。`;
@@ -810,6 +1199,640 @@
     });
     el("quiz").hidden = false;
     renderQuestion();
+  </script>
+  <script id="student-activities">
+(() => {
+  const zh = document.documentElement.lang === "zh-Hant";
+  const text = (chinese, english) => zh ? chinese : english;
+  const find = id => document.getElementById(id);
+  const fixed = value => Number(value.toFixed(2)).toLocaleString("en-HK", { maximumFractionDigits:2 });
+  const currency = value => "HK$" + value.toLocaleString("en-HK", { minimumFractionDigits:2, maximumFractionDigits:2 });
+  function exercise(id, html, before) {
+    const node = document.createElement("div");
+    node.id = id; node.className = "student-task";
+    node.innerHTML = html;
+    before.before(node);
+    return node;
+  }
+  function feedback(id, state, message) {
+    const node = find(id);
+    node.dataset.state = state;
+    node.textContent = message;
+  }
+
+  const baseTask = exercise("base-task", `
+    <h3>${text("由 800 變成 600，你會選誰做分母？","From 800 to 600, which denominator would you choose?")}</h3>
+    <p>${text("變化額是 −200。選出基數，再看看這個分數到底在比較甚麼。","The change is −200. Choose a base, then check what your fraction actually compares.")}</p>
+    <div class="base-expression math"><span class="frac"><span>600 − 800</span><span id="chosen-base">?</span></span> × 100% <span id="base-rate"></span></div>
+    <div class="task-actions" role="group" aria-label="${text("選擇基數","Choose the base")}">
+      <button type="button" class="secondary" data-base="800" aria-pressed="false">HK$800</button>
+      <button type="button" class="secondary" data-base="600" aria-pressed="false">HK$600</button>
+    </div>
+    <p class="task-feedback" id="base-feedback" aria-live="polite">${text("先選一個基數。","Choose a base first.")}</p>`,
+    document.querySelector("#concepts > .section-heading + p"));
+  baseTask.querySelectorAll("[data-base]").forEach(button => button.addEventListener("click", () => {
+    const base = Number(button.dataset.base);
+    baseTask.querySelectorAll("[data-base]").forEach(item => item.setAttribute("aria-pressed", String(item === button)));
+    find("chosen-base").textContent = String(base);
+    find("base-rate").textContent = base === 800 ? "= −25%" : "≈ −33.33%";
+    feedback("base-feedback", base === 800 ? "success" : "hint", base === 800
+      ? text("正確。題目跟原值比較，所以 800 才是 100%。","Correct. We are comparing with the original, so 800 is 100%.")
+      : text("這個分數比較的是新值。600 是剩下的金額，不是題目所說的原來金額；請再選。","That fraction compares with the new amount. 600 is what remains, not the original amount in this question. Try the other base."));
+  }));
+
+  exercise("reverse-task", `
+    <h3>${text("現在由你求原值。","Now find the original amount yourself.")}</h3>
+    <p id="reverse-task-question"></p>
+    <form id="reverse-answer-form" novalidate>
+      <label for="reverse-answer">${text("原值（HK$）","Original amount (HK$)")}</label>
+      <div class="answer-entry"><input type="number" id="reverse-answer" min="0.01" max="1000000" step="0.01" inputmode="decimal" aria-describedby="reverse-task-feedback">
+        <button type="submit" class="primary">${text("驗算我的答案","Check my answer")}</button></div>
+    </form>
+    <p class="task-feedback" id="reverse-task-feedback" aria-live="polite"></p>
+    <div class="task-actions"><button type="button" class="secondary" id="reverse-hint">${text("給我一個提示","Give me a hint")}</button>
+      <button type="button" class="secondary" id="reverse-new">${text("換一題","Another question")}</button></div>`,
+    document.querySelector("#reverse > .columns"));
+  const reverseCases = [
+    {amount:612, rate:15, multiplier:.85},
+    {amount:504, rate:20, multiplier:.8},
+    {amount:960, rate:20, multiplier:1.2},
+    {amount:315, rate:30, multiplier:.7}
+  ];
+  let reverseIndex = 0;
+  function resetReverseTask() {
+    const q = reverseCases[reverseIndex];
+    find("reverse-task-question").textContent = text(
+      `某金額${q.multiplier < 1 ? "減少" : "增加"} ${q.rate}% 後為 ${currency(q.amount)}。原來是多少？`,
+      `After a ${q.rate}% ${q.multiplier < 1 ? "decrease" : "increase"}, an amount is ${currency(q.amount)}. What was it before?`);
+    find("reverse-answer").value = "";
+    feedback("reverse-task-feedback", "neutral", "");
+  }
+  find("reverse-answer-form").addEventListener("submit", event => {
+    event.preventDefault();
+    const input = find("reverse-answer"), q = reverseCases[reverseIndex];
+    const value = input.valueAsNumber;
+    if (!input.validity.valid || !Number.isFinite(value)) {
+      feedback("reverse-task-feedback", "hint", text("請輸入不超過 1,000,000 的正數金額，最多兩位小數。","Enter a positive amount up to 1,000,000 with at most two decimal places."));
+      input.focus(); return;
+    }
+    const correct = Math.abs(value - q.amount / q.multiplier) < .005;
+    feedback("reverse-task-feedback", correct ? "success" : "hint", correct
+      ? text(`答對了。${currency(value)} × ${q.multiplier} = ${currency(q.amount)}，回到題目的新值。`,
+        `Correct. ${currency(value)} × ${q.multiplier} = ${currency(q.amount)}, matching the given final amount.`)
+      : text(`你的原值正向計算後是 ${currency(value * q.multiplier)}，不是 ${currency(q.amount)}。新值應等於原值乘 ${q.multiplier}；再試一次。`,
+        `Your original gives ${currency(value * q.multiplier)} after the change, not ${currency(q.amount)}. The final amount should equal the original × ${q.multiplier}. Try again.`));
+  });
+  find("reverse-hint").addEventListener("click", () => {
+    const q = reverseCases[reverseIndex];
+    feedback("reverse-task-feedback", "hint", text(
+      `新值是原值的 ${Math.round(q.multiplier * 100)}%。設原值為一個未知數，先寫「原值 × ${q.multiplier} = ${q.amount}」，再倒轉乘法。`,
+      `The final amount is ${Math.round(q.multiplier * 100)}% of the original. Write "original × ${q.multiplier} = ${q.amount}", then undo the multiplication.`));
+  });
+  find("reverse-new").addEventListener("click", () => {
+    reverseIndex = (reverseIndex + 1) % reverseCases.length;
+    resetReverseTask(); find("reverse-answer").focus();
+  });
+  resetReverseTask();
+
+  exercise("chain-task", `
+    <h3>${text("由你改百分率：怎樣才剛好回到 100？","Change the rates: what brings us exactly back to 100?")}</h3>
+    <div class="task-controls">
+      <div><label for="chain-rise">${text("先增加","First increase")}: <output id="chain-rise-label">20%</output></label><input id="chain-rise" type="range" min="0" max="50" step="1" value="20"></div>
+      <div><label for="chain-fall">${text("再減少","Then decrease")}: <output id="chain-fall-label">20%</output></label><input id="chain-fall" type="range" min="0" max="50" step="any" value="20"></div>
+    </div>
+    <div class="chain-bars" role="img" id="chain-diagram">
+      <div class="value-row"><div class="value-label"><span>${text("原值","Original")}</span><strong>100</strong></div><div class="value-track"><div id="chain-start-bar" class="value-fill"></div></div></div>
+      <div class="value-row"><div class="value-label"><span>${text("第一次變化後","After the first change")}</span><strong id="chain-middle"></strong></div><div class="value-track"><div id="chain-middle-bar" class="value-fill rise"></div></div></div>
+      <div class="value-row"><div class="value-label"><span>${text("第二次變化後","After the second change")}</span><strong id="chain-final"></strong></div><div class="value-track"><div id="chain-final-bar" class="value-fill fall"></div></div></div>
+    </div>
+    <p class="task-feedback" id="chain-feedback" aria-live="polite"></p>
+    <div class="task-actions"><button type="button" class="secondary" id="chain-match">${text("試相同的增減率","Try equal rates")}</button>
+      <button type="button" class="primary" id="chain-restore">${text("求回復 100 的減幅","Find the decrease back to 100")}</button></div>
+    <p id="chain-recovery" class="math" aria-live="polite" hidden></p>`,
+    document.querySelector("#successive > .columns"));
+  function renderChain() {
+    const rise = find("chain-rise").valueAsNumber, fall = find("chain-fall").valueAsNumber;
+    const middle = 100 * (1 + rise / 100), final = middle * (1 - fall / 100);
+    find("chain-rise-label").value = rise + "%";
+    find("chain-fall-label").value = (Math.abs(fall - Number(fall.toFixed(2))) > 1e-9 ? "≈ " : "") + fixed(fall) + "%";
+    find("chain-middle").textContent = fixed(middle);
+    find("chain-final").textContent = fixed(final);
+    [["chain-start-bar",100],["chain-middle-bar",middle],["chain-final-bar",final]].forEach(([id,amount]) => {
+      find(id).style.setProperty("--value", amount / middle * 100 + "%");
+    });
+    find("chain-diagram").setAttribute("aria-label",text(
+      `相同比例：原值 100，第一次後 ${fixed(middle)}，第二次後 ${fixed(final)}。`,
+      `Same scale: original 100, then ${fixed(middle)}, then ${fixed(final)}.`));
+    const equal = Math.abs(final - 100) < 1e-8;
+    feedback("chain-feedback", equal ? "success" : "neutral", text(
+      `第二次按 ${fixed(middle)} 計算，不是按 100。這次減去 ${fixed(middle - final)}。${equal ? "剛好回到 100！" : `最後比原值${final < 100 ? "少" : "多"} ${fixed(Math.abs(final - 100))}。`}`,
+      `The second base is ${fixed(middle)}, not 100. This decrease removes ${fixed(middle - final)}. ${equal ? "Exactly back to 100!" : `The final amount is ${fixed(Math.abs(final - 100))} ${final < 100 ? "below" : "above"} the original.`}`));
+  }
+  ["chain-rise","chain-fall"].forEach(id => find(id).addEventListener("input", () => {
+    find("chain-recovery").hidden = true; renderChain();
+  }));
+  find("chain-match").addEventListener("click", () => {
+    find("chain-fall").value = find("chain-rise").value;
+    find("chain-recovery").hidden = true; renderChain();
+  });
+  find("chain-restore").addEventListener("click", () => {
+    const rise = find("chain-rise").valueAsNumber, middle = 100 + rise;
+    find("chain-fall").value = rise / middle * 100;
+    renderChain();
+    find("chain-recovery").innerHTML = `<span class="frac"><span>${rise}</span><span>${middle}</span></span> × 100% ≈ ${fixed(rise / middle * 100)}%`;
+    find("chain-recovery").hidden = false;
+  });
+  renderChain();
+
+  const interestTask = exercise("interest-base-task", `
+    <h3>${text("第 2 年年初，哪些錢應該計息？","At the start of year 2, which money earns interest?")}</h3>
+    <p>${text("本金是 HK$5,000，第 1 年已賺 HK$200，年利率是 4%。先選計息方式，再勾選這一年的基數。","The principal is HK$5,000, year 1 earned HK$200, and the annual rate is 4%. Choose the interest method, then select this year's base.")}</p>
+    <div class="segments task-mode" role="group" aria-label="${text("計息方式","Interest method")}">
+      <button type="button" data-interest-mode="simple" aria-pressed="false">${text("單利","Simple")}</button>
+      <button type="button" data-interest-mode="compound" aria-pressed="true">${text("複利","Compound")}</button>
+    </div>
+    <fieldset class="money-selection"><legend>${text("哪些金額放進計息基數？","Which amounts belong in the interest base?")}</legend>
+      <label><input type="checkbox" id="include-principal" value="5000"><span>${text("原有本金","Original principal")} <strong>HK$5,000</strong></span></label>
+      <label><input type="checkbox" id="include-earned" value="200"><span>${text("第 1 年已賺的利息","Interest already earned in year 1")} <strong>HK$200</strong></span></label>
+      <label><input type="checkbox" id="include-future" value="208"><span>${text("候選金額：第 2 年利息，尚未賺到","Proposed year 2 interest, not yet earned")} <strong>HK$208</strong></span></label>
+    </fieldset>
+    <p class="math" id="selected-interest-base" aria-live="polite"></p>
+    <button type="button" class="primary" id="check-interest-base">${text("檢查計息基數","Check the interest base")}</button>
+    <p class="task-feedback" id="interest-base-feedback" aria-live="polite"></p>
+    <p class="task-progress" id="interest-task-progress"></p>`,
+    document.querySelector("#interest > .coin-lab"));
+  let interestMode = "compound";
+  const completedModes = new Set();
+  function selectedBase() {
+    return [...interestTask.querySelectorAll("input:checked")].reduce((sum,input) => sum + Number(input.value),0);
+  }
+  function renderInterestBase() {
+    const base = selectedBase();
+    find("selected-interest-base").textContent = `${currency(base)} × 4% = ${currency(base * .04)}`;
+    feedback("interest-base-feedback", "neutral", "");
+  }
+  interestTask.querySelectorAll("input").forEach(input => input.addEventListener("change",renderInterestBase));
+  interestTask.querySelectorAll("[data-interest-mode]").forEach(button => button.addEventListener("click", () => {
+    interestMode = button.dataset.interestMode;
+    interestTask.querySelectorAll("[data-interest-mode]").forEach(item => item.setAttribute("aria-pressed",String(item === button)));
+    interestTask.querySelectorAll("input").forEach(input => input.checked = false);
+    renderInterestBase();
+  }));
+  find("check-interest-base").addEventListener("click", () => {
+    const principal = find("include-principal").checked;
+    const earned = find("include-earned").checked;
+    const future = find("include-future").checked;
+    const correct = principal && earned === (interestMode === "compound") && !future;
+    let message;
+    if (correct) {
+      completedModes.add(interestMode);
+      message = interestMode === "compound"
+        ? text("正確。5,000 + 200 = 5,200；本年利息是 208。其中多出的 8，是上一年利息再賺的利息。","Correct. 5,000 + 200 = 5,200, so this year's interest is 208. The extra 8 is interest earned on last year's interest.")
+        : text("正確。單利只按本金 5,000 計算，每年利息都是 200。","Correct. Simple interest uses only the original 5,000, earning 200 each year.");
+    } else if (future) {
+      message = text("第 2 年的利息還未賺到，不能提前加入年初基數。取消最後一項，再想想。","Year 2's interest has not been earned yet. It cannot be part of the opening base. Remove the last amount and try again.");
+    } else if (!principal) {
+      message = text("原有本金仍在戶口裏，不能漏掉 5,000。","The original principal is still in the account. Do not leave out the 5,000.");
+    } else {
+      message = interestMode === "compound"
+        ? text("複利要把已賺的利息加入基數。第 1 年的 200 已經在戶口裏了。","Compound interest includes interest already earned. The 200 from year 1 is already in the account.")
+        : text("單利的基數只用原有本金。雖然已賺了 200，但它不再產生單利利息。","Simple interest uses only the original principal. The 200 already earned does not itself earn simple interest.");
+    }
+    feedback("interest-base-feedback", correct ? "success" : "hint",message);
+    find("interest-task-progress").textContent = text(`已完成 ${completedModes.size} / 2 種計息方式。`,`Completed ${completedModes.size} / 2 interest methods.`);
+  });
+  renderInterestBase();
+})();
+
+  </script>
+  <script id="compact-lesson">
+(() => {
+  const zh = document.documentElement.lang === "zh-Hant";
+  const text = (chinese, english) => zh ? chinese : english;
+  const query = selector => document.querySelector(selector);
+  function fold(section, selectors, label) {
+    const nodes = selectors.flatMap(selector => [...section.querySelectorAll(selector)]);
+    if (!nodes.length) return;
+    const details = document.createElement("details");
+    details.className = "compact-notes";
+    const summary = document.createElement("summary");
+    summary.textContent = label;
+    const body = document.createElement("div");
+    nodes.forEach(node => body.append(node));
+    details.append(summary,body); section.append(details);
+  }
+  query(".intro .lead").textContent = text("每個百分率，都有自己的基數。","Every percentage has its own base.");
+  query(".intro h1").textContent = text("這次，拿誰比較？","Compared with what?");
+  query(".intro .opening-question").remove();
+  const headings = {
+    concepts:["誰是 100%？","Which amount is 100%?"],
+    reverse:["原來是多少？","What was the original?"],
+    successive:["先加再減，會抵銷嗎？","Up, then down: do they cancel?"],
+    depreciation:["三年後，還剩多少？","What remains after three years?"],
+    interest:["利息也會賺利息？","Can interest earn interest?"],
+    practice:["換你挑戰。","Your turn."]
+  };
+  Object.entries(headings).forEach(([id,titles]) => query(`#${id}-title`).textContent = text(...titles));
+
+  const concepts = query("#concepts");
+  fold(concepts,[":scope > p",":scope > .columns"],text("筆記：基數與倍率","Notes: bases and multipliers"));
+  fold(concepts,[":scope > .tool"],text("試其他金額與百分率","Try other amounts and rates"));
+  const reverse = query("#reverse");
+  fold(reverse,[":scope > #reverse-activity",":scope > .columns",":scope > .teacher-correction"],
+    text("為甚麼要除？看倒帶與錯法","Why divide? See the rewind and a common mistake"));
+  const successive = query("#successive");
+  const chain = query("#chain-task");
+  const challenge = document.createElement("details");
+  challenge.className = "compact-challenge";
+  const challengeTitle = document.createElement("summary");
+  challengeTitle.textContent = text("進階挑戰：把結果調回 100","Extra challenge: bring the result back to 100");
+  challenge.append(challengeTitle,chain);
+  query("#guess-activity").append(challenge);
+  fold(successive,[":scope > .columns"],text("筆記：兩次變化怎樣接起來？","Notes: how do the two changes connect?"));
+  const depreciation = query("#depreciation");
+  fold(depreciation,[":scope > .columns"],text("公式、三年例題與未知增長率","Formulas, the three-year example and an unknown rate"));
+  const interest = query("#interest");
+  fold(interest,[":scope > p",":scope > .interest-visual",":scope > .columns"],
+    text("筆記：單利與複利的計算","Notes: simple and compound interest"));
+  fold(interest,[":scope > #coin-lab"],text("看金幣：利息差距從哪裏來？","Watch the coins: where does the gap come from?"));
+  fold(interest,[":scope > .tool"],text("試其他本金、利率與年期","Try another principal, rate or term"));
+  const practice = query("#practice");
+  fold(practice,[":scope > .example",":scope > .note"],text("綜合題與最後檢查","A combined problem and a final check"));
+
+  function essential(section, html) {
+    const node = document.createElement("div");
+    node.className = "lesson-essential";
+    node.innerHTML = html;
+    section.querySelector(":scope > .compact-notes").before(node);
+    return node;
+  }
+  essential(concepts, `
+    <h3>${text("計算前，要記住甚麼？","What do you need before calculating?")}</h3>
+    <p class="essential-key">${text("原值就是 100%。增加用「1 + 百分率」，減少用「1 − 百分率」。","The original is 100%. Increase: 1 + the rate. Decrease: 1 − the rate.")}</p>
+    <div class="math"><var>N</var> = <var>O</var>(1 + <var>r</var>%)<br><var>N</var> = <var>O</var>(1 − <var>r</var>%)</div>
+    <p class="essential-definitions">${text("<var>O</var>：原值；<var>N</var>：新值。若百分率是 15%，<var>r</var> = 15。","<var>O</var>: original; <var>N</var>: new amount. For 15%, <var>r</var> = 15.")}</p>
+    <div class="math"><span class="frac"><span>${text("新值 − 原值","new − original")}</span><span>${text("原值","original")}</span></span> × 100%</div>
+    <p class="essential-definitions">${text("正數表示增加，負數表示減少；原值不能是 0。","Positive means an increase; negative means a decrease. The original must not be zero.")}</p>`);
+  essential(reverse, `
+    <p class="essential-key">${text("知道新值，求原值：除以倍率，不是加回同一百分率。","Given the new amount, divide by the multiplier. Do not add back the same percentage.")}</p>
+    <div class="math"><var>O</var> = <span class="frac"><span><var>N</var></span><span>${text("倍率","multiplier")}</span></span></div>
+    <p class="essential-definitions">${text("增加後的倍率是 1 + <var>r</var>%；減少後是 1 − <var>r</var>%。減少 100% 時倍率為 0，不能倒算原值。","After an increase: 1 + <var>r</var>%. After a decrease: 1 − <var>r</var>%. A 100% decrease gives a zero multiplier, so the original cannot be recovered.")}</p>`);
+  essential(successive, `
+    <p class="essential-key">${text("第二次用第一次變化後的數量作基數。把倍率相乘，不把百分率相加減。","The second base is the amount after the first change. Multiply the multipliers, not the percentage rates.")}</p>
+    <div class="math">1.20 × 0.80 = 0.96</div>
+    <p>${text("最後是原值的 96%，即整體減少 4%。","The final amount is 96% of the original: an overall 4% decrease.")}</p>`);
+  essential(depreciation, `
+    <h3>${text("重複同一倍率，用甚麼表示？","How do we repeat the same multiplier?")}</h3>
+    <div class="repeated-rates">
+      <p><span class="essential-label">${text("增長","Growth")}</span><span class="math"><var>V</var> = <var>V</var><sub>0</sub>(1 + <var>r</var>%)<sup><var>n</var></sup></span></p>
+      <p><span class="essential-label">${text("折舊","Depreciation")}</span><span class="math"><var>V</var> = <var>V</var><sub>0</sub>(1 − <var>r</var>%)<sup><var>n</var></sup></span></p>
+    </div>
+    <p class="essential-definitions">${text("<var>V</var><sub>0</sub> 是初始值，<var>n</var> 是期數，<var>r</var>% 是每期固定百分率。","<var>V</var><sub>0</sub> is the initial value, <var>n</var> the number of periods, and <var>r</var>% the fixed rate per period.")}</p>
+    <p class="essential-key">${text("每年折舊 15%，是每年乘 0.85；不是三年直接減去 45%。","15% annual depreciation means × 0.85 each year, not a straight 45% decrease over three years.")}</p>`);
+  const comparison = document.createElement("div");
+  comparison.id = "interest-calculation";
+  comparison.innerHTML = `
+    <h3>${text("同一筆錢，兩種算法並排看。","The same money, two calculations side by side.")}</h3>
+    <p class="comparison-given">${text("本金 HK$5,000 · 年利率 4% · 3 年 · 每年複利一次","Principal HK$5,000 · 4% p.a. · 3 years · annual compounding")}</p>
+    <div class="interest-formula-pair">
+      <div><h4>${text("單利：只按原本金","Simple: original principal only")}</h4><div class="math"><var>I</var> = <var>P</var> × <var>r</var>% × <var>t</var><br><var>A</var> = <var>P</var> + <var>I</var></div></div>
+      <div><h4>${text("複利：利息加入基數","Compound: interest joins the base")}</h4><div class="math"><var>A</var> = <var>P</var>(1 + <var>r</var>%)<sup><var>t</var></sup><br><var>I</var> = <var>A</var> − <var>P</var></div></div>
+    </div>
+    <p class="essential-definitions">${text("<var>P</var> 是本金，<var>r</var>% 是年利率，<var>t</var> 是年期，<var>I</var> 是利息，<var>A</var> 是本利和。","<var>P</var>: principal; <var>r</var>%: annual rate; <var>t</var>: years; <var>I</var>: interest; <var>A</var>: final balance.")}</p>
+    <table class="interest-comparison">
+      <caption>${text("留意每一行的計息基數。","Watch the interest base in each row.")}</caption>
+      <thead><tr><th scope="col">${text("計算","Item")}</th><th scope="col">${text("單利","Simple")}</th><th scope="col">${text("複利","Compound")}</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">${text("第 1 年利息","Year 1 interest")}</th><td><span class="math">5,000 × 4%<br>= 200</span></td><td><span class="math">5,000 × 4%<br>= 200</span></td></tr>
+        <tr class="base-change"><th scope="row">${text("第 2 年利息","Year 2 interest")}</th><td><span class="math">5,000 × 4%<br>= 200</span></td><td><span class="math"><strong>5,200</strong> × 4%<br>= <strong>208</strong></span></td></tr>
+        <tr><th scope="row">${text("第 3 年利息","Year 3 interest")}</th><td><span class="math">5,000 × 4%<br>= 200</span></td><td><span class="math">5,408 × 4%<br>= 216.32</span></td></tr>
+        <tr><th scope="row">${text("3 年總利息","Total interest")}</th><td><span class="math">5,000 × 4% × 3<br>= <strong>600</strong></span></td><td><span class="math">5,624.32 − 5,000<br>= <strong>624.32</strong></span></td></tr>
+        <tr class="balance-row"><th scope="row">${text("本利和","Final balance")}</th><td><span class="math">5,000 + 600<br>= <strong>5,600</strong></span></td><td><span class="math">5,000(1.04)<sup>3</sup><br>= <strong>5,624.32</strong></span></td></tr>
+      </tbody>
+    </table>
+    <p class="comparison-point">${text("<strong>複利多了 HK$24.32。</strong> 關鍵不是利率不同，而是第二年起，已賺的利息也開始計息。","<strong>Compound interest earns HK$24.32 more.</strong> The rate is the same. From year 2, interest already earned also earns interest.")}</p>`;
+  query("#interest-base-task").before(comparison);
+
+  query("#base-task h3").textContent = text("800 → 600。分母選誰？","800 → 600. Which denominator?");
+  query("#base-task > p").textContent = text("少了 200。選出比較的基數。","200 less. Choose the comparison base.");
+  query("#base-feedback").textContent = "";
+  query("#reverse-task h3").textContent = text("試試求回原值。","Find the original.");
+  query("#reverse-answer-form button").textContent = text("驗算","Check");
+  query("#reverse-hint").textContent = text("提示","Hint");
+  query("#reverse-new").textContent = text("換題","New question");
+  query("#chain-task h3").textContent = text("能剛好回到 100 嗎？","Can you land exactly on 100?");
+  query("#chain-restore").textContent = text("求回復的減幅","Find the recovery rate");
+  query("#interest-base-task h3").textContent = text("第二年，哪些錢計息？","Year 2: which money earns interest?");
+  query("#interest-base-task > p").textContent = text("年利率 4%；第一年已賺 200。","4% a year; year 1 has already earned 200.");
+  query("#interest-base-task .money-selection legend").classList.add("visually-hidden");
+  const labels = [
+    ["原有本金","Original principal"],
+    ["去年利息","Last year's interest"],
+    ["今年利息（未賺到）","This year's interest (not earned yet)"]
+  ];
+  query("#interest-base-task").querySelectorAll(".money-selection label span").forEach((span,index) => {
+    span.firstChild.textContent = text(...labels[index]) + " ";
+  });
+  query("#check-interest-base").textContent = text("檢查","Check");
+  query("#guess-activity h3").textContent = text("先加 20%，再減 20%。猜結果！","Up 20%, then down 20%. Make a prediction!");
+  query("#guess-activity > p").textContent = text("由 100 開始。最後是……","Start at 100. The final amount is…");
+  const guesses = {below:"< 100",equal:"= 100",above:"> 100"};
+  query("#guess-activity").querySelectorAll("[data-guess]").forEach(button => {
+    button.setAttribute("aria-label",button.textContent);
+    button.textContent = guesses[button.dataset.guess];
+    button.addEventListener("click",() => query("#guess-reset").hidden = false);
+  });
+  query("#guess-reset").hidden = true;
+  query("#guess-reset").addEventListener("click",() => query("#guess-reset").hidden = true);
+  query("#depreciation-activity h3").textContent = text("每年乘 0.85，拉到第三年看看。","Multiply by 0.85 each year. Try year 3.");
+
+  // Keep the lesson in classroom order without rebuilding existing controls.
+  function chapter(id, number, topic, question) {
+    const section = document.createElement("section");
+    section.id = id;
+    section.setAttribute("aria-labelledby", `${id}-title`);
+    section.innerHTML = `<header class="section-heading"><p class="kicker">${number} · ${topic}</p><h2 id="${id}-title">${question}</h2></header>`;
+    return section;
+  }
+  function heading(section, number, topic, question) {
+    section.querySelector(".kicker").textContent = `${number} · ${topic}`;
+    section.querySelector("h2").textContent = question;
+  }
+  heading(concepts,"01",text("百分數加減","Percentage increase and decrease"),
+    text("增加 15%，為甚麼乘 1.15？","Why multiply by 1.15 for a 15% increase?"));
+  const change = chapter("percentage-change","02",text("百分變化","Percentage change"),
+    text("800 變成 600，減了百分之幾？","800 becomes 600: what is the percentage decrease?"));
+  concepts.after(change);
+  change.append(query("#base-task"));
+  const changeEssential = document.createElement("div");
+  changeEssential.className = "lesson-essential";
+  const conceptsEssential = concepts.querySelector(".lesson-essential");
+  const changeFormula = conceptsEssential.querySelector(".math + .essential-definitions + .math");
+  const changeDefinition = changeFormula.nextElementSibling;
+  changeEssential.append(changeFormula,changeDefinition);
+  change.append(changeEssential);
+  const conceptNotes = concepts.querySelector(".compact-notes");
+  const firstExplanation = conceptNotes.querySelector("div > p");
+  if (firstExplanation) change.querySelector(".student-task").before(firstExplanation);
+  [...concepts.querySelectorAll(":scope > p.math, :scope > p.note")].forEach(node => {
+    change.querySelector(".student-task").before(node);
+  });
+  // The first calculator belongs to forward percentage changes, not extra notes.
+  const calculatorNotes = concepts.querySelectorAll(".compact-notes")[1];
+  conceptsEssential.after(calculatorNotes.querySelector(".tool"));
+  calculatorNotes.remove();
+  const reverseHeader = reverse.querySelector(".section-heading");
+  reverseHeader.innerHTML = `<h3 id="reverse-title">${text("反過來：知道新值，怎樣求原值？","In reverse: how do you recover the original?")}</h3>`;
+  const inverse = document.createElement("div");
+  inverse.id = "reverse";
+  inverse.className = "lesson-subtopic";
+  inverse.append(...reverse.childNodes);
+  concepts.append(inverse);
+  reverse.remove();
+  heading(successive,"03",text("連續增加／減少","Successive increases and decreases"),
+    text("先加再減，可以直接抵銷嗎？","Can an increase and a decrease simply cancel?"));
+  const repeated = document.createElement("div");
+  repeated.id = "depreciation";
+  repeated.className = "lesson-subtopic";
+  depreciation.querySelector(".section-heading").innerHTML =
+    `<h3 id="depreciation-title">${text("同一百分率連續三年，又怎樣算？","How do you repeat the same rate for three years?")}</h3>`;
+  repeated.append(...depreciation.childNodes);
+  successive.append(repeated);
+  depreciation.remove();
+
+  const interestNotes = interest.querySelector(".compact-notes");
+  const interestColumns = interestNotes.querySelector(".columns");
+  const simple = chapter("simple-interest","04",text("單利息","Simple interest"),
+    text("每年只用本金計息，三年賺多少？","Only the principal earns interest: how much in three years?"));
+  interest.before(simple);
+  const assumptions = interestNotes.querySelector("div > p");
+  simple.append(assumptions,interestColumns.children[0]);
+  heading(interest,"05",text("複利息","Compound interest"),
+    text("把利息留下，下一年會有甚麼不同？","What changes if the interest stays in the account?"));
+  interest.querySelector(".section-heading").after(interestColumns.children[0]);
+  interestColumns.remove();
+  interestNotes.querySelector("summary").textContent = text("圖解：每年利息怎樣變？","Diagram: how does each year's interest change?");
+
+  const frequent = chapter("frequent-compounding","06",text("一年內多次結算複利","Compounding more than once a year"),
+    text("一年結算兩次，利率和期數怎樣改？","Twice a year: what happens to the rate and periods?"));
+  interest.after(frequent);
+  const extension = interest.querySelector(":scope > details:not(.compact-notes)");
+  frequent.append(...extension.querySelector("div").childNodes);
+  extension.remove();
+  const settlement = document.createElement("div");
+  settlement.className = "tool settlement-tool";
+  settlement.innerHTML = `<h3>${text("同一筆 8,000，改變結算次數看看。","Keep the same 8,000 and change the frequency.")}</h3>
+    <p>${text("名義年利率 6%，存款 2 年。不加款、不提款。","6% nominal annual rate, for 2 years. No deposits or withdrawals.")}</p>
+    <div class="segments" role="group" aria-label="${text("每年結算次數","Compounding frequency")}">
+    ${[[1,"每年","Annual"],[2,"每半年","Half-yearly"],[4,"每季","Quarterly"],[12,"每月","Monthly"]].map(([m,c,e])=>`<button type="button" data-settlements="${m}" aria-pressed="${m===2}">${text(c,e)}</button>`).join("")}</div>
+    <div id="settlement-result" aria-live="polite"></div>`;
+  frequent.append(settlement);
+  function showSettlement(m) {
+    settlement.querySelectorAll("button").forEach(button=>button.setAttribute("aria-pressed",String(Number(button.dataset.settlements)===m)));
+    const amount = 8000 * (1 + .06 / m) ** (m * 2);
+    const money = n=>n.toLocaleString("en-HK",{minimumFractionDigits:2,maximumFractionDigits:2});
+    query("#settlement-result").innerHTML = `<p class="settlement-final">${text("兩年後本利和","Final balance after two years")} <strong class="math">HK$${money(amount)}</strong></p>
+      <details class="visual-notes"><summary>${text("完整計算與總利息","Full calculation and total interest")}</summary><div>
+      <p class="math"><var>A</var> = 8,000(1 + ${6/m}%)<sup>${m*2}</sup> ≈ HK$${money(amount)}</p>
+      <p class="math"><var>I</var> = <var>A</var> − 8,000 ≈ HK$${money(amount-8000)}</p></div></details>`;
+    document.dispatchEvent(new CustomEvent("settlementchange",{detail:{frequency:m}}));
+  }
+  settlement.querySelectorAll("button").forEach(button=>button.addEventListener("click",()=>showSettlement(Number(button.dataset.settlements))));
+  showSettlement(2);
+  heading(practice,"07",text("綜合練習","Practice"),text("這一題，應該用哪一種算法？","Which method does this question need?"));
+  query(".intro h1").textContent = text("百分數，這一步怎樣算？","Percentages: what is the next step?");
+  query(".intro .lead").textContent = text("先學加減與變化，再看連續變化，最後比較三種計息情況。","Start with changes, repeat them, then compare how interest is calculated.");
+  query(".contents").innerHTML = [
+    ["concepts","01 百分數加減","01 Increase / decrease"],
+    ["percentage-change","02 百分變化","02 Percentage change"],
+    ["successive","03 連續加減","03 Successive changes"],
+    ["simple-interest","04 單利息","04 Simple interest"],
+    ["interest","05 複利息","05 Compound interest"],
+    ["frequent-compounding","06 一年多次結算","06 More than once a year"],
+    ["practice","07 綜合練習","07 Practice"]
+  ].map(([id,c,e])=>`<a href="#${id}">${text(c,e)}</a>`).join("");
+  document.body.classList.add("compact-lesson");
+})();
+
+  </script>
+  <script id="interest-visuals">
+(() => {
+  const zh = document.documentElement.lang === "zh-Hant";
+  const text = (c,e) => zh ? c : e;
+  const query = selector => document.querySelector(selector);
+  const money = n => n.toLocaleString("en-HK",{minimumFractionDigits:2,maximumFractionDigits:2});
+  function notes(parent, nodes, label) {
+    const details = document.createElement("details");
+    details.className = "visual-notes";
+    const summary = document.createElement("summary");
+    summary.textContent = label;
+    const body = document.createElement("div");
+    body.append(...nodes);
+    details.append(summary,body);
+    parent.append(details);
+    return details;
+  }
+
+  const simple = query("#simple-interest");
+  const simpleWorking = simple.querySelector(":scope > div");
+  const simpleFormula = simpleWorking.querySelector(".formula");
+  const simpleCore = document.createElement("div");
+  simpleCore.className = "interest-core";
+  simpleCore.innerHTML = `<p>${text("本金 5,000 · 年利率 4% · 3 年","Principal 5,000 · 4% p.a. · 3 years")}</p>
+    <figure class="simple-addition"><figcaption>${text("本金不變，每年加同樣的利息。","The principal stays the same. Add equal interest each year.")}</figcaption>
+    <div class="addition-track"><span class="principal-block">5,000</span>${[1,2,3].map(year=>`<span class="addition-block"><small>${text(`第 ${year} 年`,`Year ${year}`)}</small><strong>+200</strong></span>`).join("")}</div>
+    <p class="math">5,000 + 200 + 200 + 200 = <strong>5,600</strong></p></figure>`;
+  simpleCore.append(simpleFormula);
+  simple.querySelector(".section-heading").after(simpleCore);
+  notes(simple,[simple.querySelector(":scope > p"),simpleWorking],text("計算步驟、符號與不足一年的情況","Working, symbols and periods shorter than a year"));
+  simpleCore.insertAdjacentHTML("beforeend",`<p class="essential-definitions">${text("<var>P</var>：本金；<var>r</var>%：年利率；<var>t</var>：年期；<var>I</var>：利息。","<var>P</var>: principal; <var>r</var>%: annual rate; <var>t</var>: years; <var>I</var>: interest.")}</p>`);
+
+  const compound = query("#interest");
+  const compoundWorking = compound.querySelector(".section-heading + div");
+  const compoundCore = document.createElement("div");
+  compoundCore.className = "interest-core";
+  compoundCore.append(...compoundWorking.querySelectorAll(".formula"));
+  compound.querySelector(".section-heading").after(compoundCore);
+  notes(compound,[compoundWorking],text("複利計算步驟與取近似值","Compound working and rounding"));
+  compoundCore.insertAdjacentHTML("beforeend",`<p class="essential-definitions">${text("<var>A</var> 是本利和，<var>I</var> 是利息。每年結算一次：<var>A</var> − <var>P</var> 才是利息。","<var>A</var> is the final balance, <var>I</var> the interest. Annual compounding: interest is <var>A</var> − <var>P</var>.")}</p>`);
+  const comparison = query("#interest-calculation");
+  const comparisonNotes = document.createElement("div");
+  comparisonNotes.append(...comparison.childNodes);
+  comparison.replaceChildren();
+  const coins = query("#coin-lab");
+  const oldCoinNotes = coins.closest(".compact-notes");
+  comparison.append(coins);
+  oldCoinNotes.remove();
+  const oldDiagram = query(".interest-visual");
+  oldDiagram.closest(".compact-notes").remove();
+  coins.classList.add("refined-coins");
+  coins.querySelector("h3").textContent = text("留下的利息，又賺了多少？","How much does the interest earn?");
+  coins.querySelector("h3 + p").textContent = text("本金 5,000 · 年利率 4% · 每年結算","Principal 5,000 · 4% p.a. · annual compounding");
+  coins.querySelector(".earning-key").innerHTML = `<span>${text("本金賺到的利息","Interest on principal")}</span><span>${text("利息再賺的利息","Interest on earlier interest")}</span>`;
+  const mode = document.createElement("div");
+  mode.className = "segments coin-view-mode";
+  mode.setAttribute("role","group");
+  mode.setAttribute("aria-label",text("利息比較方式","Interest view"));
+  mode.innerHTML = `<button type="button" data-coin-view="total" aria-pressed="true">${text("累積利息","Total interest")}</button><button type="button" data-coin-view="annual" aria-pressed="false">${text("本年利息","This year's interest")}</button>`;
+  coins.querySelector(".coin-controls").before(mode);
+  [["#coin-back","←",text("上一年","Previous year")],["#coin-next","→",text("下一年","Next year")]].forEach(([selector,symbol,label])=>{
+    const button = query(selector);
+    button.textContent = symbol;
+    button.setAttribute("aria-label",label);
+    button.title = label;
+  });
+  const yearControl = document.createElement("div");
+  yearControl.className = "coin-year-slider";
+  yearControl.innerHTML = `<label for="coin-year-range" class="visually-hidden">${text("年期","Year")}</label><input id="coin-year-range" type="range" min="0" max="5" step="1" value="3"><div class="coin-year-ticks" aria-hidden="true">${[0,1,2,3,4,5].map(n=>`<span>${n}</span>`).join("")}</div>`;
+  coins.querySelector(".coin-controls").after(yearControl);
+  coins.querySelector(".coin-caption").textContent = text("一枚完整金幣 = HK$100 利息；不足一枚按比例顯示。本金不畫成金幣。","One full coin = HK$100 interest; part-coins are proportional. The principal is not shown as coins.");
+  let coinView = "total";
+  // Reuse the existing year buttons and their state; only newly added coins animate.
+  drawCoins = function(id,amount,extra=false) {
+    const pile = query("#"+id);
+    const count = Math.ceil(Math.max(0,amount-1e-8)/100);
+    while(pile.children.length>count) pile.lastElementChild.remove();
+    for(let index=0;index<count;index++) {
+      let slot = pile.children[index];
+      if(!slot) {
+        slot = document.createElement("div");
+        slot.className = "coin-slot";
+        slot.innerHTML = `<div class="coin${extra?" extra":""}"></div>`;
+        pile.append(slot);
+      }
+      const fraction = Math.max(0,Math.min(1,(amount-index*100)/100));
+      slot.firstElementChild.style.clipPath = `inset(0 ${100*(1-fraction)}% 0 0)`;
+    }
+  };
+  renderCoinLab = function() {
+    const balance = 5000 * 1.04 ** coinYear;
+    const simpleTotal = 200 * coinYear;
+    const compoundTotal = balance-5000;
+    const simpleShown = coinView==="total" ? simpleTotal : coinYear ? 200 : 0;
+    const compoundShown = coinView==="total" ? compoundTotal : coinYear ? 5000*1.04**(coinYear-1)*.04 : 0;
+    const extra = Math.max(0,compoundShown-simpleShown);
+    drawCoins("simple-coins",simpleShown);
+    drawCoins("compound-base-coins",simpleShown);
+    drawCoins("compound-extra-coins",extra,true);
+    query("#coin-year").value = text(`第 ${coinYear} 年`,`Year ${coinYear}`);
+    query("#coin-year-range").value = coinYear;
+    query("#coin-back").disabled = coinYear===0;
+    query("#coin-next").disabled = coinYear===5;
+    query("#simple-earned").textContent = `HK$${money(simpleShown)}`;
+    query("#compound-earned").textContent = `HK$${money(compoundShown)}`;
+    query("#simple-balance").textContent = text("本利和 ","Balance ")+money(5000+simpleTotal);
+    query("#coin-compound-balance").textContent = text("本利和 ","Balance ")+money(balance);
+    coins.querySelectorAll(".coin-total + p").forEach(p=>p.textContent=coinView==="total"?text("累積利息","Total interest"):text("本年利息","This year's interest"));
+    query("#coin-story").innerHTML = coinYear===0
+      ? text("本金相同：HK$5,000，尚未賺取利息。","Same principal: HK$5,000. No interest yet.")
+      : coinYear===1
+        ? text("第一年都是 HK$200；複利的不同，從第二年開始。","Both earn HK$200 in year 1. The difference starts in year 2.")
+        : `<strong>${text(coinView==="total"?"累積多賺":"本年多賺",coinView==="total"?"Total extra":"Extra this year")} HK$${money(extra)}</strong><span>${text("已賺的利息，也開始計息。","Earlier interest earns interest too.")}</span>`;
+  };
+  mode.querySelectorAll("button").forEach(button=>button.addEventListener("click",()=>{
+    coinView = button.dataset.coinView;
+    mode.querySelectorAll("button").forEach(item=>item.setAttribute("aria-pressed",String(item===button)));
+    renderCoinLab();
+  }));
+  query("#coin-year-range").addEventListener("input",()=>{
+    coinYear = Number(query("#coin-year-range").value);
+    renderCoinLab();
+  });
+  coinYear = 3;
+  renderCoinLab();
+  notes(comparison,[comparisonNotes],text("展開完整公式與逐年計算","Full formulas and year-by-year working"));
+
+  const frequent = query("#frequent-compounding");
+  query("#frequent-compounding-title").textContent = text("一年不只結算一次，怎樣算？","More than once a year: how does the calculation change?");
+  query(".settlement-tool h3").textContent = text("一年結算多少次？","How often is interest added?");
+  query(".settlement-tool > p").textContent = text("本金 8,000 · 名義年利率 6% · 2 年","Principal 8,000 · 6% nominal p.a. · 2 years");
+  const formula = frequent.querySelector(":scope > .formula");
+  const explanation = [...frequent.querySelectorAll(":scope > p")];
+  const frequencyNotes = notes(frequent,explanation,text("公式中的符號與半年結算例題","Formula symbols and the half-yearly example"));
+  frequencyNotes.querySelector("div").insertAdjacentHTML("beforeend",`<p class="note">${text("圖中金額取至最接近的一仙；計算過程保留原有精度，不在每期先捨入。","Amounts shown are rounded to the nearest cent. Calculations retain full precision, without rounding at each settlement.")}</p>`);
+  // One visible formula, with the periodic rate and number of periods above it.
+  query(".settlement-tool").after(formula);
+  const timeline = document.createElement("div");
+  timeline.id = "settlement-timeline";
+  timeline.innerHTML = `<div id="settlement-rate-pair"></div>
+    <figure class="settlement-axis"><figcaption>${text("兩年內，每個刻度結算一次。","Two years: each marker is one settlement.")}</figcaption><div id="settlement-years"></div></figure>
+    <label for="settlement-step">${text("看到第幾次結算？","Which settlement?")} <output id="settlement-step-label"></output></label>
+    <input id="settlement-step" type="range" min="0" max="4" step="1" value="1">
+    <div id="settlement-step-working" aria-live="polite"></div>`;
+  query(".settlement-tool .segments").after(timeline);
+  let frequency = 2;
+  function drawStep() {
+    const step = Number(query("#settlement-step").value);
+    query("#settlement-step-label").textContent = `${step} / ${frequency*2}`;
+    timeline.querySelectorAll("[data-settlement-period]").forEach(marker=>{
+      const period = Number(marker.dataset.settlementPeriod);
+      marker.classList.toggle("settled",period<=step);
+      marker.classList.toggle("current-settlement",period===step);
+    });
+    const balance = 8000 * (1+.06/frequency) ** step;
+    const before = step ? balance/(1+.06/frequency) : 8000;
+    query("#settlement-step-working").innerHTML = step===0
+      ? `<p>${text("未結算：本金","Before settlement: principal")} <strong class="math">HK$8,000.00</strong></p>`
+      : `<p class="step-equation"><span><small>${text("期初金額","Opening balance")}</small><strong>${money(before)}</strong></span><b>+</b><span><small>${text("本期利息","Period interest")}</small><strong>${money(before*.06/frequency)}</strong></span><b>=</b><span class="step-balance"><small>${text("下一期基數","Next period's base")}</small><strong>${money(balance)}</strong></span></p>
+        <p class="step-rate math">${money(before)} × ${6/frequency}% ≈ ${money(before*.06/frequency)}</p>`;
+  }
+  function drawTimeline(m) {
+    frequency = m;
+    query("#settlement-step").max = m*2;
+    query("#settlement-step").value = 1;
+    query("#settlement-rate-pair").innerHTML = `<div class="rate-pair">
+      <p><span>${text("每期利率","Rate per period")}</span><strong class="math"><span class="frac"><span>6</span><span>${m}</span></span>% = ${6/m}%</strong></p>
+      <p><span>${text("總期數","Total periods")}</span><strong class="math">${m} × 2 = ${m*2}</strong></p></div>`;
+    query("#settlement-years").innerHTML = [1,2].map(year=>`<div class="settlement-year"><h4>${text(`第 ${year} 年`,`Year ${year}`)}</h4>
+      <ol style="--periods:${m}" aria-label="${text(`第 ${year} 年：${m} 次結算`,`Year ${year}: ${m} settlements`)}">
+      ${Array.from({length:m},(_,i)=>`<li data-settlement-period="${(year-1)*m+i+1}"><span class="period-tick" aria-hidden="true"></span><small>${m<=4 || (i+1)%6===0 ? `${(i+1)*12/m}${text("月","m")}`:""}</small><span class="visually-hidden">${text(`第 ${(year-1)*m+i+1} 次結算`,`Settlement ${(year-1)*m+i+1}`)}</span></li>`).join("")}</ol></div>`).join("");
+    drawStep();
+  }
+  query("#settlement-step").addEventListener("input",drawStep);
+  document.addEventListener("settlementchange",event=>drawTimeline(event.detail.frequency));
+  drawTimeline(Number(query("[data-settlements][aria-pressed=true]").dataset.settlements));
+})();
+
   </script>
 </body>
 </html>
