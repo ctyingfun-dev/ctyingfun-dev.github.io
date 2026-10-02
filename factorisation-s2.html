@@ -90,6 +90,15 @@
     .flow-arrows { font-size:12px; color:var(--muted); }
     .flow-arrows strong { display:block; font-size:24px; line-height:1.1; color:var(--coral); }
     .factor-token { color:var(--coral); font-weight:700; }
+    .math-hotspot,.math-part { border-radius:2px; transition:background-color .18s ease,box-shadow .18s ease,color .18s ease; }
+    .math-hotspot { cursor:pointer; }
+    .math-hotspot:hover { color:var(--teal); }
+    .math-hotspot.is-related,.math-part.is-related { color:#145e55; background:#d5eee6; box-shadow:0 0 0 2px #bfe3d8; animation:math-link-in .32s ease both; }
+    .math-hotspot.is-origin { color:#873449; background:#fff0ee; box-shadow:0 0 0 2px #edb9b7,0 0 10px 2px #edb9b755; }
+    .math-hotspot:focus-visible { outline:2px solid var(--blue); outline-offset:4px; }
+    .math-guide-caption { min-height:2.3em; margin:12px 0 0; padding:5px 0 5px 12px; border-left:2px solid #adc7bf; color:var(--muted); font-size:14px; line-height:1.55; }
+    .math-guide-caption.is-active { color:var(--ink); border-color:var(--teal); }
+    @keyframes math-link-in { from { background:transparent; box-shadow:0 0 0 0 #bfe3d8; } to { background:#d5eee6; box-shadow:0 0 0 2px #bfe3d8; } }
     .factor-tile-stage { width:min(100%,470px); margin:auto; }
     .tile-widths { display:grid; grid-template-columns:3fr 2fr; text-align:center; padding-left:38px; font-size:18px; margin-bottom:8px; }
     .tile-layout { display:grid; grid-template-columns:30px minmax(0,1fr); gap:8px; align-items:center; }
@@ -189,11 +198,12 @@
     <section id="meaning" aria-labelledby="meaning-title">
       <header class="section-heading"><p class="kicker">01 · 由展開倒過來</p><h2 id="meaning-title">甚麼是因式分解？</h2></header>
       <p>展開時，把乘積寫成各項的和；因式分解則反過來，把多項式寫成<strong>因式的乘積</strong>。</p>
-      <figure class="diagram">
-        <div class="reverse-flow"><div class="math">3(<var>x</var> + 2)</div><div class="flow-arrows">展開<strong aria-hidden="true">→</strong><strong aria-hidden="true">←</strong>因式分解</div><div class="math">3<var>x</var> + 6</div></div>
+      <figure class="diagram math-guide" data-guide="numeric">
+        <div class="reverse-flow"><div class="math"><span class="math-hotspot" role="button" tabindex="0" data-link="all" data-members="first second" aria-label="共同因數 3">3</span>(<span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="括號內的 x"><var>x</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="括號內的 2">2</span>)</div><div class="flow-arrows">展開<strong aria-hidden="true">→</strong><strong aria-hidden="true">←</strong>因式分解</div><div class="math"><span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第一項 3x">3<var>x</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第二項 6">6</span></div></div>
+        <p class="math-guide-caption" aria-live="polite">共同因數 3 乘括號內每一項；反過來，兩項都可提出 3。</p>
         <figcaption>3 與 (<var>x</var> + 2) 是兩個因式；3<var>x</var> 與 6 是兩項，並不是整個多項式的兩個因式。</figcaption>
       </figure>
-      <div class="formula math"><span class="formula-label">分配律：兩個方向都成立</span><var>a</var>(<var>b</var> + <var>c</var>) = <var>ab</var> + <var>ac</var></div>
+      <div class="formula math math-guide" data-guide="symbolic"><span class="formula-label">分配律：兩個方向都成立</span><span class="math-hotspot" role="button" tabindex="0" data-link="all" data-members="first second" aria-label="共同因數 a"><var>a</var></span>(<span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="括號內的 b"><var>b</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="括號內的 c"><var>c</var></span>) = <span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第一項 ab"><var>ab</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第二項 ac"><var>ac</var></span><p class="math-guide-caption" aria-live="polite">同一個 <var>a</var> 分別乘 <var>b</var>、<var>c</var>；倒過來可提出 <var>a</var>。</p></div>
       <p class="note">因式分解不是解方程。題目只有多項式，沒有等號時，不需要求 <var>x</var> 的值。</p>
       <div class="tool" id="meaning-tool" hidden>
         <h3 class="tool-heading">哪一個才是因式分解？</h3><div class="tool-body">
@@ -206,10 +216,11 @@
     <section id="common" aria-labelledby="common-title">
       <header class="section-heading"><p class="kicker">02 · 每項都有甚麼？</p><h2 id="common-title">先找最大公因式</h2></header>
       <ol class="steps"><li>數字：找各項係數的最大公因數。</li><li>字母：只取每一項都有的字母，並取其<strong>最低次數</strong>。</li><li>每一項除以公因式，所得結果放入括號。</li></ol>
-      <article class="example"><h3>例 1 · 數字與字母一起提取</h3>
-        <p class="math">6<var>x</var><sup>2</sup><var>y</var> + 9<var>xy</var><sup>2</sup></p>
+      <article class="example math-guide" data-guide="common"><h3>例 1 · 數字與字母一起提取</h3>
+        <p class="math"><span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第一項 6x²y">6<var>x</var><sup>2</sup><var>y</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第二項 9xy²">9<var>xy</var><sup>2</sup></span></p>
         <p>6 和 9 的最大公因數是 3；兩項都有 <var>x</var> 和 <var>y</var>，最低次數都是 1。</p>
-        <div class="formula math"><span class="formula-label">最大公因式：3<var>xy</var></span>6<var>x</var><sup>2</sup><var>y</var> + 9<var>xy</var><sup>2</sup><br>= <span class="factor-token">3<var>xy</var></span>(2<var>x</var> + 3<var>y</var>)</div>
+        <div class="formula math"><span class="formula-label">最大公因式：3<var>xy</var></span><span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第一項 6x²y">6<var>x</var><sup>2</sup><var>y</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第二項 9xy²">9<var>xy</var><sup>2</sup></span><br>= <span class="factor-token math-hotspot" role="button" tabindex="0" data-link="all" data-members="first second" aria-label="兩項共有的因式 3xy">3<var>xy</var></span>(<span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第一項除以 3xy 得 2x">2<var>x</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第二項除以 3xy 得 3y">3<var>y</var></span>)</div>
+        <p class="math-guide-caption" aria-live="polite">兩項都有 3<var>xy</var>；各自除以它，所得結果放進括號。</p>
         <details><summary>展開驗算</summary><div><p class="math">3<var>xy</var> × 2<var>x</var> + 3<var>xy</var> × 3<var>y</var><br>= 6<var>x</var><sup>2</sup><var>y</var> + 9<var>xy</var><sup>2</sup></p></div></details>
       </article>
       <div class="tool" id="area-tool" hidden>
@@ -227,27 +238,36 @@
     <section id="grouping" aria-labelledby="grouping-title">
       <header class="section-heading"><p class="kicker">03 · 把共同括號找出來</p><h2 id="grouping-title">四項多項式：分組法</h2></header>
       <p>若沒有所有項都共有的因式，可先把各項分組。每組提取公因式後，看看能否出現<strong>相同的括號</strong>。</p>
-      <div class="formula math"><var>ax</var> + <var>ay</var> + <var>bx</var> + <var>by</var><br>= <var>a</var>(<var>x</var> + <var>y</var>) + <var>b</var>(<var>x</var> + <var>y</var>)<br>= (<var>a</var> + <var>b</var>)(<var>x</var> + <var>y</var>)</div>
+      <div class="formula math math-guide" data-guide="grouping">
+        <span class="math-hotspot" role="button" tabindex="0" data-link="ax" data-members="ax a" aria-label="第一項 ax"><var>ax</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="ay" data-members="ay a" aria-label="第二項 ay"><var>ay</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="bx" data-members="bx b" aria-label="第三項 bx"><var>bx</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="by" data-members="by b" aria-label="第四項 by"><var>by</var></span><br>
+        = <span class="math-hotspot" role="button" tabindex="0" data-link="a" data-members="ax ay a" aria-label="第一組提出的 a"><var>a</var></span><span class="math-hotspot" role="button" tabindex="0" data-link="bracket" data-members="bracket" aria-label="第一組的括號 x 加 y">(<var class="math-part" data-members="ax">x</var> + <var class="math-part" data-members="ay">y</var>)</span> + <span class="math-hotspot" role="button" tabindex="0" data-link="b" data-members="bx by b" aria-label="第二組提出的 b"><var>b</var></span><span class="math-hotspot" role="button" tabindex="0" data-link="bracket" data-members="bracket" aria-label="第二組的括號 x 加 y">(<var class="math-part" data-members="bx">x</var> + <var class="math-part" data-members="by">y</var>)</span><br>
+        = (<span class="math-hotspot" role="button" tabindex="0" data-link="a" data-members="a" aria-label="提出共同括號後的 a"><var>a</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="b" data-members="b" aria-label="提出共同括號後的 b"><var>b</var></span>)<span class="math-hotspot" role="button" tabindex="0" data-link="bracket" data-members="bracket" aria-label="兩組共同的括號 x 加 y">(<var>x</var> + <var>y</var>)</span>
+        <p class="math-guide-caption" aria-live="polite">前兩項提出 <var>a</var>，後兩項提出 <var>b</var>；兩組留下同一個括號。</p>
+      </div>
       <div class="tool" id="group-tool" hidden>
         <h3 class="tool-heading">逐步拆解：先分組，再提取</h3>
         <div class="controls"><label for="group-case">例題 <select id="group-case"><option value="0">正數分組</option><option value="1">留意負號</option></select></label></div>
         <div class="tool-body"><p class="muted" id="group-progress"></p><div class="group-stage math"><div class="group-terms" id="group-terms" role="group" aria-label="選兩項為第一組"></div><div id="group-expression" hidden></div></div><p class="feedback" id="group-explanation" aria-live="polite"></p><div class="actions"><button type="button" class="primary" id="group-next" disabled>下一步</button><button type="button" class="secondary" id="group-reset">重新開始</button></div></div>
       </div>
-      <article class="example"><h3>例 2 · 括號的次序相反</h3><p class="math"><var>a</var>(<var>x</var> − <var>y</var>) + <var>b</var>(<var>y</var> − <var>x</var>)<br>= <var>a</var>(<var>x</var> − <var>y</var>) − <var>b</var>(<var>x</var> − <var>y</var>)<br>= (<var>a</var> − <var>b</var>)(<var>x</var> − <var>y</var>)</p><p class="note"><span class="math">(<var>y</var> − <var>x</var>) = −(<var>x</var> − <var>y</var>)</span>，不能直接當作相同括號。</p></article>
+      <article class="example math-guide" data-guide="reverse-group"><h3>例 2 · 括號的次序相反</h3><p class="math"><span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第一組 a 乘 x 減 y"><var>a</var>(<var>x</var> − <var>y</var>)</span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第二組 b 乘 y 減 x"><var>b</var>(<var>y</var> − <var>x</var>)</span><br>= <span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第一組保持不變"><var>a</var>(<var>x</var> − <var>y</var>)</span> <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第二組提出負號">− <var>b</var>(<var>x</var> − <var>y</var>)</span><br>= (<span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="提出共同括號後的 a"><var>a</var></span> <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="提出共同括號後的負 b">− <var>b</var></span>)<span class="math-hotspot" role="button" tabindex="0" data-link="all" data-members="first second" aria-label="共同括號 x 減 y">(<var>x</var> − <var>y</var>)</span></p><p class="math-guide-caption" aria-live="polite">(<var>y</var> − <var>x</var>) = −(<var>x</var> − <var>y</var>)；先變成相同括號，再提出來。</p><p class="note"><span class="math">(<var>y</var> − <var>x</var>) = −(<var>x</var> − <var>y</var>)</span>，不能直接當作相同括號。</p></article>
     </section>
     <section id="identities" aria-labelledby="identities-title">
       <header class="section-heading"><p class="kicker">04 · 認出熟悉的形狀</p><h2 id="identities-title">把恆等式倒過來用</h2></header>
-      <div class="formula math"><span class="formula-label">平方差：兩項、相減、各自是平方</span><var>a</var><sup>2</sup> − <var>b</var><sup>2</sup> = (<var>a</var> + <var>b</var>)(<var>a</var> − <var>b</var>)</div>
-      <div class="formula math"><span class="formula-label">完全平方：中間項必須是 ±2<var>ab</var></span><var>a</var><sup>2</sup> + 2<var>ab</var> + <var>b</var><sup>2</sup> = (<var>a</var> + <var>b</var>)<sup>2</sup><br><var>a</var><sup>2</sup> − 2<var>ab</var> + <var>b</var><sup>2</sup> = (<var>a</var> − <var>b</var>)<sup>2</sup></div>
-      <figure class="diagram"><h3>為甚麼中間是 2<var>ab</var>？</h3>
-        <div class="square-stage" aria-label="邊長 a 加 b 的正方形分成 a 平方、兩個 ab 及 b 平方四部分"><div><span><var>a</var><sup>2</sup></span></div><div><span><var>ab</var></span></div><div><span><var>ab</var></span></div><div><span><var>b</var><sup>2</sup></span></div></div>
-        <figcaption>大正方形邊長為 <var>a</var> + <var>b</var>。兩個綠色長方形的面積各為 <var>ab</var>，合計 2<var>ab</var>。圖示假設 <var>a</var>、<var>b</var> 均為正數；恆等式本身不限於正數。</figcaption>
-      </figure>
+      <div class="formula math math-guide" data-guide="difference"><span class="formula-label">平方差：兩項、相減、各自是平方</span><span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第一個平方 a²"><var>a</var><sup>2</sup></span> − <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第二個平方 b²"><var>b</var><sup>2</sup></span> = (<span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第一因式中的 a"><var>a</var></span> <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第一因式中的正 b">+ <var>b</var></span>)(<span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第二因式中的 a"><var>a</var></span> <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第二因式中的負 b">− <var>b</var></span>)<p class="math-guide-caption" aria-live="polite">展開時 +<var>ab</var> 和 −<var>ab</var> 抵消，留下兩個平方之差。</p></div>
+      <div class="math-guide" data-guide="square-plus">
+        <div class="formula math"><span class="formula-label">完全平方：加</span><span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="首項 a²"><var>a</var><sup>2</sup></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="middle" data-members="middle" aria-label="中間項 2ab">2<var>ab</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="末項 b²"><var>b</var><sup>2</sup></span> = (<span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first middle" aria-label="括號內的 a"><var>a</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second middle" aria-label="括號內的 b"><var>b</var></span>)<sup>2</sup></div>
+        <p class="math-guide-caption" aria-live="polite">(<var>a</var> + <var>b</var>)<sup>2</sup> 有 <var>a</var><sup>2</sup>、兩份 <var>ab</var> 和 <var>b</var><sup>2</sup>。</p>
+        <figure class="diagram"><h3>為甚麼中間是 2<var>ab</var>？</h3>
+          <div class="square-stage" aria-label="邊長 a 加 b 的正方形分成 a 平方、兩個 ab 及 b 平方四部分"><div><span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="面積 a²"><var>a</var><sup>2</sup></span></div><div><span class="math-hotspot" role="button" tabindex="0" data-link="middle" data-members="middle" aria-label="第一份面積 ab"><var>ab</var></span></div><div><span class="math-hotspot" role="button" tabindex="0" data-link="middle" data-members="middle" aria-label="第二份面積 ab"><var>ab</var></span></div><div><span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="面積 b²"><var>b</var><sup>2</sup></span></div></div>
+          <figcaption>大正方形邊長為 <var>a</var> + <var>b</var>。兩個綠色長方形的面積各為 <var>ab</var>，合計 2<var>ab</var>。圖示假設 <var>a</var>、<var>b</var> 均為正數；恆等式本身不限於正數。</figcaption>
+        </figure>
+      </div>
+      <div class="formula math math-guide" data-guide="square-minus"><span class="formula-label">完全平方：減，中間項是 −2<var>ab</var></span><span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="首項 a²"><var>a</var><sup>2</sup></span> − <span class="math-hotspot" role="button" tabindex="0" data-link="middle" data-members="middle" aria-label="中間項 2ab">2<var>ab</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="末項 b²"><var>b</var><sup>2</sup></span> = (<span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first middle" aria-label="括號內的 a"><var>a</var></span> − <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second middle" aria-label="括號內的 b"><var>b</var></span>)<sup>2</sup><p class="math-guide-caption" aria-live="polite">(<var>a</var> − <var>b</var>)<sup>2</sup> 的兩個交叉項都是 −<var>ab</var>，合成 −2<var>ab</var>。</p></div>
       <div class="tool" id="identity-tool" hidden>
         <h3 class="tool-heading">辨認模式，再揭曉因式</h3><div class="identity-tabs" role="group" aria-label="恆等式模式"><button type="button" data-identity="0" aria-pressed="true">平方差</button><button type="button" data-identity="1" aria-pressed="false">完全平方：加</button><button type="button" data-identity="2" aria-pressed="false">完全平方：減</button></div>
         <div class="tool-body"><div class="math" id="identity-expression"></div><p class="feedback" id="identity-clue"></p><button type="button" class="primary" id="identity-reveal">揭曉並驗算</button><div class="formula math" id="identity-answer" aria-live="polite" hidden></div></div>
       </div>
-      <article class="example"><h3>例 3 · 提取後，還可以再分解</h3><p class="math">2<var>x</var><sup>2</sup> − 18<br>= 2(<var>x</var><sup>2</sup> − 9)<br>= <strong>2(<var>x</var> + 3)(<var>x</var> − 3)</strong></p><p>先提出 2，再把括號內的平方差分解，才是完全因式分解。</p></article>
+      <article class="example math-guide" data-guide="two-stage"><h3>例 3 · 提取後，還可以再分解</h3><p class="math"><span class="math-hotspot" role="button" tabindex="0" data-link="factor" data-members="factor" aria-label="第一項 2x² 有公因數 2">2<var>x</var><sup>2</sup></span> − <span class="math-hotspot" role="button" tabindex="0" data-link="factor" data-members="factor" aria-label="第二項 18 有公因數 2">18</span><br>= <span class="math-hotspot" role="button" tabindex="0" data-link="factor" data-members="factor" aria-label="提出的公因數 2">2</span>(<span class="math-hotspot" role="button" tabindex="0" data-link="difference" data-members="difference" aria-label="括號內還有平方差 x² 減 9"><var>x</var><sup>2</sup> − 9</span>)<br>= <strong><span class="math-hotspot" role="button" tabindex="0" data-link="factor" data-members="factor" aria-label="最後仍保留公因數 2">2</span><span class="math-hotspot" role="button" tabindex="0" data-link="difference" data-members="difference" aria-label="平方差分解為 x 加 3 乘 x 減 3">(<var>x</var> + 3)(<var>x</var> − 3)</span></strong></p><p class="math-guide-caption" aria-live="polite">先提出公因數 2，再把括號內的平方差分解，才是完全因式分解。</p></article>
       <p class="note"><span class="math"><var>x</var><sup>2</sup> + 9</span> 是平方<strong>和</strong>，不能寫成 <span class="math">(<var>x</var> + 3)(<var>x</var> − 3)</span>。後者展開是 <span class="math"><var>x</var><sup>2</sup> − 9</span>。</p>
       <p><a href="identities-s2.html">重溫恆等式的面積圖解</a></p>
     </section>
@@ -271,6 +291,109 @@
     const settleIn=[{opacity:.8,transform:"translateY(4px)"},{opacity:1,transform:"translateY(0)"}];
     const x = "<var>x</var>";
     const term = (coefficient, variable = x) => `${coefficient === 1 ? "" : coefficient}${variable}`;
+    const guideText={
+      numeric:{
+        first:"3 × x → 3x；反過來 3x ÷ 3 → x。",
+        second:"3 × 2 → 6；反過來 6 ÷ 3 → 2。",
+        all:"3 乘括號內兩項 → 3x + 6；兩項同時除以 3 → x + 2。"
+      },
+      symbolic:{
+        first:"a × b → ab；ab ÷ a → b。",
+        second:"a × c → ac；ac ÷ a → c。",
+        all:"a 同時乘 b、c → ab + ac；倒過來提出 a。"
+      },
+      common:{
+        first:"6x²y ÷ 3xy → 2x；3xy × 2x → 6x²y。",
+        second:"9xy² ÷ 3xy → 3y；3xy × 3y → 9xy²。",
+        all:"共同因式是 3xy；兩項分別除以它，留下 2x 和 3y。"
+      },
+      grouping:{
+        ax:"ax = a × x；a 提到括號外，x 留在括號內。",
+        ay:"ay = a × y；a 提到括號外，y 留在括號內。",
+        bx:"bx = b × x；b 提到括號外，x 留在括號內。",
+        by:"by = b × y；b 提到括號外，y 留在括號內。",
+        a:"ax + ay → a(x + y)。",
+        b:"bx + by → b(x + y)。",
+        bracket:"兩組都有完整的 (x + y)，所以可把整個括號提出來。"
+      },
+      "reverse-group":{
+        first:"a(x − y) 保持不變；提出括號後留下 a。",
+        second:"y − x = −(x − y)；b(y − x) → −b(x − y)。",
+        all:"a(x − y) − b(x − y) → (a − b)(x − y)。"
+      },
+      difference:{
+        first:"a × a → a²；兩個因式都保留 a。",
+        second:"b × (−b) → −b²；+ab 與 −ab 互相抵消。",
+        all:"(a + b)(a − b) → a² − b²；中間兩項抵消。"
+      },
+      "square-plus":{
+        first:"a × a → a²；對應圖中大塊面積。",
+        middle:"a × b + b × a → 2ab；圖中兩塊各是 ab。",
+        second:"b × b → b²；對應圖中右下角。"
+      },
+      "square-minus":{
+        first:"a × a → a²；展開後的首項。",
+        middle:"a × (−b) + (−b) × a → −2ab。",
+        second:"(−b) × (−b) → b²；末項仍是正數。"
+      },
+      "two-stage":{
+        factor:"2x² − 18 → 2(x² − 9)；先提出公因數 2。",
+        difference:"x² − 9 → (x + 3)(x − 3)；再拆平方差。"
+      }
+    };
+    document.querySelectorAll(".math-guide").forEach(guide=>{
+      const caption=guide.querySelector(".math-guide-caption");
+      const original=caption.innerHTML;
+      const hotspots=[...guide.querySelectorAll(".math-hotspot,.math-part")];
+      let activeOrigin=null;
+      function highlight(step,origin=null){
+        if(guide.dataset.activeStep===step&&activeOrigin===origin)return;
+        activeOrigin=origin;
+        if(step)guide.dataset.activeStep=step;
+        else delete guide.dataset.activeStep;
+        hotspots.forEach(node=>{
+          const related=!!step&&(step==="all"||node.dataset.members.split(" ").includes(step));
+          node.classList.toggle("is-lit",related);
+          node.classList.toggle("is-origin",node===origin);
+          node.classList.toggle("is-related",related&&node!==origin);
+        });
+        caption.innerHTML=step?guideText[guide.dataset.guide][step]:original;
+        caption.classList.toggle("is-active",!!step);
+      }
+      guide.addEventListener("pointerover",event=>{
+        if(event.pointerType==="touch")return;
+        const node=event.target.closest(".math-hotspot");
+        if(node&&guide.contains(node))highlight(node.dataset.link,node);
+      });
+      guide.addEventListener("pointerout",event=>{
+        if(event.pointerType==="touch")return;
+        const node=event.target.closest(".math-hotspot");
+        const next=event.relatedTarget?.closest?.(".math-hotspot");
+        if(node&&!next)highlight(null);
+      });
+      guide.addEventListener("pointerleave",event=>{
+        if(event.pointerType!=="touch")highlight(null);
+      });
+      guide.addEventListener("focusin",event=>{
+        const node=event.target.closest(".math-hotspot");
+        if(node&&guide.contains(node))highlight(node.dataset.link,node);
+      });
+      guide.addEventListener("focusout",event=>{
+        if(!guide.contains(event.relatedTarget))highlight(null);
+      });
+      guide.addEventListener("click",event=>{
+        if(!matchMedia("(hover: none)").matches)return;
+        const node=event.target.closest(".math-hotspot");
+        if(node&&guide.contains(node))highlight(node.dataset.link,node);
+      });
+      guide.addEventListener("keydown",event=>{
+        if(event.key!=="Enter"&&event.key!==" ")return;
+        const node=event.target.closest(".math-hotspot");
+        if(!node||!guide.contains(node))return;
+        event.preventDefault();
+        highlight(node.dataset.link,node);
+      });
+    });
     document.querySelectorAll("[data-meaning]").forEach(button => button.addEventListener("click", () => {
       const reasons = [
         "正確。6(x + 2) 展開得 6x + 12；括號內已沒有可再提出的整數公因式。",
