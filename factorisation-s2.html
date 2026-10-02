@@ -7,10 +7,11 @@
   <meta name="description" content="香港中二數學：多項式的因式分解。以面積圖、公因式、分組法及恆等式理解因式分解，附逐步例題及互動練習。">
   <title>多項式的因式分解 | 中二數學</title>
   <style>
-    :root { --ink:#19312f; --muted:#526664; --line:#d4e1dd; --teal:#08786e; --blue:#286d9e; --coral:#b53f59; --pale:#e4f4ef; --surface:#f6f9f8; --shadow:0 8px 28px #19312f0c; }
+    @font-face { font-family:Iansui; src:url("fonts/Iansui-S2.woff2") format("woff2"); font-style:normal; font-weight:400 700; font-display:swap; }
+    :root { --ink:#263431; --muted:#586963; --line:#dce4dc; --teal:#12766c; --blue:#306a96; --coral:#a94e58; --pale:#e8f2e9; --surface:#f8faf7; --marker:#ffd86b; --marker-soft:#f2e8ae; --shadow:0 8px 28px #19312f0c; --hand:Iansui,"Kaiti TC","Songti TC",serif; }
     * { box-sizing:border-box; letter-spacing:0; }
     html { scroll-behavior:smooth; }
-    body { margin:0; color:var(--ink); background:#fff; font:17px/1.85 -apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif; }
+    body { margin:0; color:var(--ink); background:#fff; font:17px/1.85 var(--hand); }
     a { color:var(--teal); text-underline-offset:4px; }
     button,input,select { font:inherit; }
     button { cursor:pointer; }
@@ -19,49 +20,72 @@
     .reading-progress { position:fixed; inset:0 auto auto 0; width:100%; height:3px; z-index:20; background:var(--teal); transform:scaleX(0); transform-origin:left; pointer-events:none; }
     .top { background:#fff; border-bottom:1px solid var(--line); }
     .top-inner { min-height:66px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
-    .brand { display:inline-flex; align-items:center; font-size:15px; font-weight:750; text-decoration:none; color:var(--ink); white-space:nowrap; }
-    .brand::before { content:"×"; display:inline-grid; place-items:center; width:32px; height:32px; margin-right:10px; background:var(--teal); color:white; font:23px Georgia,serif; border-radius:4px; }
+    .brand { display:inline-flex; align-items:center; font-size:15px; font-weight:700; text-decoration:none; color:var(--ink); white-space:nowrap; }
     .top nav { display:flex; flex-wrap:wrap; gap:18px; font-size:13px; }
     .top nav a { color:var(--muted); text-decoration:none; transition:color .2s ease; }
     .top nav a:hover { color:var(--teal); }
-    .intro { padding:48px 0 38px; border-bottom:1px solid var(--line); }
-    .eyebrow,.kicker { color:var(--teal); font-size:13px; font-weight:700; margin:0 0 10px; }
-    h1 { font-size:38px; line-height:1.28; margin:0 0 16px; }
-    h2 { font-size:27px; line-height:1.5; margin:0; }
+    .intro { display:grid; grid-template-columns:minmax(0,1fr) 250px; gap:54px; align-items:end; padding:66px 0 52px; border-bottom:1px solid var(--line); }
+    .opening-problem { margin:0 0 4px; padding:2px 0 2px 18px; border-left:2px solid var(--coral); }
+    .opening-problem .problem-label { display:block; color:var(--coral); font-size:14px; }
+    .opening-problem .math { display:block; font-size:29px; line-height:1.5; white-space:nowrap; margin:7px 0; }
+    .opening-problem a { font-size:14px; }
+    .eyebrow { color:var(--teal); font-size:13px; font-weight:600; margin:0 0 10px; }
+    h1,h2 { font-family:var(--hand); font-weight:700; }
+    h1 { font-size:42px; line-height:1.35; margin:0 0 20px; }
+    .title-mark { color:var(--ink); }
+    h2 { font-size:28px; line-height:1.5; margin:0; }
     h3 { font-size:20px; margin:0 0 16px; }
     h4 { font-size:16px; margin:0 0 10px; }
     p { margin:0 0 18px; }
     .lead,.muted { color:var(--muted); }
-    .lead { max-width:36em; font-size:18px; }
+    .lead { max-width:36em; font-size:18px; margin-bottom:0; }
+    .lead .math { font-size:20px; white-space:nowrap; }
     .contents { display:flex; gap:4px; overflow-x:auto; padding:10px 0; border-bottom:1px solid var(--line); background:#fff; scrollbar-width:none; }
     .contents::-webkit-scrollbar { display:none; }
     .contents a { flex:none; padding:9px 12px; border-bottom:2px solid transparent; text-decoration:none; font-size:14px; color:var(--muted); white-space:nowrap; transition:background-color .2s ease,color .2s ease,border-color .2s ease; }
     .contents a:hover { background:var(--surface); }
-    .contents a[aria-current="location"] { background:var(--pale); border-color:var(--teal); color:var(--teal); font-weight:700; }
-    section { --accent:var(--teal); --tint:#edf6f2; padding:42px 0; border-bottom:1px solid var(--line); scroll-margin-top:78px; }
-    #common,#identities { --accent:var(--blue); --tint:#edf4fa; }
-    #grouping { --accent:var(--coral); --tint:#fceff2; }
-    .section-heading { padding:18px 24px 20px; margin-bottom:28px; background:var(--tint); border-left:5px solid var(--accent); border-bottom:1px solid var(--line); transition:border-color .3s ease,background-color .3s ease; }
-    .section-heading .kicker { color:var(--accent); margin-bottom:8px; }
+    .contents a[aria-current="location"] { background:transparent; border-color:var(--coral); color:var(--ink); font-weight:700; }
+    section { --accent:var(--teal); --tint:#eef5ef; padding:64px 0 68px; border-bottom:1px solid var(--line); scroll-margin-top:78px; }
+    #common,#identities { --accent:var(--blue); --tint:#f0f5f8; }
+    #grouping { --accent:var(--coral); --tint:#fbf3f1; }
+    .section-heading { margin-bottom:28px; }
+    .section-heading .kicker { color:var(--muted); font-size:14px; font-weight:400; margin:0 0 2px; }
     var { font-family:Georgia,"Times New Roman",serif; font-style:italic; }
     .math { font:22px/1.9 Georgia,"Times New Roman",serif; overflow-wrap:anywhere; }
     sup { font-size:.68em; line-height:0; }
-    .formula { margin:20px 0; padding:18px 22px; background:var(--tint); border-left:3px solid var(--accent); }
-    .formula-label { display:block; font:600 13px/1.5 -apple-system,BlinkMacSystemFont,sans-serif; color:var(--muted); margin-bottom:8px; }
-    .note { margin:24px 0; padding:8px 0 8px 18px; border-left:3px solid var(--coral); font-size:15px; }
-    .example { border-left:3px solid var(--blue); padding:20px 0 12px 22px; margin:28px 0; }
-    .example h3 { color:var(--blue); font-size:18px; padding-bottom:12px; border-bottom:1px solid var(--line); }
-    .steps { margin:16px 0; padding-left:24px; }
-    .steps li { padding:7px 0 7px 6px; }
+    .formula { margin:24px 0; padding:14px 0 18px 18px; background:transparent; border-left:2px solid var(--line); border-bottom:1px solid var(--line); }
+    .formula-label { display:block; font:600 13px/1.5 var(--hand); color:var(--accent); margin-bottom:8px; }
+    .note { margin:28px 0 28px 18px; padding:4px 0 4px 16px; border-left:2px solid var(--coral); font-size:15px; }
+    .teacher-correction { font-size:16px; }
+    .teacher-correction p { margin-bottom:14px; }
+    .teacher-correction p:last-child { margin-bottom:0; }
+    .correction-row { margin:8px 0 20px; }
+    .correction-label { display:block; color:#762632; font-size:14px; font-weight:700; }
+    .correction-row .math { display:block; margin-top:5px; }
+    .teacher-correction del { color:#762632; text-decoration:none; }
+    .teacher-correction ins { color:#075b4f; text-decoration:none; }
+    .correction-row--right .correction-label { color:#075b4f; }
+    .thread-note { max-width:650px; margin:22px 0 40px; padding:4px 0 4px 18px; border-left:2px solid var(--coral); }
+    .thread-note .math { display:block; margin:8px 0; font-size:25px; }
+    .thread-note .inline-math { display:inline; font-size:20px; }
+    .thread-note p { margin:0; }
+    .example.story-solution { border-left-color:var(--teal); scroll-margin-top:90px; }
+    #identities > .note { width:min(100%,610px); margin:36px 0 38px 0; padding:18px 22px; border:0; background:#fff1b8; box-shadow:4px 5px 0 #e8dfb8; }
+    #identities > .note .math { white-space:nowrap; }
+    .example { padding:12px 0 12px 24px; margin:36px 0 36px 12px; border-left:1px solid #b9cac2; }
+    .example h3 { color:var(--ink); font-size:18px; padding-bottom:10px; margin-bottom:18px; border-bottom:1px dashed #b9cac2; }
+    .steps { max-width:640px; margin:24px 0 42px; padding:0; list-style:none; counter-reset:step; border-top:1px solid #aebfba; }
+    .steps li { counter-increment:step; display:grid; grid-template-columns:36px minmax(0,1fr); gap:12px; padding:12px 0; border-bottom:1px solid var(--line); font-size:16px; line-height:1.7; }
+    .steps li::before { content:counter(step) "."; color:var(--blue); font:700 18px/1.5 Georgia,serif; }
     details { margin-top:24px; border-top:1px solid var(--line); }
     summary { cursor:pointer; color:var(--teal); font-size:16px; font-weight:600; padding:14px 24px 14px 0; position:relative; }
     summary::marker { color:var(--teal); }
     details[open] summary { border-bottom:1px solid var(--line); }
     details > div { padding:16px 0 2px; }
-    .tool { margin:30px 0; border:1px solid var(--line); border-radius:6px; overflow:hidden; background:white; box-shadow:var(--shadow); }
-    .tool-heading { margin:0; padding:15px 20px; background:var(--tint); border-top:3px solid var(--accent); border-bottom:1px solid var(--line); font-size:17px; line-height:1.5; }
-    .tool-body { padding:22px; }
-    .controls { display:flex; gap:20px; align-items:end; flex-wrap:wrap; padding:18px 22px; border-bottom:1px solid var(--line); background:var(--surface); }
+    .tool { margin:42px 0; border:0; border-top:2px solid var(--accent); border-bottom:1px solid var(--line); border-radius:0; background:#fff; }
+    .tool-heading { margin:0; padding:14px 0; border-bottom:1px dashed #c1cec7; font-size:17px; line-height:1.5; }
+    .tool-body { padding:22px 0; }
+    .controls { display:flex; gap:20px; align-items:end; flex-wrap:wrap; padding:18px 0; border-bottom:1px solid var(--line); }
     label { display:block; font-weight:600; font-size:14px; }
     select { max-width:100%; min-height:44px; padding:8px 12px; border:1px solid #8ea8a1; border-radius:4px; color:var(--ink); background:white; }
     input[type=range] { max-width:100%; width:180px; min-height:28px; accent-color:var(--teal); cursor:pointer; }
@@ -84,37 +108,92 @@
     .feedback[data-state=answer] { border-color:var(--blue); background:#edf4fa; }
     .diagram { margin:24px 0; }
     figcaption { font-size:13px; color:var(--muted); margin-top:14px; }
-    .reverse-flow { display:grid; grid-template-columns:1fr 90px 1fr; gap:12px; align-items:center; text-align:center; padding:20px 0; }
-    .reverse-flow .math { padding:18px 8px; border-bottom:3px solid var(--blue); background:#edf4fa; }
-    .reverse-flow .math:last-child { background:#edf6f2; border-color:var(--teal); }
-    .flow-arrows { font-size:12px; color:var(--muted); }
-    .flow-arrows strong { display:block; font-size:24px; line-height:1.1; color:var(--coral); }
+    .reverse-flow { display:grid; grid-template-columns:1fr 90px 1fr; gap:12px; align-items:center; text-align:center; padding:24px; border:5px solid #354b3d; background:#263a32; color:#f4f4e8; box-shadow:inset 0 0 0 1px #849a85,4px 5px 0 #dce4d9; }
+    .reverse-flow .math { padding:18px 8px 12px; border-bottom:2px solid #a6c7ba; font-size:27px; }
+    .reverse-flow .math::before { content:"乘積"; display:block; margin-bottom:8px; color:#cedbd0; font:600 12px/1.4 var(--hand); }
+    .reverse-flow .math:last-child { border-color:#e7c788; }
+    .reverse-flow .math:last-child::before { content:"和"; }
+    .flow-arrows { font-size:12px; color:#cedbd0; }
+    .flow-arrows strong { display:block; font-size:24px; line-height:1.1; color:#f5d999; }
+    .reverse-flow .math-hotspot:hover:not(.is-origin):not(.is-related) { color:#f5d999; }
+    .reverse-flow .math-hotspot:focus-visible { outline-color:#f5d999; }
+    .law-line { border:0; padding:12px 0 18px; margin:24px 0; border-bottom:1px solid var(--line); }
+    .law-line > .formula-label { margin-bottom:10px; }
     .factor-token { color:var(--coral); font-weight:700; }
-    .math-hotspot,.math-part { border-radius:2px; transition:background-color .18s ease,box-shadow .18s ease,color .18s ease; }
+    .math-hotspot,.math-part { border-radius:2px; transition:background-color .18s ease,box-shadow .18s ease,color .18s ease; -webkit-box-decoration-break:clone; box-decoration-break:clone; }
     .math-hotspot { cursor:pointer; }
     .math-hotspot:hover { color:var(--teal); }
-    .math-hotspot.is-related,.math-part.is-related { color:#145e55; background:#d5eee6; box-shadow:0 0 0 2px #bfe3d8; animation:math-link-in .32s ease both; }
-    .math-hotspot.is-origin { color:#873449; background:#fff0ee; box-shadow:0 0 0 2px #edb9b7,0 0 10px 2px #edb9b755; }
+    .math-hotspot.is-related,.math-part.is-related { color:#253b34; background:#fff2bd; box-shadow:inset 0 -.62em var(--marker),0 2px 0 #c9952f; animation:math-link-in .28s ease both; }
+    .math-hotspot.is-origin { color:#93434c; background:#fff6f2; outline:2px solid #c87876; outline-offset:2px; border-radius:46% 38% 51% 40%; box-shadow:none; }
     .math-hotspot:focus-visible { outline:2px solid var(--blue); outline-offset:4px; }
-    .math-guide-caption { min-height:2.3em; margin:12px 0 0; padding:5px 0 5px 12px; border-left:2px solid #adc7bf; color:var(--muted); font-size:14px; line-height:1.55; }
-    .math-guide-caption.is-active { color:var(--ink); border-color:var(--teal); }
-    @keyframes math-link-in { from { background:transparent; box-shadow:0 0 0 0 #bfe3d8; } to { background:#d5eee6; box-shadow:0 0 0 2px #bfe3d8; } }
-    .factor-tile-stage { width:min(100%,470px); margin:auto; }
-    .tile-widths { display:grid; grid-template-columns:3fr 2fr; text-align:center; padding-left:38px; font-size:18px; margin-bottom:8px; }
-    .tile-layout { display:grid; grid-template-columns:30px minmax(0,1fr); gap:8px; align-items:center; }
-    .tile-height { text-align:center; }
-    .tile-board,.tile-tray { display:grid; grid-template-columns:3fr 2fr; height:132px; }
-    .tile-board { border:1px solid #638f87; }
-    .tile-region { display:flex; align-items:center; justify-content:center; font:24px Georgia,serif; }
-    #area-left { background:#dbeff7; border-right:1px solid #638f87; }
-    #area-slot { display:grid; place-items:center; min-width:0; background:#f7faf8; border:2px dashed #9ab9aa; color:var(--muted); font-size:14px; transition:background-color .2s ease,border-color .2s ease,box-shadow .2s ease; }
-    #area-slot.is-over { background:#e4f4ef; border-color:var(--teal); box-shadow:inset 0 0 0 3px #08786e20; }
-    #area-slot.filled { border:0; background:#e5f3ed; }
-    .tile-tray { width:calc(100% - 38px); margin:12px 0 0 38px; }
-    #area-right { grid-column:2; width:100%; height:100%; border:1px solid #638f87; border-radius:0; background:#e5f3ed; color:var(--ink); touch-action:none; user-select:none; cursor:grab; transition:background-color .2s ease,box-shadow .2s ease; }
-    #tile-tray #area-right:hover { background:#d8ede3; box-shadow:0 5px 18px #19312f16; }
+    .math-guide-caption { min-height:2.3em; margin:16px 0 0; padding:2px 0 2px 12px; border-left:1px dashed #96aaa0; color:var(--muted); font:14px/1.65 var(--hand); }
+    .math-guide-caption.is-active { color:var(--ink); border-color:var(--coral); }
+    @keyframes math-link-in { from { box-shadow:inset 0 0 var(--marker),0 0 0 transparent; } to { box-shadow:inset 0 -.62em var(--marker),0 2px 0 #c9952f; } }
+    .grouping-work { margin:32px 0 42px; padding:0; border:0; background:none; }
+    .group-work-row,.group-work-bridge { display:grid; grid-template-columns:116px minmax(0,1fr) 30px minmax(0,1fr); gap:10px; align-items:center; }
+    .group-work-row { min-height:72px; }
+    .group-step { align-self:center; color:var(--muted); font:600 13px/1.5 var(--hand); }
+    .group-cluster { min-width:0; padding:12px 4px 13px; text-align:center; white-space:nowrap; border-bottom:2px solid var(--blue); }
+    .group-cluster--second { border-color:var(--coral); }
+    .group-work-operator { color:var(--muted); text-align:center; }
+    .group-work-bridge { min-height:66px; color:var(--muted); }
+    .group-work-bridge span { align-self:center; text-align:center; font:12px/1.4 var(--hand); }
+    .group-work-bridge span:first-child { grid-column:2; }
+    .group-work-bridge span:last-child { grid-column:4; }
+    .group-work-bridge span::before { content:"↓"; display:block; color:var(--accent); font:25px/1 Georgia,serif; }
+    .group-work-factored .group-cluster { border-bottom:0; }
+    .group-work-merge { display:flex; flex-direction:column; align-items:center; margin:16px 0 0 116px; color:var(--coral); font:600 13px/1.5 var(--hand); }
+    .group-work-merge .group-down { font:25px/1 Georgia,serif; }
+    .group-work-result { display:grid; grid-template-columns:116px minmax(0,1fr); align-items:baseline; padding:4px 12px 18px 0; border-bottom:1px solid var(--line); }
+    .group-work-result .group-answer { justify-self:center; }
+    .group-work-result .group-answer { display:inline-block; min-width:0; box-shadow:inset 0 -.18em var(--marker-soft); }
+    .grouping-work > .math-guide-caption { margin:18px 0 0 116px; }
+    .common-inspection { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:24px; align-items:center; margin:18px 0 22px; }
+    .common-inspection .math { margin:0; font-size:26px; }
+    .common-inspection .observation { margin:0; padding-left:16px; border-left:2px solid var(--blue); color:var(--muted); font-size:15px; line-height:1.7; }
+    .common-working { margin:10px 0 0; padding:12px 0 18px; border:0; border-bottom:1px solid var(--line); }
+    .common-working .formula-label { color:var(--blue); }
+    #common .example { border-left:0; padding-left:0; margin-left:0; }
+    #common .example h3 { max-width:390px; }
+    .identity-lead { max-width:34em; margin:0 0 28px; color:var(--muted); }
+    .identity-lead .math { font-size:18px; white-space:nowrap; }
+    .identity-difference { border-left:3px solid var(--blue); padding:14px 0 20px 18px; }
+    .identity-square { display:grid; grid-template-columns:minmax(0,1fr) 290px; gap:0 30px; align-items:center; margin:40px 0; }
+    .identity-square > .formula { grid-column:1; align-self:end; border-left:0; margin:0; padding:0 0 15px; }
+    .identity-square > .math-guide-caption { grid-column:1; align-self:start; margin:12px 0 0; }
+    .identity-square > .diagram { grid-column:2; grid-row:1 / span 2; margin:0; }
+    .identity-square .diagram h3 { font-size:16px; margin:0 0 12px; }
+    .identity-square .square-stage { margin:0 auto; }
+    .identity-minus { margin-top:36px; margin-left:26px; padding:10px 0 12px 18px; border-color:var(--coral); border-bottom:0; }
+    #area-tool .tool-heading { border-bottom:0; font-size:20px; }
+    #area-tool .controls { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; padding-top:8px; }
+    #area-tool input[type=range] { display:block; width:100%; max-width:240px; margin:8px 0 0; }
+    #area-tool output { margin-left:4px; font:700 18px/1.4 Georgia,serif; }
+    #area-tool .diagram { margin-top:8px; }
+    .factor-tile-stage { width:min(100%,540px); margin:26px auto 0; }
+    .tile-widths { display:grid; grid-template-columns:3fr 2fr; text-align:center; padding-left:44px; font:20px/1.5 Georgia,serif; margin-bottom:12px; }
+    .tile-widths > span { position:relative; padding-bottom:10px; }
+    .tile-widths > span::after { content:""; position:absolute; bottom:0; left:0; right:0; height:6px; border:1px solid #7a9287; border-top:0; }
+    .tile-layout { display:grid; grid-template-columns:34px minmax(0,1fr); gap:10px; align-items:stretch; }
+    .tile-height { position:relative; display:grid; place-items:center; padding-right:8px; }
+    .tile-height::after { content:""; position:absolute; top:0; bottom:0; right:0; width:6px; border:1px solid #7a9287; border-left:0; }
+    .tile-board,.tile-tray { display:grid; grid-template-columns:3fr 2fr; height:144px; }
+    .tile-board { outline:1px solid #607f73; background:#f5f9f6; box-shadow:0 3px 0 #d3dfd6; }
+    .tile-region { display:flex; align-items:center; justify-content:center; font:26px Georgia,serif; text-shadow:0 1px 0 #ffffff90; }
+    #area-left { background:#dbeef6; color:#254c67; border-right:1px solid #607f73; box-shadow:inset 0 1px 0 #ffffffc0,inset 0 -3px 0 #bcd9e7; }
+    #area-slot { display:grid; place-items:center; min-width:0; background:#f0f7f2; border:2px dashed #7ea28c; color:#486657; font-size:14px; box-shadow:inset 0 2px 5px #284b3510; transition:background-color .2s ease,border-color .2s ease,box-shadow .2s ease; }
+    #area-slot > span { text-align:center; }
+    #area-slot > span::before { content:"+"; display:block; margin-bottom:6px; color:#709a7e; font:30px/1 Georgia,serif; }
+    #area-slot.is-over { background:#d5eddf; border-color:#267254; box-shadow:inset 0 0 0 3px #26725425; }
+    #area-slot.filled { border:0; background:#d4ebdd; box-shadow:none; }
+    .tile-tray { width:calc(100% - 44px); margin:28px 0 0 44px; }
+    #area-right { position:relative; grid-column:2; width:100%; height:100%; padding:0; border:1px solid #367654; border-radius:4px; background:#d4ebdd; color:#173f2d; box-shadow:inset 0 1px 0 #ffffffd0,inset 1px 0 0 #ffffff80,inset 0 -2px 0 #b3d4bd,0 4px 0 #94b89f,0 7px 12px #244b3518; touch-action:none; user-select:none; cursor:grab; transition:background-color .2s ease,box-shadow .2s ease; }
+    #area-right::before { content:""; position:absolute; inset:5px; border:1px solid #4d8c6333; border-radius:2px; pointer-events:none; }
+    #tile-tray #area-right:hover { background:#c9e7d5; box-shadow:inset 0 1px 0 #ffffffd0,inset 0 -2px 0 #b3d4bd,0 4px 0 #87b095,0 10px 16px #244b3524; }
+    #tile-tray #area-right.is-dragging { box-shadow:inset 0 1px 0 #ffffffd0,inset 0 -2px 0 #b3d4bd,0 4px 0 #87b095,0 16px 24px #244b3538; cursor:grabbing; }
     #area-right:active { cursor:grabbing; }
-    #area-slot #area-right { grid-column:1; border:0; cursor:default; }
+    #area-slot #area-right { grid-column:1; border:0; border-radius:0; box-shadow:inset 0 1px 0 #ffffffc0,inset 0 -3px 0 #b8d8c1; cursor:default; }
+    #area-slot #area-right::before { border-color:#4d8c6320; }
     .tile-region { transition:background-color .28s ease; }
     .tile-prompt { margin:0 0 14px; color:var(--muted); font-size:15px; }
     .tile-prompt[data-state=success] { color:var(--teal); font-weight:650; }
@@ -138,7 +217,7 @@
     .square-stage > div:last-child { background:#f9e1e7; }
     .quiz-head { display:flex; gap:16px; justify-content:space-between; padding:14px 20px; background:var(--ink); color:white; font-size:13px; font-weight:650; }
     .choices { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin:20px 0; }
-    .choice { position:relative; min-height:62px; border:1px solid #9ab4ab; border-radius:4px; background:white; color:var(--ink); padding:10px 14px 10px 54px; text-align:left; font:21px/1.5 Georgia,serif; overflow-wrap:anywhere; transition:background-color .24s ease,border-color .24s ease,box-shadow .24s ease,transform .2s ease; }
+    .choice { position:relative; min-height:62px; border:1px solid #9ab4ab; border-radius:3px; background:white; color:var(--ink); padding:10px 14px 10px 54px; text-align:left; font:21px/1.5 Georgia,serif; overflow-wrap:anywhere; transition:background-color .24s ease,border-color .24s ease,box-shadow .24s ease,transform .2s ease; }
     .choice::before { content:attr(data-choice-label); position:absolute; left:14px; top:50%; transform:translateY(-50%); display:grid; place-items:center; width:28px; height:28px; border:1px solid var(--line); border-radius:4px; color:var(--muted); font:700 12px/1 -apple-system,BlinkMacSystemFont,sans-serif; }
     .choice:hover:not(:disabled) { background:var(--pale); transform:translateY(-2px); box-shadow:0 4px 12px #19312f12; }
     .choice.correct { border:2px solid var(--teal); background:var(--pale); }
@@ -151,9 +230,14 @@
     .quiz-progress::-webkit-progress-bar { background:#d8e7e1; }
     .quiz-progress::-webkit-progress-value { background:var(--teal); transition:width .35s cubic-bezier(.2,.7,.2,1); }
     .quiz-progress::-moz-progress-bar { background:var(--teal); }
-    .method-list { padding:0; list-style:none; }
-    .method-list li { padding:12px 0; border-bottom:1px solid var(--line); }
+    .method-list { max-width:650px; padding:0; margin:30px 0 42px; list-style:none; border-top:1px solid #aebfba; }
+    .method-list li { padding:8px 0; font-size:16px; line-height:1.7; }
+    .method-list li:first-child { padding-top:14px; font-size:17px; }
+    .method-list li:nth-child(2),.method-list li:nth-child(3),.method-list li:nth-child(4) { position:relative; padding-left:38px; }
+    .method-list li:nth-child(2)::before,.method-list li:nth-child(3)::before,.method-list li:nth-child(4)::before { content:"↳"; position:absolute; left:9px; color:var(--coral); font:20px/1.4 Georgia,serif; }
+    .method-list li:last-child { margin-top:10px; padding:14px 0; border-top:1px solid var(--line); }
     .method-list strong { color:var(--teal); }
+    #practice { padding-top:72px; }
     .scroll-enter { animation:arrive .5s cubic-bezier(.2,.7,.2,1) both; }
     @keyframes arrive { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
     [hidden] { display:none!important; }
@@ -163,50 +247,76 @@
       main.wrap { width:min(1080px,calc(100% - 64px)); display:grid; grid-template-columns:210px minmax(0,1fr); column-gap:64px; }
       .intro { grid-column:1 / -1; }
       .contents { grid-column:1; grid-row:2 / span 5; position:sticky; top:24px; align-self:start; display:grid; overflow:visible; grid-template-columns:1fr; gap:2px; border:0; padding:38px 0 0; background:transparent; }
-      .contents a { white-space:normal; border-left:3px solid transparent; border-bottom:0; line-height:1.5; padding:12px 12px 12px 14px; }
+      .contents a { white-space:normal; border-left:2px solid transparent; border-bottom:0; line-height:1.5; padding:12px 12px 12px 14px; }
       main > section { grid-column:2; }
       main > section { scroll-margin-top:20px; }
     }
     @media(max-width:1099px) {
       .contents { position:sticky; top:0; z-index:10; width:calc(100% + 36px); margin-inline:-18px; padding:10px 18px; box-shadow:0 3px 10px #19312f08; }
     }
+    @media(max-width:760px) {
+      .intro { grid-template-columns:1fr; gap:24px; }
+      .opening-problem { width:100%; margin:0; }
+      .identity-square { grid-template-columns:1fr; }
+      .identity-square > .formula,.identity-square > .math-guide-caption,.identity-square > .diagram { grid-column:1; }
+      .identity-square > .diagram { grid-row:auto; margin:24px 0 0; }
+    }
     @media(max-width:640px) {
-      h1 { font-size:30px; } h2 { font-size:23px; }
+      h1 { font-size:32px; } h2 { font-size:24px; }
+      .brand { font-size:14px; }
+      .top nav { gap:10px; font-size:12px; }
       .top-inner { flex-wrap:wrap; padding-block:12px; }
-      .intro { padding:32px 0 28px; }
+      .intro { padding:32px 0 28px; gap:18px; }
+      .opening-problem .math { font-size:27px; }
       .lead { font-size:16px; }
-      .section-heading { padding:16px; }
-      .tool-body,.controls { padding:16px; }
+      .example { margin-left:0; padding-left:16px; }
+      .note { margin-left:0; }
+      .tool-body { padding:18px 0; }
+      .controls { padding:14px 0; }
       .math { font-size:20px; }
       .reverse-flow { grid-template-columns:minmax(0,1fr); gap:8px; }
+      .reverse-flow { padding:16px; }
+      .reverse-flow .math { font-size:24px; }
       .flow-arrows { display:flex; justify-content:center; align-items:center; gap:12px; }
       .flow-arrows strong { transform:rotate(90deg); }
+      .common-inspection { grid-template-columns:1fr; gap:14px; }
+      .common-inspection .math { font-size:23px; }
+      .identity-minus { margin-left:0; }
       .choices { grid-template-columns:1fr; }
       .group-terms { grid-template-columns:repeat(2,minmax(0,1fr)); }
       .choice { min-height:58px; }
+      .group-work-row,.group-work-bridge { grid-template-columns:minmax(0,1fr) 20px minmax(0,1fr); gap:5px; }
+      .group-work-row .group-step { grid-column:1 / -1; margin-bottom:2px; }
+      .group-work-bridge span:first-child { grid-column:1; }
+      .group-work-bridge span:last-child { grid-column:3; }
+      .group-cluster { padding-inline:0; }
+      .group-work-merge { margin-left:0; }
+      .group-work-result { grid-template-columns:1fr; padding-bottom:12px; }
+      .group-work-result .group-step { display:block; margin-bottom:10px; }
+      .grouping-work > .math-guide-caption { margin-left:0; }
     }
     @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; } .scroll-enter { animation:none; } }
-    @media print { .top,.contents,.controls,.actions,.quiz { display:none; } main.wrap { display:block; width:100%; } .scroll-enter { animation:none; } section { padding:18px 0; } }
+    @media print { .top,.contents,.controls,.actions,.quiz { display:none; } main.wrap { display:block; width:100%; } .scroll-enter { animation:none; } section { padding:18px 0; } .reverse-flow { background:white; color:var(--ink); border:1px solid var(--line); box-shadow:none; } .reverse-flow .math::before,.flow-arrows { color:var(--muted); } .flow-arrows strong { color:var(--coral); } }
   </style>
 </head>
 <body>
   <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
   <header class="top"><div class="wrap top-inner"><a class="brand" href="index.html">數學研習室</a><nav aria-label="主要導覽"><a href="#common">公因式</a><a href="#practice">練習</a><a href="index.html">教材總覽</a></nav></div></header>
   <main class="wrap">
-    <div class="intro"><p class="eyebrow">香港 · 中二 · 代數</p><h1>多項式的因式分解</h1><p class="lead">把「幾項相加」變成「幾個因式相乘」，再用展開驗算。</p></div>
+    <div class="intro"><div class="intro-copy"><p class="eyebrow">香港 · 中二 · 代數</p><h1>多項式的<span class="title-mark">因式分解</span></h1><p class="lead">先試一題。做到 <span class="math">2(<var>x</var><sup>2</sup> − 9)</span>，你會停嗎？我們由這一步開始，看看甚麼才叫「完全分解」。</p></div><aside class="opening-problem" aria-label="開場題目"><span class="problem-label">把這題完全因式分解</span><span class="math">2<var>x</var><sup>2</sup> − 18</span><a href="#story-solution">稍後回來對答案 ↓</a></aside></div>
     <nav class="contents" aria-label="課程章節"><a href="#meaning">01 甚麼是因式分解？</a><a href="#common">02 提取公因式</a><a href="#grouping">03 分組法</a><a href="#identities">04 運用恆等式</a><a href="#practice">05 練習與方法選擇</a></nav>
     <section id="meaning" aria-labelledby="meaning-title">
-      <header class="section-heading"><p class="kicker">01 · 由展開倒過來</p><h2 id="meaning-title">甚麼是因式分解？</h2></header>
-      <p>展開時，把乘積寫成各項的和；因式分解則反過來，把多項式寫成<strong>因式的乘積</strong>。</p>
+      <header class="section-heading"><p class="kicker">由展開倒過來</p><h2 id="meaning-title">甚麼是因式分解？</h2></header>
+      <p>先用一個較簡單的式子看看。展開，是把乘積寫成各項的和；因式分解就是倒過來，找出相乘的<strong>因式</strong>。</p>
       <figure class="diagram math-guide" data-guide="numeric">
         <div class="reverse-flow"><div class="math"><span class="math-hotspot" role="button" tabindex="0" data-link="all" data-members="first second" aria-label="共同因數 3">3</span>(<span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="括號內的 x"><var>x</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="括號內的 2">2</span>)</div><div class="flow-arrows">展開<strong aria-hidden="true">→</strong><strong aria-hidden="true">←</strong>因式分解</div><div class="math"><span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第一項 3x">3<var>x</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第二項 6">6</span></div></div>
         <p class="math-guide-caption" aria-live="polite">共同因數 3 乘括號內每一項；反過來，兩項都可提出 3。</p>
         <figcaption>3 與 (<var>x</var> + 2) 是兩個因式；3<var>x</var> 與 6 是兩項，並不是整個多項式的兩個因式。</figcaption>
       </figure>
-      <div class="formula math math-guide" data-guide="symbolic"><span class="formula-label">分配律：兩個方向都成立</span><span class="math-hotspot" role="button" tabindex="0" data-link="all" data-members="first second" aria-label="共同因數 a"><var>a</var></span>(<span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="括號內的 b"><var>b</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="括號內的 c"><var>c</var></span>) = <span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第一項 ab"><var>ab</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第二項 ac"><var>ac</var></span><p class="math-guide-caption" aria-live="polite">同一個 <var>a</var> 分別乘 <var>b</var>、<var>c</var>；倒過來可提出 <var>a</var>。</p></div>
+      <div class="formula law-line math math-guide" data-guide="symbolic"><span class="formula-label">分配律：兩個方向都成立</span><span class="math-hotspot" role="button" tabindex="0" data-link="all" data-members="first second" aria-label="共同因數 a"><var>a</var></span>(<span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="括號內的 b"><var>b</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="括號內的 c"><var>c</var></span>) = <span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第一項 ab"><var>ab</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第二項 ac"><var>ac</var></span><p class="math-guide-caption" aria-live="polite">同一個 <var>a</var> 分別乘 <var>b</var>、<var>c</var>；倒過來可提出 <var>a</var>。</p></div>
       <p class="note">因式分解不是解方程。題目只有多項式，沒有等號時，不需要求 <var>x</var> 的值。</p>
       <div class="tool" id="meaning-tool" hidden>
-        <h3 class="tool-heading">哪一個才是因式分解？</h3><div class="tool-body">
+        <h3 class="tool-heading">這三個答案，你會給哪個滿分？</h3><div class="tool-body">
           <p>把 <span class="math">6<var>x</var> + 12</span> 完全因式分解。</p>
           <div class="choices" id="meaning-choices"><button type="button" class="choice" data-meaning="0" data-choice-label="A">6(<var>x</var> + 2)</button><button type="button" class="choice" data-meaning="1" data-choice-label="B">3(2<var>x</var> + 4)</button><button type="button" class="choice" data-meaning="2" data-choice-label="C">6(<var>x</var> + 12)</button></div>
           <p class="feedback" id="meaning-feedback" aria-live="polite">留意「相等」和「已完全分解」是兩件不同的事。</p>
@@ -214,17 +324,20 @@
       </div>
     </section>
     <section id="common" aria-labelledby="common-title">
-      <header class="section-heading"><p class="kicker">02 · 每項都有甚麼？</p><h2 id="common-title">先找最大公因式</h2></header>
-      <ol class="steps"><li>數字：找各項係數的最大公因數。</li><li>字母：只取每一項都有的字母，並取其<strong>最低次數</strong>。</li><li>每一項除以公因式，所得結果放入括號。</li></ol>
+      <header class="section-heading"><p class="kicker">每項都有甚麼？</p><h2 id="common-title">先找最大公因式</h2></header>
+      <ol class="steps"><li><span>數字：找各項係數的最大公因數。</span></li><li><span>字母：只取每一項都有的字母，並取其<strong>最低次數</strong>。</span></li><li><span>每一項除以公因式，所得結果放入括號。</span></li></ol>
+      <aside class="thread-note" aria-label="開場題目的第一步"><p>回到開頭那題：兩項都有公因數 2。</p><span class="math">2<var>x</var><sup>2</sup> − 18<br>= 2(<var>x</var><sup>2</sup> − 9)</span><p><strong>這一步正確，但還未做完。</strong>先記住括號裏的 <span class="math inline-math"><var>x</var><sup>2</sup> − 9</span>，到了恆等式再回來看。</p></aside>
       <article class="example math-guide" data-guide="common"><h3>例 1 · 數字與字母一起提取</h3>
+        <div class="common-inspection">
         <p class="math"><span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第一項 6x²y">6<var>x</var><sup>2</sup><var>y</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第二項 9xy²">9<var>xy</var><sup>2</sup></span></p>
-        <p>6 和 9 的最大公因數是 3；兩項都有 <var>x</var> 和 <var>y</var>，最低次數都是 1。</p>
-        <div class="formula math"><span class="formula-label">最大公因式：3<var>xy</var></span><span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第一項 6x²y">6<var>x</var><sup>2</sup><var>y</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第二項 9xy²">9<var>xy</var><sup>2</sup></span><br>= <span class="factor-token math-hotspot" role="button" tabindex="0" data-link="all" data-members="first second" aria-label="兩項共有的因式 3xy">3<var>xy</var></span>(<span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第一項除以 3xy 得 2x">2<var>x</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第二項除以 3xy 得 3y">3<var>y</var></span>)</div>
+        <p class="observation">6 和 9 的最大公因數是 3；兩項都有 <var>x</var> 和 <var>y</var>，最低次數都是 1。</p>
+        </div>
+        <div class="formula common-working math"><span class="formula-label">最大公因式：3<var>xy</var></span><span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第一項 6x²y">6<var>x</var><sup>2</sup><var>y</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第二項 9xy²">9<var>xy</var><sup>2</sup></span><br>= <span class="factor-token math-hotspot" role="button" tabindex="0" data-link="all" data-members="first second" aria-label="兩項共有的因式 3xy">3<var>xy</var></span>(<span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第一項除以 3xy 得 2x">2<var>x</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第二項除以 3xy 得 3y">3<var>y</var></span>)</div>
         <p class="math-guide-caption" aria-live="polite">兩項都有 3<var>xy</var>；各自除以它，所得結果放進括號。</p>
         <details><summary>展開驗算</summary><div><p class="math">3<var>xy</var> × 2<var>x</var> + 3<var>xy</var> × 3<var>y</var><br>= 6<var>x</var><sup>2</sup><var>y</var> + 9<var>xy</var><sup>2</sup></p></div></details>
       </article>
       <div class="tool" id="area-tool" hidden>
-        <h3 class="tool-heading">面積圖：共同的高度，就是公因式</h3>
+        <h3 class="tool-heading">兩塊拼起來，總闊度會是甚麼？</h3>
         <div class="controls"><div><label for="factor-a">共同高度：<output id="factor-a-label">3</output></label><input id="factor-a" type="range" min="1" max="6" step="1" value="3"></div><div><label for="factor-b">右邊闊度：<output id="factor-b-label">2</output></label><input id="factor-b" type="range" min="1" max="6" step="1" value="2"></div></div>
         <div class="tool-body">
           <figure class="diagram"><p class="tile-prompt" id="area-prompt" aria-live="polite">把綠色長方形拖到虛線位置，或點按它。</p><div class="factor-tile-stage"><div class="tile-widths"><span><var>x</var></span><span id="width-b">2</span></div><div class="tile-layout"><div class="tile-height math" id="height-a">3</div><div class="tile-board"><div class="tile-region" id="area-left">3<var>x</var></div><div id="area-slot" aria-label="拼合位置"><span>放在這裏</span></div></div></div><div class="tile-tray" id="tile-tray"><button type="button" class="tile-region" id="area-right" aria-label="把右邊長方形拼到面積圖">6</button></div></div><div class="tile-actions"><button type="button" class="secondary" id="area-reset" hidden>分開重試</button></div><figcaption>兩個長方形高度相同，合併後的闊度為 <var>x</var> 加上右邊闊度。這是代數示意圖，並非按比例繪製；面積解釋假設 <var>x</var> &gt; 0。</figcaption></figure>
@@ -232,29 +345,42 @@
           <p>分開計面積：把兩項相加。合起來計面積：共同高度 × 總闊度。</p>
         </div>
       </div>
-      <p class="note">提取後不能漏掉 1：<span class="math">5<var>x</var> + 5 = 5(<var>x</var> + 1)</span>，不是 <span class="math">5<var>x</var></span>。</p>
+      <div class="note teacher-correction"><div class="correction-row"><span class="correction-label">有人這樣寫（錯誤）</span><del class="math">5<var>x</var> + 5 = 5<var>x</var></del></div><p><strong>那個 5 沒有消失。</strong><br>它除以公因數 5，留下的是 1。</p><div class="correction-row correction-row--right"><span class="correction-label">應寫成</span><ins class="math">5(<var>x</var> + 1)</ins></div><p>展開才會回到原式。</p></div>
       <details><summary>遇到負數：提取 −1 有甚麼作用？</summary><div><p class="math">3 − <var>x</var> = −(<var>x</var> − 3)</p><p>提出負號時，括號內每一項都要變號。例如：</p><p class="math">−4<var>x</var><sup>2</sup> + 8<var>x</var> = −4<var>x</var>(<var>x</var> − 2)</p></div></details>
     </section>
     <section id="grouping" aria-labelledby="grouping-title">
-      <header class="section-heading"><p class="kicker">03 · 把共同括號找出來</p><h2 id="grouping-title">四項多項式：分組法</h2></header>
-      <p>若沒有所有項都共有的因式，可先把各項分組。每組提取公因式後，看看能否出現<strong>相同的括號</strong>。</p>
-      <div class="formula math math-guide" data-guide="grouping">
-        <span class="math-hotspot" role="button" tabindex="0" data-link="ax" data-members="ax a" aria-label="第一項 ax"><var>ax</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="ay" data-members="ay a" aria-label="第二項 ay"><var>ay</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="bx" data-members="bx b" aria-label="第三項 bx"><var>bx</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="by" data-members="by b" aria-label="第四項 by"><var>by</var></span><br>
-        = <span class="math-hotspot" role="button" tabindex="0" data-link="a" data-members="ax ay a" aria-label="第一組提出的 a"><var>a</var></span><span class="math-hotspot" role="button" tabindex="0" data-link="bracket" data-members="bracket" aria-label="第一組的括號 x 加 y">(<var class="math-part" data-members="ax">x</var> + <var class="math-part" data-members="ay">y</var>)</span> + <span class="math-hotspot" role="button" tabindex="0" data-link="b" data-members="bx by b" aria-label="第二組提出的 b"><var>b</var></span><span class="math-hotspot" role="button" tabindex="0" data-link="bracket" data-members="bracket" aria-label="第二組的括號 x 加 y">(<var class="math-part" data-members="bx">x</var> + <var class="math-part" data-members="by">y</var>)</span><br>
-        = (<span class="math-hotspot" role="button" tabindex="0" data-link="a" data-members="a" aria-label="提出共同括號後的 a"><var>a</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="b" data-members="b" aria-label="提出共同括號後的 b"><var>b</var></span>)<span class="math-hotspot" role="button" tabindex="0" data-link="bracket" data-members="bracket" aria-label="兩組共同的括號 x 加 y">(<var>x</var> + <var>y</var>)</span>
+      <header class="section-heading"><p class="kicker">換一題，遇到四項怎麼辦？</p><h2 id="grouping-title">四項多項式：分組法</h2></header>
+      <p>不是每題都能一次提出公因式。若四項沒有共同因式，先分成兩組；每組各自提取後，再看看有沒有留下<strong>同一個括號</strong>。</p>
+      <div class="grouping-work math math-guide" data-guide="grouping" role="group" aria-label="分組法的三步因式分解">
+        <div class="group-work-row">
+          <span class="group-step">先分成兩組</span>
+          <span class="group-cluster"><span class="math-hotspot" role="button" tabindex="0" data-link="ax" data-members="ax a" aria-label="第一項 ax"><var>ax</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="ay" data-members="ay a" aria-label="第二項 ay"><var>ay</var></span></span>
+          <span class="group-work-operator">+</span>
+          <span class="group-cluster group-cluster--second"><span class="math-hotspot" role="button" tabindex="0" data-link="bx" data-members="bx b" aria-label="第三項 bx"><var>bx</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="by" data-members="by b" aria-label="第四項 by"><var>by</var></span></span>
+        </div>
+        <div class="group-work-bridge" aria-hidden="true"><span>提出 <var>a</var></span><span>提出 <var>b</var></span></div>
+        <div class="group-work-row group-work-factored">
+          <span class="group-step">各組提出公因式</span>
+          <span class="group-cluster"><span class="math-hotspot" role="button" tabindex="0" data-link="a" data-members="ax ay a" aria-label="第一組提出的 a"><var>a</var></span><span class="math-hotspot" role="button" tabindex="0" data-link="bracket" data-members="bracket" aria-label="第一組的括號 x 加 y">(<var class="math-part" data-members="ax">x</var> + <var class="math-part" data-members="ay">y</var>)</span></span>
+          <span class="group-work-operator">+</span>
+          <span class="group-cluster group-cluster--second"><span class="math-hotspot" role="button" tabindex="0" data-link="b" data-members="bx by b" aria-label="第二組提出的 b"><var>b</var></span><span class="math-hotspot" role="button" tabindex="0" data-link="bracket" data-members="bracket" aria-label="第二組的括號 x 加 y">(<var class="math-part" data-members="bx">x</var> + <var class="math-part" data-members="by">y</var>)</span></span>
+        </div>
+        <div class="group-work-merge">兩組同一個括號，提出一次<span class="group-down" aria-hidden="true">↓</span></div>
+        <div class="group-work-result"><span class="group-step">合成結果</span><span class="group-answer">= (<span class="math-hotspot" role="button" tabindex="0" data-link="a" data-members="a" aria-label="提出共同括號後的 a"><var>a</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="b" data-members="b" aria-label="提出共同括號後的 b"><var>b</var></span>)<span class="math-hotspot" role="button" tabindex="0" data-link="bracket" data-members="bracket" aria-label="兩組共同的括號 x 加 y">(<var>x</var> + <var>y</var>)</span></span></div>
         <p class="math-guide-caption" aria-live="polite">前兩項提出 <var>a</var>，後兩項提出 <var>b</var>；兩組留下同一個括號。</p>
       </div>
       <div class="tool" id="group-tool" hidden>
-        <h3 class="tool-heading">逐步拆解：先分組，再提取</h3>
+        <h3 class="tool-heading">你會先把哪兩項放在一起？</h3>
         <div class="controls"><label for="group-case">例題 <select id="group-case"><option value="0">正數分組</option><option value="1">留意負號</option></select></label></div>
         <div class="tool-body"><p class="muted" id="group-progress"></p><div class="group-stage math"><div class="group-terms" id="group-terms" role="group" aria-label="選兩項為第一組"></div><div id="group-expression" hidden></div></div><p class="feedback" id="group-explanation" aria-live="polite"></p><div class="actions"><button type="button" class="primary" id="group-next" disabled>下一步</button><button type="button" class="secondary" id="group-reset">重新開始</button></div></div>
       </div>
       <article class="example math-guide" data-guide="reverse-group"><h3>例 2 · 括號的次序相反</h3><p class="math"><span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第一組 a 乘 x 減 y"><var>a</var>(<var>x</var> − <var>y</var>)</span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第二組 b 乘 y 減 x"><var>b</var>(<var>y</var> − <var>x</var>)</span><br>= <span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第一組保持不變"><var>a</var>(<var>x</var> − <var>y</var>)</span> <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第二組提出負號">− <var>b</var>(<var>x</var> − <var>y</var>)</span><br>= (<span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="提出共同括號後的 a"><var>a</var></span> <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="提出共同括號後的負 b">− <var>b</var></span>)<span class="math-hotspot" role="button" tabindex="0" data-link="all" data-members="first second" aria-label="共同括號 x 減 y">(<var>x</var> − <var>y</var>)</span></p><p class="math-guide-caption" aria-live="polite">(<var>y</var> − <var>x</var>) = −(<var>x</var> − <var>y</var>)；先變成相同括號，再提出來。</p><p class="note"><span class="math">(<var>y</var> − <var>x</var>) = −(<var>x</var> − <var>y</var>)</span>，不能直接當作相同括號。</p></article>
     </section>
     <section id="identities" aria-labelledby="identities-title">
-      <header class="section-heading"><p class="kicker">04 · 認出熟悉的形狀</p><h2 id="identities-title">把恆等式倒過來用</h2></header>
-      <div class="formula math math-guide" data-guide="difference"><span class="formula-label">平方差：兩項、相減、各自是平方</span><span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第一個平方 a²"><var>a</var><sup>2</sup></span> − <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第二個平方 b²"><var>b</var><sup>2</sup></span> = (<span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第一因式中的 a"><var>a</var></span> <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第一因式中的正 b">+ <var>b</var></span>)(<span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第二因式中的 a"><var>a</var></span> <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第二因式中的負 b">− <var>b</var></span>)<p class="math-guide-caption" aria-live="polite">展開時 +<var>ab</var> 和 −<var>ab</var> 抵消，留下兩個平方之差。</p></div>
-      <div class="math-guide" data-guide="square-plus">
+      <header class="section-heading"><p class="kicker">開頭的括號，原來還有一步</p><h2 id="identities-title">把恆等式倒過來用</h2></header>
+      <p class="identity-lead">還記得 <span class="math"><var>x</var><sup>2</sup> − 9</span> 嗎？9 就是 <span class="math">3<sup>2</sup></span>，所以它是兩個平方相減。先認出平方差，再看看三項的完全平方：首末項都要是平方，中間項還要配得上 <span class="math">±2<var>ab</var></span>。</p>
+      <div class="formula identity-difference math math-guide" data-guide="difference"><span class="formula-label">平方差：兩項、相減、各自是平方</span><span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第一個平方 a²"><var>a</var><sup>2</sup></span> − <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第二個平方 b²"><var>b</var><sup>2</sup></span> = (<span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第一因式中的 a"><var>a</var></span> <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第一因式中的正 b">+ <var>b</var></span>)(<span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="第二因式中的 a"><var>a</var></span> <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="第二因式中的負 b">− <var>b</var></span>)<p class="math-guide-caption" aria-live="polite">展開時 +<var>ab</var> 和 −<var>ab</var> 抵消，留下兩個平方之差。</p></div>
+      <div class="identity-square math-guide" data-guide="square-plus">
         <div class="formula math"><span class="formula-label">完全平方：加</span><span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="首項 a²"><var>a</var><sup>2</sup></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="middle" data-members="middle" aria-label="中間項 2ab">2<var>ab</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="末項 b²"><var>b</var><sup>2</sup></span> = (<span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first middle" aria-label="括號內的 a"><var>a</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second middle" aria-label="括號內的 b"><var>b</var></span>)<sup>2</sup></div>
         <p class="math-guide-caption" aria-live="polite">(<var>a</var> + <var>b</var>)<sup>2</sup> 有 <var>a</var><sup>2</sup>、兩份 <var>ab</var> 和 <var>b</var><sup>2</sup>。</p>
         <figure class="diagram"><h3>為甚麼中間是 2<var>ab</var>？</h3>
@@ -262,17 +388,17 @@
           <figcaption>大正方形邊長為 <var>a</var> + <var>b</var>。兩個綠色長方形的面積各為 <var>ab</var>，合計 2<var>ab</var>。圖示假設 <var>a</var>、<var>b</var> 均為正數；恆等式本身不限於正數。</figcaption>
         </figure>
       </div>
-      <div class="formula math math-guide" data-guide="square-minus"><span class="formula-label">完全平方：減，中間項是 −2<var>ab</var></span><span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="首項 a²"><var>a</var><sup>2</sup></span> − <span class="math-hotspot" role="button" tabindex="0" data-link="middle" data-members="middle" aria-label="中間項 2ab">2<var>ab</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="末項 b²"><var>b</var><sup>2</sup></span> = (<span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first middle" aria-label="括號內的 a"><var>a</var></span> − <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second middle" aria-label="括號內的 b"><var>b</var></span>)<sup>2</sup><p class="math-guide-caption" aria-live="polite">(<var>a</var> − <var>b</var>)<sup>2</sup> 的兩個交叉項都是 −<var>ab</var>，合成 −2<var>ab</var>。</p></div>
+      <div class="formula identity-minus math math-guide" data-guide="square-minus"><span class="formula-label">完全平方：減，中間項是 −2<var>ab</var></span><span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first" aria-label="首項 a²"><var>a</var><sup>2</sup></span> − <span class="math-hotspot" role="button" tabindex="0" data-link="middle" data-members="middle" aria-label="中間項 2ab">2<var>ab</var></span> + <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second" aria-label="末項 b²"><var>b</var><sup>2</sup></span> = (<span class="math-hotspot" role="button" tabindex="0" data-link="first" data-members="first middle" aria-label="括號內的 a"><var>a</var></span> − <span class="math-hotspot" role="button" tabindex="0" data-link="second" data-members="second middle" aria-label="括號內的 b"><var>b</var></span>)<sup>2</sup><p class="math-guide-caption" aria-live="polite">(<var>a</var> − <var>b</var>)<sup>2</sup> 的兩個交叉項都是 −<var>ab</var>，合成 −2<var>ab</var>。</p></div>
       <div class="tool" id="identity-tool" hidden>
-        <h3 class="tool-heading">辨認模式，再揭曉因式</h3><div class="identity-tabs" role="group" aria-label="恆等式模式"><button type="button" data-identity="0" aria-pressed="true">平方差</button><button type="button" data-identity="1" aria-pressed="false">完全平方：加</button><button type="button" data-identity="2" aria-pressed="false">完全平方：減</button></div>
+        <h3 class="tool-heading">這題像哪一個恆等式？</h3><div class="identity-tabs" role="group" aria-label="恆等式模式"><button type="button" data-identity="0" aria-pressed="true">平方差</button><button type="button" data-identity="1" aria-pressed="false">完全平方：加</button><button type="button" data-identity="2" aria-pressed="false">完全平方：減</button></div>
         <div class="tool-body"><div class="math" id="identity-expression"></div><p class="feedback" id="identity-clue"></p><button type="button" class="primary" id="identity-reveal">揭曉並驗算</button><div class="formula math" id="identity-answer" aria-live="polite" hidden></div></div>
       </div>
-      <article class="example math-guide" data-guide="two-stage"><h3>例 3 · 提取後，還可以再分解</h3><p class="math"><span class="math-hotspot" role="button" tabindex="0" data-link="factor" data-members="factor" aria-label="第一項 2x² 有公因數 2">2<var>x</var><sup>2</sup></span> − <span class="math-hotspot" role="button" tabindex="0" data-link="factor" data-members="factor" aria-label="第二項 18 有公因數 2">18</span><br>= <span class="math-hotspot" role="button" tabindex="0" data-link="factor" data-members="factor" aria-label="提出的公因數 2">2</span>(<span class="math-hotspot" role="button" tabindex="0" data-link="difference" data-members="difference" aria-label="括號內還有平方差 x² 減 9"><var>x</var><sup>2</sup> − 9</span>)<br>= <strong><span class="math-hotspot" role="button" tabindex="0" data-link="factor" data-members="factor" aria-label="最後仍保留公因數 2">2</span><span class="math-hotspot" role="button" tabindex="0" data-link="difference" data-members="difference" aria-label="平方差分解為 x 加 3 乘 x 減 3">(<var>x</var> + 3)(<var>x</var> − 3)</span></strong></p><p class="math-guide-caption" aria-live="polite">先提出公因數 2，再把括號內的平方差分解，才是完全因式分解。</p></article>
-      <p class="note"><span class="math"><var>x</var><sup>2</sup> + 9</span> 是平方<strong>和</strong>，不能寫成 <span class="math">(<var>x</var> + 3)(<var>x</var> − 3)</span>。後者展開是 <span class="math"><var>x</var><sup>2</sup> − 9</span>。</p>
+      <article class="example math-guide story-solution" id="story-solution" data-guide="two-stage"><h3>回到開頭那題：現在可以分解到底了</h3><p>提出 2 之後，括號裏的平方差還可以再拆。兩步要一起保留。</p><p class="math"><span class="math-hotspot" role="button" tabindex="0" data-link="factor" data-members="factor" aria-label="第一項 2x² 有公因數 2">2<var>x</var><sup>2</sup></span> − <span class="math-hotspot" role="button" tabindex="0" data-link="factor" data-members="factor" aria-label="第二項 18 有公因數 2">18</span><br>= <span class="math-hotspot" role="button" tabindex="0" data-link="factor" data-members="factor" aria-label="提出的公因數 2">2</span>(<span class="math-hotspot" role="button" tabindex="0" data-link="difference" data-members="difference" aria-label="括號內還有平方差 x² 減 9"><var>x</var><sup>2</sup> − 9</span>)<br>= <strong><span class="math-hotspot" role="button" tabindex="0" data-link="factor" data-members="factor" aria-label="最後仍保留公因數 2">2</span><span class="math-hotspot" role="button" tabindex="0" data-link="difference" data-members="difference" aria-label="平方差分解為 x 加 3 乘 x 減 3">(<var>x</var> + 3)(<var>x</var> − 3)</span></strong></p><p class="math-guide-caption" aria-live="polite">先提出公因數 2，再把括號內的平方差分解，才是完全因式分解。</p></article>
+      <div class="note teacher-correction"><div class="correction-row"><span class="correction-label">有人這樣寫（錯誤）</span><del class="math"><var>x</var><sup>2</sup> + 9<br>= (<var>x</var> + 3)(<var>x</var> − 3)</del></div><p><strong>先展開，不要只看它長得像。</strong></p><p>右邊展開會得到 <span class="math"><var>x</var><sup>2</sup> − 9</span>，正負號對不上。平方<strong>和</strong>不是平方差。</p></div>
       <p><a href="identities-s2.html">重溫恆等式的面積圖解</a></p>
     </section>
     <section id="practice" aria-labelledby="practice-title">
-      <header class="section-heading"><p class="kicker">05 · 先選方法，再動筆</p><h2 id="practice-title">完全分解，展開驗算</h2></header>
+      <header class="section-heading"><p class="kicker">先選方法，再動筆</p><h2 id="practice-title">完全分解，展開驗算</h2></header>
       <ol class="method-list"><li><strong>先看公因式。</strong> 每題都先檢查能否提取。</li><li><strong>兩項：</strong>看看是否平方差。</li><li><strong>三項：</strong>看看是否完全平方。</li><li><strong>四項：</strong>嘗試分組，找出共同括號。</li><li><strong>最後檢查：</strong>還能再分解嗎？展開後是否回到原式？</li></ol>
       <div class="tool quiz" id="quiz" hidden><div class="quiz-head"><span id="progress"></span><span id="score"></span></div><progress class="quiz-progress" id="quiz-progress" value="0" max="9" aria-label="已完成題數"></progress><div class="tool-body"><h3 id="question" tabindex="-1"></h3><div class="choices" id="choices"></div><p id="feedback" class="feedback" aria-live="polite"></p><div class="actions"><button class="primary" id="next" type="button" hidden>下一題</button></div></div></div>
       <noscript><p>互動練習需要啟用 JavaScript；所有講解、例題及以下綜合題仍可閱讀。</p></noscript>
@@ -415,8 +541,8 @@
       el("area-equation").innerHTML = `${term(a)} + ${a * b} = ${a}(${x} + ${b})`;
       if(animate) {
         const changed=el("area-left");
-        animateChange(changed,[{backgroundColor:"#b9e4f2",transform:"scale(.985)"},{backgroundColor:"#dbeff7",transform:"scale(1)"}],340);
-        animateChange(el("area-right"),[{backgroundColor:"#c6ead8",transform:"scale(.985)"},{backgroundColor:"#e5f3ed",transform:"scale(1)"}],340);
+        animateChange(changed,[{backgroundColor:"#b9dfef",transform:"scale(.985)"},{backgroundColor:"#dbeef6",transform:"scale(1)"}],340);
+        animateChange(el("area-right"),[{backgroundColor:"#b5dfc5",transform:"scale(.985)"},{backgroundColor:"#d4ebdd",transform:"scale(1)"}],340);
         if(!el("area-equation").hidden)animateChange(el("area-equation"),settleIn);
       }
     }
@@ -426,6 +552,7 @@
     let dragStart=null,suppressTileClick=false;
     function assembleArea() {
       if(tile.parentElement===slot)return;
+      tile.classList.remove("is-dragging");
       const from=tile.getBoundingClientRect();
       tile.style.transform="";tile.style.position="";tile.style.zIndex="";
       slot.replaceChildren(tile);
@@ -451,6 +578,7 @@
       const dx=event.clientX-dragStart.x,dy=event.clientY-dragStart.y;
       if(Math.hypot(dx,dy)<5&&!dragStart.moved)return;
       dragStart.moved=true;
+      tile.classList.add("is-dragging");
       tile.style.position="relative";tile.style.zIndex="2";
       tile.style.transform=`translate(${dx}px, ${dy}px)`;
       const rect=slot.getBoundingClientRect();
@@ -458,6 +586,7 @@
     });
     tile.addEventListener("pointerup",event=>{
       if(!dragStart)return;
+      tile.classList.remove("is-dragging");
       if(dragStart.moved) {
         suppressTileClick=true;
         const rect=slot.getBoundingClientRect();
@@ -473,11 +602,13 @@
       dragStart=null;
     });
     tile.addEventListener("pointercancel",()=>{
+      tile.classList.remove("is-dragging");
       dragStart=null;tile.style.transform="";tile.style.position="";tile.style.zIndex="";
       slot.classList.remove("is-over");
     });
     tile.addEventListener("click",()=>{if(!suppressTileClick)assembleArea();});
     el("area-reset").addEventListener("click",()=>{
+      tile.classList.remove("is-dragging");
       el("tile-tray").append(tile);
       el("tile-tray").hidden=false;
       slot.replaceChildren(Object.assign(document.createElement("span"),{textContent:"放在這裏"}));
