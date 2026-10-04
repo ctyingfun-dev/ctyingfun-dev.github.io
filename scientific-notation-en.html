@@ -1,0 +1,965 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Why scientific notation matters: powers of ten, exact conversions and interactive practice.">
+  <title>Scientific Notation | Standard Form</title>
+  <style>
+    @font-face{font-family:IansuiLesson;src:url("fonts/Iansui-Scientific.woff2") format("woff2");font-weight:400;font-display:swap}
+    :root{--ink:#253330;--muted:#526664;--line:#d7e2de;--teal:#08786e;--blue:#286d9e;--red:#a33850;--hand:IansuiLesson,"Kaiti TC","Songti TC",serif}
+    *{box-sizing:border-box;letter-spacing:0}
+    html{scroll-behavior:smooth}
+    body{margin:0;color:var(--ink);background:#fff;font:19px/1.8 var(--hand);font-synthesis:none}
+    [lang=en]{font-family:Georgia,"Times New Roman",serif}
+    .en{display:block;color:var(--muted);font-size:15px;line-height:1.65;margin-top:3px}
+    h1,h2,h3,h4,p,figure{margin:0}
+    h1,h2,h3,h4{font-weight:400}
+    h1{font-size:42px;line-height:1.45}
+    h1 .en{font-size:28px;color:var(--ink);margin-top:5px}
+    h2{font-size:29px;line-height:1.55;margin-bottom:20px}
+    h2 .en{font-size:19px}
+    h3{font-size:22px;line-height:1.6;margin-bottom:16px}
+    h3 .en{font-size:16px}
+    p{margin-bottom:20px}
+    a{color:var(--teal);text-underline-offset:4px}
+    button,input,select{font:inherit;color:inherit}
+    button{cursor:pointer;min-height:44px;border:1px solid #94aaa2;border-radius:4px;background:white;padding:8px 14px}
+    button:hover:not(:disabled){border-color:var(--teal);background:#eef6f3}
+    button:disabled{opacity:.45;cursor:default}
+    button.primary{background:var(--teal);color:white;border-color:var(--teal)}
+    button.primary:hover:not(:disabled){background:#075e57}
+    :focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+    input,select{max-width:100%;min-height:44px;background:white;border:1px solid #94aaa2;border-radius:4px;padding:6px 10px}
+    input[type=range]{padding:0;border:0;accent-color:var(--teal);width:220px}
+    input[type=radio]{min-height:0;width:20px;height:20px;accent-color:var(--teal);flex:none;margin:0}
+    label{cursor:pointer}
+    .wrap{width:min(820px,calc(100% - 48px));margin:auto}
+    .top{border-bottom:1px solid var(--line);background:white}
+    .top-inner{min-height:68px;display:flex;justify-content:space-between;align-items:center;gap:18px}
+    .top .brand{display:inline-flex;align-items:center;min-height:44px;color:var(--ink);font-size:16px;font-weight:400;text-decoration:none;white-space:nowrap}
+    .top nav{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px}
+    .top nav a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;color:var(--muted);font-size:15px;text-decoration:none;white-space:nowrap}
+    .top a:hover{color:var(--teal);text-decoration:underline}
+    .intro{padding:42px 0 26px;border-bottom:1px solid var(--line)}
+    .intro>p{margin:18px 0 0;max-width:38em}
+    .intro h2{font-size:26px;margin:16px 0 12px}
+    .why-reasons{list-style:none;padding:0;margin:24px 0 0;max-width:44em}
+    .why-reasons li{padding:10px 0 10px 18px;border-left:1px solid #b9cac2;margin:14px 0}
+    .why-reasons strong{display:block;color:var(--teal);font-weight:400}
+    .intro .takeaway{padding-top:12px;border-top:1px solid var(--line)}
+    .language-link{font:15px/1.6 Georgia,"Times New Roman",serif;min-height:44px;display:flex;align-items:center}
+    .language-link[lang=zh-Hant]{font-family:var(--hand)}
+    html[lang=en] body,html[lang=en] .icon .tip{font-family:Georgia,"Times New Roman",serif}
+    html[lang=en] .contents a{font-size:15px}
+    .opening{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;margin:24px 0 0;padding:12px 0 4px;max-width:900px}
+    .real-example{min-width:0}
+    .example-photo{display:block;width:100%;height:240px;object-fit:contain;background:#f2f5f3}
+    .example-photo.earth{background:#000}
+    .image-link{display:block}
+    .real-example figcaption{padding-top:14px}
+    .real-example h3{font-size:22px;margin-bottom:8px}
+    .real-example p{font-size:16px;margin-bottom:10px}
+    .real-example .math{font-size:24px}
+    .real-example p:not(.math) .math{font-size:20px}
+    .real-example .source-credit{font-size:13px;color:var(--muted);line-height:1.75}
+    .intro .source-notice{font-size:14px;color:var(--muted);max-width:900px;margin-top:12px}
+    .source-notice .math{font-size:17px}
+    .contents{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px 22px;padding:20px 0;border-bottom:1px solid var(--line)}
+    .contents a{padding:7px 0;text-decoration:none;min-height:44px;font-size:16px}
+    .contents .en{font-size:13px;margin:0}
+    .contents a[aria-current=location]{color:var(--ink);text-decoration:underline;text-decoration-color:var(--red)}
+    main>section{padding:44px 0 48px;border-bottom:1px solid var(--line);scroll-margin-top:20px;min-width:0}
+    .kicker{font:13px/1.5 Georgia,serif;color:var(--muted);margin-bottom:8px}
+    html[lang=zh-Hant] .kicker{font-family:var(--hand)}
+    .power-label,.comparison-note{display:block}
+    .math{font-family:Georgia,"Times New Roman",serif;font-variant-numeric:tabular-nums;font-size:23px;line-height:1.9}
+    var{font-family:Georgia,"Times New Roman",serif;font-style:italic}
+    sup{font-size:.65em;line-height:0}
+    .eq{display:inline-block;white-space:nowrap;max-width:100%}
+    .formula{font-size:30px;padding:16px 0;margin:22px 0;border-block:1px solid var(--line)}
+    .rule{display:flex;flex-wrap:wrap;gap:4px 32px;align-items:center;margin:12px 0}
+    .rule .math{color:var(--teal)}
+    .definitions{display:grid;grid-template-columns:28px minmax(0,1fr);gap:14px;margin:22px 0}
+    .definitions dt,.definitions dd{margin:0}
+    .definitions dt{font-size:24px;color:var(--teal)}
+    .definitions .en{margin-top:0}
+    .note{padding-left:16px;border-left:1px dashed #95aaa1;margin:24px 0;font-size:17px}
+    .example{padding:8px 0 12px 20px;border-left:1px solid #b9cac2;margin:24px 0}
+    .example h3{font-size:21px;margin-bottom:12px}
+    .example p:last-child{margin-bottom:0}
+    .example .math{margin:6px 0}
+    .frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.9em;line-height:1.3;margin:0 4px}
+    .frac>span:first-child{padding:0 4px 3px;border-bottom:1px solid currentColor}
+    .frac>span:last-child{padding:3px 4px 0}
+    .powers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:1px solid var(--line);margin:22px 0}
+    .powers>div{padding:16px 12px 16px 0;min-width:0}
+    .powers>div+div{border-left:1px solid var(--line);padding-left:20px}
+    .powers .math{font-size:21px}
+    .powers .en{font-size:14px}
+    .tool{margin:28px 0 8px;border:1px solid #b4c8bf;border-radius:6px;overflow:hidden}
+    .tool-head{padding:20px 22px 0}
+    .tool-head h3{margin-bottom:10px}
+    .tool-head p{font-size:17px}
+    .controls{display:flex;gap:16px 24px;flex-wrap:wrap;align-items:end;padding:16px 22px;border-block:1px solid var(--line);background:#fafbfa}
+    .controls>div{min-width:0;max-width:100%}
+    .control-label{display:block;font-size:16px;margin-bottom:4px}
+    .control-label .en{font-size:13px;margin:0}
+    .stepper{display:flex;align-items:center;gap:10px}
+    .icon{width:44px;height:44px;display:inline-grid;place-items:center;padding:0;font-family:Georgia,serif;font-size:24px;position:relative}
+    .icon .tip{position:absolute;bottom:calc(100% + 8px);background:var(--ink);color:white;font:13px/1.5 var(--hand);padding:5px 8px;min-width:130px;border-radius:3px;z-index:2;display:none;pointer-events:none}
+    .icon:hover .tip,.icon:focus-visible .tip{display:block}
+    .stepper output{min-width:50px;text-align:center;font:23px Georgia,serif}
+    .tool-body{padding:20px 22px}
+    .activity-list{list-style:none;padding:0;margin:0}
+    .activity-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 0;border-bottom:1px solid var(--line)}
+    .activity-row .math{font-size:21px}
+    .activity-options{display:flex;gap:12px;flex-wrap:wrap}
+    .activity-options label{display:flex;gap:6px;align-items:center;font-size:16px}
+    .activity-note{flex-basis:100%;font-size:15px;min-height:24px;margin:0}
+    .repair-fields{display:flex;gap:16px;flex-wrap:wrap;margin:16px 0}
+    .repair-fields label{min-width:0;flex:1 1 120px}
+    .repair-fields input{width:100%;min-width:0}
+    .sorting-controls{display:flex;gap:8px}
+    .activity-feedback{min-height:76px;margin:14px 0 0;font-size:17px}
+    .grid-caption{font-size:15px;margin:0 0 12px}
+    .place-grid{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));height:114px;border:1px solid #99b4a7;border-radius:3px;margin-top:12px;position:relative}
+    .place-cell{min-width:0;display:flex;flex-direction:column;align-items:center;border-right:1px solid var(--line);background:white}
+    .place-cell:last-child{border-right:0}
+    .place-cell .power{display:block;text-align:center;width:100%;height:40px;background:#f2f6f4;font:15px/40px Georgia,serif;border-bottom:1px solid var(--line)}
+    .place-cell .digit{display:grid;place-items:center;width:100%;height:72px;font:29px Georgia,serif}
+    .place-cell.significant .digit{background:#edf5fb;color:var(--blue)}
+    .place-cell.ones{border-right:2px solid var(--teal);position:relative}
+    .place-cell.ones::after{content:".";position:absolute;right:-6px;bottom:14px;color:var(--teal);background:white;font:30px/1 Georgia,serif;z-index:1}
+    .decimal-key{height:34px;font-size:13px;color:var(--teal);text-align:center;padding-top:5px}
+    .readout{min-height:122px;padding:12px 0}
+    .readout .math{font-size:26px;display:flex;gap:4px 10px;align-items:baseline;flex-wrap:wrap}
+    .readout .en{font-size:14px}
+    .decimal-original-label{font-size:15px;color:var(--muted);margin-bottom:0}
+    .decimal-original{font-size:25px;margin:0 0 12px}
+    .decimal-stage{height:128px;padding-inline:14px;border-block:1px solid var(--line)}
+    .decimal-track{position:relative;height:100%;--decimal-position:100%;--decimal-origin:100%;cursor:ew-resize;touch-action:none;user-select:none}
+    .decimal-track:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+    .decimal-digits{position:absolute;inset:25px 0 auto;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));height:80px}
+    .decimal-digit{display:grid;place-items:center;min-width:0;font:32px/80px Georgia,serif}
+    .decimal-digit.omittable{color:#9eaaa5}
+    .decimal-rail{position:absolute;top:108px;left:0;right:0;height:1px;background:var(--line)}
+    .decimal-marker{position:absolute;top:10px;left:var(--decimal-position);width:0;height:74px;border-left:2px solid var(--teal);transition:left .24s ease}
+    .decimal-marker::after{content:"";position:absolute;top:64px;left:-6px;width:10px;height:10px;background:var(--teal);border-radius:50%}
+    .decimal-origin{position:absolute;top:105px;left:var(--decimal-origin);width:7px;height:7px;border:1px solid #758a80;border-radius:50%;background:white;transform:translateX(-50%)}
+    .decimal-key-row{display:flex;flex-wrap:wrap;gap:4px 20px;margin:10px 0;color:var(--muted);font-size:13px}
+    .decimal-key-row span:first-child::before{content:"";display:inline-block;width:7px;height:7px;margin-right:7px;border:1px solid #758a80;border-radius:50%}
+    .decimal-caption{font-size:14px;color:var(--muted);margin:0}
+    .decimal-readout{padding:16px 0 0;min-height:212px}
+    .decimal-readout>.math{font-size:25px;display:flex;gap:0 6px;flex-wrap:wrap}
+    .decimal-explanation{font-size:16px;min-height:64px;margin:8px 0}
+    .decimal-status{font-size:16px;min-height:60px;margin:8px 0 0}
+    .decimal-status .math{font-size:19px}
+    .decimal-status[data-state=right]{color:#075b4f}
+    .decimal-status[data-state=working]{color:var(--muted)}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
+    .feedback{min-height:92px;font-size:17px;margin:14px 0 0}
+    .feedback>.math{display:block}
+    .feedback[data-state=wrong]{color:var(--red)}
+    .feedback[data-state=right]{color:#075b4f}
+    .prediction{padding:16px 0 0;border-top:1px solid var(--line)}
+    .prediction fieldset{border:0;margin:0;padding:0;min-width:0}
+    .prediction legend{font-size:17px;margin-bottom:10px}
+    .radio-row{display:flex;gap:12px 24px;flex-wrap:wrap}
+    .radio-row label{display:flex;align-items:center;gap:9px;min-height:44px}
+    .chalkboard{margin:28px 0;padding:20px 24px;background:#263a32;color:#f4f4e8;border:4px solid #405448;box-shadow:inset 0 0 0 1px #7a9280}
+    .chalkboard .en{color:#d3e0d3}
+    .chalkboard .math{font-size:25px}
+    .chalkboard p:last-child{margin-bottom:0}
+    .chalkboard .caption{font-size:17px}
+    .correction{margin:24px 0;padding:12px 0}
+    .correction-label{font-size:15px;color:var(--red);display:block;margin-bottom:3px}
+    .correction .comment{border-left:1px dashed #9aaba2;margin:12px 0;padding-left:16px;font-size:17px}
+    .right-label{color:#075b4f}
+    .sticky{background:#fff1b8;box-shadow:3px 4px 0 #e8dfb8;padding:18px 20px;margin:24px 0}
+    .sticky p:last-child{margin-bottom:0}
+    details{margin-top:24px;border-top:1px solid var(--line)}
+    summary{cursor:pointer;padding:14px 0;color:var(--teal);font-size:17px}
+    details>div{padding:12px 0}
+    .compare-steps{list-style:none;margin:20px 0;padding:0;counter-reset:step}
+    .compare-steps li{padding:16px 0 16px 42px;position:relative;border-bottom:1px solid var(--line)}
+    .compare-steps li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:17px;font:22px/1.5 Georgia,serif;color:var(--blue)}
+    .compare-steps .math{display:block;margin-top:8px}
+    .quiz{margin-top:20px}
+    .quiz-meta{display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap;border-block:1px solid #9bada3;padding:12px 0;font-size:15px}
+    .quiz-body{padding-top:22px}
+    .quiz-body h3{margin-bottom:16px;font-size:21px}
+    .quiz-expression{font-size:28px;min-height:56px}
+    .answer-fields{display:flex;gap:14px;align-items:end;flex-wrap:wrap;margin:16px 0}
+    .answer-fields label{display:block;font-size:16px}
+    .answer-fields input{width:132px;display:block;margin-top:5px;font:22px/1.5 Georgia,serif}
+    .answer-fields .wide{width:240px}
+    .quiz fieldset{border:0;margin:18px 0;padding:0;min-width:0}
+    .choice{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);min-height:54px}
+    .choice span{min-width:0}
+    .quiz .feedback{min-height:116px}
+    .solution{padding:16px 0;border-block:1px solid var(--line);margin:18px 0}
+    .solution .math{font-size:23px}
+    .quiz-end{padding:22px 0}
+    footer{padding:28px 0 40px;color:var(--muted);font-size:14px}
+    footer p{margin:0 0 10px}
+    .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+    [hidden]{display:none!important}
+    @media(min-width:1100px){
+      .wrap{width:min(1120px,calc(100% - 64px))}
+      main.wrap{display:grid;grid-template-columns:200px minmax(0,1fr);column-gap:64px}
+      .intro{grid-column:1 / -1}
+      .contents{grid-column:1;grid-row:2 / span 6;display:block;position:sticky;top:24px;align-self:start;border:0;padding-top:38px}
+      .contents a{display:block;margin-bottom:10px}
+      main>section{grid-column:2}
+    }
+    @media(max-width:600px){
+      body{font-size:18px}
+      .wrap{width:calc(100% - 32px)}
+      .top-inner{flex-direction:column;align-items:flex-start;gap:0;padding-block:8px}
+      .top nav{gap:0 16px}
+      h1{font-size:32px}h1 .en{font-size:23px}
+      h2{font-size:25px}h2 .en{font-size:17px}
+      h3{font-size:21px}
+      .intro{padding-top:28px}
+      .opening{grid-template-columns:1fr;gap:26px;margin-top:16px}
+      .example-photo{height:220px}
+      .real-example .math{font-size:23px}
+      .contents{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 16px}
+      .contents a{font-size:15px}
+      main>section{padding:32px 0 36px}
+      .formula{font-size:27px}
+      .powers{grid-template-columns:1fr}
+      .powers>div{padding:12px 0}
+      .powers>div+div{border-left:0;border-top:1px solid var(--line);padding-left:0}
+      .powers .math{display:inline-block;min-width:125px}
+      .tool-head{padding:16px 12px 0}
+      .tool-body{padding:16px 12px}
+      .controls{padding:14px 12px;gap:12px}
+      .place-cell .power{font-size:12px}
+      .place-cell .digit{font-size:22px}
+      .readout .math{font-size:23px}
+      .readout{min-height:146px}
+      .decimal-digit{font-size:25px}
+      .decimal-readout{min-height:284px}
+      .decimal-readout>.math{font-size:22px}
+      .decimal-explanation{min-height:108px}
+      .decimal-status{min-height:86px}
+      .math{font-size:21px}
+      .example{padding-left:14px}
+      .chalkboard{padding:16px 14px}
+      .chalkboard .math{font-size:22px}
+      .sticky{padding:16px}
+      .quiz-expression{font-size:26px}
+      .feedback{min-height:120px}
+      .quiz .feedback{min-height:150px}
+      .answer-fields{gap:12px}
+      .answer-fields input{width:112px}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.decimal-marker{transition:none}}
+    @media print{
+      body{font-size:13px}
+      .wrap{width:100%}main.wrap{display:block}
+      header,.contents,.tool,.quiz,footer{display:none}
+      main>section{padding:20px 0;break-inside:avoid}
+      .en{font-size:11px}.math{font-size:17px}
+      .chalkboard{background:white;color:black;border:1px solid #777;box-shadow:none}
+      .chalkboard .en{color:#444}.sticky{background:white;box-shadow:none;border:1px solid #777}
+    }
+  </style>
+</head>
+<body>
+<header class="top"><div class="wrap top-inner">
+  <a class="brand" href="https://ctyingfun-dev.github.io/index.html">Mathematics Studio</a>
+  <nav aria-label="Main navigation">
+    <a href="#form">Concepts</a>
+    <a href="#convert">Conversions</a>
+    <a href="#practice">Practice</a>
+    <a href="https://ctyingfun-dev.github.io/index.html">All lessons</a>
+    <a class="language-link" id="language-link" href="scientific-notation.html" lang="zh-Hant">繁體中文</a>
+  </nav>
+</div></header>
+<main class="wrap">
+  <div class="intro">
+    <h1>Scientific Notation</h1>
+    <h2>Why do we use scientific notation?</h2>
+    <p>From planets to bacteria, real-world sizes can differ enormously. In the same unit, metres, their measurements can contain long strings of zeros. Counting them takes time, and a missed zero changes the value.</p>
+    <div class="opening">
+      <figure class="real-example">
+        <a class="image-link" href="images/earth-apollo17.jpg" target="_blank" rel="noopener noreferrer" aria-label="View the full Earth photograph" title="View full photograph"><img class="example-photo earth" src="images/earth-apollo17.jpg" width="1024" height="1024" alt="Earth photographed by Apollo 17, showing Africa, oceans and clouds"></a>
+        <figcaption>
+          <h3>A planet: Earth's equatorial diameter</h3>
+          <p>About <span class="math eq">12,756 km</span>. In metres:</p>
+          <p class="math"><span class="eq">12,756,000 m</span><br>= <span class="eq">1.2756 × 10<sup>7</sup> m</span></p>
+          <p class="source-credit">Photo: <a href="https://svs.gsfc.nasa.gov/30613/" target="_blank" rel="noopener noreferrer">NASA / Apollo 17</a>. Diameter: <a href="https://science.nasa.gov/earth/facts/" target="_blank" rel="noopener noreferrer">NASA Earth facts</a>.</p>
+        </figcaption>
+      </figure>
+      <figure class="real-example">
+        <a class="image-link" href="images/ecoli-cdc.jpg" target="_blank" rel="noopener noreferrer" aria-label="View the full bacterial image and scale bar" title="View full image"><img class="example-photo" src="images/ecoli-cdc.jpg" width="700" height="475" alt="Colourised scanning electron micrograph of E. coli O157:H7 with a 2 micrometre scale bar"></a>
+        <figcaption>
+          <h3>A bacterium: the length of E. coli</h3>
+          <p>Use a typical length of about <span class="math eq">2 μm</span> as our example. In metres:</p>
+          <p class="math"><span class="eq">0.000002 m</span><br>= <span class="eq">2 × 10<sup>−6</sup> m</span></p>
+          <p class="source-credit">Image: <a href="https://phil.cdc.gov/Details.aspx?pid=10071" target="_blank" rel="noopener noreferrer">CDC's free image library / Janice Haney Carr, PHIL #10071</a>, digitally colourised. Length reference: <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4372735/" target="_blank" rel="noopener noreferrer">bacterial research paper</a>.</p>
+        </figcaption>
+      </figure>
+    </div>
+    <p class="source-notice"><span class="math eq">1 km = 1,000 m</span>; <span class="math eq">1 μm = 0.000001 m</span> (micrometre).</p>
+    <p class="source-notice">The two images are not to a common scale. These sizes are approximate. E. coli length varies with strain and growth state; 2 μm is not a measurement of every cell pictured. The equal signs show that rewriting each stated value leaves it unchanged.</p>
+    <ul class="why-reasons">
+      <li><strong>Shorter to write and easier to read.</strong> We can avoid repeatedly counting zeros, reducing the chance of missing a zero or misplacing the decimal point.</li>
+      <li><strong>See how large or small a number is.</strong> A power of ten shows the scale: tens of millions of metres, or a few millionths of a metre.</li>
+      <li><strong>Compare and calculate more easily.</strong> A common form helps us compare scales. Powers of ten also help organise multiplication involving very large or very small numbers.</li>
+    </ul>
+    <p class="takeaway">Scientific notation changes the <strong>way we write a number</strong>, not its value. We do not have to round it just to make the notation shorter.</p>
+  </div>
+  <nav class="contents" aria-label="Lesson sections">
+    <a href="#form">01　The standard form</a>
+    <a href="#convert">02　Convert both ways</a>
+    <a href="#powers">03　Powers &amp; place value</a>
+    <a href="#errors">04　Spot &amp; repair errors</a>
+    <a href="#compare">05　Compare numbers</a>
+    <a href="#practice">06　Mixed practice</a>
+  </nav>
+
+  <section id="form">
+    <div class="kicker">01 / STANDARD FORM</div>
+    <h2>How do we shorten the writing, not the value?</h2>
+    <p>Multiply a short coefficient by an integer power of ten. This is scientific notation, also called standard form.</p>
+    <div class="formula math"><var>a</var> × 10<sup><var>n</var></sup></div>
+    <div class="rule"><span>For a positive number</span><span class="math">1 ≤ <var>a</var> &lt; 10</span><span><var>n</var> is an integer</span></div>
+    <dl class="definitions">
+      <dt><var>a</var></dt><dd>Coefficient: exactly one non-zero digit before the decimal point.</dd>
+      <dt><var>n</var></dt><dd>Exponent: a positive integer, a negative integer, or zero.</dd>
+    </dl>
+    <div class="example">
+      <h3>What do our opening numbers become?</h3>
+      <p class="math"><span class="eq">12,756,000 m</span> = <span class="eq">1.2756 × 10<sup>7</sup> m</span><br><span class="eq">0.000002 m</span> = <span class="eq">2 × 10<sup>−6</sup> m</span></p>
+      <p>Both use metres: the Earth measurement has a positive exponent, while the bacterial measurement has a negative one. The coefficient keeps the digits; the power of ten shows the scale.</p>
+    </div>
+    <aside class="note">The lower boundary 1 is included; 10 is not. Write ten as 1 × 10<sup>1</sup>.</aside>
+    <p>For a negative number, use <span class="math eq">1 ≤ |<var>a</var>| &lt; 10</span>. Keep the negative sign with the coefficient; for example, <span class="math eq">−320 = −3.2 × 10<sup>2</sup></span>.</p>
+    <p>Write zero as 0. It has no standard form satisfying the coefficient condition above.</p>
+    <div class="tool" id="classify-tool">
+      <div class="tool-head"><h3>Which expressions are in standard form?</h3></div>
+      <form class="tool-body" id="classify-form">
+        <ul class="activity-list" id="classify-list"></ul>
+        <div class="actions"><button type="submit">Check categories</button><button type="button" id="classify-reset">Start again</button></div>
+        <p class="activity-feedback" id="classify-feedback" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <section id="convert">
+    <div class="kicker">02 / CONVERT BOTH WAYS</div>
+    <h2>How does the exponent compensate?</h2>
+    <p>Ordinary number → standard form: find a coefficient from 1 inclusive to 10 exclusive, then choose the power of ten that restores the original value.</p>
+    <div class="tool" id="decimal-tool">
+      <div class="tool-head">
+        <h3>Where should the decimal point go for standard form?</h3>
+        <p>Keep the original value fixed. Move the decimal point; the coefficient and exponent change together.</p>
+      </div>
+      <div class="controls">
+        <div><label class="control-label" for="decimal-example">Example</label><select id="decimal-example"><option value="earth">Earth diameter</option><option value="bacteria">E. coli length</option></select></div>
+        <div>
+          <label class="control-label" for="decimal-position">Decimal point position</label>
+          <div class="stepper">
+            <button class="icon" id="decimal-reset" aria-label="Reset the decimal point to its original position" title="Reset position">↺<span class="tip">Reset position</span></button>
+          </div>
+          <input type="range" id="decimal-position" min="0" max="8" step="1" value="8" aria-label="Decimal point position">
+        </div>
+      </div>
+      <div class="tool-body">
+        <p class="decimal-original-label">Original value (metres)</p>
+        <div class="math decimal-original" id="decimal-original"></div>
+        <div class="decimal-stage">
+          <div class="decimal-track" id="decimal-track" role="slider" tabindex="0" aria-label="Decimal point position" aria-valuemin="0" aria-valuemax="8" aria-valuenow="8">
+            <div class="decimal-digits" id="decimal-digits" aria-hidden="true"></div>
+            <div class="decimal-rail" aria-hidden="true"></div>
+            <div class="decimal-origin" aria-hidden="true"></div>
+            <div class="decimal-marker" id="decimal-marker" aria-hidden="true"></div>
+          </div>
+        </div>
+        <div class="decimal-key-row"><span>Grey ring: original position</span><span>Green dot: current position</span></div>
+        <p class="decimal-caption">Faded zeros may be omitted from the current coefficient without changing its value.</p>
+        <div class="decimal-readout" aria-live="polite" aria-atomic="true">
+          <div class="math" id="decimal-equation"></div>
+          <p class="decimal-explanation" id="decimal-explanation"></p>
+          <p class="decimal-status" id="decimal-status"></p>
+        </div>
+      </div>
+    </div>
+    <div class="example">
+      <h3>How do we restore 32,400 from 3.24?</h3>
+      <p>Move the decimal point 4 places left to obtain 3.24. Multiplying by 10<sup>4</sup> restores the value.</p>
+      <p class="math"><span class="eq">32,400</span> = <span class="eq">3.24 × 10<sup>4</sup></span></p>
+    </div>
+    <div class="example">
+      <h3>What about 0.00324?</h3>
+      <p>Move the decimal point 3 places right to obtain 3.24. Multiplying by 10<sup>−3</sup> shrinks it back.</p>
+      <p class="math"><span class="eq">0.00324</span> = <span class="eq">3.24 × 10<sup>−3</sup></span></p>
+    </div>
+    <aside class="sticky">
+      <p>Count decimal places moved, not just zeros.</p>
+      <p class="math"><span class="eq">0.0405</span> = <span class="eq">4.05 × 10<sup>−2</sup></span></p>
+      <p>Keep the zero between 4 and 5.</p>
+    </aside>
+    <h3>How do we convert back?</h3>
+    <p>Start from the coefficient: a positive exponent moves the decimal right; a negative one moves it left. Add zeros as needed. With exponent zero, the value equals the coefficient.</p>
+    <p class="math"><span class="eq">6.02 × 10<sup>3</sup></span> = 6,020<br><span class="eq">6.02 × 10<sup>−3</sup></span> = 0.00602<br><span class="eq">6.02 × 10<sup>0</sup></span> = 6.02</p>
+    <details><summary>Two more examples</summary><div>
+      <p class="math">1,000 = 1 × 10<sup>3</sup><br>0.00009 = 9 × 10<sup>−5</sup></p>
+      <p>For positive numbers: at least 10 gives a positive exponent; from 1 inclusive to 10 exclusive gives zero; between 0 and 1 gives a negative exponent.</p>
+    </div></details>
+  </section>
+
+  <section id="powers">
+    <div class="kicker">03 / POWERS &amp; PLACE VALUE</div>
+    <h2>Does a negative exponent mean a negative number?</h2>
+    <p>No. Every integer power of ten is positive. A negative exponent gives a reciprocal, not a negative sign.</p>
+    <div class="powers">
+      <div><span class="math eq">10<sup>3</sup> = 1,000</span><span class="power-label">Positive exponent</span></div>
+      <div><span class="math eq">10<sup>0</sup> = 1</span><span class="power-label">Zero exponent</span></div>
+      <div><span class="math eq">10<sup>−3</sup> = <span class="frac"><span>1</span><span>1,000</span></span></span><br><span class="math">= 0.001</span><span class="power-label">Negative exponent</span></div>
+    </div>
+    <p>With the coefficient fixed, increasing the exponent by 1 multiplies the value by 10; decreasing it by 1 makes the value one tenth as large.</p>
+    <div class="tool" id="place-tool">
+      <div class="tool-head">
+        <h3>Keep the coefficient fixed. Where will the digits go?</h3>
+        <p>The decimal boundary stays after the ones column. The digits change columns.</p>
+      </div>
+      <div class="controls">
+        <div><label class="control-label" for="coefficient">Coefficient <var>a</var></label><select id="coefficient"><option value="324">3.24</option><option value="705">7.05</option><option value="108">1.08</option></select></div>
+        <div><label class="control-label" for="exponent">Exponent <var>n</var></label><div class="stepper"><button class="icon" id="exponent-down" aria-label="Decrease exponent by 1" title="Decrease exponent">−<span class="tip">Decrease exponent by 1</span></button><output id="exponent-output" for="exponent">0</output><button class="icon" id="exponent-up" aria-label="Increase exponent by 1" title="Increase exponent">+<span class="tip">Increase exponent by 1</span></button><button class="icon" id="exponent-reset" aria-label="Reset exponent to zero" title="Reset">↺<span class="tip">Reset exponent to zero</span></button></div><input type="range" id="exponent" min="-2" max="4" step="1" value="0" aria-label="Exponent"></div>
+      </div>
+      <div class="tool-body">
+        <figure>
+          <figcaption class="grid-caption">Blue cells track the three digits of the coefficient.</figcaption>
+          <div class="place-grid" id="place-grid" aria-label="Place-value grid"></div>
+          <div class="decimal-key">After the ones</div>
+        </figure>
+        <div class="readout" aria-live="polite" aria-atomic="true"><div class="math" id="place-equation"></div><div id="place-description"></div></div>
+        <div class="prediction">
+          <fieldset><legend>Predict: if the exponent rises by 1, the value will…</legend><div class="radio-row"><label><input type="radio" name="prediction" value="larger"><span>be ten times as large</span></label><label><input type="radio" name="prediction" value="smaller"><span>be one tenth as large</span></label></div></fieldset>
+          <div class="actions"><button id="prediction-check">Check</button></div>
+          <p class="feedback" id="prediction-feedback" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="errors">
+    <div class="kicker">04 / SPOT &amp; REPAIR ERRORS</div>
+    <h2>Same value, but is it standard form?</h2>
+    <p>Not necessarily. The value must be correct and the coefficient must be in range. When the coefficient changes, compensate with the exponent.</p>
+    <div class="tool" id="repair-tool">
+      <div class="tool-head"><h3>Repair the expression into standard form.</h3></div>
+      <form class="tool-body" id="repair-form" novalidate>
+        <label class="control-label" for="repair-example">Expression to repair</label>
+        <select id="repair-example"><option value="0">32.4 × 10³</option><option value="1">0.52 × 10⁶</option><option value="2">−45 × 10⁻³</option></select>
+        <p class="math" id="repair-original"></p>
+        <div class="repair-fields">
+          <label for="repair-a"><span>Coefficient a</span><input id="repair-a" type="text" inputmode="decimal" autocomplete="off"></label>
+          <label for="repair-n"><span>Exponent n</span><input id="repair-n" type="text" inputmode="text" autocomplete="off"></label>
+        </div>
+        <div class="actions"><button type="submit">Check repair</button><button type="button" id="repair-reset">Try again</button></div>
+        <p class="activity-feedback" id="repair-feedback" aria-live="polite"></p>
+      </form>
+    </div>
+    <div class="chalkboard">
+      <p class="caption">Make the coefficient one tenth as large; make the power of ten ten times as large.</p>
+      <p class="math"><span class="eq">32.4 × 10<sup>3</sup></span><br>= <span class="eq">(3.24 × 10) × 10<sup>3</sup></span><br>= <span class="eq">3.24 × 10<sup>4</sup></span></p>
+      <p class="caption">Coefficient × 10 ⇔ exponent − 1;<br>coefficient × <span class="frac"><span>1</span><span>10</span></span> ⇔ exponent + 1.</p>
+    </div>
+    <div class="correction">
+      <span class="correction-label">Incorrect A: coefficient out of range</span>
+      <div class="math">32.4 × 10<sup>3</sup></div>
+      <p class="comment">It equals 32,400, but 32.4 is at least 10. The value is right; the form is not.</p>
+      <span class="correction-label right-label">Correct standard form</span><div class="math">3.24 × 10<sup>4</sup></div>
+    </div>
+    <div class="correction">
+      <span class="correction-label">Incorrect B: wrong direction</span>
+      <div class="math"><span class="eq">3.24 × 10<sup>−3</sup></span> = 3,240</div>
+      <p class="comment">A negative exponent shrinks the value. Move left, not right.</p>
+      <span class="correction-label right-label">Correct equation</span><div class="math"><span class="eq">3.24 × 10<sup>−3</sup></span> = 0.00324</div>
+    </div>
+    <div class="correction">
+      <span class="correction-label">Incorrect C: coefficient changed alone</span>
+      <div class="math"><span class="eq">0.52 × 10<sup>6</sup></span> = <span class="eq">5.2 × 10<sup>6</sup></span></div>
+      <p class="comment">The coefficient grew tenfold, so reduce the exponent by 1 to keep the value.</p>
+      <span class="correction-label right-label">Correct equation</span><div class="math"><span class="eq">0.52 × 10<sup>6</sup></span> = <span class="eq">5.2 × 10<sup>5</sup></span></div>
+    </div>
+    <details><summary>Must we round?</summary><div>
+      <p>No. Scientific notation changes the representation, not the precision. Rounding and significant figures are separate instructions.</p>
+      <p class="math"><span class="eq">12,345 = 1.2345 × 10<sup>4</sup></span></p>
+      <p>The equality is exact. Only a separate request for three significant figures gives the approximation <span class="math eq">1.23 × 10<sup>4</sup></span>.</p>
+    </div></details>
+  </section>
+
+  <section id="compare">
+    <div class="kicker">05 / COMPARE NUMBERS</div>
+    <h2>Is comparing 9.8 and 1.2 enough?</h2>
+    <p>Before comparing positive numbers, make sure both are in standard form.</p>
+    <ol class="compare-steps">
+      <li><span class="comparison-note">Compare exponents first: the larger exponent gives the larger number.</span><span class="math"><span class="eq">9.8 × 10<sup>−4</sup></span> &lt; <span class="eq">1.2 × 10<sup>−3</sup></span></span><span class="comparison-note">−3 &gt; −4, even though 1.2 &lt; 9.8.</span></li>
+      <li><span class="comparison-note">If the exponents match, compare coefficients.</span><span class="math"><span class="eq">6.4 × 10<sup>5</sup></span> &gt; <span class="eq">2.9 × 10<sup>5</sup></span></span></li>
+    </ol>
+    <div class="example">
+      <h3>Check with ordinary numbers.</h3>
+      <p class="math"><span class="eq">9.8 × 10<sup>−4</sup></span> = 0.00098<br><span class="eq">1.2 × 10<sup>−3</sup></span> = 0.0012</p>
+      <p>So 0.00098 &lt; 0.0012. The larger coefficient alone does not decide.</p>
+    </div>
+    <aside class="note">For negative numbers, a larger absolute value means a smaller number. Do not apply the positive-number rule directly.</aside>
+    <div class="tool" id="sorting-tool">
+      <div class="tool-head"><h3>Order four numbers from smallest to largest.</h3></div>
+      <div class="tool-body">
+        <label class="control-label" for="sorting-set">Number set</label>
+        <select id="sorting-set"><option value="0">Positive numbers</option><option value="1">Positive &amp; negative</option></select>
+        <ol class="activity-list" id="sorting-list"></ol>
+        <div class="actions"><button id="sorting-check">Check order</button><button id="sorting-reset">Start again</button></div>
+        <p class="activity-feedback" id="sorting-feedback" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="practice">
+    <div class="kicker">06 / MIXED PRACTICE</div>
+    <h2>Can you write it and explain why?</h2>
+    <div class="quiz" id="quiz">
+      <div class="quiz-meta"><span id="quiz-progress"></span><span id="quiz-score"></span></div>
+      <div class="quiz-body" id="quiz-body">
+        <h3 id="quiz-question"></h3>
+        <div class="math quiz-expression" id="quiz-expression"></div>
+        <form id="quiz-form" novalidate>
+          <div id="quiz-inputs"></div>
+          <div class="actions"><button type="submit" class="primary" id="quiz-check">Check</button><button type="button" id="quiz-hint">Hint</button><button type="button" id="quiz-reveal" hidden>Answer</button></div>
+        </form>
+        <div class="feedback" id="quiz-feedback" aria-live="polite" aria-atomic="true"></div>
+        <div class="solution" id="quiz-solution" hidden></div>
+        <div class="actions"><button id="quiz-next" hidden>Next</button></div>
+      </div>
+      <div class="quiz-end" id="quiz-end" hidden aria-live="polite"></div>
+    </div>
+    <noscript><p>Interactive practice needs JavaScript. The rules and worked examples above remain readable.</p></noscript>
+  </section>
+</main>
+<footer class="wrap"><p>Scientific Notation · Standard Form</p><p><a href="images/credits.md">Image &amp; data credits</a></p><a href="fonts/OFL.txt">Font licence</a></footer>
+<script>
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const english = document.documentElement.lang === 'en';
+  const pair = (zh,en) => english ? en : zh;
+  const expText = n => String(n).replace('-', '−');
+  const powerHTML = n => `10<sup>${expText(n)}</sup>`;
+  const sciHTML = (a,n) => `${String(a).replace('-', '−')} × ${powerHTML(n)}`;
+
+  const classifications = [
+    {a:3.2,n:4,valid:true,reason:()=>pair('係數介乎 1 與 10，指數是整數。','The coefficient is from 1 to less than 10; the exponent is an integer.')},
+    {a:32,n:3,valid:false,reason:()=>pair('係數 32 太大。','The coefficient 32 is too large.')},
+    {a:0.32,n:5,valid:false,reason:()=>pair('係數 0.32 小於 1。','The coefficient 0.32 is less than 1.')},
+    {a:-2,n:-6,valid:true,reason:()=>pair('負號可以保留；係數的絕對值是 2。','The negative sign is allowed; the absolute coefficient is 2.')},
+    {a:1,n:0.5,valid:false,reason:()=>pair('指數 0.5 不是整數。','The exponent 0.5 is not an integer.')}
+  ];
+  function renderClassifications(){
+    $('classify-list').innerHTML=classifications.map((item,i)=>`<li class="activity-row">
+      <span class="math" id="classify-expression-${i}">${sciHTML(item.a,item.n)}</span>
+      <div class="activity-options" role="group" aria-labelledby="classify-expression-${i}">
+        <label><input type="radio" name="category-${i}" value="yes">${pair('標準','Standard')}</label>
+        <label><input type="radio" name="category-${i}" value="no">${pair('非標準','Not standard')}</label>
+      </div><p class="activity-note" id="category-note-${i}"></p></li>`).join('');
+    $('classify-feedback').textContent='';
+  }
+  $('classify-form').addEventListener('submit',event=>{
+    event.preventDefault();
+    let correct=0;
+    classifications.forEach((item,i)=>{
+      const answer=document.querySelector(`input[name="category-${i}"]:checked`);
+      const right=answer && (answer.value==='yes')===item.valid;
+      if(right)correct++;
+      $(`category-note-${i}`).textContent=answer
+        ? (right?pair('正確。','Correct.'):pair('再想一想。','Try again.'))+' '+item.reason()
+        : pair('請先分類這個算式。','Choose a category for this expression.');
+    });
+    $('classify-feedback').textContent=pair(`答對 ${correct} / 5 個。`,`${correct} / 5 correct.`);
+  });
+  $('classify-reset').addEventListener('click',renderClassifications);
+  $('classify-list').addEventListener('change',event=>{
+    const index=event.target.name.split('-')[1];
+    $(`category-note-${index}`).textContent='';
+    $('classify-feedback').textContent='';
+  });
+  renderClassifications();
+
+  const repairExamples=[{a:'32.4',n:3,answerA:'3.24',answerN:4},{a:'0.52',n:6,answerA:'5.2',answerN:5},{a:'-45',n:-3,answerA:'-4.5',answerN:-2}];
+  function resetRepair(){
+    const item=repairExamples[Number($('repair-example').value)];
+    $('repair-original').innerHTML=sciHTML(item.a,item.n);
+    $('repair-a').value=item.a;
+    $('repair-n').value=item.n;
+    $('repair-feedback').textContent='';
+  }
+  $('repair-example').addEventListener('change',resetRepair);
+  $('repair-reset').addEventListener('click',resetRepair);
+  for(const id of ['repair-a','repair-n']){
+    $(id).addEventListener('input',()=>{$('repair-feedback').textContent='';});
+  }
+  $('repair-form').addEventListener('submit',event=>{
+    event.preventDefault();
+    const a=canonical($('repair-a').value);
+    const n=$('repair-n').value.trim().replaceAll('−','-');
+    const feedback=$('repair-feedback');
+    if(a===null||!Number.isFinite(Number(a))||!/^[+-]?\d+$/.test(n)||Math.abs(Number(n))>100){
+      feedback.textContent=pair('請填入有限的係數及整數指數（−100 至 100）。','Enter a finite coefficient and an integer exponent from −100 to 100.');
+      return;
+    }
+    const item=repairExamples[Number($('repair-example').value)];
+    const same=shiftDecimal(a,Number(n))===shiftDecimal(item.a,item.n);
+    const standard=Math.abs(Number(a))>=1&&Math.abs(Number(a))<10;
+    feedback.textContent=same&&standard
+      ? pair('正確！數值不變，係數亦符合標準形式。','Correct! The value is unchanged and the coefficient is in standard form.')
+      : same
+        ? pair('數值相同，但係數的絕對值仍須介乎 1（包括）與 10（不包括）。','The value matches, but the absolute coefficient must be from 1 inclusive to 10 exclusive.')
+        : pair('數值改變了。係數放大 10 倍，指數要減 1；係數縮小至十分之一，指數要加 1。','The value changed. Multiply the coefficient by 10 and decrease the exponent by 1, or divide by 10 and increase it by 1.');
+  });
+  resetRepair();
+
+  const sortingSets=[
+    [{a:1.2,n:-3,rank:2},{a:6.4,n:5,rank:3},{a:2,n:-6,rank:0},{a:9.8,n:-4,rank:1}],
+    [{a:2,n:2,rank:3},{a:-3,n:-2,rank:1},{a:1,n:-3,rank:2},{a:-4,n:3,rank:0}]
+  ];
+  let sortingOrder=[];
+  function renderSorting(focusRank,direction){
+    $('sorting-list').innerHTML=sortingOrder.map((item,i)=>`<li class="activity-row">
+      <span class="math">${i+1}. ${sciHTML(item.a,item.n)}</span>
+      <div class="sorting-controls">
+        <button class="icon" data-rank="${item.rank}" data-move="-1" ${i===0?'disabled':''} aria-label="${pair('向前移','Move earlier')} ${item.a} × 10 ${expText(item.n)}" title="${pair('向前移','Move earlier')}">↑</button>
+        <button class="icon" data-rank="${item.rank}" data-move="1" ${i===sortingOrder.length-1?'disabled':''} aria-label="${pair('向後移','Move later')} ${item.a} × 10 ${expText(item.n)}" title="${pair('向後移','Move later')}">↓</button>
+      </div></li>`).join('');
+    if(focusRank!==undefined){
+      const same=$('sorting-list').querySelector(`[data-rank="${focusRank}"][data-move="${direction}"]`);
+      const alternate=$('sorting-list').querySelector(`[data-rank="${focusRank}"]:not(:disabled)`);
+      (same&&!same.disabled?same:alternate)?.focus();
+    }
+  }
+  function resetSorting(){
+    sortingOrder=[...sortingSets[Number($('sorting-set').value)]];
+    $('sorting-feedback').textContent='';
+    renderSorting();
+  }
+  $('sorting-list').addEventListener('click',event=>{
+    const button=event.target.closest('button[data-move]');
+    if(!button||button.disabled)return;
+    const index=sortingOrder.findIndex(item=>item.rank===Number(button.dataset.rank));
+    const next=index+Number(button.dataset.move);
+    [sortingOrder[index],sortingOrder[next]]=[sortingOrder[next],sortingOrder[index]];
+    $('sorting-feedback').textContent='';
+    renderSorting(Number(button.dataset.rank),button.dataset.move);
+  });
+  $('sorting-check').addEventListener('click',()=>{
+    const correct=sortingOrder.every((item,i)=>item.rank===i);
+    $('sorting-feedback').textContent=correct
+      ? pair('次序正確！由小至大排列完成。','Correct! All four numbers are in increasing order.')
+      : Number($('sorting-set').value)===0
+        ? pair('還未排好。先比較指數，指數相同才比較係數。','Not yet. Compare exponents first, then coefficients if exponents match.')
+        : pair('還未排好。負數在正數前；負數的絕對值越大，數值越小。','Not yet. Negative numbers precede positive ones; among negatives, a larger absolute value means a smaller number.');
+  });
+  $('sorting-set').addEventListener('change',resetSorting);
+  $('sorting-reset').addEventListener('click',resetSorting);
+  resetSorting();
+
+  // Decimal strings keep the demonstration exact, without binary rounding.
+  function shiftDecimal(source,places){
+    const negative = source.startsWith('-');
+    const unsigned = source.replace(/^[−-]/,'');
+    const parts = unsigned.split('.');
+    const digits = parts.join('');
+    const point = parts[0].length + places;
+    let value;
+    if(point <= 0) value = '0.' + '0'.repeat(-point) + digits;
+    else if(point >= digits.length) value = digits + '0'.repeat(point-digits.length);
+    else value = digits.slice(0,point) + '.' + digits.slice(point);
+    let [whole,fraction=''] = value.split('.');
+    whole = whole.replace(/^0+(?=\d)/,'');
+    fraction = fraction.replace(/0+$/,'');
+    return (negative?'-':'') + whole + (fraction?'.'+fraction:'');
+  }
+  function canonical(value){
+    const clean = value.trim().replace(/−/g,'-');
+    if(!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(clean)) return null;
+    const negative = clean.startsWith('-');
+    const unsigned = clean.replace(/^[+-]/,'');
+    let [whole,fraction=''] = unsigned.split('.');
+    whole = (whole || '0').replace(/^0+(?=\d)/,'');
+    fraction = fraction.replace(/0+$/,'');
+    const zero = whole === '0' && fraction === '';
+    return (negative && !zero?'-':'') + whole + (fraction?'.'+fraction:'');
+  }
+
+  let exponent = 0;
+  const gridPowers = [4,3,2,1,0,-1,-2,-3,-4];
+  $('place-grid').innerHTML = gridPowers.map(n=>`<div class="place-cell${n===0?' ones':''}" data-power="${n}"><span class="power">${powerHTML(n)}</span><span class="digit">0</span></div>`).join('');
+  function renderPlace(){
+    const digits = $('coefficient').value;
+    const coefficient = digits[0]+'.'+digits.slice(1);
+    for(const cell of $('place-grid').children){
+      const index = exponent - Number(cell.dataset.power);
+      const significant = index >= 0 && index < digits.length;
+      cell.classList.toggle('significant',significant);
+      cell.querySelector('.digit').textContent = significant?digits[index]:'0';
+      cell.setAttribute('aria-label',pair(`10 的 ${expText(cell.dataset.power)} 次冪：${significant?digits[index]:'0'}`,`10 to the power ${expText(cell.dataset.power)}: ${significant?digits[index]:'0'}`));
+    }
+    $('exponent').value = exponent;
+    $('exponent-output').textContent = expText(exponent);
+    $('exponent-down').disabled = exponent === -2;
+    $('exponent-up').disabled = exponent === 4;
+    $('exponent-reset').disabled = exponent === 0;
+    const ordinary = shiftDecimal(coefficient,exponent);
+    $('place-equation').innerHTML = `<span class="eq">${sciHTML(coefficient,exponent)}</span><span>= ${ordinary}</span>`;
+    $('place-description').innerHTML = exponent===0
+      ? pair('零指數：乘以 1，數值就是係數。','Zero exponent: multiply by 1; the value is the coefficient.')
+      : exponent>0
+        ? pair(`由係數向右移 ${exponent} 位，數值放大。`,`Move ${exponent} place${exponent===1?'':'s'} right from the coefficient; the value grows.`)
+        : pair(`由係數向左移 ${-exponent} 位，數值縮小。`,`Move ${-exponent} place${exponent===-1?'':'s'} left from the coefficient; the value shrinks.`);
+    $('place-grid').setAttribute('aria-label',pair(`位值格：${ordinary}`,`Place value: ${ordinary}`));
+  }
+  function setExponent(n){
+    exponent = Math.max(-2,Math.min(4,n));
+    renderPlace();
+  }
+  $('exponent').addEventListener('input',event=>setExponent(Number(event.target.value)));
+  $('exponent-down').addEventListener('click',()=>setExponent(exponent-1));
+  $('exponent-up').addEventListener('click',()=>setExponent(exponent+1));
+  $('exponent-reset').addEventListener('click',()=>setExponent(0));
+  $('coefficient').addEventListener('change',renderPlace);
+  $('prediction-check').addEventListener('click',()=>{
+    const selected = document.querySelector('input[name=prediction]:checked');
+    const feedback = $('prediction-feedback');
+    if(!selected){feedback.innerHTML=pair('先選一個預測。','Choose a prediction first.');return;}
+    if(selected.value!=='larger'){
+      feedback.dataset.state='wrong';
+      feedback.innerHTML=pair('再想一想：10 的指數由 0 變 1，倍率由 1 變成多少？選另一個預測再驗算。','Try again: when the exponent goes from 0 to 1, what does the multiplier become? Choose again, then check.');
+      return;
+    }
+    const coefficient = $('coefficient').value[0]+'.'+$('coefficient').value.slice(1);
+    const before = shiftDecimal(coefficient,exponent);
+    const after = shiftDecimal(coefficient,exponent+1);
+    feedback.dataset.state='right';
+    feedback.innerHTML=pair('正確：指數增加 1，數值變成 10 倍。','Correct: raising the exponent by 1 makes the value ten times as large.')+`<span class="math">${before} × 10 = ${after}</span>`;
+  });
+  renderPlace();
+
+  const decimalExamples = {
+    earth:{digits:'12756000',originalPoint:8,value:'12756000',label:'12,756,000'},
+    bacteria:{digits:'0000002',originalPoint:1,value:'0.000002',label:'0.000002'}
+  };
+  let decimalPosition=decimalExamples.earth.originalPoint;
+  function decimalState(){
+    const example=decimalExamples[$('decimal-example').value];
+    const coefficient=shiftDecimal(example.digits,decimalPosition-example.digits.length);
+    const n=example.originalPoint-decimalPosition;
+    return {example,coefficient,n,standard:Number(coefficient)>=1&&Number(coefficient)<10};
+  }
+  function renderDecimal(){
+    const {example,coefficient,n,standard}=decimalState();
+    $('decimal-position').max=example.digits.length;
+    $('decimal-position').value=decimalPosition;
+    const movement=n>0?pair(`向左 ${n} 位`,`left ${n} place${n===1?'':'s'}`)
+      :n<0?pair(`向右 ${-n} 位`,`right ${-n} place${n===-1?'':'s'}`):pair('未移動','original position');
+    $('decimal-position').setAttribute('aria-valuetext',movement);
+    $('decimal-track').setAttribute('aria-valuemax',example.digits.length);
+    $('decimal-track').setAttribute('aria-valuenow',decimalPosition);
+    $('decimal-track').setAttribute('aria-valuetext',movement);
+    $('decimal-reset').disabled=decimalPosition===example.originalPoint;
+    $('decimal-original').textContent=example.label+' m';
+    $('decimal-track').style.setProperty('--decimal-position',`${decimalPosition/8*100}%`);
+    $('decimal-track').style.setProperty('--decimal-origin',`${example.originalPoint/8*100}%`);
+    const firstNonzero=example.digits.search(/[1-9]/);
+    const lastNonzero=example.digits.search(/[1-9](?=0*$)/);
+    for(let i=0;i<8;i++){
+      const cell=$('decimal-digits').children[i];
+      cell.textContent=example.digits[i]||'';
+      const redundantLeading=example.digits[i]==='0'&&i<firstNonzero&&i<decimalPosition-1;
+      const redundantTrailing=example.digits[i]==='0'&&i>lastNonzero&&i>=decimalPosition;
+      cell.classList.toggle('omittable',redundantLeading||redundantTrailing);
+    }
+    $('decimal-equation').innerHTML=`<span class="eq">${coefficient}</span><span class="eq">× ${powerHTML(n)} m</span>`;
+    $('decimal-explanation').textContent=n===0
+      ?pair('還未移位。乘以 10 的零次冪，原數值保持不變。','No net movement. Multiplying by the zeroth power of ten keeps the original value.')
+      :n>0
+        ?pair(`共向左移 ${n} 位：係數縮小，乘以 10 的 ${n} 次冪補回。`,`Left ${n} place${n===1?'':'s'}: smaller coefficient; exponent +${n} preserves the value.`)
+        :pair(`共向右移 ${-n} 位：係數放大，乘以 10 的負 ${-n} 次冪補回。`,`Right ${-n} place${n===-1?'':'s'}: larger coefficient; exponent ${expText(n)} preserves the value.`);
+    const status=$('decimal-status');
+    status.dataset.state=standard?'right':'working';
+    status.innerHTML=standard
+      ?pair('已是標準形式：','Standard form reached: ')+`<span class="math eq">1 ≤ <var>a</var> &lt; 10</span>`
+      :pair('數值仍然相同。試把係數移到 1（包括）與 10（不包括）之間。','The value is unchanged. Find a coefficient from 1 inclusive to 10 exclusive.');
+  }
+  function setDecimalPosition(position){
+    const example=decimalExamples[$('decimal-example').value];
+    decimalPosition=Math.max(0,Math.min(example.digits.length,position));
+    renderDecimal();
+  }
+  $('decimal-digits').innerHTML=Array.from({length:8},()=>'<span class="decimal-digit"></span>').join('');
+  $('decimal-example').addEventListener('change',()=>{
+    decimalPosition=decimalExamples[$('decimal-example').value].originalPoint;
+    renderDecimal();
+  });
+  $('decimal-position').addEventListener('input',event=>setDecimalPosition(Number(event.target.value)));
+  const decimalTrack=$('decimal-track');
+  function positionFromPointer(event){
+    const bounds=decimalTrack.getBoundingClientRect();
+    setDecimalPosition(Math.round((event.clientX-bounds.left)/bounds.width*8));
+  }
+  decimalTrack.addEventListener('pointerdown',event=>{
+    if(event.button!==0||!event.isPrimary)return;
+    decimalTrack.focus({preventScroll:true});
+    decimalTrack.setPointerCapture(event.pointerId);
+    positionFromPointer(event);
+  });
+  decimalTrack.addEventListener('pointermove',event=>{
+    if(decimalTrack.hasPointerCapture(event.pointerId))positionFromPointer(event);
+  });
+  decimalTrack.addEventListener('pointerup',event=>{
+    if(decimalTrack.hasPointerCapture(event.pointerId)){
+      positionFromPointer(event);
+      decimalTrack.releasePointerCapture(event.pointerId);
+    }
+  });
+  decimalTrack.addEventListener('keydown',event=>{
+    const max=decimalExamples[$('decimal-example').value].digits.length;
+    const positions={ArrowLeft:decimalPosition-1,ArrowDown:decimalPosition-1,ArrowRight:decimalPosition+1,ArrowUp:decimalPosition+1,Home:0,End:max};
+    if(Object.hasOwn(positions,event.key)){
+      event.preventDefault();
+      setDecimalPosition(positions[event.key]);
+    }
+  });
+  $('decimal-reset').addEventListener('click',()=>setDecimalPosition(decimalExamples[$('decimal-example').value].originalPoint));
+  renderDecimal();
+
+  const questions = [
+    {type:'sci',zh:'把地球的赤道直徑示例（米）寫成標準形式。',en:'Write the Earth diameter example in standard form, keeping metres.',expression:'12,756,000 m',a:'1.2756',n:7,hint:pair('先找係數：12,756,000 → 1.2756。要乘以多少個 10 才還原？','Find the coefficient: 12,756,000 → 1.2756. How many factors of ten restore the value?'),solution:sciHTML('1.2756',7)+' m',reason:pair('小數點向左移 7 位得到係數，再乘以 10 的 7 次冪還原。單位仍是米。','Move 7 places left to obtain the coefficient; restore with the seventh power of ten. The unit stays metres.')},
+    {type:'sci',zh:'把大腸桿菌的示例長度（米）寫成標準形式。',en:'Write the E. coli length example in standard form, keeping metres.',expression:'0.000002 m',a:'2',n:-6,hint:pair('把 0.000002 變成 2，小數點向右移了幾位？還原時要縮小。','How many places right take 0.000002 to 2? Restoring the value must shrink it.'),solution:sciHTML('2',-6)+' m',reason:pair('係數比原數大 1,000,000 倍，乘以 10 的負 6 次冪才能還原。單位仍是米。','The coefficient is 1,000,000 times larger; use the negative sixth power to restore the value. The unit stays metres.')},
+    {type:'ordinary',zh:'寫回普通數字。',en:'Convert to an ordinary number.',expression:sciHTML('4.08',3),answer:'4080',hint:pair('正指數：由 4.08 向右移 3 位。保留 4 和 8 之間的 0。','A positive exponent: move 3 places right from 4.08. Keep the zero between 4 and 8.'),solution:'4,080',reason:pair('4.08 × 1,000 = 4,080。','4.08 × 1,000 = 4,080.')},
+    {type:'ordinary',zh:'負指數的方向對嗎？',en:'Which way does the negative exponent move it?',expression:sciHTML('6.2',-3),answer:'0.0062',hint:pair('由 6.2 向左移 3 位；答案應小於 1。','Move 3 places left from 6.2. The result should be below 1.'),solution:'0.0062',reason:pair('乘以 0.001，所以縮小至原來的千分之一。','Multiply by 0.001: one thousandth of the original value.')},
+    {type:'sci',zh:'把這個寫法改成標準形式，保持數值不變。',en:'Rewrite in standard form without changing the value.',expression:sciHTML('0.83',7),a:'8.3',n:6,hint:pair('0.83 變成 8.3，係數放大 10 倍；指數應如何補償？','The coefficient grows tenfold from 0.83 to 8.3. How should the exponent compensate?'),solution:sciHTML('8.3',6),reason:pair('係數放大 10 倍，指數減 1。','Multiply the coefficient by 10; decrease the exponent by 1.')},
+    {type:'choice',zh:'以下哪一個是正數的標準形式？',en:'Which is a positive number in standard form?',expression:'',options:[sciHTML('10',2),sciHTML('0.9',3),sciHTML('1',0),'2.5 × 10<sup>1.5</sup>'],answer:'2',hint:pair('係數必須 ≥ 1 且 < 10，指數必須是整數。兩個條件都要檢查。','Check both: coefficient at least 1 but below 10; exponent an integer.'),solution:sciHTML('1',0),reason:pair('係數 1 在範圍內，0 也是整數。','The coefficient 1 is in range; zero is an integer.')},
+    {type:'choice',zh:'填上正確的比較符號。',en:'Choose the correct comparison sign.',expression:`<span class="eq">${sciHTML('9.8',-4)}</span>　?　<span class="eq">${sciHTML('1.2',-3)}</span>`,options:['&lt;','=','&gt;'],answer:'0',hint:pair('兩個都是正數標準形式。先比較 −4 和 −3，不要先看係數。','Both are positive and in standard form. Compare −4 and −3 before the coefficients.'),solution:`${sciHTML('9.8',-4)} &lt; ${sciHTML('1.2',-3)}`,reason:pair('−4 < −3；亦可驗算 0.00098 < 0.0012。','−4 < −3; equivalently, 0.00098 < 0.0012.')},
+    {type:'sci',zh:'這個數的指數應是多少？',en:'Which exponent does this number need?',expression:'8.45',a:'8.45',n:0,hint:pair('8.45 已在係數範圍內。乘以甚麼才不改變它？','8.45 is already in coefficient range. Which multiplier leaves it unchanged?'),solution:sciHTML('8.45',0),reason:pair('10 的零次冪是 1，所以數值不變。','The zeroth power of ten is 1, so the value stays unchanged.')},
+    {type:'sci',zh:'負數的符號要保留。',en:'Keep the sign of the negative number.',expression:'−45,000',a:'-4.5',n:4,hint:pair('先將 45,000 寫成標準形式，再把負號放在係數前。','Write 45,000 in standard form first, then put the negative sign on the coefficient.'),solution:sciHTML('-4.5',4),reason:pair('係數的絕對值是 4.5，符合 <span class="math eq">1 ≤ |<var>a</var>| &lt; 10</span>。','The absolute value of the coefficient is 4.5, within the required range.')},
+    {type:'choice',zh:'兩個指數相同，哪個數較大？',en:'With equal exponents, which number is larger?',expression:`<span class="eq">${sciHTML('2.75',5)}</span>　?　<span class="eq">${sciHTML('2.9',5)}</span>`,options:['&lt;','=','&gt;'],answer:'0',hint:pair('指數同為 5，比較 2.75 和 2.90。','Both exponents are 5. Compare 2.75 with 2.90.'),solution:`${sciHTML('2.75',5)} &lt; ${sciHTML('2.9',5)}`,reason:pair('2.75 < 2.9，所以乘以相同的正倍率後仍較小。','2.75 < 2.9, and multiplying by the same positive factor preserves the order.')}
+  ];
+  let questionIndex=0, attempts=0, hintUsed=false, solved=false;
+  const results = Array(questions.length).fill(null);
+  const quizFeedback = $('quiz-feedback');
+  function scoreText(){
+    const independent=results.filter(x=>x==='independent').length;
+    const supported=results.filter(x=>x==='supported').length;
+    const revealed=results.filter(x=>x==='revealed').length;
+    return pair(`獨立答對 ${independent} · 提示後 ${supported} · 看答案 ${revealed}`,`${independent} independent · ${supported} with support · ${revealed} revealed`);
+  }
+  function loadQuestion(){
+    const q=questions[questionIndex];
+    attempts=0;hintUsed=false;solved=false;
+    $('quiz-progress').textContent=`${questionIndex+1} / ${questions.length}`;
+    $('quiz-score').innerHTML=scoreText();
+    $('quiz-question').innerHTML=pair(q.zh,q.en);
+    $('quiz-expression').innerHTML=q.expression;
+    $('quiz-expression').hidden=!q.expression;
+    quizFeedback.innerHTML='';quizFeedback.removeAttribute('data-state');
+    $('quiz-solution').hidden=true;
+    $('quiz-reveal').hidden=true;$('quiz-next').hidden=true;
+    $('quiz-check').disabled=false;$('quiz-hint').disabled=false;
+    if(q.type==='sci'){
+      $('quiz-inputs').innerHTML=`<div class="answer-fields"><div><label for="answer-a">${pair('係數 <var>a</var>','Coefficient <var>a</var>')}</label><input id="answer-a" type="text" inputmode="${q.a.startsWith('-')?'text':'decimal'}" autocomplete="off" spellcheck="false"></div><div><label for="answer-n">${pair('指數 <var>n</var>','Integer exponent <var>n</var>')}</label><input id="answer-n" type="text" inputmode="text" autocomplete="off" spellcheck="false"></div></div>`;
+    }else if(q.type==='ordinary'){
+      $('quiz-inputs').innerHTML=`<div class="answer-fields"><div><label for="answer-value">${pair('普通數字（不加逗號）','Ordinary number (no commas)')}</label><input class="wide" id="answer-value" type="text" inputmode="decimal" autocomplete="off" spellcheck="false"></div></div>`;
+    }else{
+      $('quiz-inputs').innerHTML=`<fieldset><legend class="sr-only">${pair('選擇答案','Choose an answer')}</legend>${q.options.map((option,i)=>`<label class="choice"><input type="radio" name="quiz-choice" value="${i}"><span class="math">${option}</span></label>`).join('')}</fieldset>`;
+    }
+    $('quiz-next').innerHTML=questionIndex===questions.length-1?pair('看結果','Results'):pair('下一題','Next');
+  }
+  function getAnswer(q){
+    if(q.type==='choice'){
+      const selected=document.querySelector('input[name=quiz-choice]:checked');
+      return selected?{valid:true,correct:selected.value===q.answer}:{valid:false};
+    }
+    if(q.type==='ordinary'){
+      const value=canonical($('answer-value').value);
+      return value===null?{valid:false}:{valid:true,correct:value===q.answer};
+    }
+    const a=canonical($('answer-a').value);
+    const rawN=$('answer-n').value.trim().replace(/−/g,'-');
+    if(a===null || !/^[+-]?\d+$/.test(rawN))return {valid:false};
+    const n=Number(rawN);
+    if(!Number.isSafeInteger(n))return {valid:false};
+    const numericA=Number(a);
+    if(!Number.isFinite(numericA))return {valid:false};
+    const inRange=Math.abs(numericA)>=1&&Math.abs(numericA)<10;
+    return {valid:true,correct:inRange&&a===q.a&&n===q.n,outOfRange:!inRange};
+  }
+  function showSolution(q){
+    $('quiz-solution').innerHTML=pair('答案與原因','Answer &amp; reason')+`<div class="math">${q.solution}</div>`+q.reason;
+    $('quiz-solution').hidden=false;
+    $('quiz-next').hidden=false;
+    $('quiz-check').disabled=true;$('quiz-hint').disabled=true;$('quiz-reveal').hidden=true;
+    $('quiz-inputs').querySelectorAll('input').forEach(input=>input.disabled=true);
+  }
+  $('quiz-form').addEventListener('submit',event=>{
+    event.preventDefault();
+    if(solved)return;
+    const q=questions[questionIndex],answer=getAnswer(q);
+    if(!answer.valid){
+      quizFeedback.dataset.state='wrong';
+      quizFeedback.innerHTML=pair(q.type==='choice'?'請先選一個答案。':'請填上完整數字；指數只可填整數，可用 − 或鍵盤減號。',q.type==='choice'?'Choose an answer first.':'Enter complete numbers; the exponent must be an integer. Either minus sign is accepted.');
+      return;
+    }
+    attempts++;
+    if(answer.correct){
+      solved=true;
+      results[questionIndex]=(attempts===1&&!hintUsed)?'independent':'supported';
+      quizFeedback.dataset.state='right';
+      quizFeedback.innerHTML=pair('正確。看看原因，再試下一題。','Correct. Check the reasoning, then continue.');
+      showSolution(q);$('quiz-score').innerHTML=scoreText();
+    }else{
+      hintUsed=true;quizFeedback.dataset.state='wrong';
+      const reminder=answer.outOfRange?pair('係數未符合範圍；先調整係數，再補償指數。','The coefficient is outside the range; adjust it and compensate with the exponent.'):pair('還未正確，按提示重試一次。','Not yet. Use the hint and try again.');
+      quizFeedback.innerHTML=reminder+'<br>'+q.hint;
+      if(attempts>=2)$('quiz-reveal').hidden=false;
+    }
+  });
+  $('quiz-hint').addEventListener('click',()=>{
+    hintUsed=true;quizFeedback.removeAttribute('data-state');
+    quizFeedback.innerHTML=questions[questionIndex].hint;
+  });
+  $('quiz-reveal').addEventListener('click',()=>{
+    if(attempts<2 || solved)return;
+    solved=true;results[questionIndex]='revealed';
+    quizFeedback.removeAttribute('data-state');
+    quizFeedback.innerHTML=pair('把你的步驟與答案比較，找出需要改動的位置。','Compare your steps with the answer and find what needs changing.');
+    showSolution(questions[questionIndex]);$('quiz-score').innerHTML=scoreText();
+  });
+  $('quiz-next').addEventListener('click',()=>{
+    if(!solved)return;
+    questionIndex++;
+    if(questionIndex<questions.length){loadQuestion();$('quiz-question').tabIndex=-1;$('quiz-question').focus();return;}
+    $('quiz-body').hidden=true;$('quiz-end').hidden=false;
+    $('quiz-end').innerHTML=`<h3>${pair('完成了。哪一步仍需要再練？','Finished. Which step needs another look?')}</h3><p>${scoreText()}</p><p>${pair('再檢查三件事：係數範圍、指數方向、數值是否不變。','Check three things: coefficient range, exponent direction, and unchanged value.')}</p><button id="quiz-restart">${pair('再做一次','Start again')}</button>`;
+    $('quiz-end').tabIndex=-1;$('quiz-end').focus();
+    $('quiz-restart').addEventListener('click',()=>{
+      questionIndex=0;results.fill(null);$('quiz-body').hidden=false;$('quiz-end').hidden=true;loadQuestion();$('quiz-question').focus();
+    });
+  });
+  loadQuestion();
+  const observer=new IntersectionObserver(entries=>{
+    const visible=entries.filter(entry=>entry.isIntersecting).sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top);
+    if(!visible.length)return;
+    const id=visible[0].target.id;
+    document.querySelectorAll('.contents a').forEach(link=>{
+      if(link.hash==='#'+id)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current');
+    });
+  },{rootMargin:'-10% 0px -50% 0px',threshold:0});
+  document.querySelectorAll('main>section').forEach(section=>observer.observe(section));
+</script>
+</body>
+</html>
