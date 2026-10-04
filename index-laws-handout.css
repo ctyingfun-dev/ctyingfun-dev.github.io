@@ -1,0 +1,125 @@
+.lesson-indices {
+  --teal-pale: #e8f2e9;
+  --blue-pale: #e5f0f7;
+  --coral-pale: #fbe9ed;
+}
+.lesson-indices .wrap { max-width: 880px; }
+.lesson-indices .intro { max-width: 740px; }
+.lesson-indices h1 { font-size: 38px; line-height: 1.5; }
+.lesson-indices h1 sup { font-family: Georgia, serif; }
+.lesson-indices .section-kicker { color: var(--muted); font-size: 15px; font-weight: 400; text-transform: none; margin-bottom: 5px; }
+.lesson-indices .top nav a:first-child { display: inline-flex; }
+.lesson-indices .eyebrow { font-size: 15px; text-transform: none; }
+.lesson-indices .section-lead { font-size: 18px; margin-bottom: 26px; }
+.lesson-indices .math { white-space: normal; overflow-wrap: anywhere; }
+.lesson-indices .math var { white-space: nowrap; }
+.lesson-indices .lead .math { white-space: nowrap; }
+.lesson-indices .explorer { border: 0; border-radius: 0; margin-top: 28px; overflow: visible; }
+.lesson-indices .explorer-controls { padding: 18px 0; align-items: end; border-top: 1px solid #aebfba; }
+.lesson-indices .control-label { font-size: 16px; font-weight: 400; text-transform: none; }
+.lesson-indices .segments, .lesson-indices .stepper { border-color: #aebfba; border-radius: 3px; overflow: visible; }
+.lesson-indices .segments button, .lesson-indices .stepper button { width: 48px; height: 44px; font-weight: 400; }
+.lesson-indices .segments button { font-family: Georgia, serif; font-size: 19px; }
+.lesson-indices .stepper output { font-family: Georgia, serif; font-size: 20px; font-weight: 400; }
+.lesson-indices .explorer-stage { padding: 26px 0; }
+.lesson-indices .current { min-height: 86px; gap: 20px; }
+.lesson-indices .expression, .lesson-indices .result { font: 400 38px/1.6 Georgia, serif; min-width: 0; }
+.lesson-indices .fraction { font-size: .87em; }
+.lesson-indices .meaning { min-height: 66px; font-size: 18px; margin-top: 14px; }
+.lesson-indices .rail { grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 0; border: 1px solid #aebfba; padding: 0; margin-top: 16px; }
+.lesson-indices .power { min-height: 94px; border: 0; border-right: 1px solid var(--line); border-radius: 0; padding: 10px 4px; }
+.lesson-indices .power:last-child { border-right: 0; }
+.lesson-indices .power[aria-pressed="true"] { background: var(--teal-pale); box-shadow: inset 0 -2px var(--teal); }
+.lesson-indices .power strong { font: 400 20px/1.65 Georgia, serif; min-height: 33px; }
+.lesson-indices .power small { font: 16px/1.8 Georgia, serif; min-height: 36px; margin: 4px 0 0; }
+.lesson-indices .power .fraction { font-size: 15px; }
+.lesson-indices .direction { font-size: 14px; margin-top: 12px; }
+.lesson-indices .direction span { max-width: 47%; }
+.lesson-indices .why { display: block; max-width: 710px; margin: 14px 0 30px; }
+.lesson-indices .why > div, .lesson-indices .why > div:last-child { padding: 0; border: 0; margin: 26px 0; }
+.lesson-indices .why h3 { margin-bottom: 12px; }
+.lesson-indices .why p { font-size: 18px; }
+.lesson-indices .pattern-working { max-width: 730px; margin: 26px 0; }
+.lesson-indices summary { color: var(--teal); cursor: pointer; }
+.lesson-indices .working-label { font-size: 16px; color: #f5d999; margin-bottom: 14px; }
+.lesson-indices .pattern-equation { font-size: 28px; margin-bottom: 18px; }
+.lesson-indices #pattern-note { font-size: 17px; }
+.lesson-indices .rules { display: block; margin-top: 34px; }
+.lesson-indices .rule { display: grid; grid-template-columns: 235px minmax(0, 1fr); column-gap: 42px; padding: 0; margin: 0 0 42px; border: 0; border-radius: 0; }
+.lesson-indices .rule .number { grid-column: 1; color: var(--muted); font: 15px/1.7 var(--hand); margin: 0 0 8px; }
+.lesson-indices .rule h3 { grid-column: 1; grid-row: 2 / span 3; min-height: 0; font-size: 21px; }
+.lesson-indices .rule .formula { grid-column: 2; grid-row: 1 / span 2; min-height: 56px; margin: 0 0 12px; font: 24px Georgia, serif; }
+.lesson-indices .rule .formula math { font-size: 26px; }
+.lesson-indices .rule > p { grid-column: 2; font-size: 17px; margin: 0 0 12px; }
+.lesson-indices .rule .example { padding: 0; border: 0; font-size: 23px; color: var(--ink); }
+.lesson-indices .rule .law-comment { max-width: 540px; font-size: 16px; }
+.lesson-indices #rules .rule:nth-child(4) { padding-top: 28px; border-top: 1px solid var(--line); }
+.lesson-indices .index-extension .rule:first-child { max-width: 700px; margin: 46px 0 36px; }
+.lesson-indices #rules .rule:last-child { padding-top: 24px; border-top: 1px solid var(--line); }
+.lesson-indices .conditions { max-width: 710px; font-size: 17px; }
+.lesson-indices .conditions strong { display: block; margin-bottom: 12px; }
+.lesson-indices .pitfalls { display: block; max-width: 730px; }
+.lesson-indices .pitfall { padding: 0; border: 0; margin: 28px 0 40px; }
+.lesson-indices .pitfall h3 { margin-bottom: 18px; }
+.lesson-indices .pitfall p { font-size: 17px; }
+.lesson-indices .quiz { border: 0; border-radius: 0; max-width: 760px; }
+.lesson-indices .quiz-head { padding: 14px 0; border-block: 1px solid var(--line); font-size: 16px; }
+.lesson-indices .quiz-body { padding: 24px 0; }
+.lesson-indices .question { min-height: 55px; font: 23px/1.6 var(--hand); }
+.lesson-indices .choices { gap: 12px; }
+.lesson-indices .choice { font: 23px/1.6 Georgia, serif; min-height: 60px; }
+.lesson-indices .choice.correct::after { content: " Correct"; font: 15px var(--hand); color: #075b4f; }
+.lesson-indices .choice.wrong::after { content: " Incorrect"; font: 15px var(--hand); color: #762632; }
+.lesson-indices .feedback { font-size: 18px; margin-top: 22px; }
+.lesson-indices .feedback strong, .lesson-indices .feedback span { display: block; margin: 12px 0; }
+.lesson-indices .primary { background: var(--teal); }
+.lesson-indices .factor-investigation { margin: 32px 0 42px; padding: 24px 0; border-block: 1px solid #aebfba; }
+.lesson-indices .factor-investigation h3 { margin-bottom: 20px; }
+.lesson-indices .factor-modes { display: grid; grid-template-columns: 1fr 1fr 64px; width: 100%; max-width: 350px; border: 1px solid #aebfba; border-radius: 4px; overflow: hidden; }
+.lesson-indices .factor-modes button { border: 0; border-right: 1px solid #aebfba; border-radius: 0; padding: 8px 6px; min-height: 48px; background: white; font-size: 16px; }
+.lesson-indices .factor-modes button:last-child { border-right: 0; font-family: Georgia, serif; }
+.lesson-indices .factor-modes button[aria-pressed="true"] { background: #e4f3ef; box-shadow: inset 0 -2px #087b70; }
+.lesson-indices .factor-question { font: 30px/1.8 Georgia, serif; margin: 24px 0 12px; min-height: 92px; }
+.lesson-indices .empty-index { color: #087b70; }
+.lesson-indices .factor-answers { display: flex; gap: 12px; margin: 12px 0; }
+.lesson-indices .factor-answers button { width: 58px; min-height: 48px; border: 1px solid #aebfba; border-radius: 4px; font: 23px Georgia, serif; background: white; }
+.lesson-indices .factor-answers button[aria-pressed="true"] { outline: 2px solid #174c68; outline-offset: 2px; }
+.lesson-indices .factor-answers .factor-answer-correct { background: #e4f3ef; border-color: #087b70; }
+.lesson-indices .factor-reveal { margin-top: 24px; }
+.lesson-indices .factor-correct { color: #086357; }
+.lesson-indices .factor-incorrect { color: #9a344b; }
+.lesson-indices .factor-model { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin: 22px 0; }
+.lesson-indices .factor-group { padding: 12px 0; min-width: 0; }
+.lesson-indices .factor-group-label { display: block; font-size: 14px; color: var(--muted); margin-bottom: 8px; }
+.lesson-indices .factor-tokens { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; }
+.lesson-indices .factor-token { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; width: 38px; height: 48px; background: #e4f3ef; border: 1px solid #80b7ad; border-radius: 3px; font: 23px Georgia, serif; color: #075e55; }
+.lesson-indices .factor-second { background: #fff0f3; border-color: #d4a0ae; color: #a23252; }
+.lesson-indices .factor-token small { font: 10px/1.4 var(--hand); }
+.lesson-indices .factor-paired { border-style: dashed; }
+.lesson-indices .factor-times, .lesson-indices .factor-join { font: 18px Georgia, serif; }
+.lesson-indices .factor-conclusion { font: 25px Georgia, serif; padding: 12px 0; }
+.lesson-indices .factor-division { display: block; max-width: 340px; }
+.lesson-indices .factor-division .factor-group:first-child { border-bottom: 1px solid #174c68; }
+.lesson-indices #factor-retry { min-height: 44px; padding: 8px 16px; background: white; border: 1px solid #aebfba; border-radius: 4px; margin-top: 14px; }
+.lesson-indices .factor-investigation button:focus-visible { outline: 2px solid #174c68; outline-offset: 3px; }
+@media (max-width: 760px) {
+  .lesson-indices .rule { grid-template-columns: 195px minmax(0, 1fr); column-gap: 26px; }
+  .lesson-indices .rail { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .lesson-indices .power:nth-child(4) { border-right: 0; }
+  .lesson-indices .power:nth-child(-n+4) { border-bottom: 1px solid var(--line); }
+}
+@media (max-width: 590px) {
+  .lesson-indices .factor-token { width: 34px; }
+  .lesson-indices .factor-tokens { gap: 4px; }
+  .lesson-indices .wrap { width: calc(100% - 32px); }
+  .lesson-indices h1 { font-size: 30px; }
+  .lesson-indices .lead { font-size: 18px; }
+  .lesson-indices .rule { display: block; }
+  .lesson-indices .rule h3 { margin-bottom: 18px; }
+  .lesson-indices .rule .example { font-size: 22px; }
+  .lesson-indices .direction { font-size: 14px; }
+  .lesson-indices .choices { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lesson-indices *, .lesson-indices *::before, .lesson-indices *::after { transition: none !important; animation: none !important; }
+}

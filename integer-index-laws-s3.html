@@ -147,26 +147,82 @@
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   </style>
+  <link rel="stylesheet" href="teacher-notes.css">
+  <link rel="stylesheet" href="index-laws-handout.css">
 </head>
-<body>
+<body class="lesson-indices">
   <header class="top">
     <div class="wrap top-inner">
       <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">aⁿ</span> Mathematics Studio</a>
       <nav aria-label="Lesson navigation">
-        <a href="#explore">Explore</a><a href="#rules">The laws</a><a href="#practice">Practice</a>
+        <a href="https://ctyingfun-dev.github.io/index.html" aria-label="Return to the mathematics homepage">Home</a>
+        <a href="#rules">Index laws</a><a href="#explore">Zero &amp; negative indices</a><a href="#practice">Practice</a>
       </nav>
     </div>
   </header>
   <main id="top" class="wrap">
     <div class="intro">
       <p class="eyebrow">Secondary 3 · Algebra</p>
-      <h1>Laws of Integer Indices</h1>
-      <p class="lead">An index tells us how many times to multiply by a base. What happens when the index reaches zero, or becomes negative?</p>
+      <h1>When do we add, subtract or multiply indices?</h1>
+      <p class="lead"><span class="math">2<sup>3</sup> = 2 × 2 × 2 = 8</span>: the index counts three factors of 2. What happens when we multiply two powers, divide them, or raise a whole power to another power?</p>
     </div>
+    <section class="section" id="rules" aria-labelledby="rules-title">
+      <p class="section-kicker">First, the laws of indices</p>
+      <h2 id="rules-title">Add, subtract or multiply the indices?</h2>
+      <p class="section-lead">First look at the operation, then the base. <span class="math">2<sup>3</sup> × 2<sup>2</sup></span> joins two groups of factors. <span class="math">(2<sup>3</sup>)<sup>2</sup></span> repeats the whole group. These are different calculations.</p>
+      <div class="factor-investigation" aria-labelledby="factor-heading">
+        <h3 id="factor-heading">Can you predict the index before counting?</h3>
+        <div class="factor-modes" role="group" aria-label="Choose a calculation">
+          <button type="button" data-factor-mode="product" aria-pressed="true" title="Multiply powers">× <span>Multiply</span></button>
+          <button type="button" data-factor-mode="quotient" aria-pressed="false" title="Divide powers">÷ <span>Divide</span></button>
+          <button type="button" data-factor-mode="power" aria-pressed="false" title="Raise a power to a power">(<var>a</var><sup><var>m</var></sup>)<sup><var>n</var></sup></button>
+        </div>
+        <div id="factor-question" class="factor-question math"></div>
+        <p>What goes in the empty index?</p>
+        <div id="factor-answers" class="factor-answers" role="group" aria-label="Predict the missing index"></div>
+        <div id="factor-reveal" class="factor-reveal" hidden>
+          <p id="factor-feedback" role="status" aria-live="polite"></p>
+          <div id="factor-model" class="factor-model" aria-label="Expanded factors"></div>
+          <p id="factor-explanation"></p>
+          <button type="button" id="factor-retry">Try this again</button>
+        </div>
+      </div>
+      <div class="rules">
+        <article class="rule">
+          <span class="number">01 · Multiply powers</span><h3>How many factors are there altogether?</h3>
+          <div class="formula"><math><msup><mi>a</mi><mi>m</mi></msup><mo>×</mo><msup><mi>a</mi><mi>n</mi></msup><mo>=</mo><msup><mi>a</mi><mrow><mi>m</mi><mo>+</mo><mi>n</mi></mrow></msup></math></div>
+          <p>Same base: add the indices.</p><p class="example math">2<sup>3</sup> × 2<sup>2</sup> = 2<sup>5</sup> = 32</p>
+          <p class="law-comment">Three factors of 2, followed by two more: five in total. We add the indices because we are multiplying the powers.</p>
+        </article>
+        <article class="rule">
+          <span class="number">02 · Divide powers</span><h3>Which factors are left after division?</h3>
+          <div class="formula"><math><mfrac><msup><mi>a</mi><mi>m</mi></msup><msup><mi>a</mi><mi>n</mi></msup></mfrac><mo>=</mo><msup><mi>a</mi><mrow><mi>m</mi><mo>−</mo><mi>n</mi></mrow></msup></math></div>
+          <p>Same non-zero base: subtract the indices.</p><p class="example math"><math><mfrac><msup><mn>3</mn><mn>5</mn></msup><msup><mn>3</mn><mn>2</mn></msup></mfrac></math> = 3<sup>3</sup> = 27</p>
+          <p class="law-comment">Two of the five factors of 3 divide out, leaving three. A zero denominator would make the division undefined.</p>
+        </article>
+        <article class="rule">
+          <span class="number">03 · Power of a power</span><h3>How many groups of three 2s?</h3>
+          <div class="formula"><math><msup><mrow><mo>(</mo><msup><mi>a</mi><mi>m</mi></msup><mo>)</mo></mrow><mi>n</mi></msup><mo>=</mo><msup><mi>a</mi><mrow><mi>m</mi><mo>×</mo><mi>n</mi></mrow></msup></math></div>
+          <p>Multiply the indices.</p><p class="example math">(2<sup>3</sup>)<sup>2</sup> = 2<sup>6</sup> = 64</p>
+          <p class="law-comment">The outer index repeats the whole bracket twice. Two groups of three factors give six factors, not five.</p>
+        </article>
+        <article class="rule">
+          <span class="number">04 · Power of a product</span><h3>Does the index act on both factors?</h3>
+          <div class="formula"><math><msup><mrow><mo>(</mo><mi>a</mi><mi>b</mi><mo>)</mo></mrow><mi>n</mi></msup><mo>=</mo><msup><mi>a</mi><mi>n</mi></msup><msup><mi>b</mi><mi>n</mi></msup></math></div>
+          <p>Apply the index to both factors.</p><p class="example math">(2 × 3)<sup>2</sup> = 2<sup>2</sup> × 3<sup>2</sup> = 36</p>
+        </article>
+        <article class="rule">
+          <span class="number">05 · Power of a quotient</span><h3>Do we raise just the numerator?</h3>
+          <div class="formula"><math><msup><mrow><mo>(</mo><mfrac><mi>a</mi><mi>b</mi></mfrac><mo>)</mo></mrow><mi>n</mi></msup><mo>=</mo><mfrac><msup><mi>a</mi><mi>n</mi></msup><msup><mi>b</mi><mi>n</mi></msup></mfrac></math></div>
+          <p>Apply the index to the numerator and denominator.</p><p class="example math"><math><msup><mrow><mo>(</mo><mfrac><mn>2</mn><mn>3</mn></mfrac><mo>)</mo></mrow><mn>2</mn></msup><mo>=</mo><mfrac><mn>4</mn><mn>9</mn></mfrac></math></p>
+        </article>
+      </div>
+      <p class="teacher-note">Here <var>m</var> and <var>n</var> are integers. Use each law only when all the powers and fractions are defined; every denominator must be non-zero. Start with positive indices, then extend the pattern below.</p>
+    </section>
     <section class="section" id="explore" aria-labelledby="explore-title">
-      <p class="section-kicker">01 · Build the idea</p>
-      <h2 id="explore-title">Move through the powers</h2>
-      <p class="section-lead">Choose a base, then change the index. Look at the powers on either side of your selection.</p>
+      <p class="section-kicker">Now extend the pattern: zero and negative indices</p>
+      <h2 id="explore-title">What should 2<sup>0</sup> and 2<sup>−1</sup> mean?</h2>
+      <p class="section-lead">We have used division to subtract indices. Start at <span class="math">2<sup>3</sup> = 8</span>, then reduce the index by one each time. The next values are 4, then 2. What happens when we reach zero and continue?</p>
       <div class="explorer">
         <div class="explorer-controls">
           <div role="group" aria-label="Choose a base">
@@ -180,9 +236,9 @@
           <div role="group" aria-label="Change the index">
             <span class="control-label">Index</span>
             <div class="stepper">
-              <button type="button" id="decrease" aria-label="Decrease index">−</button>
+              <button type="button" id="decrease" aria-label="Decrease index" title="Decrease index">−</button>
               <output id="index-value" aria-live="polite">2</output>
-              <button type="button" id="increase" aria-label="Increase index">+</button>
+              <button type="button" id="increase" aria-label="Increase index" title="Increase index">+</button>
             </div>
           </div>
         </div>
@@ -193,82 +249,65 @@
             <span class="result" id="result">4</span>
           </div>
           <p class="meaning" id="meaning">Multiply two 2s: 2 × 2 = 4.</p>
-          <div class="rail" id="rail" role="group" aria-label="Select a power"></div>
-          <div class="direction"><span>← Divide by the base for each step</span><span>Multiply by the base for each step →</span></div>
+          <div class="rail" id="rail" role="group" aria-label="Select a power from negative three to four"></div>
+          <div class="direction"><span>One smaller index: divide by the base.</span><span>One larger index: multiply by the base.</span></div>
         </div>
       </div>
       <div class="why">
         <div>
-          <h3>Why is the zero index 1?</h3>
+          <h3>Why 1, rather than 0?</h3>
           <p><span class="math">2<sup>1</sup> = 2</span>. One step left divides by 2, giving <span class="math">2<sup>0</sup> = 1</span>. This works for any non-zero base.</p>
         </div>
         <div>
-          <h3>Why do negative indices make fractions?</h3>
+          <h3>Does a negative index mean a negative answer?</h3>
           <p>Take another step left: <span class="math">2<sup>−1</sup> = <span class="fraction"><span>1</span><span>2</span></span></span>. A negative index means a reciprocal, not a negative answer.</p>
         </div>
       </div>
-    </section>
-    <section class="section" id="rules" aria-labelledby="rules-title">
-      <p class="section-kicker">02 · Use the laws</p>
-      <h2 id="rules-title">Seven laws to know</h2>
-      <p class="section-lead">Check the base first. The first three laws act on powers with the same base.</p>
-      <div class="rules">
+      <details class="pattern-working">
+        <summary>Can you explain the step you just made?</summary>
+        <div class="chalkboard">
+          <p class="working-label">One smaller index. One division by the base.</p>
+          <p class="pattern-equation math" id="pattern-equation"></p>
+          <p id="pattern-note"></p>
+        </div>
+      </details>
+      <p class="teacher-note">The “number of factors” explanation starts with a positive integer index. For zero and negative indices, we extend the same multiplication-and-division pattern. A reciprocal is not a change of sign.</p>
+      <div class="rules index-extension">
         <article class="rule">
-          <span class="number">01</span><h3>Multiply powers</h3>
-          <div class="formula"><math><msup><mi>a</mi><mi>m</mi></msup><mo>×</mo><msup><mi>a</mi><mi>n</mi></msup><mo>=</mo><msup><mi>a</mi><mrow><mi>m</mi><mo>+</mo><mi>n</mi></mrow></msup></math></div>
-          <p>Same base: add the indices.</p><p class="example math">2<sup>3</sup> × 2<sup>2</sup> = 2<sup>5</sup> = 32</p>
-        </article>
-        <article class="rule">
-          <span class="number">02</span><h3>Divide powers</h3>
-          <div class="formula"><math><mfrac><msup><mi>a</mi><mi>m</mi></msup><msup><mi>a</mi><mi>n</mi></msup></mfrac><mo>=</mo><msup><mi>a</mi><mrow><mi>m</mi><mo>−</mo><mi>n</mi></mrow></msup></math></div>
-          <p>Same non-zero base: subtract the indices.</p><p class="example math"><math><mfrac><msup><mn>3</mn><mn>5</mn></msup><msup><mn>3</mn><mn>2</mn></msup></mfrac></math> = 3<sup>3</sup> = 27</p>
-        </article>
-        <article class="rule">
-          <span class="number">03</span><h3>Power of a power</h3>
-          <div class="formula"><math><msup><mrow><mo>(</mo><msup><mi>a</mi><mi>m</mi></msup><mo>)</mo></mrow><mi>n</mi></msup><mo>=</mo><msup><mi>a</mi><mrow><mi>m</mi><mo>×</mo><mi>n</mi></mrow></msup></math></div>
-          <p>Multiply the indices.</p><p class="example math">(2<sup>3</sup>)<sup>2</sup> = 2<sup>6</sup> = 64</p>
-        </article>
-        <article class="rule">
-          <span class="number">04</span><h3>Power of a product</h3>
-          <div class="formula"><math><msup><mrow><mo>(</mo><mi>a</mi><mi>b</mi><mo>)</mo></mrow><mi>n</mi></msup><mo>=</mo><msup><mi>a</mi><mi>n</mi></msup><msup><mi>b</mi><mi>n</mi></msup></math></div>
-          <p>Apply the index to both factors.</p><p class="example math">(2 × 3)<sup>2</sup> = 2<sup>2</sup> × 3<sup>2</sup> = 36</p>
-        </article>
-        <article class="rule">
-          <span class="number">05</span><h3>Zero index</h3>
+          <span class="number">06 · Zero index</span><h3>What stays true for every non-zero base?</h3>
           <div class="formula"><math><msup><mi>a</mi><mn>0</mn></msup><mo>=</mo><mn>1</mn></math></div>
           <p>For any non-zero base.</p><p class="example math">7<sup>0</sup> = 1</p>
         </article>
         <article class="rule">
-          <span class="number">06</span><h3>Negative index</h3>
+          <span class="number">07 · Negative index</span><h3>Where does the power go in the reciprocal?</h3>
           <div class="formula"><math><msup><mi>a</mi><mrow><mo>−</mo><mi>n</mi></mrow></msup><mo>=</mo><mfrac><mn>1</mn><msup><mi>a</mi><mi>n</mi></msup></mfrac></math></div>
           <p>Take the reciprocal; the base must be non-zero.</p><p class="example math">2<sup>−3</sup> = <span class="fraction"><span>1</span><span>8</span></span></p>
         </article>
-        <article class="rule">
-          <span class="number">07</span><h3>Power of a quotient</h3>
-          <div class="formula"><math><msup><mrow><mo>(</mo><mfrac><mi>a</mi><mi>b</mi></mfrac><mo>)</mo></mrow><mi>n</mi></msup><mo>=</mo><mfrac><msup><mi>a</mi><mi>n</mi></msup><msup><mi>b</mi><mi>n</mi></msup></mfrac></math></div>
-          <p>Apply the index to the numerator and denominator.</p><p class="example math"><math><msup><mrow><mo>(</mo><mfrac><mn>2</mn><mn>3</mn></mfrac><mo>)</mo></mrow><mn>2</mn></msup><mo>=</mo><mfrac><mn>4</mn><mn>9</mn></mfrac></math></p>
-        </article>
       </div>
-      <p class="conditions">Here <span class="math">m</span> and <span class="math">n</span> are integers. Every denominator must be non-zero, and a base with a negative index must be non-zero. The zero-index law requires <span class="math">a ≠ 0</span>; <span class="math">0<sup>0</sup></span> is not defined here.</p>
+      <aside class="conditions sticky-note"><strong>Before using a law, check that it is defined.</strong><p>Here <var>m</var> and <var>n</var> are integers. Every denominator must be non-zero, and a base with a negative index must be non-zero. The zero-index law requires <span class="math">a ≠ 0</span>; <span class="math">0<sup>0</sup></span> is not defined here.</p></aside>
     </section>
     <section class="section" aria-labelledby="mistakes-title">
-      <p class="section-kicker">03 · Check your thinking</p>
-      <h2 id="mistakes-title">Two common traps</h2>
+      <p class="section-kicker">Two answers worth checking</p>
+      <h2 id="mistakes-title">Which symbol changes the answer?</h2>
       <div class="pitfalls">
         <div class="pitfall">
-          <h3>Do not add powers by adding indices</h3>
-          <p><span class="math">2<sup>3</sup> + 2<sup>2</sup> = 8 + 4 = 12</span>, not <span class="math">2<sup>5</sup></span>. The index law applies to multiplication, not addition.</p>
+          <h3>Can we use the same rule for a plus sign?</h3>
+          <div class="correction-row"><strong class="correction-label">Incorrect</strong><span class="math">2<sup>3</sup> + 2<sup>2</sup> = 2<sup>5</sup></span></div>
+          <p class="teacher-note">Teacher's note: the left-hand side is 8 + 4, but the proposed answer is 32. The index law applies to multiplication, not addition.</p>
+          <div class="correction-row correction-row--right"><strong class="correction-label">Correct</strong><span class="math">2<sup>3</sup> + 2<sup>2</sup> = 8 + 4 = 12</span></div>
         </div>
         <div class="pitfall">
-          <h3>Watch the brackets around a negative base</h3>
-          <p><span class="math">(−2)<sup>2</sup> = 4</span>, but <span class="math">−2<sup>2</sup> = −4</span>. Without brackets, only the 2 is squared.</p>
+          <h3>Is the minus sign inside the square?</h3>
+          <div class="correction-row"><strong class="correction-label">Incorrect</strong><span class="math">−2<sup>2</sup> = 4</span></div>
+          <p class="teacher-note">Teacher's note: without brackets, only the 2 is squared. With brackets, the whole negative number is the base.</p>
+          <div class="correction-row correction-row--right"><strong class="correction-label">Correct</strong><span class="math">−2<sup>2</sup> = −(2 × 2) = −4</span><span class="math">(−2)<sup>2</sup> = (−2) × (−2) = 4</span></div>
         </div>
       </div>
     </section>
     <section class="section" id="practice" aria-labelledby="practice-title">
-      <p class="section-kicker">04 · Try it</p>
-      <h2 id="practice-title">Quick check</h2>
-      <p class="section-lead">Choose an answer. You will see the reason before moving on.</p>
+      <p class="section-kicker">Try the same decisions on your own</p>
+      <h2 id="practice-title">Which law fits this calculation?</h2>
+      <p class="section-lead">Before calculating, name the operation. Is the base the same? Does a bracket include the minus sign? Keep those two checks in mind.</p>
       <div class="quiz">
         <div class="quiz-head"><span id="progress">Question 1 of 7</span><span id="score">Score: 0</span></div>
         <div class="quiz-body">
@@ -290,6 +329,8 @@
     const indexValue = document.getElementById("index-value");
     const decrease = document.getElementById("decrease");
     const increase = document.getElementById("increase");
+    const patternEquation = document.getElementById("pattern-equation");
+    const patternNote = document.getElementById("pattern-note");
     let base = 2;
     let exponent = 2;
 
@@ -301,41 +342,75 @@
       return n < 0 ? fraction(1, b ** -n) : String(b ** n);
     }
 
-    function renderExplorer() {
+    function indexText(n) {
+      return String(n).replace("-", "−");
+    }
+
+    function renderExplorer(animate = false) {
       bases.forEach(button => button.setAttribute("aria-pressed", button.dataset.base === String(base)));
       indexValue.value = String(exponent);
       indexValue.textContent = String(exponent);
       decrease.disabled = exponent === -3;
       increase.disabled = exponent === 4;
-      expression.innerHTML = `${base}<sup>${exponent}</sup>`;
+      expression.innerHTML = `${base}<sup>${indexText(exponent)}</sup>`;
       result.innerHTML = powerValue(base, exponent);
       if (exponent > 0) {
         const factors = Array(exponent).fill(base).join(" × ");
-        meaning.textContent = `Multiply ${exponent} ${base}${exponent === 1 ? "" : "s"}: ${factors} = ${base ** exponent}.`;
+        meaning.textContent = `There ${exponent === 1 ? "is 1 factor" : `are ${exponent} factors`} of ${base}: ${factors} = ${base ** exponent}.`;
       } else if (exponent === 0) {
         meaning.textContent = `One step left from ${base}¹ divides by ${base}, so ${base}⁰ = 1.`;
       } else {
         meaning.innerHTML = `Move ${-exponent} step${exponent === -1 ? "" : "s"} left from 1, dividing by ${base} each time.`;
       }
-      rail.innerHTML = "";
+      patternEquation.innerHTML = `${base}<sup>${indexText(exponent + 1)}</sup> ÷ ${base} = ${base}<sup>${indexText(exponent)}</sup> = ${powerValue(base, exponent)}`;
+      patternNote.textContent = exponent === 0
+        ? `At index 1 the value is ${base}. Dividing it by ${base} gives 1, not 0.`
+        : exponent < 0
+          ? `Keep dividing by ${base}. The reciprocal stays positive here because our selected base is positive.`
+          : `Reducing the index removes one factor of ${base}: divide the value by ${base}.`;
+      [...rail.children].forEach(button => {
+        const n = Number(button.dataset.power);
+        button.setAttribute("aria-pressed", String(n === exponent));
+        button.setAttribute("aria-label", `${base} to the power of ${n}`);
+        button.innerHTML = `<strong>${base}<sup>${indexText(n)}</sup></strong><small>${powerValue(base, n)}</small>`;
+      });
+      if (animate && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const current = expression.parentElement;
+        current.getAnimations().forEach(animation => animation.cancel());
+        current.animate([{ opacity: .7 }, { opacity: 1 }], { duration: 160, easing: "ease-out" });
+      }
+    }
+
+    function selectPower(n) {
+      exponent = Math.max(-3, Math.min(4, n));
+      renderExplorer(true);
+    }
+
+    function buildRail() {
       for (let n = -3; n <= 4; n++) {
         const button = document.createElement("button");
         button.type = "button";
         button.className = "power";
-        button.setAttribute("aria-pressed", String(n === exponent));
-        button.setAttribute("aria-label", `${base} to the power of ${n}`);
-        button.innerHTML = `<strong>${base}<sup>${n}</sup></strong><small>${powerValue(base, n)}</small>`;
-        button.addEventListener("click", () => { exponent = n; renderExplorer(); });
+        button.dataset.power = String(n);
+        button.addEventListener("click", () => selectPower(n));
+        button.addEventListener("keydown", event => {
+          const targets = { ArrowLeft: n - 1, ArrowRight: n + 1, Home: -3, End: 4 };
+          if (!(event.key in targets)) return;
+          event.preventDefault();
+          selectPower(targets[event.key]);
+          rail.querySelector(`[data-power="${exponent}"]`).focus();
+        });
         rail.append(button);
       }
     }
 
     bases.forEach(button => button.addEventListener("click", () => {
       base = Number(button.dataset.base);
-      renderExplorer();
+      renderExplorer(true);
     }));
-    decrease.addEventListener("click", () => { exponent--; renderExplorer(); });
-    increase.addEventListener("click", () => { exponent++; renderExplorer(); });
+    decrease.addEventListener("click", () => selectPower(exponent - 1));
+    increase.addEventListener("click", () => selectPower(exponent + 1));
+    buildRail();
     renderExplorer();
 
     const questions = [
@@ -369,7 +444,8 @@
         button.type = "button";
         button.className = "choice";
         button.innerHTML = choice;
-        button.setAttribute("aria-label", button.textContent);
+        const fractionChoice = /^<span class="fraction"><span>(\d+)<\/span><span>(\d+)<\/span><\/span>$/.exec(choice);
+        button.setAttribute("aria-label", fractionChoice ? `${fractionChoice[1]} over ${fractionChoice[2]}` : button.textContent);
         button.addEventListener("click", () => selectAnswer(index));
         choicesEl.append(button);
       });
@@ -386,7 +462,7 @@
         if (choiceIndex === question.answer) button.classList.add("correct");
         else if (choiceIndex === index) button.classList.add("wrong");
       });
-      feedbackEl.innerHTML = `<strong>${correct ? "Correct." : "Not quite."}</strong><span>${question.reason}</span>`;
+      feedbackEl.innerHTML = `<strong>${correct ? "Correct." : "Incorrect. The correct answer is marked."}</strong><span>Teacher's note: ${question.reason}</span>`;
       document.getElementById("score").textContent = `Score: ${score}`;
       next.textContent = questionIndex === questions.length - 1 ? "Try again" : "Next question";
       next.hidden = false;
@@ -402,6 +478,28 @@
       renderQuestion();
     });
     renderQuestion();
+
+    function italicizeMath(root) {
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+      const nodes = [];
+      while (walker.nextNode()) {
+        const node = walker.currentNode;
+        if (!node.parentElement.closest("var, math")) nodes.push(node);
+      }
+      nodes.forEach(node => {
+        if (!/[abmn]/.test(node.textContent)) return;
+        const fragment = document.createDocumentFragment();
+        node.textContent.split(/([abmn])/).forEach(part => {
+          const child = /^[abmn]$/.test(part) ? document.createElement("var") : document.createTextNode(part);
+          if (child.nodeType === Node.ELEMENT_NODE) child.textContent = part;
+          fragment.append(child);
+        });
+        node.replaceWith(fragment);
+      });
+    }
+    document.querySelectorAll(".math").forEach(italicizeMath);
+    document.querySelectorAll("mi").forEach(variable => variable.setAttribute("mathvariant", "italic"));
   </script>
+  <script src="index-laws-play.js"></script>
 </body>
 </html>
