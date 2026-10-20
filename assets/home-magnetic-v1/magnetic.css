@@ -1,0 +1,39 @@
+/* Stable 44px anchors; translation, press scale and fill each own a layer. */
+.magnet-anchor { display: block; width: 44px; height: 44px; flex: none; }
+.lesson-magnet { grid-column: 1 / -1; grid-row: 4; justify-self: end; }
+.magnet-anchor > .magnet-button { position: relative; background: transparent; border: 0; transition: none; }
+.magnet-face {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: var(--radius-control);
+  background: var(--color-paper-2);
+  pointer-events: none;
+}
+.back-top .magnet-face { border: 1px solid var(--color-button-edge); background: var(--color-card); }
+.magnet-fill { position: absolute; inset: 0; z-index: -1; background: var(--color-accent); transform: translateX(-101%); }
+.magnet-face > img { width: 20px; height: 20px; }
+.magnet-button[data-magnet-hover] .magnet-face img,
+.magnet-button[data-magnet-down] .magnet-face img { filter: brightness(0) invert(1); }
+html .lesson .magnet-face .arrow-motion img:first-child { display: none; }
+html .lesson .magnet-face .arrow-motion img:last-child { transform: none !important; transition: none; }
+html:not([data-input="keyboard"]) .lesson[data-magnet-press] { transform: translateY(-3px); }
+.lesson[data-magnet-press] .lesson-link:active { color: var(--color-ink); }
+.lesson:has(.lesson-link:focus-visible) .magnet-face,
+.back-top:focus-visible .magnet-face { background: var(--color-accent); }
+.lesson:has(.lesson-link:focus-visible) .magnet-face img,
+.back-top:focus-visible .magnet-face img { filter: brightness(0) invert(1); }
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  html .lesson[data-magnet-press] { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .magnet-button, .magnet-face { transform: none !important; }
+}
+@media (forced-colors: active) {
+  .magnet-face { border: 1px solid ButtonText; }
+  .magnet-fill { background: Highlight; }
+}
