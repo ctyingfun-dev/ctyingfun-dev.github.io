@@ -1,0 +1,38 @@
+/* A clipped duplicate keeps white labels aligned with the moving capsule. */
+.grade-nav { position: relative; isolation: isolate; border-radius: 999px; }
+.grade-choice { border-radius: 999px; font-weight: 500; }
+.grade-choice[aria-current] { font-weight: 500; }
+.grade-nav[data-pill-ready] .grade-choice {
+  color: var(--color-ink);
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  transform: none;
+}
+.grade-nav[data-pill-ready] .grade-choice .grade-total { color: var(--color-muted); }
+.grade-nav[data-pill-ready] .grade-choice::after { display: none; }
+.grade-highlight {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  border-radius: inherit;
+}
+.pill-label {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.pill-label .grade-total { color: inherit; }
+.grade-nav[data-pill-ready] .grade-choice:focus-visible { outline-offset: 2px; }
+@media (forced-colors: active) {
+  .grade-highlight { background: Highlight; color: HighlightText; }
+  .grade-nav[data-pill-ready] .grade-choice[aria-current] { outline: 2px solid Highlight; }
+}

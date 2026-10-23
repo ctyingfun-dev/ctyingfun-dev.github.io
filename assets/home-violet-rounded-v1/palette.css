@@ -1,0 +1,42 @@
+/* Teacher's paper: warm ground, violet actions and small yellow reading cues. */
+:root {
+  --palette-paper: #F7F2E8;
+  --palette-card: #FFFEFB;
+  --palette-ink: #302B38;
+  --palette-accent: #6F52C9;
+  --palette-gold: #F2C94C;
+  --color-paper: var(--palette-paper);
+  --color-paper-2: #EBE7ED;
+  --color-ink: var(--palette-ink);
+  --color-muted: #66616C;
+  --color-rule: #DED9D2;
+  --color-control: #82798C;
+  --color-accent: var(--palette-accent);
+  --color-link: #58409E;
+  --color-accent-ink: #FFFFFF;
+  --color-focus: var(--palette-accent);
+  --color-annotation: var(--palette-accent);
+  --color-selected: #EAE2F7;
+  --color-card: var(--palette-card);
+  --color-card-edge: #E2DDD8;
+  --color-button-edge: var(--color-control);
+  --color-primary-surface: var(--palette-card);
+  --color-primary-edge: var(--color-card-edge);
+  --color-blue-surface: var(--palette-card);
+  --color-blue-edge: var(--color-card-edge);
+  --color-grey-surface: var(--palette-card);
+  --color-grey-edge: var(--color-card-edge);
+  --color-card-shadow: rgb(48 43 56 / 4%);
+  --color-hover-shadow: rgb(48 43 56 / 9%);
+}
+
+.lesson-symbol img { filter: grayscale(1); opacity: .85; }
+.magnet-face { background: var(--palette-gold); }
+.note-label {
+  width: fit-content;
+  padding-inline: 6px;
+  border-radius: 2px;
+  background: var(--palette-gold);
+  color: var(--color-ink);
+}
+.lesson-link:active { color: var(--color-link); }
