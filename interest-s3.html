@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="An interactive lesson on simple interest, compound interest and compounding frequency.">
+  <title>Interest | Mathematics Study Room</title>
+
+
+<link rel="stylesheet" href="original-en.css"><link rel="stylesheet" href="lesson-ui.css"><script src="lesson-en.js" defer=""></script><script src="interest-controls.js" defer=""></script><script src="lesson-motion.js" defer=""></script><link rel="stylesheet" href="interest-polish.css"><script src="interest-polish.js" defer=""></script></head>
+<body class="compact-lesson split-lesson" data-topic="interest" data-interest-polish="v1"><a class="skip" href="#main">Skip to lesson</a>
+  <header class="top"><div class="wrap top-inner">
+    <a class="brand" href="index.html">Mathematics Studio</a>
+    <nav aria-label="Main navigation"><a href="index.html">All lessons</a>
+            <a href="percentages-s3.html">Percentages</a>
+            <a href="interest-s3-zh.html" lang="zh-Hant">繁體中文</a></nav>
+  </div></header>
+  <main class="wrap" id="main" tabindex="-1">
+    <div class="intro">
+
+      <h1>Interest: which money earns?</h1>
+      <p class="lead">Same principal, same rate. Why do the balances differ?</p>
+
+    </div><noscript><p class="no-script-note">Examples and formulas remain available. Enable JavaScript to use the tools and answer questions.</p><style>.split-lesson button,.split-lesson input,.split-lesson #quiz { display:none!important }</style></noscript>
+    <nav class="contents" aria-label="Lesson sections"><a href="#simple-interest">Simple interest</a><a href="#interest">Compound interest</a><a href="#frequent-compounding">More settlements</a><a href="#practice">Practice</a></nav>
+
+
+
+
+
+
+
+
+
+    <section id="simple-interest" aria-labelledby="simple-interest-title"><header class="section-heading"><h2 id="simple-interest-title">Only the principal earns interest: how much in three years?</h2></header><div class="lesson-workspace"><div class="sequence-mount"></div><div class="interest-core"><p>Principal 5,000 · 4% p.a. · 3 years</p>
+    <figure class="simple-addition"><figcaption>The principal stays the same. Add equal interest each year.</figcaption>
+    <div class="addition-track"><span class="principal-block">5,000</span><span class="addition-block"><small>Year 1</small><strong>+200</strong></span><span class="addition-block"><small>Year 2</small><strong>+200</strong></span><span class="addition-block"><small>Year 3</small><strong>+200</strong></span></div>
+    <p class="math">5,000 + 200 + 200 + 200 = <strong>5,600</strong></p></figure><div class="formula"><var>I</var> = <var>P</var> × <var>r</var>% × <var>t</var></div><p class="essential-definitions"><var>P</var>: principal; <var>r</var>%: annual rate; <var>t</var>: years; <var>I</var>: interest.</p></div></div><details class="visual-notes"><summary>Working, symbols and periods shorter than a year</summary><div><p>Let <var>P</var> be the principal, <var>r</var>% the annual interest rate, <var>t</var> the time in years, <var>I</var> the interest and <var>A</var> the final amount. These examples assume a fixed rate, no fees and no deposits or withdrawals.</p><div>
+          <h3>Simple interest: always the original principal?</h3>
+          <p>Interest is calculated on the original principal only.</p>
+
+          <div class="formula"><var>A</var> = <var>P</var>(1 + <var>r</var>% × <var>t</var>)</div>
+          <p>HK$5,000 at 4% p.a. for 3 years:</p>
+          <p class="math"><var>I</var> = 5,000 × 0.04 × 3 = HK$600<br><var>A</var> = 5,000 + 600 = <strong>HK$5,600</strong></p>
+          <p class="note">“p.a.” means per annum (per year). For simple interest over 9 months, use <var>t</var> = <span class="frac"><span>9</span><span>12</span></span>.</p>
+        </div></div></details></section><section id="interest" aria-labelledby="interest-title">
+      <header class="section-heading"><h2 id="interest-title">What changes if the interest stays in the account?</h2></header><div class="lesson-workspace"><div class="sequence-mount"></div><div class="interest-core"><div class="formula"><var>A</var> = <var>P</var>(1 + <var>r</var>%)<sup><var>t</var></sup></div><div class="formula"><var>I</var> = <var>A</var> − <var>P</var></div><p class="essential-definitions"><var>A</var> is the final balance, <var>I</var> the interest. Annual compounding: interest is <var>A</var> − <var>P</var>.</p></div></div>
+
+      <div id="interest-calculation"><div class="coin-lab refined-coins" id="coin-lab">
+        <h3>How much does the interest earn?</h3>
+        <p>Principal 5,000 · 4% p.a. · annual compounding</p>
+        <div class="earning-key"><span>Interest on principal</span><span>Interest on earlier interest</span></div>
+        <div class="coin-toolbar"><div class="segments coin-view-mode" role="group" aria-label="Interest view"><button type="button" data-coin-view="total" aria-pressed="true">Total interest</button><button type="button" data-coin-view="annual" aria-pressed="false">This year's interest</button></div><div class="coin-controls">
+          <button type="button" id="coin-back" aria-label="Previous year" title="Previous year"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 19-7-7 7-7"></path></svg></button>
+          <output id="coin-year">Year 3</output>
+          <button type="button" id="coin-next" aria-label="Next year" title="Next year"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 5 7 7-7 7"></path></svg></button>
+        </div></div><div class="coin-year-slider"><label for="coin-year-range" class="visually-hidden">Year</label><input id="coin-year-range" type="range" min="0" max="5" step="1" value="3"><div class="coin-year-ticks" aria-hidden="true"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
+        <div class="coin-scenes">
+          <div class="coin-scene"><h4>Simple interest</h4><div class="coin-stage" aria-hidden="true"><div class="coin-pile" id="simple-coins"><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div></div></div><strong class="coin-total" id="simple-earned">HK$600.00</strong><p>Total interest</p><p id="simple-balance">Balance 5,600.00</p></div>
+          <div class="coin-scene"><h4>Compound interest</h4><div class="coin-stage" aria-hidden="true"><div class="coin-pile" id="compound-base-coins"><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div></div><div class="coin-pile" id="compound-extra-coins"><div class="coin-slot"><div class="coin extra" style="clip-path: inset(0px 75.68% 0px 0px);"></div></div></div></div><strong class="coin-total" id="compound-earned">HK$624.32</strong><p>Total interest</p><p id="coin-compound-balance">Balance 5,624.32</p></div>
+        </div>
+        <p class="coin-caption">One full coin = HK$100 interest; part-coins are proportional. The principal is not shown as coins.</p>
+        <p class="coin-story" id="coin-story" aria-live="polite"><strong>Total extra HK$24.32</strong><span>Earlier interest earns interest too.</span></p>
+      </div><details class="visual-notes"><summary>Full formulas and year-by-year working</summary><div><div>
+    <h3>The same money, two calculations side by side.</h3>
+    <p class="comparison-given">Principal HK$5,000 · 4% p.a. · 3 years · annual compounding</p>
+    <div class="interest-formula-pair">
+      <div><h4>Simple: original principal only</h4><div class="math"><var>I</var> = <var>P</var> × <var>r</var>% × <var>t</var><br><var>A</var> = <var>P</var> + <var>I</var></div></div>
+      <div><h4>Compound: interest joins the base</h4><div class="math"><var>A</var> = <var>P</var>(1 + <var>r</var>%)<sup><var>t</var></sup><br><var>I</var> = <var>A</var> − <var>P</var></div></div>
+    </div>
+    <p class="essential-definitions"><var>P</var>: principal; <var>r</var>%: annual rate; <var>t</var>: years; <var>I</var>: interest; <var>A</var>: final balance.</p>
+    <table class="interest-comparison">
+      <caption>Watch the interest base in each row.</caption>
+      <thead><tr><th scope="col">Item</th><th scope="col">Simple</th><th scope="col">Compound</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Year 1 interest</th><td><span class="math">5,000 × 4%<br>= 200</span></td><td><span class="math">5,000 × 4%<br>= 200</span></td></tr>
+        <tr class="base-change"><th scope="row">Year 2 interest</th><td><span class="math">5,000 × 4%<br>= 200</span></td><td><span class="math"><strong>5,200</strong> × 4%<br>= <strong>208</strong></span></td></tr>
+        <tr><th scope="row">Year 3 interest</th><td><span class="math">5,000 × 4%<br>= 200</span></td><td><span class="math">5,408 × 4%<br>= 216.32</span></td></tr>
+        <tr><th scope="row">Total interest</th><td><span class="math">5,000 × 4% × 3<br>= <strong>600</strong></span></td><td><span class="math">5,624.32 − 5,000<br>= <strong>624.32</strong></span></td></tr>
+        <tr class="balance-row"><th scope="row">Final balance</th><td><span class="math">5,000 + 600<br>= <strong>5,600</strong></span></td><td><span class="math">5,000(1.04)<sup>3</sup><br>= <strong>5,624.32</strong></span></td></tr>
+      </tbody>
+    </table>
+    <p class="comparison-point"><strong>Compound interest earns HK$24.32 more.</strong> The rate is the same. From year 2, interest already earned also earns interest.</p></div></div></details></div><div id="interest-base-task" class="student-task">
+    <h3>Year 2: which money earns interest?</h3>
+    <p>4% a year; year 1 has already earned 200.</p>
+    <div class="segments task-mode" role="group" aria-label="Interest method">
+      <button type="button" data-interest-mode="simple" aria-pressed="false">Simple</button>
+      <button type="button" data-interest-mode="compound" aria-pressed="true">Compound</button>
+    </div>
+    <fieldset class="money-selection"><legend class="visually-hidden">Which amounts belong in the interest base?</legend>
+      <label><input type="checkbox" id="include-principal" value="5000"><span>Original principal <strong>HK$5,000</strong></span></label>
+      <label><input type="checkbox" id="include-earned" value="200"><span>Last year's interest <strong>HK$200</strong></span></label>
+      <label><input type="checkbox" id="include-future" value="208"><span>This year's interest (not earned yet) <strong>HK$208</strong></span></label>
+    </fieldset>
+    <p class="math" id="selected-interest-base" aria-live="polite">HK$0.00 × 4% = HK$0.00</p>
+    <button type="button" class="primary" id="check-interest-base">Check</button>
+    <p class="task-feedback" id="interest-base-feedback" aria-live="polite" data-state="neutral"></p>
+    <p class="task-progress" id="interest-task-progress"></p></div>
+
+
+
+
+    <details class="compact-notes"><summary>Try another principal, rate or term</summary><div><div class="tool" aria-label="Interest comparison">
+        <h3 class="tool-heading">How much further apart are the balances after more years?</h3>
+        <div class="controls">
+          <div><label for="principal">Principal (HK$)</label><input id="principal" type="number" min="1" max="1000000" step="1" value="5000"></div>
+          <div><label for="interest-rate">Annual rate (%)</label><input id="interest-rate" type="number" min="0" max="30" step="0.1" value="4"></div>
+          <div><label for="years">Years: <output id="years-label" for="years">3</output></label><input id="years" type="range" min="1" max="20" step="1" value="3"></div>
+        </div>
+        <div class="tool-body">
+          <p class="error" id="interest-error" role="status"></p>
+          <div id="interest-results">
+            <div class="columns" aria-live="polite"><div><p class="muted">Simple interest: final amount</p><p class="result" id="simple-total">HK$5,600.00</p></div><div><p class="muted">Annual compounding: final amount</p><p class="result" id="compound-total">HK$5,624.32</p></div></div>
+            <p id="interest-difference">Extra interest from compounding: HK$24.32.</p>
+            <div class="legend"><span>Simple interest</span><span>Compound interest</span></div>
+            <canvas id="interest-chart" role="img" aria-label="Balance by year. Exact amounts are in the table below." width="806" height="260"></canvas>
+            <details><summary>Year-by-year balances</summary><div class="table-wrap"><table><caption>Balance at the end of each year (HK$)</caption><thead><tr><th scope="col">Year</th><th scope="col">Simple</th><th scope="col">Compound</th></tr></thead><tbody id="interest-table"><tr><th scope="row">0</th><td>HK$5,000.00</td><td>HK$5,000.00</td></tr><tr><th scope="row">1</th><td>HK$5,200.00</td><td>HK$5,200.00</td></tr><tr><th scope="row">2</th><td>HK$5,400.00</td><td>HK$5,408.00</td></tr><tr><th scope="row">3</th><td>HK$5,600.00</td><td>HK$5,624.32</td></tr></tbody></table></div></details>
+          </div>
+        </div>
+      </div></div></details><details class="visual-notes"><summary>Compound working and rounding</summary><div><div>
+          <h3>Compound interest: does last year's interest earn more?</h3>
+          <p>Interest is added to the balance and earns interest in later periods.</p>
+
+
+          <p>HK$5,000 at 4% p.a., compounded annually for 3 years:</p>
+          <p class="math"><var>A</var> = 5,000(1.04)<sup>3</sup> = <strong>HK$5,624.32</strong><br><var>I</var> = 5,624.32 − 5,000 = HK$624.32</p>
+          <p class="note">The annual formula assumes a whole number of annual compounding periods. Keep full precision during working and round money to the nearest cent at the end.</p>
+        </div></div></details></section><section id="frequent-compounding" aria-labelledby="frequent-compounding-title"><header class="section-heading"><h2 id="frequent-compounding-title">More than once a year: how does the calculation change?</h2></header>
+
+
+
+      <div class="tool settlement-tool"><h3>How often is interest added?</h3>
+    <p>Principal 8,000 · 6% nominal p.a. · 2 years</p>
+    <div class="segments" role="group" aria-label="Compounding frequency">
+    <button type="button" data-settlements="1" aria-pressed="false">Annual</button><button type="button" data-settlements="2" aria-pressed="true">Half-yearly</button><button type="button" data-settlements="4" aria-pressed="false">Quarterly</button><button type="button" data-settlements="12" aria-pressed="false">Monthly</button></div><div class="settlement-workspace"><div id="settlement-timeline"><div id="settlement-rate-pair"><div class="rate-pair">
+      <p><span>Rate per period</span><strong class="math"><span class="frac"><span>6</span><span>2</span></span>% = 3%</strong></p>
+      <p><span>Total periods</span><strong class="math">2 × 2 = 4</strong></p></div></div>
+    <figure class="settlement-axis"><figcaption>Two years: each marker is one settlement.</figcaption><div id="settlement-years"><div class="settlement-year"><h4>Year 1</h4>
+      <ol style="--periods:2" aria-label="Year 1: 2 settlements">
+      <li data-settlement-period="1" class="settled current-settlement"><span class="period-tick" aria-hidden="true"></span><small>6m</small><span class="visually-hidden">Settlement 1</span></li><li data-settlement-period="2"><span class="period-tick" aria-hidden="true"></span><small>12m</small><span class="visually-hidden">Settlement 2</span></li></ol></div><div class="settlement-year"><h4>Year 2</h4>
+      <ol style="--periods:2" aria-label="Year 2: 2 settlements">
+      <li data-settlement-period="3"><span class="period-tick" aria-hidden="true"></span><small>6m</small><span class="visually-hidden">Settlement 3</span></li><li data-settlement-period="4"><span class="period-tick" aria-hidden="true"></span><small>12m</small><span class="visually-hidden">Settlement 4</span></li></ol></div></div></figure>
+    <label for="settlement-step">Which settlement? <output id="settlement-step-label">1 / 4</output></label>
+    <input id="settlement-step" type="range" min="0" max="4" step="1" value="1">
+    </div><div class="settlement-working"><div id="settlement-step-working" aria-live="polite"><p class="step-equation"><span><small>Opening balance</small><strong>8,000.00</strong></span><b>+</b><span><small>Period interest</small><strong>240.00</strong></span><b>=</b><span class="step-balance"><small>Next period's base</small><strong>8,240.00</strong></span></p>
+        <p class="step-rate math">8,000.00 × 3% ≈ 240.00</p></div><div id="settlement-result" aria-live="polite"><p class="settlement-final">Final balance after two years <strong class="math">HK$9,004.07</strong></p>
+      <details class="visual-notes"><summary>Full calculation and total interest</summary><div>
+      <p class="math"><var>A</var> = 8,000(1 + 3%)<sup>4</sup> ≈ HK$9,004.07</p>
+      <p class="math"><var>I</var> = <var>A</var> − 8,000 ≈ HK$1,004.07</p></div></details></div></div></div>
+    </div><div class="formula"><var>A</var> = <var>P</var>(1 + (<span class="frac"><span><var>r</var></span><span><var>m</var></span></span>)%)<sup><var>mt</var></sup></div><details class="visual-notes"><summary>Formula symbols and the half-yearly example</summary><div><p>For a nominal annual rate of <var>r</var>%, compounded <var>m</var> times per year, the rate per period is <span class="math">(<span class="frac"><span><var>r</var></span><span><var>m</var></span></span>)%</span> and the number of periods is <var>mt</var>.</p><p>HK$8,000 at 6% p.a., compounded half-yearly for 2 years: <var>m</var> = 2, so <var>A</var> = 8,000(1.03)<sup>4</sup> ≈ HK$9,004.07.</p><p class="note">Amounts shown are rounded to the nearest cent. Calculations retain full precision, without rounding at each settlement.</p></div></details><details class="visual-notes settlement-recap"><summary>How do we find the rate and number of periods?</summary><div class="sequence-mount"></div></details></section>
+
+    <section id="practice" aria-labelledby="practice-title">
+      <header class="section-heading"><h2 id="practice-title">Interest or final balance?</h2></header>
+      <p>Give monetary answers to the nearest cent where necessary.</p>
+
+      <div class="tool quiz" id="quiz">
+        <div class="quiz-head"><span id="progress">Practice</span><span id="score"></span></div>
+        <div class="tool-body"><h3 id="question" tabindex="-1"></h3><div class="choices" id="choices"></div><p class="feedback" id="feedback" aria-live="polite"></p><button id="next" class="primary" type="button" hidden="">Next question</button></div>
+      </div>
+
+
+    <details class="compact-notes"><summary>A combined problem and a final check</summary><p class="chapter-bridge"><a href="percentages-s3.html#successive">Review successive percentage changes and depreciation</a></p><div><article class="example" style="margin-top:24px">
+        <h3>Savings become a camera: which amount is the final comparison based on?</h3>
+        <p>A student deposits HK$4,000 at 5% p.a., compounded annually for 2 years. Find the final balance. The student uses the entire balance to buy a camera, which then depreciates by 10% per year for 2 years. Find the camera's value and its overall percentage change from the original HK$4,000.</p>
+        <details><summary>Full solution</summary><div>
+          <p>Final balance = 4,000 × (1 + 5%)<sup>2</sup> = <strong>HK$4,410.</strong></p>
+          <p>Camera's value = 4,410 × (1 − 10%)<sup>2</sup> = <strong>HK$3,572.10.</strong></p>
+          <p>Overall percentage change = (3,572.10 − 4,000) ÷ 4,000 × 100% = −10.6975%.</p>
+          <p>This is a <strong>10.7% decrease</strong>, correct to 1 decimal place. The depreciation starts from HK$4,410, while the overall change uses HK$4,000 as the base.</p>
+        </div></details>
+      </article><p class="note">Final check: identify the base, choose the multiplier, write the equation, and check whether the answer is reasonable. A change from 40% to 50% is 10 percentage points, but the relative increase is (10 ÷ 40) × 100% = 25%.</p></div></details></section>
+  </main>
+  <footer class=""><div class="wrap"><span>Mathematics Study Room · S3</span><a href="index.html">Back to all lessons</a></div></footer>
+
+
+
+
+
+
+</body></html>

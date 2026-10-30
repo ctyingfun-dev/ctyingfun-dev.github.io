@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="zh-Hant"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="單利、複利與一年多次結算的互動講義。">
+  <title>單利與複利 | 數學研習室</title>
+
+
+<link rel="stylesheet" href="original-zh.css"><link rel="stylesheet" href="lesson-ui.css"><script src="lesson-zh.js" defer=""></script><script src="interest-controls.js" defer=""></script><script src="lesson-motion.js" defer=""></script><link rel="stylesheet" href="interest-polish.css"><script src="interest-polish.js" defer=""></script></head>
+<body class="compact-lesson split-lesson" data-topic="interest" data-interest-polish="v1"><a class="skip" href="#main">跳到講義</a>
+  <header class="top"><div class="wrap top-inner">
+    <a class="brand" href="index.html">數學研習室</a>
+    <nav aria-label="主要導覽"><a href="index.html">教材總覽</a>
+            <a href="percentages-s3-zh.html">百分數</a>
+            <a href="interest-s3.html" lang="en">English</a></nav>
+  </div></header>
+  <main class="wrap" id="main" tabindex="-1">
+    <div class="intro">
+
+      <h1>利息，下一年按甚麼計？</h1>
+      <p class="lead">本金相同、利率相同，為甚麼最後的結餘不同？</p>
+
+    </div><noscript><p class="no-script-note">已顯示例題與公式。操作教具及作答需要啟用 JavaScript。</p><style>.split-lesson button,.split-lesson input,.split-lesson #quiz { display:none!important }</style></noscript>
+    <nav class="contents" aria-label="課程章節"><a href="#simple-interest">單利</a><a href="#interest">複利</a><a href="#frequent-compounding">多次結算</a><a href="#practice">練習</a></nav>
+
+
+
+
+
+
+
+
+
+    <section id="simple-interest" aria-labelledby="simple-interest-title"><header class="section-heading"><h2 id="simple-interest-title">每年只用本金計息，三年賺多少？</h2></header><div class="lesson-workspace"><div class="sequence-mount"></div><div class="interest-core"><p>本金 5,000 · 年利率 4% · 3 年</p>
+    <figure class="simple-addition"><figcaption>本金不變，每年加同樣的利息。</figcaption>
+    <div class="addition-track"><span class="principal-block">5,000</span><span class="addition-block"><small>第 1 年</small><strong>+200</strong></span><span class="addition-block"><small>第 2 年</small><strong>+200</strong></span><span class="addition-block"><small>第 3 年</small><strong>+200</strong></span></div>
+    <p class="math">5,000 + 200 + 200 + 200 = <strong>5,600</strong></p></figure><div class="formula"><var>I</var> = <var>P</var> × <var>r</var>% × <var>t</var></div><p class="essential-definitions"><var>P</var>：本金；<var>r</var>%：年利率；<var>t</var>：年期；<var>I</var>：利息。</p></div></div><details class="visual-notes"><summary>計算步驟、符號與不足一年的情況</summary><div><p>設 <var>P</var> 為本金，<var>r</var>% 為年利率，<var>t</var> 為年期，<var>I</var> 為利息，<var>A</var> 為本利和。以下例子假設利率固定、不收費，且期間沒有存款或提款。</p><div>
+          <h3>單利：每年都按原本金計算嗎？</h3>
+          <p>只按原有本金計算利息。</p>
+
+          <div class="formula"><var>A</var> = <var>P</var>(1 + <var>r</var>% × <var>t</var>)</div>
+          <p>本金 HK$5,000，年利率 4%，存期 3 年：</p>
+          <p class="math"><var>I</var> = 5,000 × 0.04 × 3 = HK$600<br><var>A</var> = 5,000 + 600 = <strong>HK$5,600</strong></p>
+          <p class="note">「p.a.」表示每年。計算 9 個月的單利時，<var>t</var> = <span class="frac"><span>9</span><span>12</span></span>。</p>
+        </div></div></details></section><section id="interest" aria-labelledby="interest-title">
+      <header class="section-heading"><h2 id="interest-title">把利息留下，下一年會有甚麼不同？</h2></header><div class="lesson-workspace"><div class="sequence-mount"></div><div class="interest-core"><div class="formula"><var>A</var> = <var>P</var>(1 + <var>r</var>%)<sup><var>t</var></sup></div><div class="formula"><var>I</var> = <var>A</var> − <var>P</var></div><p class="essential-definitions"><var>A</var> 是本利和，<var>I</var> 是利息。每年結算一次：<var>A</var> − <var>P</var> 才是利息。</p></div></div>
+
+      <div id="interest-calculation"><div class="coin-lab refined-coins" id="coin-lab">
+        <h3>留下的利息，又賺了多少？</h3>
+        <p>本金 5,000 · 年利率 4% · 每年結算</p>
+        <div class="earning-key"><span>本金賺到的利息</span><span>利息再賺的利息</span></div>
+        <div class="coin-toolbar"><div class="segments coin-view-mode" role="group" aria-label="利息比較方式"><button type="button" data-coin-view="total" aria-pressed="true">累積利息</button><button type="button" data-coin-view="annual" aria-pressed="false">本年利息</button></div><div class="coin-controls">
+          <button type="button" id="coin-back" aria-label="上一年" title="上一年"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 19-7-7 7-7"></path></svg></button>
+          <output id="coin-year">第 3 年</output>
+          <button type="button" id="coin-next" aria-label="下一年" title="下一年"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 5 7 7-7 7"></path></svg></button>
+        </div></div><div class="coin-year-slider"><label for="coin-year-range" class="visually-hidden">年期</label><input id="coin-year-range" type="range" min="0" max="5" step="1" value="3"><div class="coin-year-ticks" aria-hidden="true"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
+        <div class="coin-scenes">
+          <div class="coin-scene"><h4>單利</h4><div class="coin-stage" aria-hidden="true"><div class="coin-pile" id="simple-coins"><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div></div></div><strong class="coin-total" id="simple-earned">HK$600.00</strong><p>累積利息</p><p id="simple-balance">本利和 5,600.00</p></div>
+          <div class="coin-scene"><h4>複利</h4><div class="coin-stage" aria-hidden="true"><div class="coin-pile" id="compound-base-coins"><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div><div class="coin-slot"><div class="coin" style="clip-path: inset(0px 0% 0px 0px);"></div></div></div><div class="coin-pile" id="compound-extra-coins"><div class="coin-slot"><div class="coin extra" style="clip-path: inset(0px 75.68% 0px 0px);"></div></div></div></div><strong class="coin-total" id="compound-earned">HK$624.32</strong><p>累積利息</p><p id="coin-compound-balance">本利和 5,624.32</p></div>
+        </div>
+        <p class="coin-caption">一枚完整金幣 = HK$100 利息；不足一枚按比例顯示。本金不畫成金幣。</p>
+        <p class="coin-story" id="coin-story" aria-live="polite"><strong>累積多賺 HK$24.32</strong><span>已賺的利息，也開始計息。</span></p>
+      </div><details class="visual-notes"><summary>展開完整公式與逐年計算</summary><div><div>
+    <h3>同一筆錢，兩種算法並排看。</h3>
+    <p class="comparison-given">本金 HK$5,000 · 年利率 4% · 3 年 · 每年複利一次</p>
+    <div class="interest-formula-pair">
+      <div><h4>單利：只按原本金</h4><div class="math"><var>I</var> = <var>P</var> × <var>r</var>% × <var>t</var><br><var>A</var> = <var>P</var> + <var>I</var></div></div>
+      <div><h4>複利：利息加入基數</h4><div class="math"><var>A</var> = <var>P</var>(1 + <var>r</var>%)<sup><var>t</var></sup><br><var>I</var> = <var>A</var> − <var>P</var></div></div>
+    </div>
+    <p class="essential-definitions"><var>P</var> 是本金，<var>r</var>% 是年利率，<var>t</var> 是年期，<var>I</var> 是利息，<var>A</var> 是本利和。</p>
+    <table class="interest-comparison">
+      <caption>留意每一行的計息基數。</caption>
+      <thead><tr><th scope="col">計算</th><th scope="col">單利</th><th scope="col">複利</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">第 1 年利息</th><td><span class="math">5,000 × 4%<br>= 200</span></td><td><span class="math">5,000 × 4%<br>= 200</span></td></tr>
+        <tr class="base-change"><th scope="row">第 2 年利息</th><td><span class="math">5,000 × 4%<br>= 200</span></td><td><span class="math"><strong>5,200</strong> × 4%<br>= <strong>208</strong></span></td></tr>
+        <tr><th scope="row">第 3 年利息</th><td><span class="math">5,000 × 4%<br>= 200</span></td><td><span class="math">5,408 × 4%<br>= 216.32</span></td></tr>
+        <tr><th scope="row">3 年總利息</th><td><span class="math">5,000 × 4% × 3<br>= <strong>600</strong></span></td><td><span class="math">5,624.32 − 5,000<br>= <strong>624.32</strong></span></td></tr>
+        <tr class="balance-row"><th scope="row">本利和</th><td><span class="math">5,000 + 600<br>= <strong>5,600</strong></span></td><td><span class="math">5,000(1.04)<sup>3</sup><br>= <strong>5,624.32</strong></span></td></tr>
+      </tbody>
+    </table>
+    <p class="comparison-point"><strong>複利多了 HK$24.32。</strong> 關鍵不是利率不同，而是第二年起，已賺的利息也開始計息。</p></div></div></details></div><div id="interest-base-task" class="student-task">
+    <h3>第二年，哪些錢計息？</h3>
+    <p>年利率 4%；第一年已賺 200。</p>
+    <div class="segments task-mode" role="group" aria-label="計息方式">
+      <button type="button" data-interest-mode="simple" aria-pressed="false">單利</button>
+      <button type="button" data-interest-mode="compound" aria-pressed="true">複利</button>
+    </div>
+    <fieldset class="money-selection"><legend class="visually-hidden">哪些金額放進計息基數？</legend>
+      <label><input type="checkbox" id="include-principal" value="5000"><span>原有本金 <strong>HK$5,000</strong></span></label>
+      <label><input type="checkbox" id="include-earned" value="200"><span>去年利息 <strong>HK$200</strong></span></label>
+      <label><input type="checkbox" id="include-future" value="208"><span>今年利息（未賺到） <strong>HK$208</strong></span></label>
+    </fieldset>
+    <p class="math" id="selected-interest-base" aria-live="polite">HK$0.00 × 4% = HK$0.00</p>
+    <button type="button" class="primary" id="check-interest-base">檢查</button>
+    <p class="task-feedback" id="interest-base-feedback" aria-live="polite" data-state="neutral"></p>
+    <p class="task-progress" id="interest-task-progress"></p></div>
+
+
+
+
+    <details class="compact-notes"><summary>試其他本金、利率與年期</summary><div><div class="tool" aria-label="利息比較">
+        <h3 class="tool-heading">多存幾年，兩種結餘會差多少？</h3>
+        <div class="controls">
+          <div><label for="principal">本金（HK$）</label><input id="principal" type="number" min="1" max="1000000" step="1" value="5000"></div>
+          <div><label for="interest-rate">年利率（%）</label><input id="interest-rate" type="number" min="0" max="30" step="0.1" value="4"></div>
+          <div><label for="years">年期：<output id="years-label" for="years">3</output></label><input id="years" type="range" min="1" max="20" step="1" value="3"></div>
+        </div>
+        <div class="tool-body">
+          <p class="error" id="interest-error" role="status"></p>
+          <div id="interest-results">
+            <div class="columns" aria-live="polite"><div><p class="muted">單利：本利和</p><p class="result" id="simple-total">HK$5,600.00</p></div><div><p class="muted">每年複利：本利和</p><p class="result" id="compound-total">HK$5,624.32</p></div></div>
+            <p id="interest-difference">複利額外賺取的利息：HK$24.32。</p>
+            <div class="legend"><span>單利</span><span>複利</span></div>
+            <canvas id="interest-chart" role="img" aria-label="逐年結餘；詳細金額列於下表。" width="806" height="260"></canvas>
+            <details><summary>逐年結餘</summary><div class="table-wrap"><table><caption>每年年終結餘（HK$）</caption><thead><tr><th scope="col">年</th><th scope="col">單利</th><th scope="col">複利</th></tr></thead><tbody id="interest-table"><tr><th scope="row">0</th><td>HK$5,000.00</td><td>HK$5,000.00</td></tr><tr><th scope="row">1</th><td>HK$5,200.00</td><td>HK$5,200.00</td></tr><tr><th scope="row">2</th><td>HK$5,400.00</td><td>HK$5,408.00</td></tr><tr><th scope="row">3</th><td>HK$5,600.00</td><td>HK$5,624.32</td></tr></tbody></table></div></details>
+          </div>
+        </div>
+      </div></div></details><details class="visual-notes"><summary>複利計算步驟與取近似值</summary><div><div>
+          <h3>複利：上一年的利息也計息嗎？</h3>
+          <p>利息加入結餘後，在往後的期數也會賺取利息。</p>
+
+
+          <p>本金 HK$5,000，年利率 4%，每年複利一次，共存 3 年：</p>
+          <p class="math"><var>A</var> = 5,000(1.04)<sup>3</sup> = <strong>HK$5,624.32</strong><br><var>I</var> = 5,624.32 − 5,000 = HK$624.32</p>
+          <p class="note">這條年複利公式假設年期為整數。計算過程保留完整數值，最後才把金額四捨五入至最接近的一仙。</p>
+        </div></div></details></section><section id="frequent-compounding" aria-labelledby="frequent-compounding-title"><header class="section-heading"><h2 id="frequent-compounding-title">一年不只結算一次，怎樣算？</h2></header>
+
+
+
+      <div class="tool settlement-tool"><h3>一年結算多少次？</h3>
+    <p>本金 8,000 · 名義年利率 6% · 2 年</p>
+    <div class="segments" role="group" aria-label="每年結算次數">
+    <button type="button" data-settlements="1" aria-pressed="false">每年</button><button type="button" data-settlements="2" aria-pressed="true">每半年</button><button type="button" data-settlements="4" aria-pressed="false">每季</button><button type="button" data-settlements="12" aria-pressed="false">每月</button></div><div class="settlement-workspace"><div id="settlement-timeline"><div id="settlement-rate-pair"><div class="rate-pair">
+      <p><span>每期利率</span><strong class="math"><span class="frac"><span>6</span><span>2</span></span>% = 3%</strong></p>
+      <p><span>總期數</span><strong class="math">2 × 2 = 4</strong></p></div></div>
+    <figure class="settlement-axis"><figcaption>兩年內，每個刻度結算一次。</figcaption><div id="settlement-years"><div class="settlement-year"><h4>第 1 年</h4>
+      <ol style="--periods:2" aria-label="第 1 年：2 次結算">
+      <li data-settlement-period="1" class="settled current-settlement"><span class="period-tick" aria-hidden="true"></span><small>6月</small><span class="visually-hidden">第 1 次結算</span></li><li data-settlement-period="2"><span class="period-tick" aria-hidden="true"></span><small>12月</small><span class="visually-hidden">第 2 次結算</span></li></ol></div><div class="settlement-year"><h4>第 2 年</h4>
+      <ol style="--periods:2" aria-label="第 2 年：2 次結算">
+      <li data-settlement-period="3"><span class="period-tick" aria-hidden="true"></span><small>6月</small><span class="visually-hidden">第 3 次結算</span></li><li data-settlement-period="4"><span class="period-tick" aria-hidden="true"></span><small>12月</small><span class="visually-hidden">第 4 次結算</span></li></ol></div></div></figure>
+    <label for="settlement-step">看到第幾次結算？ <output id="settlement-step-label">1 / 4</output></label>
+    <input id="settlement-step" type="range" min="0" max="4" step="1" value="1">
+    </div><div class="settlement-working"><div id="settlement-step-working" aria-live="polite"><p class="step-equation"><span><small>期初金額</small><strong>8,000.00</strong></span><b>+</b><span><small>本期利息</small><strong>240.00</strong></span><b>=</b><span class="step-balance"><small>下一期基數</small><strong>8,240.00</strong></span></p>
+        <p class="step-rate math">8,000.00 × 3% ≈ 240.00</p></div><div id="settlement-result" aria-live="polite"><p class="settlement-final">兩年後本利和 <strong class="math">HK$9,004.07</strong></p>
+      <details class="visual-notes"><summary>完整計算與總利息</summary><div>
+      <p class="math"><var>A</var> = 8,000(1 + 3%)<sup>4</sup> ≈ HK$9,004.07</p>
+      <p class="math"><var>I</var> = <var>A</var> − 8,000 ≈ HK$1,004.07</p></div></details></div></div></div>
+    </div><div class="formula"><var>A</var> = <var>P</var>(1 + (<span class="frac"><span><var>r</var></span><span><var>m</var></span></span>)%)<sup><var>mt</var></sup></div><details class="visual-notes"><summary>公式中的符號與半年結算例題</summary><div><p>若名義年利率為 <var>r</var>%，每年複利 <var>m</var> 次，則每期利率為 <span class="math">(<span class="frac"><span><var>r</var></span><span><var>m</var></span></span>)%</span>，總期數為 <var>mt</var>。</p><p>本金 HK$8,000，年利率 6%，每半年複利一次，共存 2 年：<var>m</var> = 2，因此 <var>A</var> = 8,000(1.03)<sup>4</sup> ≈ HK$9,004.07.</p><p class="note">圖中金額取至最接近的一仙；計算過程保留原有精度，不在每期先捨入。</p></div></details><details class="visual-notes settlement-recap"><summary>每期利率和期數，怎樣一步步找出來？</summary><div class="sequence-mount"></div></details></section>
+
+    <section id="practice" aria-labelledby="practice-title">
+      <header class="section-heading"><h2 id="practice-title">利息還是本利和？</h2></header>
+      <p>有需要時，把金額答案四捨五入至最接近的一仙。</p>
+
+      <div class="tool quiz" id="quiz">
+        <div class="quiz-head"><span id="progress">練習</span><span id="score"></span></div>
+        <div class="tool-body"><h3 id="question" tabindex="-1"></h3><div class="choices" id="choices"></div><p class="feedback" id="feedback" aria-live="polite"></p><button id="next" class="primary" type="button" hidden="">下一題</button></div>
+      </div>
+
+
+    <details class="compact-notes"><summary>綜合題與最後檢查</summary><p class="chapter-bridge"><a href="percentages-s3-zh.html#successive">先重溫連續百分變化與折舊</a></p><div><article class="example" style="margin-top:24px">
+        <h3>存款變成相機，整體變化應跟誰比較？</h3>
+        <p>一名學生存入 HK$4,000，年利率 5%，每年複利一次，共存 2 年。求本利和。學生把全數款項用來購買相機；相機其後每年折舊 10%，共折舊 2 年。求相機的價值，以及相對原來 HK$4,000 的整體百分變化。</p>
+        <details><summary>完整解答</summary><div>
+          <p>本利和 = 4,000 × (1 + 5%)<sup>2</sup> = <strong>HK$4,410.</strong></p>
+          <p>相機價值 = 4,410 × (1 − 10%)<sup>2</sup> = <strong>HK$3,572.10.</strong></p>
+          <p>整體百分變化 = (3,572.10 − 4,000) ÷ 4,000 × 100% = −10.6975%.</p>
+          <p>即<strong>減少 10.7%</strong>，準確至小數點後一位。折舊以 HK$4,410 開始計算，整體變化則以 HK$4,000 為基數。</p>
+        </div></details>
+      </article><p class="note">最後檢查：認清基數、選擇倍率、列出算式，並判斷答案是否合理。由 40% 升至 50%，是增加 10 個百分點；但相對增幅為 (10 ÷ 40) × 100% = 25%。</p></div></details></section>
+  </main>
+  <footer class=""><div class="wrap"><span>數學研習室 · 中三數學</span><a href="index.html">返回教材總覽</a></div></footer>
+
+
+
+
+
+
+</body></html>

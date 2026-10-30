@@ -1,0 +1,174 @@
+/* Interest tools share the lesson's paper, violet ink and gold coin key. */
+body[data-topic=interest] { --blue:#756872; --coral:#6f52c9; font-variant-numeric:tabular-nums; }
+body[data-topic=interest] #interest { --accent:var(--teal); }
+body[data-topic=interest] .skip:not(:focus) { clip-path:inset(50%); }
+body[data-topic=interest] .intro { padding:14px 0 22px; }
+body[data-topic=interest] .intro h1 { font-size:32px; }
+body[data-topic=interest] .intro .lead { margin:0; }
+body[data-topic=interest] .lesson-status { margin-top:12px; font-size:12px; }
+body[data-topic=interest] .contents { gap:0 26px; }
+body[data-topic=interest] main > section { padding:30px 0 34px; }
+body[data-topic=interest] .section-heading { margin-bottom:22px; }
+body[data-topic=interest] .section-heading h2 { font-size:23px; text-wrap:pretty; }
+body[data-topic=interest] .lesson-workspace { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:32px; align-items:start; margin-bottom:24px; }
+body[data-topic=interest] .lesson-workspace > * { min-width:0; }
+body[data-topic=interest] .sequence-mount:empty { display:none; }
+body[data-topic=interest] .lesson-workspace:not(:has(.teaching-sequence)) { display:block; }
+body[data-topic=interest] .teaching-sequence { background:var(--white); border:1px solid var(--line); border-radius:6px; padding:20px 24px 12px; margin:0; box-shadow:0 2px 5px #302b3804; }
+body[data-topic=interest] .sequence-values { display:block; padding:0; }
+body[data-topic=interest] .sequence-values li { display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:48px; padding:8px 12px; border:0; border-bottom:1px solid #eeeae4; }
+body[data-topic=interest] .sequence-values li.is-current { background:#eee8f8; border-radius:3px; border-bottom-color:transparent; }
+body[data-topic=interest] .sequence-values li span { margin:0; font-size:13px; }
+body[data-topic=interest] .sequence-values li strong { font-size:26px; font-weight:400; line-height:1.25; }
+body[data-topic=interest] .sequence-equation { font-size:24px; margin:18px 0 6px; min-height:42px; }
+body[data-topic=interest] .sequence-caption { min-height:50px; font-size:14px; margin-bottom:14px; }
+body[data-topic=interest] .sequence-track { height:2px; }
+body[data-topic=interest] .motion-controls { border:0; margin:0; padding:10px 0 0; grid-template-columns:92px 44px minmax(24px,1fr) 44px 44px; gap:4px; }
+body[data-topic=interest] .motion-controls button.motion-play { width:92px; border-radius:4px; }
+body[data-topic=interest] .motion-controls button:not(.motion-play) { border-radius:4px; }
+body[data-topic=interest] .interest-core { margin:0; padding:4px 0; }
+body[data-topic=interest] .interest-core > p:first-child { margin-top:0; font-size:14px; color:var(--muted); }
+body[data-topic=interest] .interest-core .formula { background:none; padding:8px 0; font-size:25px; }
+body[data-topic=interest] .essential-definitions { font-size:14px; line-height:1.9; color:var(--muted); }
+body[data-topic=interest] .simple-addition { margin:18px 0; }
+body[data-topic=interest] .simple-addition figcaption { font-size:14px; margin-bottom:14px; }
+body[data-topic=interest] .addition-track { min-height:64px; border-color:var(--line); }
+body[data-topic=interest] .addition-block { border-color:var(--line); color:var(--ink); }
+body[data-topic=interest] .principal-block { background:#eae5df; color:var(--ink); font-size:22px; }
+body[data-topic=interest] .addition-block strong { font-size:20px; font-weight:400; }
+body[data-topic=interest] .addition-block small { font-size:12px; }
+body[data-topic=interest] .simple-addition .math { font-size:19px; line-height:1.8; }
+body[data-topic=interest] #interest-calculation { margin:24px 0; padding:0; }
+body[data-topic=interest] #coin-lab { margin:0 0 20px; padding:24px 28px; border:1px solid var(--line); border-radius:6px; background:var(--white); box-shadow:0 2px 5px #302b3804; }
+body[data-topic=interest] #coin-lab h3 { margin:0 0 4px; font-size:20px; }
+body[data-topic=interest] #coin-lab h3 + p { margin:0 0 12px; font-size:14px; }
+body[data-topic=interest] .earning-key { margin:12px 0 18px; gap:10px 24px; }
+body[data-topic=interest] .coin-toolbar { display:flex; justify-content:space-between; align-items:center; gap:20px; padding-top:18px; border-top:1px solid var(--line); }
+body[data-topic=interest] .coin-toolbar .coin-controls { width:190px; flex:none; margin:0; align-items:center; }
+body[data-topic=interest] .coin-controls button { display:grid; place-items:center; border:1px solid var(--line); border-radius:4px; background:var(--white); color:var(--ink); }
+body[data-topic=interest] .coin-controls button:disabled { opacity:.35; cursor:default; }
+body[data-topic=interest] .coin-controls svg { width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+body[data-topic=interest] .coin-controls output { font-size:16px; font-weight:500; }
+body[data-topic=interest] .coin-year-slider { margin:10px 0 0; }
+body[data-topic=interest] .refined-coins .coin-scenes { margin-top:20px; gap:40px; }
+body[data-topic=interest] .refined-coins .coin-scene h4 { min-height:32px; font-size:16px; font-weight:500; }
+body[data-topic=interest] .refined-coins .coin-stage { height:180px; border-color:var(--line); }
+body[data-topic=interest] .refined-coins .coin-pile { gap:2px; }
+body[data-topic=interest] .refined-coins .coin-slot, body[data-topic=interest] .refined-coins .coin { height:14px; }
+body[data-topic=interest] .refined-coins .coin { animation:none; box-shadow:none; background:var(--pale); border-color:var(--accent); border-bottom-width:2px; }
+body[data-topic=interest] .refined-coins .coin::before { border-color:var(--accent); inset:2px 4px; }
+body[data-topic=interest] .refined-coins .coin::after { color:var(--accent-dark); font-size:8px; line-height:10px; }
+body[data-topic=interest] .refined-coins .coin.extra { background:var(--gold); border-color:#94730c; }
+body[data-topic=interest] .refined-coins .coin.extra::before { border-color:#94730c; }
+body[data-topic=interest] .refined-coins .coin.extra::after { color:#5a480e; }
+body[data-topic=interest] .refined-coins .coin-total { display:block; margin:16px 0 0; font-size:28px; font-weight:500; }
+body[data-topic=interest] .refined-coins .coin-caption { margin:20px 0 0; color:var(--muted); }
+body[data-topic=interest] .refined-coins .coin-story { min-height:78px; padding:16px 0 0; margin-top:18px; }
+body[data-topic=interest] .refined-coins .coin-story strong { font-size:20px; font-weight:600; }
+body[data-topic=interest] .refined-coins .coin-story span { margin-top:3px; font-size:14px; color:var(--muted); }
+body[data-topic=interest] .segments { position:relative; isolation:isolate; display:flex; flex-wrap:nowrap; width:fit-content; padding:4px; gap:2px; border:1px solid var(--line); border-radius:6px; background:#f0ece6; margin:0; overflow:visible; }
+body[data-topic=interest] .segments button { position:relative; z-index:1; display:flex; justify-content:center; align-items:center; min-height:44px; padding:8px 14px; border:0; border-radius:3px; background:transparent; color:var(--muted); font-weight:500; font-size:14px; line-height:1.4; }
+body[data-topic=interest] .segments button[aria-pressed=true] { color:var(--accent-dark); background:var(--white); box-shadow:0 1px 3px #302b3812; }
+body[data-topic=interest] .segments.has-indicator button[aria-pressed=true] { background:transparent; box-shadow:none; }
+body[data-topic=interest] .segment-indicator { position:absolute; z-index:0; top:0; left:0; pointer-events:none; background:var(--white); border-radius:3px; box-shadow:0 1px 3px #302b3812; transform-origin:top left; transition:transform 190ms cubic-bezier(.22,1,.36,1); }
+body[data-topic=interest] .segment-indicator.no-transition { transition:none; }
+body[data-topic=interest] .student-task { padding:24px 0 18px; border-top:1px solid var(--line); }
+body[data-topic=interest] .student-task h3 { margin:0 0 6px; font-size:20px; }
+body[data-topic=interest] .student-task > p { margin:6px 0 18px; }
+body[data-topic=interest] .money-selection { max-width:680px; }
+body[data-topic=interest] .money-selection label { padding:12px 0; min-height:56px; }
+body[data-topic=interest] .money-selection input { min-height:20px; width:20px; height:20px; }
+body[data-topic=interest] .money-selection span { display:flex; flex:1; justify-content:space-between; gap:16px; font-size:15px; }
+body[data-topic=interest] .money-selection strong { font-size:20px; white-space:nowrap; }
+body[data-topic=interest] #selected-interest-base { font-size:22px; }
+body[data-topic=interest] .primary { border:0; border-radius:4px; min-width:88px; }
+body[data-topic=interest] .settlement-tool { padding:24px 28px; margin:0 0 24px; background:var(--white); border:1px solid var(--line); border-radius:6px; box-shadow:0 2px 5px #302b3804; }
+body[data-topic=interest] .settlement-tool > h3 { margin:0 0 4px; font-size:20px; }
+body[data-topic=interest] .settlement-tool > p { margin:0 0 18px; font-size:14px; color:var(--muted); }
+body[data-topic=interest] .settlement-tool .segments { width:100%; }
+body[data-topic=interest] .settlement-tool .segments button { flex:1; }
+body[data-topic=interest] .settlement-workspace { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.9fr); gap:36px; margin-top:24px; }
+body[data-topic=interest] .settlement-workspace > * { min-width:0; }
+body[data-topic=interest] .rate-pair { margin:0 0 24px; gap:20px; }
+body[data-topic=interest] .rate-pair strong { font-size:23px; font-weight:400; }
+body[data-topic=interest] .rate-pair span:not(.frac):not(.frac span) { font-size:13px; color:var(--muted); }
+body[data-topic=interest] .settlement-axis { margin:0 0 20px; }
+body[data-topic=interest] .settlement-axis figcaption { font-size:14px; color:var(--muted); margin-bottom:16px; }
+body[data-topic=interest] .settlement-year h4 { font-size:13px; font-weight:500; }
+body[data-topic=interest] .settlement-year ol { border-left-color:var(--line); }
+body[data-topic=interest] .settlement-year li { border-top-color:#e6e0ed; }
+body[data-topic=interest] .settlement-year li.settled { border-top-color:var(--accent); }
+body[data-topic=interest] .period-tick { border-color:#b5a8d4; }
+body[data-topic=interest] #settlement-timeline > label { display:flex; justify-content:space-between; align-items:center; min-height:32px; font-size:14px; }
+body[data-topic=interest] #settlement-step-label { font-weight:600; color:var(--accent-dark); }
+body[data-topic=interest] .settlement-working { padding-left:28px; border-left:1px solid var(--line); }
+body[data-topic=interest] .step-equation { display:grid; grid-template-columns:16px minmax(0,1fr); gap:10px 8px; border:0; padding:0; align-items:center; }
+body[data-topic=interest] .step-equation > span { grid-column:2; display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px 16px; align-items:baseline; padding:8px 0; }
+body[data-topic=interest] .step-equation > b { grid-column:1; font-size:20px; padding:0; align-self:center; color:var(--muted); }
+body[data-topic=interest] .step-equation > b:nth-child(2) { grid-row:2; }
+body[data-topic=interest] .step-equation > b:nth-child(4) { grid-row:3; }
+body[data-topic=interest] .step-equation small { min-height:0; font-size:13px; color:var(--muted); }
+body[data-topic=interest] .step-equation strong { margin:0; font-size:22px; font-weight:400; }
+body[data-topic=interest] .step-equation > .step-balance { border-top:1px solid var(--line); }
+body[data-topic=interest] .step-rate { font-size:16px; line-height:1.8; margin:12px 0 20px; }
+body[data-topic=interest] #settlement-result { border-top:1px solid var(--line); margin-top:18px; padding-top:8px; }
+body[data-topic=interest] .settlement-final { font-size:13px; color:var(--muted); }
+body[data-topic=interest] .settlement-final strong { font-size:30px; line-height:1.6; font-weight:400; }
+body[data-topic=interest] details { margin-block:12px; }
+body[data-topic=interest] summary { padding:12px 0; min-height:48px; cursor:pointer; }
+body[data-topic=interest] .settlement-recap .teaching-sequence { background:none; border:0; box-shadow:none; padding:12px 0; max-width:620px; }
+body[data-topic=interest] #quiz { padding:0; margin:16px 0 24px; }
+body[data-topic=interest] .quiz-head { font-size:13px; padding:10px 0; }
+body[data-topic=interest] #question { max-width:780px; font-size:20px; line-height:1.7; margin:10px 0 20px; }
+body[data-topic=interest] .choices { max-width:780px; gap:12px; }
+body[data-topic=interest] .choice { min-height:56px; border-radius:4px; padding:14px 18px; text-align:left; transition:background-color 150ms ease,border-color 150ms ease,transform 140ms cubic-bezier(.22,1,.36,1); }
+body[data-topic=interest] :is(button,a,input,summary):focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
+@media (hover:hover) and (pointer:fine) {
+  body[data-topic=interest] .segments button:hover:not([aria-pressed=true]) { color:var(--ink); background:#e6e0db; }
+  body[data-topic=interest] .coin-controls button:hover:not(:disabled), body[data-topic=interest] .choice:hover:not(.wrong):not(.correct) { border-color:#aa9acb; background:#f7f3fc; }
+  body[data-topic=interest] .primary:hover { background:var(--accent-dark); }
+}
+@media (max-width:900px) {
+  body[data-topic=interest] .lesson-workspace { grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:24px; }
+  body[data-topic=interest] .teaching-sequence { padding:16px 16px 12px; }
+  body[data-topic=interest] .settlement-workspace { grid-template-columns:1fr; gap:20px; }
+  body[data-topic=interest] .settlement-working { border-left:0; border-top:1px solid var(--line); padding:20px 0 0; }
+}
+@media (max-width:700px) {
+  body[data-topic=interest] .intro h1 { font-size:27px; }
+  body[data-topic=interest] .intro { padding:14px 0 20px; }
+  body[data-topic=interest] .contents { gap:0 14px; }
+  body[data-topic=interest] .contents a { font-size:12px; }
+  body[data-topic=interest] .section-heading h2 { font-size:21px; }
+  body[data-topic=interest] .lesson-workspace { display:block; }
+  body[data-topic=interest] .sequence-mount { margin-bottom:22px; }
+  body[data-topic=interest] .sequence-values li strong { font-size:25px; }
+  body[data-topic=interest] .sequence-equation { font-size:22px; min-height:42px; overflow-wrap:anywhere; }
+  body[data-topic=interest] .sequence-caption { min-height:76px; }
+  body[data-topic=interest] .motion-controls { grid-template-columns:78px 44px minmax(22px,1fr) 44px 44px; gap:0; }
+  body[data-topic=interest] .motion-controls button.motion-play { width:78px; gap:5px; font-size:13px; }
+  body[data-topic=interest] #coin-lab, body[data-topic=interest] .settlement-tool { padding:20px 16px; }
+  body[data-topic=interest] #coin-lab h3, body[data-topic=interest] .settlement-tool > h3 { font-size:18px; }
+  body[data-topic=interest] .coin-toolbar { display:block; padding-top:16px; }
+  body[data-topic=interest] .coin-toolbar .coin-controls { width:100%; margin-top:14px; }
+  body[data-topic=interest] .coin-view-mode { display:grid; grid-template-columns:1fr 1fr; width:100%; }
+  body[data-topic=interest] .segments button { padding:8px 10px; font-size:13px; }
+  body[data-topic=interest] .refined-coins { --coin-width:38px; }
+  body[data-topic=interest] .refined-coins .coin-scenes { gap:18px; }
+  body[data-topic=interest] .refined-coins .coin-stage { gap:6px; padding-inline:0; }
+  body[data-topic=interest] .refined-coins .coin-total { font-size:20px; }
+  body[data-topic=interest] .refined-coins .coin-scene h4 { font-size:14px; min-height:42px; }
+  body[data-topic=interest] .refined-coins .coin-scene p { font-size:12px; }
+  body[data-topic=interest] .refined-coins .coin-story strong { font-size:18px; }
+  body[data-topic=interest] .earning-key { gap:8px 16px; font-size:12px; }
+  body[data-topic=interest] .settlement-tool .segments { display:grid; grid-template-columns:1fr 1fr; }
+  body[data-topic=interest] .settlement-workspace { margin-top:20px; }
+  body[data-topic=interest] .rate-pair { gap:12px; }
+  body[data-topic=interest] .rate-pair strong { font-size:20px; }
+  body[data-topic=interest] .money-selection span { display:block; font-size:14px; }
+  body[data-topic=interest] .money-selection strong { display:block; font-size:19px; }
+  body[data-topic=interest] .choices { grid-template-columns:1fr; }
+}
+@media (prefers-reduced-motion:reduce) {
+  body[data-topic=interest] *, body[data-topic=interest] *::before, body[data-topic=interest] *::after { transition:none!important; animation:none!important; }
+}

@@ -1,0 +1,185 @@
+/* Scoped companion to the interest lesson; teaching notes stay on open paper. */
+body[data-topic=percentages] { font-variant-numeric:tabular-nums; --quiet-surface:#f0ece6; --soft-violet:#eee8f8; --error-ink:#8b3540; }
+body[data-topic=percentages] :is(#reverse,#successive,#depreciation) { --accent:var(--teal); }
+body[data-topic=percentages] .skip:not(:focus) { clip-path:inset(50%); }
+body[data-topic=percentages] .intro { padding:14px 0 22px; }
+body[data-topic=percentages] .intro h1 { font-size:32px; }
+body[data-topic=percentages] .intro .lead { margin:0; }
+body[data-topic=percentages] .lesson-status { margin-top:12px; font-size:12px; }
+body[data-topic=percentages] .contents { gap:0 26px; }
+body[data-topic=percentages] main > section { padding:30px 0 34px; }
+body[data-topic=percentages] .section-heading { margin-bottom:22px; }
+body[data-topic=percentages] #concepts > .section-heading { margin-bottom:22px; }
+body[data-topic=percentages] .section-heading h2 { font-size:23px; text-wrap:pretty; }
+body[data-topic=percentages] .lesson-subtopic { padding-top:26px; margin-top:28px; }
+body[data-topic=percentages] .lesson-subtopic .section-heading h3 { font-size:22px; }
+body[data-topic=percentages] .lesson-workspace { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:32px; align-items:start; margin-bottom:24px; }
+body[data-topic=percentages] .lesson-workspace > * { min-width:0; }
+body[data-topic=percentages] .sequence-mount:empty { display:none; }
+body[data-topic=percentages] .lesson-workspace:not(:has(.teaching-sequence,.student-task,.activity)) { display:block; }
+body[data-topic=percentages] .teaching-sequence { background:var(--white); border:1px solid var(--line); border-radius:6px; padding:20px 24px 12px; margin:0; box-shadow:0 2px 5px #302b3804; }
+body[data-topic=percentages] .sequence-values { display:block; padding:0; }
+body[data-topic=percentages] .sequence-values li { display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:52px; padding:8px 12px; border:0; border-bottom:1px solid #eeeae4; }
+body[data-topic=percentages] .sequence-values li.is-current { background:var(--soft-violet); border-radius:3px; border-bottom-color:transparent; }
+body[data-topic=percentages] .sequence-values li span { margin:0; font-size:13px; }
+body[data-topic=percentages] .sequence-values li strong { font-size:28px; line-height:1.3; font-weight:400; }
+body[data-topic=percentages] .sequence-equation { font-size:24px; margin:18px 0 6px; min-height:42px; }
+body[data-topic=percentages] .sequence-caption { min-height:52px; font-size:14px; margin-bottom:14px; }
+body[data-topic=percentages] .motion-controls { border:0; margin:0; padding:10px 0 0; grid-template-columns:92px 44px minmax(24px,1fr) 44px 44px; gap:4px; }
+body[data-topic=percentages] .motion-controls button.motion-play { width:92px; border-radius:4px; }
+body[data-topic=percentages] .motion-controls button:not(.motion-play) { border-radius:4px; }
+body[data-topic=percentages] .lesson-essential { padding:4px 0; margin:0; }
+body[data-topic=percentages] .lesson-essential h3 { margin:0 0 10px; font-size:18px; }
+body[data-topic=percentages] .essential-key { margin:0 0 14px; font-size:18px; line-height:1.85; }
+body[data-topic=percentages] .lesson-essential .math { font-size:25px; line-height:1.9; }
+body[data-topic=percentages] .essential-definitions { font-size:14px; line-height:1.9; color:var(--muted); }
+body[data-topic=percentages] .percent-explorer { padding:24px 28px; margin:24px 0; background:var(--white); border:1px solid var(--line); border-radius:6px; box-shadow:0 2px 5px #302b3804; }
+body[data-topic=percentages] .percent-explorer .tool-heading { padding:0 0 18px; margin:0; font-size:20px; }
+body[data-topic=percentages] .explorer-workspace { display:grid; grid-template-columns:240px minmax(0,1fr); gap:32px; }
+body[data-topic=percentages] .explorer-workspace > * { min-width:0; }
+body[data-topic=percentages] .percent-explorer .controls { display:grid; grid-template-columns:1fr; align-content:start; align-items:start; padding:0 28px 0 0; gap:20px; border:0; border-right:1px solid var(--line); }
+body[data-topic=percentages] .percent-explorer label, body[data-topic=percentages] .control-title { font-size:14px; font-weight:500; margin-bottom:8px; }
+body[data-topic=percentages] input[type=number] { font:16px var(--body); color:var(--ink); border-color:#aaa2af; border-radius:4px; min-height:44px; caret-color:var(--accent); }
+body[data-topic=percentages] .percent-explorer input { width:100%; }
+body[data-topic=percentages] .range-ends { display:flex; justify-content:space-between; color:var(--muted); font-size:12px; margin-top:-4px; }
+body[data-topic=percentages] .percent-explorer .tool-body { padding:0; }
+body[data-topic=percentages] #change-result > .muted { font-size:13px; margin:0; }
+body[data-topic=percentages] #new-amount { font-size:34px; margin:4px 0 16px; }
+body[data-topic=percentages] #change-working { font-size:20px; line-height:1.85; margin:8px 0 20px; overflow-wrap:anywhere; }
+body[data-topic=percentages] #bars { padding-top:16px; border-top:1px solid var(--line); }
+body[data-topic=percentages] .bar-row { grid-template-columns:56px minmax(0,1fr); gap:14px; margin:16px 0; font-size:13px; }
+body[data-topic=percentages] :is(.track,.value-track) { box-shadow:none; background:#e9e3dc; border-radius:2px; height:14px; }
+body[data-topic=percentages] :is(.bar,.value-fill) { border-radius:2px; transition:none; }
+body[data-topic=percentages] .error { color:var(--error-ink); font-size:14px; margin:12px 0 0; }
+body[data-topic=percentages] input[aria-invalid=true] { border-color:var(--error-ink); }
+body[data-topic=percentages] .segments { position:relative; isolation:isolate; display:flex; flex-wrap:nowrap; width:fit-content; padding:4px; gap:2px; border:1px solid var(--line); border-radius:6px; background:var(--quiet-surface); margin:0; overflow:visible; }
+body[data-topic=percentages] .segments button { position:relative; z-index:1; min-width:44px; min-height:44px; padding:8px 14px; border:0; border-radius:3px; background:transparent; color:var(--muted); font-size:14px; font-weight:500; line-height:1.4; }
+body[data-topic=percentages] .segments button[aria-pressed=true] { color:var(--accent-dark); background:var(--white); box-shadow:0 1px 3px #302b3812; }
+body[data-topic=percentages] .segments.has-indicator button[aria-pressed=true] { background:transparent; box-shadow:none; }
+body[data-topic=percentages] .segment-indicator { position:absolute; z-index:0; top:0; left:0; pointer-events:none; background:var(--white); border-radius:3px; box-shadow:0 1px 3px #302b3812; transform-origin:top left; transition:transform 190ms cubic-bezier(.22,1,.36,1); }
+body[data-topic=percentages] .segment-indicator.no-transition { transition:none; }
+body[data-topic=percentages] .primary { border:0; border-radius:4px; min-width:88px; }
+body[data-topic=percentages] .secondary { border-radius:4px; }
+body[data-topic=percentages] button { transition:background-color 150ms ease,transform 140ms cubic-bezier(.22,1,.36,1); }
+body[data-topic=percentages] .student-task { margin:0; padding:4px 0; }
+body[data-topic=percentages] .student-task h3 { font-size:19px; margin:0 0 12px; }
+body[data-topic=percentages] .student-task > p { margin:8px 0 16px; font-size:15px; }
+body[data-topic=percentages] #reverse-task { padding:24px 28px; background:var(--white); border:1px solid var(--line); border-radius:6px; }
+body[data-topic=percentages] #reverse-task-question { margin:0 0 18px; line-height:1.85; }
+body[data-topic=percentages] #reverse-answer-form label { font-size:14px; font-weight:500; }
+body[data-topic=percentages] .answer-entry { gap:10px; margin:8px 0; align-items:stretch; }
+body[data-topic=percentages] .answer-entry input { width:160px; flex:1; min-width:100px; }
+body[data-topic=percentages] .answer-entry button { flex:none; }
+body[data-topic=percentages] .task-actions { gap:10px; }
+body[data-topic=percentages] #reverse-task .task-feedback:empty { display:block; min-height:36px; }
+body[data-topic=percentages] .comparison-explanation > p:first-child { margin:0 0 20px; font-size:15px; }
+body[data-topic=percentages] .comparison-explanation .lesson-essential { border-top:1px solid var(--line); margin-top:16px; padding-top:18px; }
+body[data-topic=percentages] #successive > .compact-notes .columns { display:block; }
+body[data-topic=percentages] .base-expression { font-size:25px; margin:16px 0; }
+body[data-topic=percentages] #base-task .task-actions button { min-width:100px; }
+body[data-topic=percentages] #base-task .task-feedback { margin:12px 0; font-size:14px; line-height:1.85; }
+body[data-topic=percentages] #guess-activity { padding:24px 28px; margin:0; background:var(--white); border:1px solid var(--line); border-radius:6px; }
+body[data-topic=percentages] #guess-activity h3 { margin:0 0 8px; font-size:19px; }
+body[data-topic=percentages] #guess-activity > p:first-of-type { margin:0 0 18px; font-size:15px; }
+body[data-topic=percentages] .guess-options { gap:10px; margin:18px 0 24px; }
+body[data-topic=percentages] .guess-options button { font:22px/1.4 Georgia,serif; padding:10px 4px; border-radius:4px; background:var(--white); border-color:var(--line); min-height:54px; }
+body[data-topic=percentages] .guess-options button[aria-pressed=true] { background:var(--soft-violet); border-color:var(--accent); color:var(--accent-dark); }
+body[data-topic=percentages] #guess-activity .value-label { align-items:baseline; font-size:13px; margin:0 0 10px; }
+body[data-topic=percentages] #guess-amount { font:400 34px/1.4 Georgia,serif; color:var(--accent-dark); }
+body[data-topic=percentages] #guess-status { font-size:14px; min-height:76px; margin:18px 0 10px; }
+body[data-topic=percentages] .activity-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; }
+body[data-topic=percentages] .compact-challenge { margin-top:20px; }
+body[data-topic=percentages] #chain-task { padding-top:16px; }
+body[data-topic=percentages] .task-controls { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin:20px 0; }
+body[data-topic=percentages] .task-controls input { width:100%; }
+body[data-topic=percentages] .task-controls label { font-size:14px; font-weight:500; }
+body[data-topic=percentages] .chain-bars { max-width:700px; }
+body[data-topic=percentages] .chain-bars .value-row { margin:14px 0; min-height:60px; }
+body[data-topic=percentages] .chain-bars .value-label strong { font:400 23px Georgia,serif; }
+body[data-topic=percentages] #successive > .compact-notes .teaching-sequence { max-width:640px; margin:0 0 24px; padding:0; background:none; border:0; border-radius:0; box-shadow:none; }
+body[data-topic=percentages] #depreciation-activity { padding:24px 28px; margin:0; background:var(--white); border:1px solid var(--line); border-radius:6px; }
+body[data-topic=percentages] #depreciation-activity h3 { font-size:19px; margin:0 0 8px; }
+body[data-topic=percentages] #depreciation-activity > p { font-size:14px; }
+body[data-topic=percentages] .depreciation-control { display:block; margin-top:18px; }
+body[data-topic=percentages] .depreciation-control label { font-size:14px; font-weight:500; }
+body[data-topic=percentages] .depreciation-control input { width:100%; }
+body[data-topic=percentages] .laptop-scene { grid-template-columns:110px minmax(0,1fr); gap:20px; margin:24px 0 20px; }
+body[data-topic=percentages] .laptop-symbol { width:100px; }
+body[data-topic=percentages] .laptop-screen { height:70px; border:3px solid var(--ink); background:var(--soft-violet); color:var(--accent-dark); border-radius:4px 4px 0 0; font-size:20px; }
+body[data-topic=percentages] .laptop-base { width:110px; height:6px; background:#93899b; border-radius:0 0 4px 4px; }
+body[data-topic=percentages] #depreciation-value { font-size:27px; margin:0 0 4px; }
+body[data-topic=percentages] #depreciation-percent { color:var(--muted); font-size:12px; margin:4px 0 12px; }
+body[data-topic=percentages] #depreciation-status { min-height:80px; font-size:14px; line-height:1.85; margin:16px 0 0; }
+body[data-topic=percentages] .repeated-rates p { gap:12px; margin:8px 0 16px; }
+body[data-topic=percentages] .essential-label { min-width:62px; font-size:14px; }
+body[data-topic=percentages] .repeated-rates .math { font-size:24px; }
+body[data-topic=percentages] details { margin-block:12px; }
+body[data-topic=percentages] summary { min-height:48px; padding:12px 0; cursor:pointer; }
+body[data-topic=percentages] .teacher-comment { border:0; padding:0; }
+body[data-topic=percentages] .correction-row--right .correction-label { color:var(--accent-dark); }
+body[data-topic=percentages] .formula { border-radius:4px; }
+body[data-topic=percentages] .chalkboard .formula-label { color:var(--white); }
+body[data-topic=percentages] .base-label { color:var(--muted); }
+body[data-topic=percentages] .flow-change { color:var(--accent-dark); }
+body[data-topic=percentages] .flow-stage strong { color:var(--ink); }
+body[data-topic=percentages] #quiz { padding:0; margin:16px 0 24px; }
+body[data-topic=percentages] .quiz-head { font-size:13px; padding:10px 0; }
+body[data-topic=percentages] #question { max-width:780px; font-size:20px; line-height:1.7; margin:10px 0 20px; }
+body[data-topic=percentages] .choices { max-width:780px; gap:12px; }
+body[data-topic=percentages] .choice { min-height:56px; border-radius:4px; padding:14px 18px; text-align:left; }
+body[data-topic=percentages] :is(button,a,input,summary):focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
+body[data-topic=percentages] ::selection { background:var(--pale); color:var(--ink); }
+body[data-topic=percentages].keyboard-input :is(button,.segment-indicator,.sequence-track span) { transition:none; }
+body[data-topic=percentages].keyboard-input button:active { transform:none; }
+@media (hover:hover) and (pointer:fine) {
+  body[data-topic=percentages] .segments button:hover:not([aria-pressed=true]) { color:var(--ink); background:#e6e0db; }
+  body[data-topic=percentages] :is(.secondary,.guess-options button,.choice):hover:not(:disabled):not(.wrong):not(.correct) { background:#f7f3fc; border-color:#aa9acb; }
+  body[data-topic=percentages] .primary:hover { background:var(--accent-dark); }
+}
+@media (max-width:1000px) {
+  body[data-topic=percentages] .lesson-workspace { grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:24px; }
+  body[data-topic=percentages] .teaching-sequence { padding:16px 16px 12px; }
+  body[data-topic=percentages] .laptop-scene { grid-template-columns:1fr; gap:18px; }
+}
+@media (max-width:700px) {
+  body[data-topic=percentages] .intro { padding:14px 0 20px; }
+  body[data-topic=percentages] .intro h1 { font-size:27px; }
+  body[data-topic=percentages] .contents { gap:0 14px; }
+  body[data-topic=percentages] .contents a { font-size:12px; }
+  body[data-topic=percentages] .section-heading h2 { font-size:21px; }
+  body[data-topic=percentages] .lesson-subtopic .section-heading h3 { font-size:20px; }
+  body[data-topic=percentages] .lesson-workspace { display:block; }
+  body[data-topic=percentages] .lesson-workspace > * + * { margin-top:22px; }
+  body[data-topic=percentages] .sequence-values li strong { font-size:25px; }
+  body[data-topic=percentages] .sequence-equation { font-size:22px; overflow-wrap:anywhere; }
+  body[data-topic=percentages] .sequence-caption { min-height:76px; }
+  body[data-topic=percentages] .motion-controls { grid-template-columns:78px 44px minmax(22px,1fr) 44px 44px; gap:0; }
+  body[data-topic=percentages] .motion-controls button.motion-play { width:78px; gap:5px; font-size:13px; }
+  body[data-topic=percentages] .lesson-essential .math { font-size:23px; }
+  body[data-topic=percentages] :is(.percent-explorer,#reverse-task,#guess-activity,#depreciation-activity) { padding:20px 16px; }
+  body[data-topic=percentages] .percent-explorer .tool-heading { font-size:18px; }
+  body[data-topic=percentages] .explorer-workspace { display:block; }
+  body[data-topic=percentages] .percent-explorer .controls { grid-template-columns:1fr 1fr; gap:18px 12px; border:0; padding:0 0 18px; }
+  body[data-topic=percentages] .percent-explorer .controls > div:last-of-type { grid-column:1 / -1; }
+  body[data-topic=percentages] .segments { width:100%; }
+  body[data-topic=percentages] .segments button { flex:1; padding:8px 6px; font-size:13px; }
+  body[data-topic=percentages] .percent-explorer .tool-body { border-top:1px solid var(--line); padding-top:20px; }
+  body[data-topic=percentages] #new-amount { font-size:30px; }
+  body[data-topic=percentages] #change-working { font-size:19px; }
+  body[data-topic=percentages] .bar-row { grid-template-columns:44px minmax(0,1fr); gap:10px; }
+  body[data-topic=percentages] .task-controls { grid-template-columns:1fr; gap:16px; }
+  body[data-topic=percentages] .laptop-scene { grid-template-columns:100px minmax(0,1fr); gap:14px; }
+  body[data-topic=percentages] #depreciation-value { font-size:23px; }
+  body[data-topic=percentages] .choices { grid-template-columns:1fr; }
+  body[data-topic=percentages] .repeated-rates .math { font-size:21px; }
+}
+@media (max-width:360px) {
+  body[data-topic=percentages] .laptop-scene { grid-template-columns:1fr; }
+  body[data-topic=percentages] .percent-explorer .controls { grid-template-columns:1fr; }
+  body[data-topic=percentages] .percent-explorer .controls > div:last-of-type { grid-column:auto; }
+  body[data-topic=percentages] .percent-explorer .segments { width:fit-content; }
+}
+@media (prefers-reduced-motion:reduce) {
+  body[data-topic=percentages] *, body[data-topic=percentages] *::before, body[data-topic=percentages] *::after { animation:none!important; transition:none!important; }
+  body[data-topic=percentages] button:active { transform:none; }
+}
