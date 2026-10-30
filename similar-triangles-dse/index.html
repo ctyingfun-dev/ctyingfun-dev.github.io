@@ -187,32 +187,37 @@
   </style>
   <link rel="stylesheet" href="lesson.css">
   <link rel="stylesheet" href="motion.css">
+  <link rel="stylesheet" href="figma.css">
 </head>
 <body class="lesson-geometry">
   <a class="skip" href="#main">跳到教材</a>
   <header class="top">
     <div class="wrap">
-      <a class="brand" href="../index.html">數學研習室</a>
-      <nav aria-label="頁面導覽"><a href="#similar-title">概念</a><a href="#rules-title">判別</a><a href="#counterexample">反例</a><a href="#proof-title">證明</a></nav>
+      <a class="brand" href="../index.html"><span class="brand-triangle" aria-hidden="true">△</span>數學研習室</a>
+      <span class="header-meta">中二數學 · DSE 基礎</span>
     </div>
   </header>
-  <div class="lesson-progress" aria-label="示範觀看進度">
-    <div class="wrap">
-      <span id="viewed-count" aria-live="polite">已看 0 / 6</span>
-      <div class="viewed-track" role="progressbar" aria-label="已看示範" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0"><span></span></div>
-      <span class="progress-finish" hidden>全部看完</span>
-    </div>
-  </div>
   <main class="wrap" id="main" tabindex="-1">
     <section class="intro">
       <h1>相似三角形</h1>
       <p class="lead">對應角相等，對應邊成比例。</p>
-      <p class="lesson-meta">中二數學 · DSE 基礎</p>
     </section>
+    <nav class="lesson-nav" aria-label="頁面導覽"><a href="#similar" aria-current="location">概念</a><a href="#rules">判別</a><a href="#counterexample">反例</a><a href="#proof">證明</a></nav>
+    <nav class="lesson-progress" aria-label="示範觀看進度">
+      <a href="#similar" data-progress-link="concept"><span>01</span> 概念</a>
+      <a href="#aaa" data-progress-link="aaa"><span>02</span> AAA</a>
+      <a href="#sas" data-progress-link="sas"><span>03</span> SAS</a>
+      <a href="#sss" data-progress-link="sides"><span>04</span> SSS</a>
+      <a href="#counterexample" data-progress-link="counter"><span>05</span> 反例</a>
+      <a href="#proof" data-progress-link="proof"><span>06</span> 證明</a>
+      <span class="sr-only" id="viewed-count" aria-live="polite">已看 0 / 6</span>
+      <div class="viewed-track sr-only" role="progressbar" aria-label="已看示範" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0"><span></span></div>
+      <span class="progress-finish sr-only" hidden>全部看完</span>
+    </nav>
 
     <section class="section" id="similar" aria-labelledby="similar-title" data-sequence="concept">
-      <h2 id="similar-title">放大，形狀不變</h2>
-      <p>三邊同時變成 2 倍，角度不變，兩個三角形相似。</p>
+      <h2 id="similar-title"><span class="section-number">01</span>放大，形狀不變</h2>
+      <div class="concept-layout">
       <div class="similar-grid">
         <div class="similar-item">
           <svg viewBox="0 0 280 190" role="img" aria-label="小三角形，三條邊長為 3、4、5">
@@ -220,9 +225,10 @@
             <path class="pair-edge" data-pair="0" pathLength="1" d="M55 155 V80"></path>
             <path class="pair-edge" data-pair="1" pathLength="1" d="M55 155 H155"></path>
             <path class="pair-edge" data-pair="2" pathLength="1" d="M155 155 L55 80"></path>
+            <path class="right-angle" d="M55 145 H65 V155"></path>
             <text x="95" y="179">4</text><text x="35" y="123">3</text><text x="111" y="108">5</text>
+            <text class="vertex" x="41" y="173">A</text><text class="vertex" x="162" y="173">B</text><text class="vertex" x="50" y="68">C</text>
           </svg>
-          <p>原來</p>
         </div>
         <div class="scale-badge" aria-label="邊長變成兩倍">×2</div>
         <div class="similar-item">
@@ -231,11 +237,14 @@
             <path class="pair-edge" data-pair="0" pathLength="1" d="M40 165 V15"></path>
             <path class="pair-edge" data-pair="1" pathLength="1" d="M40 165 H240"></path>
             <path class="pair-edge" data-pair="2" pathLength="1" d="M240 165 L40 15"></path>
+            <path class="right-angle" d="M40 155 H50 V165"></path>
             <text x="133" y="187">8</text><text x="19" y="94">6</text><text x="165" y="86">10</text>
+            <text class="vertex" x="22" y="184">P</text><text class="vertex" x="246" y="184">Q</text><text class="vertex" x="35" y="10">R</text>
           </svg>
-          <p>放大後</p>
         </div>
       </div>
+      <div class="concept-copy">
+      <p class="formula-label">對應邊的比值</p>
       <div class="ratio-line" aria-label="三除以六等於四除以八等於五除以十">
         <span class="ratio-part" data-ratio="0"><math class="fraction-math"><mfrac><mn>3</mn><mn>6</mn></mfrac></math></span><span>=</span>
         <span class="ratio-part" data-ratio="1"><math class="fraction-math"><mfrac><mn>4</mn><mn>8</mn></mfrac></math></span><span>=</span>
@@ -243,33 +252,36 @@
         <span class="pair-link" aria-hidden="true"><span data-match-from>3</span><svg viewBox="0 0 72 20"><path pathLength="1" d="M2 10 H64 M57 4 L64 10 L57 16"></path></svg><span data-match-to>6</span></span>
       </div>
       <div class="sequence-readout"><p class="sequence-caption" data-sequence-caption aria-live="polite">三組對應邊，逐組比較。</p><span class="result-stamp" data-stamp>對應邊成比例</span></div>
+      <p class="teacher-note"><strong>先找對應，再列比例。</strong></p>
+      <p class="mini-note">邊長放大 2 倍，角度不變。大小不同，形狀仍相同。</p>
+      </div>
+      </div>
       <div data-controls></div>
-      <p class="mini-note">對應邊：3 對 6、4 對 8、5 對 10。旋轉或翻轉後，仍可相似。</p>
-      <p class="teacher-note"><strong>先找對應，再列比例。</strong>每組都用「小邊 ÷ 大邊」，次序要一致。</p>
     </section>
 
-    <section class="section" aria-labelledby="rules-title">
-      <h2 id="rules-title">三種判別條件</h2>
-      <p>符合其中一種，就能證明相似。</p>
+    <section class="section" id="rules" aria-labelledby="rules-title">
+      <h2 id="rules-title"><span class="section-number">02</span>三種判別條件</h2>
       <div class="rule-grid">
-        <div class="rule" data-demo="aaa" data-sequence="aaa">
-          <h3>三組對應角相等（AAA）</h3>
+        <div class="rule" id="aaa" data-demo="aaa" data-sequence="aaa">
+          <h3><span class="condition-code">AAA</span>三組對應角相等</h3>
           <p>兩組角相等，第三組也相等，因為內角和是 180°。</p>
+          <div class="condition-formula math">∠A = ∠P，∠B = ∠Q，∠C = ∠R</div>
           <svg viewBox="0 0 350 180" role="img" aria-label="AAA：三組對應角相等，三角形放大後仍相似">
             <polygon class="demo-triangle" points="24,150 94,150 24,97.5"></polygon>
             <polygon class="demo-triangle demo-moving" data-moving points="160,150 230,150 160,97.5"></polygon>
             <path class="demo-mark" data-mark="first" pathLength="1" d="M24 137 H37 V150 M160 137 H173 V150"></path>
-            <path class="demo-mark secondary" data-mark="second" pathLength="1" d="M78 150 A16 16 0 0 0 81.2 140.4 M214 150 A16 16 0 0 0 217.2 140.4"></path>
+            <path class="demo-mark secondary" data-mark="second" pathLength="1" d="M78 150 A16 16 0 0 1 81.2 140.4 M214 150 A16 16 0 0 1 217.2 140.4"></path>
             <path class="demo-mark" data-mark="third" pathLength="1" d="M24 113.5 A16 16 0 0 0 36.8 107.1 M160 113.5 A16 16 0 0 0 172.8 107.1"></path>
-            <text x="25" y="172">小三角形</text><text x="190" y="172">放大後</text>
+            <g class="diagram-labels"><text x="14" y="169">A</text><text x="99" y="169">B</text><text x="20" y="89">C</text><text x="150" y="169">P</text><text data-vertex="q" x="235" y="169">Q</text><text data-vertex="r" x="156" y="89">R</text><text class="angle-label" data-angle-label="second" x="63" y="142">α</text><text class="angle-label" data-angle-label="third" x="31" y="126">β</text><text class="angle-label" data-angle-label="second" data-angle="q" x="199" y="142">α</text><text class="angle-label" data-angle-label="third" data-angle="r" x="167" y="126">β</text></g>
           </svg>
           <div class="demo-progress" aria-hidden="true"><span data-progress></span></div>
           <p class="demo-caption" data-caption aria-live="polite">放大後，三組角不變。</p>
           <div class="demo-action"><button type="button" data-play aria-label="播放 AAA 動畫">播放</button><span class="demo-status" data-status></span></div>
         </div>
-        <div class="rule" data-demo="sas" data-sequence="sas">
-          <h3>兩邊成比例且夾角相等</h3>
+        <div class="rule" id="sas" data-demo="sas" data-sequence="sas">
+          <h3><span class="condition-code">SAS</span>兩邊成比例且夾角相等</h3>
           <p>兩組對應邊成比例，<strong>兩邊之間的角</strong>也相等。</p>
+          <div class="condition-formula"><math aria-label="AB 除以 PQ 等於 AC 除以 PR 等於二分之一"><mfrac><mi>AB</mi><mi>PQ</mi></mfrac><mo>=</mo><mfrac><mi>AC</mi><mi>PR</mi></mfrac><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></math><p class="math">∠BAC = ∠QPR = 90°</p><strong class="included-note">相等角必須在兩條已知邊之間。</strong></div>
           <svg viewBox="0 0 350 180" role="img" aria-label="兩邊成比例且夾角相等：先放大兩邊與夾角，最後補上第三條邊">
             <polyline class="demo-open" points="94,150 24,150 24,97.5"></polyline>
             <polyline class="demo-open demo-moving" data-moving points="230,150 160,150 160,97.5"></polyline>
@@ -278,22 +290,23 @@
             <path class="demo-edge" data-edge="first" pathLength="1" d="M24 150 L94 150 M160 150 L230 150"></path>
             <path class="demo-edge" data-edge="second" pathLength="1" d="M24 150 L24 97.5 M160 150 L160 97.5"></path>
             <path class="demo-mark" data-mark="first" pathLength="1" d="M24 137 H37 V150 M160 137 H173 V150"></path>
-            <text x="25" y="172">小三角形</text><text x="190" y="172">放大後</text>
+            <g class="diagram-labels"><text x="14" y="169">A</text><text x="99" y="169">B</text><text x="20" y="89">C</text><text x="150" y="169">P</text><text data-vertex="q" x="235" y="169">Q</text><text data-vertex="r" x="156" y="89">R</text><text x="55" y="169">4</text><text x="8" y="127">3</text><text data-side="base" x="191" y="169">4</text><text data-side="height" x="144" y="127">3</text></g>
           </svg>
           <div class="demo-progress" aria-hidden="true"><span data-progress></span></div>
           <p class="demo-caption" data-caption aria-live="polite">圖中的夾角是 90°。</p>
           <div class="demo-action"><button type="button" data-play aria-label="播放兩邊成比例且夾角相等動畫">播放</button><span class="demo-status" data-status></span></div>
         </div>
-        <div class="rule" data-demo="sides" data-sequence="sides">
-          <h3>三邊成比例</h3>
+        <div class="rule" id="sss" data-demo="sides" data-sequence="sides">
+          <h3><span class="condition-code">SSS</span>三邊成比例</h3>
           <p>三組對應邊的比值相等，例如 3、4、5 與 6、8、10。</p>
+          <div class="condition-formula"><math aria-label="AB 除以 PQ 等於 AC 除以 PR 等於 BC 除以 QR"><mfrac><mi>AB</mi><mi>PQ</mi></mfrac><mo>=</mo><mfrac><mi>AC</mi><mi>PR</mi></mfrac><mo>=</mo><mfrac><mi>BC</mi><mi>QR</mi></mfrac></math><math aria-label="四除以八等於三除以六等於五除以十"><mfrac><mn>4</mn><mn>8</mn></mfrac><mo>=</mo><mfrac><mn>3</mn><mn>6</mn></mfrac><mo>=</mo><mfrac><mn>5</mn><mn>10</mn></mfrac></math></div>
           <svg viewBox="0 0 350 180" role="img" aria-label="三邊成比例：三邊 3、4、5 同時放大為 6、8、10">
             <polygon class="demo-triangle" points="24,150 94,150 24,97.5"></polygon>
             <polygon class="demo-triangle demo-moving" data-moving points="160,150 230,150 160,97.5"></polygon>
             <path class="demo-edge" data-edge="first" pathLength="1" d="M24 150 L94 150 M160 150 L230 150"></path>
             <path class="demo-edge" data-edge="second" pathLength="1" d="M24 150 L24 97.5 M160 150 L160 97.5"></path>
             <path class="demo-edge" data-edge="third" pathLength="1" d="M94 150 L24 97.5 M230 150 L160 97.5"></path>
-            <text x="25" y="172">3、4、5</text><text x="190" y="172">6、8、10</text>
+            <g class="diagram-labels"><text x="14" y="169">A</text><text x="99" y="169">B</text><text x="20" y="89">C</text><text x="150" y="169">P</text><text data-vertex="q" x="235" y="169">Q</text><text data-vertex="r" x="156" y="89">R</text><text x="55" y="169">4</text><text x="8" y="127">3</text><text x="65" y="119">5</text><text data-side="base" x="191" y="169">4</text><text data-side="height" x="144" y="127">3</text><text data-side="diagonal" x="201" y="119">5</text></g>
           </svg>
           <div class="demo-progress" aria-hidden="true"><span data-progress></span></div>
           <p class="demo-caption" data-caption aria-live="polite">每條邊都變成 2 倍。</p>
@@ -305,15 +318,15 @@
     <section class="section" id="counterexample" aria-labelledby="counter-title" data-sequence="counter">
       <div class="explore-head">
         <div>
-          <h2 id="counter-title">如果兩邊成比例，但相等的不是夾角呢？</h2>
+          <h2 id="counter-title"><span class="section-number">03</span>如果兩邊成比例，但相等的不是夾角呢？</h2>
           <p><span class="math">AB = 10</span>、<span class="math">∠A = 30°</span>、<span class="math">BC = 6</span>，卻有兩個不同的三角形。</p>
         </div>
       </div>
-      <ol class="simple-steps">
+      <details class="construction-steps"><summary>作圖步驟</summary><ol class="simple-steps">
         <li>畫 <strong>AB = 10</strong>。</li>
         <li>從 A 畫 <strong>30°</strong> 射線。</li>
         <li>以 B 為圓心、<strong>6</strong> 為半徑畫圓，得交點 C₁、C₂。</li>
-      </ol>
+      </ol></details>
       <div class="workspace">
         <div class="figure-area">
           <svg class="figure" viewBox="0 0 650 370" role="img" aria-labelledby="diagram-title diagram-desc">
@@ -386,28 +399,28 @@
       <aside class="sticky-note"><strong>留意夾角</strong><span class="math">AB</span>、<span class="math">BC</span> 在 <var>B</var> 相接，夾角是 <var>B</var> 角，不是 <var>A</var> 角。</aside>
     </section>
 
-    <section class="section" aria-labelledby="proof-title">
-      <h2 id="proof-title">證明寫法</h2>
-      <p>列邊比，找夾角，再寫結論。</p>
-      <details class="exam">
-        <summary>DSE 證明示例</summary>
+    <section class="section" id="proof" aria-labelledby="proof-title">
+      <h2 id="proof-title"><span class="section-number">04</span>證明寫法</h2>
+      <details class="exam" open>
+        <summary>用 SAS 寫出完整證明</summary>
       <div class="proof-grid">
         <div class="chalkboard" data-sequence="proof">
-          <h3>已知 <var>AB</var>、<var>AC</var></h3>
+          <h3 class="sr-only">SAS 證明</h3>
+          <svg class="proof-diagram" viewBox="0 0 350 180" role="img" aria-label="三角形 ABC 與 PQR 的對應邊成比例，A 與 P 都是直角"><path class="triangle-outline" d="M24 150 H94 L24 97.5 Z M160 150 H300 L160 45 Z"></path><path class="proof-base" d="M24 150 H94 M160 150 H300"></path><path class="right-angle" d="M24 143 H31 V150 M160 143 H167 V150"></path><g class="diagram-labels"><text x="14" y="169">A</text><text x="99" y="169">B</text><text x="20" y="89">C</text><text x="150" y="169">P</text><text x="305" y="169">Q</text><text x="156" y="37">R</text><text x="124" y="120">∼</text></g></svg>
           <ol>
-            <li>兩組對應邊成比例：
+            <li>
               <math class="fraction-math" aria-label="AB 除以 PQ 等於 AC 除以 PR">
                 <mfrac><mi mathvariant="italic">AB</mi><mi mathvariant="italic">PQ</mi></mfrac><mo>=</mo>
                 <mfrac><mi mathvariant="italic">AC</mi><mi mathvariant="italic">PR</mi></mfrac>
-              </math>。
+              </math><span class="proof-reason">兩組對應邊成比例</span>
             </li>
-            <li>夾角相等：<span class="math">∠BAC = ∠QPR</span>。</li>
-            <li>得出 <span class="math">△ABC ∼ △PQR</span>（兩邊成比例且夾角相等）。</li>
+            <li><span class="math">∠BAC = ∠QPR</span><span class="proof-reason">兩邊之間的夾角相等</span></li>
+            <li><strong class="math">△ABC ∼ △PQR</strong><span class="proof-reason">∵ 兩邊成比例且夾角相等（SAS）</span></li>
           </ol>
           <div class="sequence-readout"><p class="sequence-caption" data-sequence-caption aria-live="polite">邊比、夾角、結論。</p><span class="result-stamp" data-stamp>條件齊備</span></div>
           <div data-controls></div>
         </div>
-        <div>
+        <details class="proof-more"><summary>補充：對應次序與其他判別</summary>
           <h3>若改為 <var>AB</var>、<var>BC</var></h3>
           <ol>
             <li>若已知的是
@@ -419,7 +432,7 @@
             <li><span class="math">∠BAC = ∠QPR</span> 不是這兩組邊的夾角條件。</li>
             <li>須補足夾角、另一組對應角，或第三組邊比。</li>
           </ol>
-        </div>
+        </details>
       </div>
       <div class="example">
         <p><strong>找共同頂點：</strong><span class="math">AB</span>、<span class="math">BC</span> 找 <var>B</var> 角；<span class="math">AB</span>、<span class="math">AC</span> 找 <var>A</var> 角。</p>
@@ -451,9 +464,29 @@
       if (edges[1]) edges[1].setAttribute("d", `M24 150 L24 97.5 M160 150 L160 ${y}`);
       if (edges[2]) edges[2].setAttribute("d", `M94 150 L24 97.5 M${x} 150 L160 ${y}`);
       const secondAngle = card.querySelector('[data-mark="second"]');
-      if (secondAngle) secondAngle.setAttribute("d", `M78 150 A16 16 0 0 0 81.2 140.4 M${x - 16} 150 A16 16 0 0 0 ${x - 12.8} 140.4`);
+      if (secondAngle) secondAngle.setAttribute("d", `M78 150 A16 16 0 0 1 81.2 140.4 M${x - 16} 150 A16 16 0 0 1 ${x - 12.8} 140.4`);
       const thirdAngle = card.querySelector('[data-mark="third"]');
       if (thirdAngle) thirdAngle.setAttribute("d", `M24 113.5 A16 16 0 0 0 36.8 107.1 M160 ${y + 16} A16 16 0 0 0 172.8 ${y + 9.6}`);
+      card.querySelector('[data-vertex="q"]').setAttribute('x', x + 5);
+      card.querySelector('[data-vertex="r"]').setAttribute('y', y - 8);
+      const alpha = card.querySelector('[data-angle="q"]');
+      const beta = card.querySelector('[data-angle="r"]');
+      if (alpha) alpha.setAttribute('x', x - 31);
+      if (beta) beta.setAttribute('y', y + 28.5);
+      const baseLabel = card.querySelector('[data-side="base"]');
+      if (baseLabel) {
+        baseLabel.setAttribute('x', (160 + x) / 2 - 4);
+        baseLabel.textContent = Number((4 * factor).toFixed(1));
+        const heightLabel = card.querySelector('[data-side="height"]');
+        heightLabel.setAttribute('y', (150 + y) / 2 + 4);
+        heightLabel.textContent = Number((3 * factor).toFixed(1));
+        const diagonalLabel = card.querySelector('[data-side="diagonal"]');
+        if (diagonalLabel) {
+          diagonalLabel.setAttribute('x', (160 + x) / 2 + 6);
+          diagonalLabel.setAttribute('y', (150 + y) / 2 - 5);
+          diagonalLabel.textContent = Number((5 * factor).toFixed(1));
+        }
+      }
     }
 
     function drawClosingSides(card, progress) {

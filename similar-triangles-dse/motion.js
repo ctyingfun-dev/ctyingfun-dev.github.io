@@ -165,6 +165,7 @@
     }
     complete() {
       completed.add(this.kind);
+      document.querySelector(`[data-progress-link="${this.kind}"]`).classList.add('is-complete');
       byId('viewed-count').textContent = `已看 ${completed.size} / 6`;
       const track = document.querySelector('.viewed-track');
       track.setAttribute('aria-valuenow', String(completed.size));
@@ -178,8 +179,9 @@
       const line = root.querySelector('[data-progress]');
       if (line) line.style.transform = `scaleX(${Math.max(0, (index + progress) / this.steps.length)})`;
       if (this.kind === 'concept') {
-        root.querySelectorAll('[data-pair]').forEach(edge => showPath(edge, index === 3 || Number(edge.dataset.pair) === index, ease));
-        root.querySelectorAll('[data-ratio]').forEach(part => part.classList.toggle('is-highlighted', index === 3 || Number(part.dataset.ratio) === index));
+        const highlightedPair = index < 0 ? 1 : index;
+        root.querySelectorAll('[data-pair]').forEach(edge => showPath(edge, index === 3 || Number(edge.dataset.pair) === highlightedPair, index < 0 ? 1 : ease));
+        root.querySelectorAll('[data-ratio]').forEach(part => part.classList.toggle('is-highlighted', index === 3 || Number(part.dataset.ratio) === highlightedPair));
         const pair = Math.max(0, Math.min(index, 2));
         root.querySelector('[data-match-from]').textContent = [3, 4, 5][pair];
         root.querySelector('[data-match-to]').textContent = [6, 8, 10][pair];
@@ -187,23 +189,24 @@
         root.querySelector('.pair-link path').style.strokeDashoffset = String(1 - ease);
       } else if (root.matches('.rule')) {
         const growth = 3;
-        const factor = index < growth ? 1 : index === growth ? 1 + ease : 2;
+        const factor = index < 0 ? 2 : index < growth ? 1 : index === growth ? 1 + ease : 2;
         drawDemo(root, factor);
         const keys = ['first', 'second', 'third'];
         root.querySelectorAll('[data-mark]').forEach(mark => {
           const step = this.kind === 'sas' ? 2 : keys.indexOf(mark.dataset.mark);
-          showPath(mark, index >= step, index === step ? ease : 1);
+          showPath(mark, index < 0 || index >= step, index === step ? ease : 1);
+        });
+        root.querySelectorAll('[data-angle-label]').forEach(label => {
+          label.style.opacity = index < 0 || index >= keys.indexOf(label.dataset.angleLabel) ? '1' : '0';
         });
         root.querySelectorAll('[data-edge]').forEach(edge => {
           const step = keys.indexOf(edge.dataset.edge);
           showPath(edge, index >= step, index === step ? ease : 1);
         });
-        if (this.kind === 'sas') drawClosingSides(root, index < 4 ? 0 : index === 4 ? ease : 1);
-        const label = root.querySelector(':scope > svg text:last-child');
-        label.textContent = this.kind === 'sides' ? (index >= 3 ? '6、8、10' : '3、4、5') : index >= 3 ? '放大後' : '對應三角形';
+        if (this.kind === 'sas') drawClosingSides(root, index < 0 ? 1 : index < 4 ? 0 : index === 4 ? ease : 1);
       } else if (this.kind === 'counter') {
         const groups = [['.known-sides', 0], ['.angle-a', 1], ['.angle-b', 2], ['.third-side', 3]];
-        groups.forEach(([selector, step]) => root.querySelectorAll(selector).forEach(path => showPath(path, index >= step, index === step ? ease : 1)));
+        groups.forEach(([selector, step]) => root.querySelectorAll(selector).forEach(path => showPath(path, index >= step || (index < 0 && selector === '.angle-a'), index === step ? ease : 1)));
         root.classList.toggle('show-correction', index >= 2);
         root.classList.toggle('show-comparison', index >= 3);
       } else {
@@ -241,4 +244,24 @@
     if (!reduced.matches) entry.target.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 360, easing: 'cubic-bezier(.2,.7,.1,1)' });
   }), { threshold: .1 });
   document.querySelectorAll('.rule, .intro, .explore-head').forEach(el => entrances.observe(el));
+  const sectionLinks = [...document.querySelectorAll('.lesson-nav a')];
+  const progressLinks = [...document.querySelectorAll('[data-progress-link]')];
+  const updateNavigation = () => {
+    const currentSection = [...document.querySelectorAll('main > .section')].filter(section => section.getBoundingClientRect().top <= innerHeight * .35).at(-1) || document.querySelector('main > .section');
+    sectionLinks.forEach(link => {
+      if (link.hash === `#${currentSection.id}`) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    const currentSequence = [...document.querySelectorAll('[data-sequence]')].filter(section => section.getBoundingClientRect().top <= innerHeight * .4).at(-1) || sequences[0].root;
+    progressLinks.forEach(link => {
+      if (link.dataset.progressLink === currentSequence.dataset.sequence) link.setAttribute('aria-current', 'step');
+      else link.removeAttribute('aria-current');
+    });
+  };
+  let navigationFrame = 0;
+  addEventListener('scroll', () => {
+    if (navigationFrame) return;
+    navigationFrame = requestAnimationFrame(() => { navigationFrame = 0; updateNavigation(); });
+  }, { passive: true });
+  updateNavigation();
 })();
