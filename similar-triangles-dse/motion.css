@@ -1,0 +1,70 @@
+.lesson-progress { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.lesson-progress .wrap { display: flex; align-items: center; gap: 16px; min-height: 44px; font-size: 13px; color: var(--muted); }
+#viewed-count { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.viewed-track { width: 160px; height: 3px; background: var(--line); overflow: hidden; }
+.viewed-track > span { display: block; height: 100%; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 300ms ease; }
+.progress-finish { color: var(--accent-dark); white-space: nowrap; }
+.sequence-readout { min-height: 104px; padding: 10px 0 8px; }
+.sequence-caption { min-height: 32px; margin: 0 0 8px; font: 18px/1.7 var(--hand); }
+.result-stamp { display: inline-flex; align-items: center; gap: 6px; padding: 1px 8px; border: 1px solid var(--accent); border-radius: 3px; font-size: 14px; color: var(--accent-dark); }
+.motion-ready .result-stamp { visibility: hidden; opacity: 0; transform: translateY(4px); transition: opacity 240ms ease, transform 240ms ease; }
+.motion-ready.is-final .result-stamp { visibility: visible; opacity: 1; transform: none; }
+.result-stamp svg, .proof-check svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.result-stamp path, .proof-check path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 350ms ease 120ms; }
+.is-final .result-stamp path, .is-checked .proof-check path { stroke-dashoffset: 0; }
+.motion-controls { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+.motion-controls button, .rule .motion-controls button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; width: 44px; min-width: 44px; height: 44px; padding: 0; border: 1px solid var(--line); border-radius: 6px; background: transparent; color: var(--ink); cursor: pointer; transition: background 160ms ease, transform 120ms ease; }
+.motion-controls button:hover, .rule .motion-controls button:hover { background: var(--selected); }
+.motion-controls button:active, .rule .motion-controls button:active { transform: scale(.96); }
+.motion-controls button:disabled, .rule .motion-controls button:disabled { opacity: .35; cursor: default; }
+.motion-controls .motion-play, .rule .motion-controls .motion-play { width: 92px; min-width: 92px; background: var(--accent); border-color: var(--accent); color: white; font-size: 15px; }
+.motion-controls .motion-play:hover, .rule .motion-controls .motion-play:hover { background: var(--accent-dark); }
+.motion-controls svg, .rule .motion-controls svg { display: block; flex: 0 0 18px; width: 18px; height: 18px; margin: 0; aspect-ratio: 1; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.step-count { width: 42px; flex: 0 0 42px; text-align: center; color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+.rule .sequence-readout { grid-column: 1; grid-row: 3; min-height: 118px; }
+.rule .sequence-readout .demo-caption { min-height: 62px; padding-top: 8px; margin: 0 0 6px; }
+.rule .result-stamp svg { width: 18px; height: 18px; margin: 0; aspect-ratio: 1; }
+.demo-progress span { width: 100% !important; transform: scaleX(0); transform-origin: left; transition: none; }
+.rule svg .demo-mark, .rule svg .demo-edge { transition: none; }
+.pair-edge, .counter-mark { fill: none; stroke: var(--blue); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; pointer-events: none; }
+.pair-edge { stroke: var(--gold); stroke-width: 7; }
+.ratio-line { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px; }
+.ratio-part { padding: 5px 9px; background: linear-gradient(var(--gold), var(--gold)) left center / 0 80% no-repeat; transition: background-size 380ms cubic-bezier(.2,.7,.1,1); }
+.ratio-part.is-highlighted { background-size: 100% 80%; }
+.pair-link { display: inline-flex; align-items: center; gap: 8px; width: 140px; padding-left: 12px; font: 20px var(--math); color: var(--ink); opacity: 0; }
+.pair-link svg { width: 60px; height: 20px; }
+.pair-link path { fill: none; stroke: var(--gold); stroke-width: 3; stroke-dasharray: 1; }
+.counter-mark.near-arc { stroke: var(--accent); }
+.counter-mark.far-arc { stroke: var(--coral); }
+.counter-mark.angle-b { stroke-width: 5; }
+.counter-mark.third-side.near-arc { stroke-width: 7; }
+.counter-mark.third-side.far-arc { stroke-width: 3; }
+.angle-correction { display: flex; flex-wrap: wrap; gap: 10px 22px; min-height: 38px; margin-top: 12px; font-size: 16px; }
+.motion-ready .angle-correction { visibility: hidden; }
+.motion-ready.show-correction .angle-correction { visibility: visible; }
+.old-angle { position: relative; color: var(--muted); }
+.old-angle::after { content: ''; position: absolute; height: 2px; background: var(--coral); left: 0; right: 0; top: 48%; transform: scaleX(0); transform-origin: left; transition: transform 300ms ease; }
+.show-correction .old-angle::after { transform: scaleX(1); }
+.new-angle { font-weight: 600; color: var(--accent-dark); opacity: 0; transform: translateY(4px); transition: opacity 240ms ease 320ms, transform 240ms ease 320ms; }
+.show-correction .new-angle { opacity: 1; transform: none; }
+.result strong { background: linear-gradient(var(--gold), var(--gold)) left center / 0 85% no-repeat; transition: background-size 400ms ease; }
+.show-comparison .result strong { background-size: 100% 85%; }
+.chalkboard ol { padding-right: 28px; }
+.chalkboard li { position: relative; background: linear-gradient(#f2c94c66, #f2c94c66) left center / 0 100% no-repeat; transition: background-size 380ms ease; }
+.chalkboard li.is-highlighted { background-size: 100% 100%; }
+.proof-check { position: absolute; top: 4px; right: -26px; color: var(--accent-dark); }
+@media (max-width: 600px) {
+  .rule .sequence-readout { grid-column: 1; grid-row: 5; }
+  .motion-controls { gap: 3px; }
+  .motion-controls .motion-play, .rule .motion-controls .motion-play { width: 86px; min-width: 86px; }
+  .step-count { width: 38px; flex-basis: 38px; }
+  .sequence-caption { min-height: 62px; }
+  .pair-link { width: 115px; padding-left: 0; }
+  .ratio-line { gap: 5px; }
+  .ratio-part { padding: 5px 7px; }
+  .lesson-progress .wrap { gap: 10px; }
+  .viewed-track { flex: 1; max-width: 160px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motion-ready .result-stamp, .new-angle { transform: none; }
+}
