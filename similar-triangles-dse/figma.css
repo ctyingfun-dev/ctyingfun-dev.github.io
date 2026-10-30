@@ -57,6 +57,8 @@ h1 { font-size: 40px; line-height: 1.3; margin-bottom: 8px; }
 .included-note { display: inline-block; padding: 3px 8px; background: var(--gold); font-size: 13px; line-height: 1.6; }
 .rule > svg { grid-column: 1; grid-row: 1 / 5; margin: 0; overflow: visible; }
 .rule svg .demo-triangle, .rule svg .demo-moving, .rule svg .demo-open, .rule svg .demo-close { fill: none; stroke: var(--accent); stroke-width: 1.5; }
+.rule svg .demo-open.demo-moving, .rule svg .demo-close.demo-moving { stroke: var(--accent); }
+.rule[data-growing="true"] .condition-formula math, .rule[data-growing="true"] [data-side] { visibility: hidden; }
 .rule svg .demo-mark { stroke: var(--accent); stroke-width: 1; }
 .rule svg .demo-edge { stroke: var(--gold); stroke-width: 4; }
 .rule svg .diagram-labels text, .proof-diagram .diagram-labels text { font: italic 11px var(--math); fill: var(--ink); }
@@ -105,6 +107,7 @@ h1 { font-size: 40px; line-height: 1.3; margin-bottom: 8px; }
 .chalkboard li { margin: 0 0 22px; padding-left: 6px; font-size: 21px; line-height: 1.5; }
 .chalkboard li::marker { color: var(--accent); font: 15px var(--math); }
 .proof-reason { display: block; color: var(--muted); font: 13px/1.8 var(--body); margin-top: 8px; }
+.chalkboard .proof-check { right: -22px; }
 .chalkboard strong.math { color: var(--accent); }
 .chalkboard .sequence-readout { grid-column: 1 / -1; min-height: 60px; }
 .chalkboard [data-controls] { grid-column: 1 / -1; }

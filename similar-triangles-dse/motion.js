@@ -191,6 +191,12 @@
         const growth = 3;
         const factor = index < 0 ? 2 : index < growth ? 1 : index === growth ? 1 + ease : 2;
         drawDemo(root, factor);
+        const growing = factor > 1 && factor < 2;
+        root.dataset.growing = String(growing);
+        if (!growing && this.kind === 'sas') root.querySelector('.condition-formula mfrac:last-child mn:last-child').textContent = factor;
+        if (!growing && this.kind === 'sides') root.querySelectorAll('.condition-formula math:last-child mfrac').forEach((fraction, i) => {
+          fraction.lastElementChild.textContent = [4, 3, 5][i] * factor;
+        });
         const keys = ['first', 'second', 'third'];
         root.querySelectorAll('[data-mark]').forEach(mark => {
           const step = this.kind === 'sas' ? 2 : keys.indexOf(mark.dataset.mark);
