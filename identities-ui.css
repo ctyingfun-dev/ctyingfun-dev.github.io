@@ -89,16 +89,44 @@ input[type="range"] { accent-color: var(--teal); min-width: 0; min-height: 44px;
 .secondary { border-color: var(--line); background: transparent; color: var(--teal); }
 .compare-statement { font-size: 29px; line-height: 1.9; margin-block: 24px; }
 .teacher-note { border-left: 3px solid var(--blue-soft); padding-left: 16px; margin: 20px 0 24px; color: var(--muted); font-size: 16px; }
-.term-chip { min-height: 48px; border-radius: 4px; font-size: 24px; }
 #compare { --term-square: #6f52c9; --term-linear: #876400; --term-constant: #655c6c; }
-.term-chip { --chip-bg: #e8e0f5; --chip-active: #dacbf4; }
-.term-chip[data-match="linear"] { --chip-bg: #faedbd; --chip-active: #f2c94c; }
-.term-chip[data-match="constant"] { --chip-bg: #ebe6ec; --chip-active: #d9d1dd; }
-.term-chip:hover, .term-chip[aria-pressed="true"] { transform: none; box-shadow: inset 0 -2px var(--chip-color); }
+.equation-line {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 14px 12px;
+  padding: 24px 0;
+  font: 400 28px/1.5 Georgia, "Times New Roman", serif;
+}
+.equation-expression { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px; min-width: 0; }
+.equation-expression--given { grid-column: 2; }
+.equation-expression--expanded { grid-column: 2; grid-row: 2; }
+.equation-symbol { grid-column: 1; grid-row: 2; margin: 0; padding-top: 9px; font-size: 28px; line-height: 1.5; color: var(--muted); }
+.term-group { display: inline-flex; align-items: baseline; gap: 4px; flex: none; }
+.term-chip {
+  --chip-active: #e8e0f5;
+  display: inline-block;
+  min-width: 44px;
+  min-height: 52px;
+  margin: 0;
+  padding: 6px 8px;
+  border: 0;
+  border-bottom: 2px solid color-mix(in srgb, var(--chip-color) 28%, transparent);
+  border-radius: 3px 3px 0 0;
+  background: transparent;
+  font: inherit;
+  vertical-align: baseline;
+  transition: background-color .18s ease, border-color .18s ease;
+}
+.term-chip sup { font-size: .65em; line-height: 0; vertical-align: super; }
+.term-chip[data-match="linear"] { --chip-active: #faedbd; }
+.term-chip[data-match="constant"] { --chip-active: #ebe6ec; }
+.term-chip:hover, .term-chip[aria-pressed="true"] { background: var(--chip-active); border-bottom-color: var(--chip-color); transform: none; box-shadow: none; }
+.term-chip:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 .mode .math { display: inline; }
-.match-detail { border: 0; border-radius: 0; border-left: 3px solid var(--teal); background: var(--teal-soft); padding: 20px 24px; }
-.match-title { font-size: 15px; }
-.match-pair { font-size: 30px; }
+.match-detail { border: 0; border-radius: 0; background: transparent; padding: 0 0 0 36px; }
+.match-title { font-size: 15px; font-weight: 500; }
+.match-pair { font-size: 30px; font-weight: 400; border: 0; padding: 0; margin: 8px 0; }
+.match-pair strong { font-weight: 400; }
 .match-reason { font-size: 17px; }
 .rules { display: block; margin-top: 28px; }
 .rule { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 0 30px; border: 0; padding: 0; margin-bottom: 28px; }
@@ -147,6 +175,11 @@ footer { color: var(--muted); background: transparent; border-top: 1px solid var
   .step-text { min-height: 72px; }
   .values { gap: 20px; }
   .compare-statement { font-size: 25px; }
+  .equation-line { font-size: 25px; grid-template-columns: 20px minmax(0, 1fr); gap: 12px 8px; }
+  .equation-expression { gap: 8px; }
+  .equation-symbol { font-size: 25px; padding-top: 8px; }
+  .term-chip { min-height: 48px; padding-inline: 6px; }
+  .match-detail { padding-left: 28px; }
   .rule { grid-template-columns: minmax(0, 1fr); gap: 6px; }
   .rule h3 { grid-row: auto; }
   .rule .formula { font-size: 25px; }
@@ -164,6 +197,7 @@ footer { color: var(--muted); background: transparent; border-top: 1px solid var
   .values { grid-template-columns: minmax(0, 1fr); }
   .formula, .rule .formula { font-size: 23px; }
   .choices { grid-template-columns: minmax(0, 1fr); }
+  .equation-expression--expanded { flex-direction: column; align-items: flex-start; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
