@@ -20,7 +20,7 @@ h1 { font-size: 40px; line-height: 1.3; margin-bottom: 8px; }
 .concept-layout { display: grid; grid-template-columns: minmax(0, 600px) minmax(0, 1fr); gap: 48px; align-items: center; padding: 16px 0 24px; }
 .similar-grid { margin: 0; gap: 6px; grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr); }
 .similar-item svg { height: auto; width: 100%; overflow: visible; }
-.similar-item polygon { fill: none; stroke: var(--accent); stroke-width: 2; }
+.similar-grid .similar-item polygon { fill: none; stroke: var(--accent); stroke-width: 2; }
 .similar-item svg text { font: 17px var(--math); fill: var(--ink); }
 .similar-item svg .vertex { font-style: italic; font-size: 14px; }
 .right-angle { fill: none; stroke: var(--accent); stroke-width: 1; }
@@ -50,7 +50,8 @@ h1 { font-size: 40px; line-height: 1.3; margin-bottom: 8px; }
 .condition-code { display: inline-block; color: var(--accent); font: 600 16px var(--math); margin-right: 10px; }
 .rule > p:not(.demo-caption) { grid-column: 2; grid-row: 2; color: var(--muted); font-size: 14px; margin: 0 0 16px; }
 .rule .condition-formula { grid-column: 2; grid-row: 3; margin-bottom: 6px; }
-.condition-formula math { display: block; width: fit-content; margin: 8px 0 18px; font-size: 20px; }
+.condition-formula math { display: block math; math-style: normal; width: fit-content; margin: 8px 0 18px; font-size: 20px; }
+.fraction-math { math-style: normal; }
 .condition-formula .math { font-size: 17px; margin: 12px 0; color: var(--ink); }
 .condition-formula.math { font-size: 17px; white-space: normal; }
 .included-note { display: inline-block; padding: 3px 8px; background: var(--gold); font-size: 13px; line-height: 1.6; }
