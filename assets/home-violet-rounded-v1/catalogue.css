@@ -101,14 +101,14 @@ html .lesson[data-magnet-press] { transform: none; }
 }
 @media (max-width: 39.999rem) {
   main { padding-top: 12px; }
-  .masthead { height: 176px; }
+  .masthead { height: 156px; }
   .masthead-title { width: 64%; padding-right: 8px; }
   .masthead-title h1 { font-size: 26px; }
   .masthead-title .identity-caption { font-size: 12px; }
   .opening-question { margin-top: 16px; font-size: 14px; }
   .math-rain { width: 34%; }
   .catalogue-tools { align-items: stretch; }
-  .catalogue-heading { padding-top: 24px; }
+  .catalogue-heading { padding-top: 20px; }
   .lesson h3, .description { grid-column: 2 / -1; }
   .topic-name { font-size: 18px; }
   .open-arrow, #s3 .open-arrow, .lesson-magnet { grid-row: 1; }

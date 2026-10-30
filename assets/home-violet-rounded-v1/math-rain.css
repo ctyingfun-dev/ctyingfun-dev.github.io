@@ -1,11 +1,11 @@
-/* Reference-led colours are confined to the cut-out maths illustration. */
+/* The physics symbols share the catalogue's violet, yellow and neutral inks. */
 .masthead {
-  --rain-blue: #2450F5;
-  --rain-orange: #FB4B2A;
-  --rain-pink: #F7AED2;
-  --rain-yellow: #FFD230;
-  --rain-black: #111313;
-  --rain-grey: #898A80;
+  --rain-blue: #6F52C9;
+  --rain-orange: #F2C94C;
+  --rain-pink: #C8BAE7;
+  --rain-yellow: #F2C94C;
+  --rain-black: #302B38;
+  --rain-grey: #82798C;
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
