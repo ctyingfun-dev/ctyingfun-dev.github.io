@@ -98,8 +98,8 @@
 
   function build() {
     stop();
-    width = header.clientWidth;
-    height = header.clientHeight;
+    width = field.clientWidth;
+    height = field.clientHeight;
     if (!width || !height) return;
     Composite.clear(engine.world, false);
     Engine.clear(engine);
@@ -107,7 +107,7 @@
     field.dataset.physics = '';
     pieces = [];
     const mobile = width < 600;
-    const count = mobile ? 14 : width < 900 ? 22 : 30;
+    const count = mobile ? 10 : 14;
     const order = [...kinds];
     for (let index = order.length - 1; index > 0; index--) {
       const other = Math.floor(Math.random() * (index + 1));
@@ -115,7 +115,7 @@
     }
     for (let index = 0; index < count; index++) {
       const kind = order[index % order.length];
-      const size = Math.round((mobile ? 46 : 74) + Math.random() * (mobile ? 52 : 92));
+      const size = Math.round(Math.min(width * .32, 36 + Math.random() * 32));
       let x;
       let y;
       // Scatter in a volume above the field, not in vertical drop lanes.
@@ -161,7 +161,7 @@
   function lift(event) {
     if (paused || reduced.matches || forced.matches || event.target.closest('button, a')) return;
     if (event.type === 'pointermove' && event.pointerType === 'touch') return;
-    const bounds = header.getBoundingClientRect();
+    const bounds = field.getBoundingClientRect();
     const point = { x: event.clientX - bounds.left, y: event.clientY - bounds.top };
     const now = performance.now();
     let lifted = 0;
@@ -187,7 +187,7 @@
     else start();
   });
   new ResizeObserver(() => {
-    if (header.clientWidth === width && header.clientHeight === height) return;
+    if (field.clientWidth === width && field.clientHeight === height) return;
     clearTimeout(resizing);
     resizing = setTimeout(build, 120);
   }).observe(header);

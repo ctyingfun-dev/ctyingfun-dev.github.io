@@ -15,6 +15,13 @@
   let grade = ['#s2', '#s3'].includes(location.hash) ? location.hash.slice(1) : 'all';
   let composing = false;
 
+  choices.forEach(choice => {
+    const total = choice.dataset.grade === 'all'
+      ? lessons.length
+      : document.getElementById(choice.dataset.grade).querySelectorAll('.lesson').length;
+    choice.querySelector('.grade-total').textContent = total;
+  });
+
   function update() {
     const terms = normalize(input.value).split(' ').filter(Boolean);
     let total = 0;

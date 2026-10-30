@@ -7,11 +7,11 @@
   <meta name="description" content="數學研習室：香港中二、中三數學教材目錄。">
   <title>數學研習室 | 教材目錄</title>
   <link rel="stylesheet" href="assets/home-violet-rounded-v1/style.css">
-  <link rel="stylesheet" href="assets/home-violet-rounded-v1/cards.css">
   <link rel="stylesheet" href="assets/home-violet-rounded-v1/magnetic.css">
   <link rel="stylesheet" href="assets/home-violet-rounded-v1/grade-pill.css">
   <link rel="stylesheet" href="assets/home-violet-rounded-v1/palette.css">
   <link rel="stylesheet" href="assets/home-violet-rounded-v1/math-rain.css">
+  <link rel="stylesheet" href="assets/home-violet-rounded-v1/catalogue.css">
   <script src="assets/home-violet-rounded-v1/home.js" defer></script>
   <script src="assets/home-violet-rounded-v1/magnetic.js" defer></script>
   <script src="assets/home-violet-rounded-v1/grade-pill.js" defer></script>
@@ -45,16 +45,13 @@
           <div class="masthead-title">
             <h1>數學研習室</h1>
             <p class="identity-caption">香港中學數學</p>
+            <p class="opening-question">今天哪一題還未想通？</p>
           </div>
           <button class="rain-toggle icon-button" type="button" aria-label="暫停圖案動畫" aria-pressed="false" hidden>
             <svg class="pause-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="14" y="3" width="5" height="18" rx="1"/><rect x="5" y="3" width="5" height="18" rx="1"/></svg>
             <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg>
             <span class="tooltip" aria-hidden="true">暫停動畫</span>
           </button>
-        </div>
-        <div class="opening">
-          <p class="opening-question">今天哪一題還未想通？</p>
-          <p class="opening-note">找回正在學的課題，從那個問題開始。</p>
         </div>
       </header>
 
@@ -71,7 +68,7 @@
           </a>
         </nav>
       <div class="search-bar" hidden>
-        <label class="search-caption" for="topic-search">搜尋教材</label>
+        <label class="sr-only" for="topic-search">搜尋教材</label>
         <div class="search-field">
           <img src="assets/home-violet-rounded-v1/assets/search.svg" alt="" width="20" height="20">
           <input id="topic-search" type="search" placeholder="搜尋課題、概念…" autocomplete="off" spellcheck="false">
